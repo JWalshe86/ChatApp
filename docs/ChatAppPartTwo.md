@@ -283,12 +283,45 @@ Adding `using ChatApp.Hubs;` in `Program.cs` is essential because:
 
 By including the namespace, you ensure SignalR can properly locate your `ChatHub` class and register it for real-time messaging functionality.
 
+Here’s the updated section integrating the images and providing a structured write-up on the outcomes:
+
+---
+
+### **Recap**
+
+Adding `using ChatApp.Hubs;` in `Program.cs` is essential because:
+
+- It ensures the `ChatHub` class, located in the `ChatApp.Hubs` namespace, is accessible without fully qualifying its name.
+- It maintains clean and readable code by avoiding verbose namespace references.
+- It prevents compilation errors when mapping the SignalR hub for real-time communication.
+
+By including the namespace, you ensure SignalR can properly locate your `ChatHub` class and register it for real-time messaging functionality.
+
+---
+
+## **Message Persistence: From Database to UI**
+With the latest update, messages are now **persisted in the database** instead of being stored temporarily in memory. Each message is saved with attributes such as `User`, `Content`, and `Timestamp`. This means that when users send messages, they are permanently recorded and can be retrieved upon refreshing the page or reopening the application.
+
+### **Database Storage Confirmation**
+The following screenshot verifies that messages are successfully stored in the SQLite database. The message, along with its associated username and timestamp, appears in the database, confirming that Entity Framework Core is handling message persistence correctly.
+
+![Screenshot 2025-01-28 171658](https://github.com/user-attachments/assets/f755097c-cd61-4487-a354-4077ff622735)
+
+
+### **Displaying Messages in the Chat Room**
+Once stored in the database, messages are then retrieved and dynamically displayed in the chat room UI. The **structured Message model** ensures that the displayed messages retain their original sender, content, and timestamp.
+
+In the screenshot below, the exact message stored in the database is rendered in the chat room. This real-time display is powered by **SignalR**, which updates the chat interface for all connected users without requiring a page refresh.
+
+![Screenshot 2025-01-28 171737](https://github.com/user-attachments/assets/cac8d0d7-2ba2-421a-85c8-e0ad3ac2566a)
+
 ### **Recap of Changes**
+- The **Chat Model** was updated to use structured message objects (`Message` class) instead of simple strings.
+- Messages now **persist in the database**, ensuring that they remain available even after a server restart or page refresh.
+- The chat UI dynamically **retrieves messages** from the database and updates in real time using SignalR.
+- **Hardcoded test messages were removed**, ensuring that only actual messages sent by users appear.
 
-- The Razor Page now dynamically handles both plain text messages and file uploads, displaying links for downloadable content.
-- The **Chat Model** leverages the `Message` class to handle structured message objects with properties such as user name, content, and timestamps.
-- Hardcoded test messages were removed, ensuring the application relies solely on dynamically populated messages from the database or received in real-time.
-
+With these improvements, the chat application has evolved into a **fully functional real-time messaging system with database-backed persistence**. 🎉
 --- 
 
 # **Real-Time User Presence**
