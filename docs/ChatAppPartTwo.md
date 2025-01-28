@@ -384,17 +384,19 @@ Here's a Bootstrap modal integrated into this Markdown file.
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Bootstrap Modal</h5>
-                <button type="button" class="btn-close" onclick="closeModal()"></button>
+                <!-- Use Bootstrap's built-in dismiss attribute -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 This is a Bootstrap modal inside ChatAppPartTwo!
             </div>
             <div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="./script.js"></script>
