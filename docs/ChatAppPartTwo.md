@@ -436,6 +436,8 @@ public async Task<IActionResult> OnPostAsync(IFormFile file)
     }
     return Content("No file selected.");
 }
+```
+
 <h2>ChatApp: Bootstrap Modal Demo</h2>
 <p>Here's a Bootstrap modal integrated into this Markdown file.</p>
 
@@ -466,19 +468,9 @@ public async Task<IActionResult> OnPostAsync(IFormFile file)
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- JavaScript to Handle Modal -->
-<script>
-  function openModal() {
-    var modal = new bootstrap.Modal(document.getElementById('customModal'));
-    modal.show();
-  }
+<!-- External JS File -->
+<script src="script.js"></script>
 
-  function closeModal() {
-    var modalEl = document.getElementById('customModal');
-    var modal = bootstrap.Modal.getInstance(modalEl);
-    modal.hide();
-  }
-</script>
 
 ---
 
