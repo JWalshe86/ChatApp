@@ -414,7 +414,7 @@ Here’s a Bootstrap modal integrated into this Markdown file.
 
 GitHub Pages does not support inline JavaScript inside `.md` files, so the modal is placed in a separate **HTML file**.
 
-[Click here to open the modal demo](https://jwalshe86.github.io/ChatApp/docs/modal.html)
+[Click here to open the modal demo](https://jwalshe86.github.io/ChatApp/modal)
 
 ---
 
