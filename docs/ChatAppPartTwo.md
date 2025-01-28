@@ -92,8 +92,6 @@ dotnet ef database update
 ```
 
 ### **Migration Output**
-![Migration Check](images/MigrationCheck.png)
-![MessagesTableAdded](images/MessagesTableAdded.png)
 ![Migrations](images/Migrations.png)
 
 ---
