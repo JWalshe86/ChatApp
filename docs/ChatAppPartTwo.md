@@ -1,5 +1,5 @@
 
-# **ChatApp - Real-Time Messaging with SignalR**
+# **ChatApp Part 2 - Real-Time Messaging with SignalR**
 
 ![ChatApp](images/ChatApp.png)
 
