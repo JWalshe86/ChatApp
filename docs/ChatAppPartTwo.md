@@ -435,40 +435,38 @@ public async Task<IActionResult> OnPostAsync(IFormFile file)
     return Content("No file selected.");
 }
 ```
+---
+layout: default
+title: ChatApp Part Two
+---
 
-<h2>ChatApp: Bootstrap Modal Demo</h2>
-<p>Here's a Bootstrap modal integrated into this Markdown file.</p>
+## ChatApp: Bootstrap Modal Demo
+
+Here's a Bootstrap modal integrated into this Markdown file.
 
 <!-- Button to Open Modal -->
-<button type="button" class="btn btn-primary" onclick="openModal()">
-  Open Modal
-</button>
+<button type="button" class="btn btn-primary" onclick="openModal()">Open Modal</button>
 
-<!-- Modal HTML -->
+<!-- Modal -->
 <div id="customModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Bootstrap Modal in Markdown</h5>
-        <button type="button" class="btn-close" onclick="closeModal()"></button>
-      </div>
-      <div class="modal-body">
-        This is a Bootstrap modal inside a Markdown file!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bootstrap Modal</h5>
+                <button type="button" class="btn-close" onclick="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+                This is a Bootstrap modal inside ChatAppPartTwo!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-<!-- Bootstrap CSS & JS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- External JS File -->
-<script src="script.js"></script>
-
+<script src="./script.js"></script>
 
 ---
 
