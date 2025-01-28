@@ -395,10 +395,8 @@ public override async Task OnDisconnectedAsync(Exception? exception)
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- External JS File -->
-<script src="script.js"></script>
-
-
+<!-- Link to External JavaScript File -->
+<script src="./script.js"></script>
 
 
 ---
