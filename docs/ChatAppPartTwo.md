@@ -402,19 +402,35 @@ public async Task<IActionResult> OnPostAsync(IFormFile file)
     return Content("No file selected.");
 }
 ```
-# ChatApp: Bootstrap Modal Demo
+## ChatApp: Bootstrap Modal Demo
 
-Here’s a Bootstrap modal integrated into this Markdown file.
+Here's a Bootstrap modal integrated into this Markdown file.
 
+<!-- Button to trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Open Modal
+  Open Modal
 </button>
 
-## Bootstrap Modal Demo
+<!-- Modal HTML -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Bootstrap Modal in Markdown</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This is a Bootstrap modal inside a Markdown file!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-GitHub Pages does not support inline JavaScript inside `.md` files, so the modal is placed in a separate **HTML file**.
-
-[Click here to open the modal demo](https://jwalshe86.github.io/ChatApp/modal)
+<!-- Bootstrap JS for Modal Functionality -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 ---
 
