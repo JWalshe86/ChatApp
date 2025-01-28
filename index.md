@@ -1,4 +1,4 @@
-
+[ChatAPP Part 2](ChatAppPart2.md)
 After completing several Udemy courses on C# rather than do more I felt it was time to build projects. I aimed to try and understand everything in this Application and put it into my own words here. Rather than build it once and move onto another project, which is what I usually do, I built the app again and again . Each time I restarted making the App I found more things I didn’t know. This made me think, with regards to learning, doing the same project over and over until I understand it fully might be more effective. 
 I asked ChatGPT for a project idea to enhance my C# skills, it suggested creating a ChatApp. This is a website where users can post messages and view messages from others in real-time. It reminded me of the early online chat rooms from 20 years ago.
 The app leverages a package called SignalR, which enables real-time communication. SignalR also incorporates asynchronous programming, ensuring the application remains responsive while processing sent messages.
