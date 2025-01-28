@@ -1,3 +1,4 @@
+![ChatApp](images/ChatApp.png)
 
 After successfully setting up real-time messaging with SignalR, I worked on persisting chat messages in a database, so they are saved even after the application restarts, and add functionality to notify all users when a new participant joins or leaves the chat. To further enrich the chat experience, I enabled users to send rich media like images and videos, as well as private messages for more personal conversations.
 As the app grew, I introduced pagination for message history, giving users the ability to load previous messages on demand. Additionally, I allowed users to create profiles with avatars and display names, enhancing personalization. To ensure the app remains reliable, I implemented proper error handling and validation, as well as unit and integration tests to catch any potential issues.
@@ -71,10 +72,12 @@ This configuration ensures that Identity works seamlessly with your custom datab
 
 
 Migrations
+![Migrations](images/Migrations.png)
 
 
 
 *** Make sure you save any updates to AppDbContext before migrating, this tripped me a few times ***
+![AppDbContextSaveCheck](images/AppDbContextSaveCheck.png)
 
 After creating the Message and AppDbContext classes and registering the new DbContext in Program.cs, run migrations to create the Messages table in the database:
 
@@ -86,10 +89,13 @@ dotnet ef migrations add AddMessagesTable
 
 Migration Check
 
-
+![Migration Check](images/MigrationCheck.png)
 
 dotnet ef database update 
 
+![MessagesTableAdded](images/MessagesTableAdded.png)
+
+![AppDbContextVChatHub](images/AppDbContextVChatHub.png)
 
 
 I had to update the ChatHub to integrate with the new Message class and database. ChatApp.Models ensures access to the Message class, while using Microsoft.AspNetCore.SignalR provided the Hub class and related SignalR functionality. The class uses dependency injection to initialize AppDbContext, allowing interaction with the database. In the SendMessage method, a new Message object is created with the user's input and a UTC timestamp, added to the Messages table, and saved asynchronously. Finally, the message is broadcast to all connected clients using SignalR's Clients.All.SendAsync method.
@@ -235,7 +241,7 @@ connection.on("UserLeft", function (user) {
     document.getElementById("messagesList").appendChild(li);
 });
 
-
+![ConnectionInvokeVConnectionOn](images/ConnectionInvokeVConnectionOn.png)
 
 I needed a way to effectively manage and display online users in a real-time chat application using SignalR. To achieve this, I created a static HashSet<string> called OnlineUsers to efficiently track users currently online, ensuring no duplicates while maintaining thread safety. When a user connected, the OnConnectedAsync method retrieved their name from Context.User?.Identity?.Name, added it to the OnlineUsers list, and notified all clients that the user had joined. It also sent the updated list of online users to the newly connected client to ensure they had the most current information. Similarly, when a user disconnected, the OnDisconnectedAsync method removed their name from the list and broadcast to all clients that the user had left, keeping the list accurate. Finally, I implemented a GetOnlineUsers method to allow clients to request the current list of online users, which was sent back to the caller. By broadcasting events such as UserJoined and UserLeft, I ensured all clients were immediately updated with changes, creating a seamless and real-time user experience.
 Updated ChatHub.cs with online user configuration
@@ -339,6 +345,8 @@ Update chat.cshtml to remove the user input and display the signed-in user's nam
 // Get the signed-in user's name from the Razor page model
 const user = "@User.Identity.Name"; // Uses the logged-in user's name from the server-side model
 
+
+![SignedInUserDisplays](images/SignedInUserDisplays.png)
 ←—------------------------------------------------------------------------------------------------------------------->
 Handling file uploads in a Razor Page API
 File Input and Button in HTML
@@ -500,7 +508,7 @@ public async Task<IActionResult> OnPostAsync(IFormFile file)
 
 Image successfully uploaded from UI to wwwroot/uploads
 
-
+![ImageUploadSuccessful](images/ImageUploadSuccessful.png)
 
 Add a preview area to show image before uploading & clear the file input and preview after successful submission
 I needed to create a variable to store the uploaded file and another to manage the image preview section, where the image would be displayed before it was uploaded. To achieve this, I used the FileReader() method to capture the potential upload, and displayed it with readAsDataURL. I then set up a handler to manage the file upload submission. The form was stored in its own variable, formData, and I used the fetch method to send a POST request to the server with the file. If the upload was successful, the file input box and preview would be cleared.
@@ -874,6 +882,8 @@ Total Script including Uploads in message input box
 
 Preview image displays in message container
 
+![ImageInMessages](images/ImageInMessages.png)
+
 Full Chat Page
 
 
@@ -1175,7 +1185,7 @@ Full Chat Page
 
 </body>
 
-
+![PreviewImageInInputBox](images/PreviewImageInInputBox.png)
 
 
 
@@ -1199,7 +1209,7 @@ Adding a new property like IsMedia to your Message class requires a migration be
 
 dotnet ef migrations add AddIsMediaToMessage
 
-
+![IsMediaColumnAdded](images/IsMediaColumnAdded.png)
 
 dotnet ef database update
 
@@ -1638,6 +1648,8 @@ public class Message
     public string? Recipient { get; set; } // Null for public messages
 }
 
+![AddPrivateMessagingClass](images/AddPrivateMessagingClass.png)
+
 Update SendMessage
 
 
@@ -1986,7 +1998,7 @@ Full HTML
 
 
 
-
+![Private Message Success](images/PrivateMessageSuccess.png)
 
 
 
