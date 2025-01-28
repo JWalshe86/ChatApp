@@ -390,7 +390,7 @@ Here's a Bootstrap modal integrated into this Markdown file.
                 This is a Bootstrap modal inside ChatAppPartTwo!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
