@@ -137,12 +137,6 @@ namespace ChatApp.Hubs
 - `SendMessage()` now **saves messages to the database** before broadcasting them.
 - **Entity Framework** manages message persistence.
 
----
-
-Here’s the updated integration rewritten for Markdown:
-
----
-
 ## **Message Display Updates**
 
 With messages now stored as **objects** instead of plain strings, updates were required to the Razor Page and its corresponding model. These changes ensure that message objects, including properties like user name, content, and timestamp, are properly handled and displayed.
