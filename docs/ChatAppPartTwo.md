@@ -139,8 +139,17 @@ namespace ChatApp.Hubs
 
 ---
 
-# **Message Display Updates**
-Since messages are now stored as **objects** (not plain strings), the Razor page needed to be updated.
+Here’s the updated integration rewritten for Markdown:
+
+---
+
+## **Message Display Updates**
+
+With messages now stored as **objects** instead of plain strings, updates were required to the Razor Page and its corresponding model. These changes ensure that message objects, including properties like user name, content, and timestamp, are properly handled and displayed.
+
+### **Updated Razor Page**
+
+The Razor page was updated to loop through a list of `Message` objects, dynamically displaying the user name, content, and timestamp. For messages containing uploaded files, links are automatically generated for download.
 
 ```razor
 <ul id="messagesList">
@@ -163,7 +172,53 @@ Since messages are now stored as **objects** (not plain strings), the Razor page
 </ul>
 ```
 
+This ensures a clean and intuitive display of both text messages and file links in the chat interface.
+
 ---
+
+### **Updates to the Chat Model**
+
+To support the new structure of `Message` objects, the **Chat Model** (`Chat.cshtml.cs`) was updated as follows:
+
+1. **Namespace Imports**  
+   Add the following namespaces at the top of the file:
+
+   ```csharp
+   using ChatApp.Models;
+   using ChatApp.Hubs;
+   ```
+
+2. **Update the `Messages` Property**  
+   Change the type of the `Messages` property from `List<string>` to `List<Message>`:
+
+   ```csharp
+   public List<Message> Messages { get; set; }
+   ```
+
+3. **Initialize the `Messages` Property**  
+   Update the initialization logic to:
+
+   ```csharp
+   Messages = new List<Message>();
+   ```
+
+4. **Remove Hardcoded Test Messages**  
+   Delete the following test message, as it’s no longer needed:
+
+   ```csharp
+   // Example: Adding a message for testing
+   Messages.Add("Welcome to the chat room!");
+   ```
+
+---
+
+### **Recap of Changes**
+
+- The Razor Page now dynamically handles both plain text messages and file uploads, displaying links for downloadable content.
+- The **Chat Model** leverages the `Message` class to handle structured message objects with properties such as user name, content, and timestamps.
+- Hardcoded test messages were removed, ensuring the application relies solely on dynamically populated messages from the database or received in real-time.
+
+--- 
 
 # **Real-Time User Presence**
 Users now receive **join/leave notifications**.
