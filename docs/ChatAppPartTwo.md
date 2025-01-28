@@ -206,6 +206,83 @@ To support the new structure of `Message` objects, the **Chat Model** (`Chat.csh
 
 ---
 
+### **Adding `using ChatApp.Hubs;` in `Program.cs`**
+
+When configuring SignalR in `Program.cs` with the following line:
+
+```csharp
+app.MapHub<ChatHub>("/chatHub");
+```
+
+you must include the namespace where your `ChatHub` class resides by adding this `using` directive at the top of your `Program.cs` file:
+
+```csharp
+using ChatApp.Hubs;
+```
+
+---
+
+### **Why This Is Necessary**
+
+1. **Namespace Usage**  
+   In C#, classes like `ChatHub` are organized into **namespaces**. The `ChatHub` class is defined within the `ChatApp.Hubs` namespace. Without explicitly including this namespace in your file via the `using` directive, the compiler cannot resolve the reference to the `ChatHub` class when executing:
+
+   ```csharp
+   app.MapHub<ChatHub>("/chatHub");
+   ```
+
+2. **Avoiding Fully Qualified Names**  
+   Without the `using` directive, you would have to fully qualify the class name in the `MapHub` call like this:
+
+   ```csharp
+   app.MapHub<ChatApp.Hubs.ChatHub>("/chatHub");
+   ```
+
+   While this approach works, it results in more verbose and less readable code. Adding the `using` directive simplifies and cleans up the code.
+
+3. **Code Organization**  
+   By placing `ChatHub` in the `ChatApp.Hubs` namespace, you’re adhering to best practices for organizing code. Adding the namespace reference in `Program.cs` ensures proper resolution and keeps your project maintainable as it scales.
+
+---
+
+### **What Happens Without It?**
+
+If you forget to add `using ChatApp.Hubs;`, the compiler will produce an error like:
+
+```
+CS0246: The type or namespace name 'ChatHub' could not be found (are you missing a using directive or an assembly reference?)
+```
+
+This error arises because `Program.cs` cannot resolve the `ChatHub` class without knowledge of its namespace.
+
+---
+
+### **How to Add It**
+
+Make sure you include the `ChatApp.Hubs` namespace in your `Program.cs` file:
+
+```csharp
+using ChatApp.Hubs;
+```
+
+Then, map the hub as usual:
+
+```csharp
+app.MapHub<ChatHub>("/chatHub");
+```
+
+---
+
+### **Recap**
+
+Adding `using ChatApp.Hubs;` in `Program.cs` is essential because:
+
+- It ensures the `ChatHub` class, located in the `ChatApp.Hubs` namespace, is accessible without fully qualifying its name.
+- It maintains clean and readable code by avoiding verbose namespace references.
+- It prevents compilation errors when mapping the SignalR hub for real-time communication.
+
+By including the namespace, you ensure SignalR can properly locate your `ChatHub` class and register it for real-time messaging functionality.
+
 ### **Recap of Changes**
 
 - The Razor Page now dynamically handles both plain text messages and file uploads, displaying links for downloadable content.
