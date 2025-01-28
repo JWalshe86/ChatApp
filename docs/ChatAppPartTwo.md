@@ -1,4 +1,7 @@
-
+---
+layout: default
+title: ChatApp Part Two
+---
 # **ChatApp Part 2 - Real-Time Messaging with SignalR**
 
 ![ChatApp](images/ChatApp.png)
@@ -365,10 +368,6 @@ public override async Task OnDisconnectedAsync(Exception? exception)
     }
 }
 ```
----
-layout: default
-title: ChatApp Part Two
----
 
 ## ChatApp: Bootstrap Modal Demo
 
