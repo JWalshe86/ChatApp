@@ -2,6 +2,9 @@
 layout: default
 title: ChatApp Part Two
 ---
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 # **ChatApp Part 2 - Real-Time Messaging with SignalR**
 
 ![ChatApp](images/ChatApp.png)
@@ -443,26 +446,30 @@ title: ChatApp Part Two
 
 Here's a Bootstrap modal integrated into this Markdown file.
 
-<!-- Button to Open Modal -->
-<button type="button" class="btn btn-primary" onclick="openModal()">Open Modal</button>
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#customModal">
+    Open Modal
+</button>
 
-<!-- Modal -->
-<div id="customModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="customModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Bootstrap Modal</h5>
-                <button type="button" class="btn-close" onclick="closeModal()"></button>
+                <h5 class="modal-title" id="modalLabel">Bootstrap Modal in Markdown</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 This is a Bootstrap modal inside ChatAppPartTwo!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="./script.js"></script>
