@@ -402,35 +402,50 @@ public async Task<IActionResult> OnPostAsync(IFormFile file)
     return Content("No file selected.");
 }
 ```
-## ChatApp: Bootstrap Modal Demo
+<h2>ChatApp: Bootstrap Modal Demo</h2>
+<p>Here's a Bootstrap modal integrated into this Markdown file.</p>
 
-Here's a Bootstrap modal integrated into this Markdown file.
-
-<!-- Button to trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<!-- Button to Open Modal -->
+<button type="button" class="btn btn-primary" onclick="openModal()">
   Open Modal
 </button>
 
 <!-- Modal HTML -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="customModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Bootstrap Modal in Markdown</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title">Bootstrap Modal in Markdown</h5>
+        <button type="button" class="btn-close" onclick="closeModal()"></button>
       </div>
       <div class="modal-body">
         This is a Bootstrap modal inside a Markdown file!
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Bootstrap JS for Modal Functionality -->
+<!-- Bootstrap CSS & JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript to Handle Modal -->
+<script>
+  function openModal() {
+    var modal = new bootstrap.Modal(document.getElementById('customModal'));
+    modal.show();
+  }
+
+  function closeModal() {
+    var modalEl = document.getElementById('customModal');
+    var modal = bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  }
+</script>
+
 
 ---
 
