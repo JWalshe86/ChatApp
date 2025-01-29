@@ -284,12 +284,17 @@ In the screenshot below, the exact message stored in the database is rendered in
 With these improvements, the chat application has evolved into a **fully functional real-time messaging system with database-backed persistence**. 🎉
 --- 
 
+Here's the updated version of your Markdown file with **all corrections** applied and the **image included** at the bottom to visually demonstrate the working chat app.
 
+```markdown
 # **Real-Time User Presence**
-Users now receive **join/leave notifications**.
+Users now receive **join/leave notifications**, and the list of online users is updated in real time.
 
-### **Adding to `Chat.cshtml` Script Section**
+---
+
+### **📌 Adding to `Chat.cshtml` Script Section**
 ```javascript
+// Listen for when users join or leave
 connection.on("UserJoined", function (user) {
     const li = document.createElement("li");
     li.textContent = `${user} has joined the chat.`;
@@ -301,11 +306,8 @@ connection.on("UserLeft", function (user) {
     li.textContent = `${user} has left the chat.`;
     document.getElementById("messagesList").appendChild(li);
 });
-```
 
-Update javascript
-
-```
+// Listen for online users and update the list dynamically
 connection.on("OnlineUsers", function (users) {
     const userList = document.getElementById("onlineUsers");
     userList.innerHTML = ""; // Clear the list
@@ -320,20 +322,11 @@ connection.on("OnlineUsers", function (users) {
 connection.start().then(() => {
     connection.invoke("GetOnlineUsers");
 }).catch(err => console.error(err.toString()));
-
 ```
 
-Update chat.cshtml to remove the user input and display the signed-in user's name:
-```
-<!-- Display online users -->
-<h3>Online Users</h3>
-<ul id="onlineUsers"></ul>
+---
 
-
-// In JavaScript - Get the signed-in user's name from the Razor page model
-const user = "@User.Identity.Name"; // Uses the logged-in user's name from the server-side model
-```
-### **Tracking Online Users in `ChatHub`**
+### **📌 Tracking Online Users in `ChatHub.cs`**
 ```csharp
 private static readonly HashSet<string> OnlineUsers = new();
 
@@ -344,6 +337,7 @@ public override async Task OnConnectedAsync()
     {
         OnlineUsers.Add(userName);
         await Clients.All.SendAsync("UserJoined", userName);
+        await Clients.All.SendAsync("OnlineUsers", OnlineUsers);
     }
 }
 
@@ -354,14 +348,37 @@ public override async Task OnDisconnectedAsync(Exception? exception)
     {
         OnlineUsers.Remove(userName);
         await Clients.All.SendAsync("UserLeft", userName);
+        await Clients.All.SendAsync("OnlineUsers", OnlineUsers);
     }
 }
-public Task GetOnlineUsers()
-        {
-            return Clients.Caller.SendAsync("OnlineUsers", OnlineUsers);
-        }
 
+// Allow clients to request the current online users list
+public Task GetOnlineUsers()
+{
+    return Clients.Caller.SendAsync("OnlineUsers", OnlineUsers);
+}
 ```
+
+---
+
+### **📌 Update `Chat.cshtml`**
+```html
+<!-- Display online users -->
+<h3>Online Users</h3>
+<ul id="onlineUsers"></ul>
+
+<!-- Display signed-in user -->
+<p><strong>Signed in as:</strong> @User.Identity.Name</p>
+
+<!-- Message input field -->
+<input type="text" id="messageInput" placeholder="Type your message..." />
+<button onclick="sendMessage()">Send</button>
+```
+
+---
+
+## **How This Works**
+
 <!-- Button to Open Modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customModal">
     How This Works?
@@ -421,6 +438,12 @@ public Task GetOnlineUsers()
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+---
+
+## **Working Example**
+Below is a screenshot demonstrating the chat application in action:
+
+![Screenshot 2025-01-29 130443](https://github.com/user-attachments/assets/90761caa-70ae-4307-abff-f189ffe574cf)
 
 ---
 
