@@ -443,9 +443,14 @@ Below is a screenshot demonstrating the chat application in action:
 ![Screenshot 2025-01-29 130443](https://github.com/user-attachments/assets/90761caa-70ae-4307-abff-f189ffe574cf)
 
 ---
+Here’s the **updated documentation** with all the **fixes implemented** and your **images included** to show it working! 🚀
 
-# **File Upload & Image Preview**
-### **Client-Side File Upload Handling**
+---
+
+# **✅ File Upload & Image Preview**
+## **🔹 Client-Side File Upload Handling**
+This code enables **file selection and preview** before uploading.
+
 ```javascript
 document.getElementById("fileInput").addEventListener("change", function () {
     const file = this.files[0];
@@ -461,6 +466,164 @@ document.getElementById("fileInput").addEventListener("change", function () {
     }
 });
 ```
+✅ **Ensures selected images are displayed before uploading.**
+
+---
+
+# **✅ Fixes Implemented**
+### **🛠 Fix 1: Ensuring Both Text & Files Send Correctly**
+**Problem:** Previously, only text messages worked, and uploaded images **did not persist** in chat.  
+**Fix:** Updated `sendMessage()` function to check for **both** text and file inputs.
+
+#### **✅ Updated `sendMessage()`**
+```javascript
+function sendMessage() {
+    const message = messageInput.value.trim();
+    const file = fileInput.files[0];
+    const user = "@User.Identity.Name"; // Get logged-in user's name
+
+    if (!file && message === "") {
+        console.warn("Message is empty, not sending.");
+        return;
+    }
+
+    if (file) {
+        const formData = new FormData();
+        const token = uploadForm.querySelector('input[name="__RequestVerificationToken"]').value;
+
+        formData.append("file", file);
+        formData.append("__RequestVerificationToken", token);
+
+        console.log("Uploading file...");
+
+        fetch(uploadForm.action, {
+            method: "POST",
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Upload failed");
+            }
+            return response.text();
+        })
+        .then(fileUrl => {
+            console.log("File uploaded successfully:", fileUrl);
+
+            // ✅ Send the file URL as a message
+            connection.invoke("SendMessage", user, fileUrl)
+                .then(() => console.log("File message sent successfully"))
+                .catch(err => console.error("Error sending file message:", err));
+
+            // ✅ Reset input fields
+            messageInput.value = "";
+            fileInput.value = "";
+            imagePreview.style.display = "none";
+            imagePreview.src = "";
+        })
+        .catch(error => console.error("Error uploading file:", error));
+    } else {
+        console.log("Sending text message:", message);
+
+        connection.invoke("SendMessage", user, message)
+            .then(() => console.log("Text message sent successfully"))
+            .catch(err => console.error("Error sending text message:", err));
+
+        messageInput.value = "";
+    }
+}
+```
+✅ **Now supports both file uploads and text messages in chat.**  
+
+---
+
+### **🛠 Fix 2: Ensure Messages Persist Instead of Being Overwritten**
+**Problem:** The message list was being reset when new messages arrived.  
+**Fix:** **Append new messages** instead of clearing the message list.
+
+#### **✅ Updated `ReceiveMessage` Handler**
+```javascript
+connection.on("ReceiveMessage", function (user, message) {
+    const messagesList = document.getElementById("messagesList");
+    const li = document.createElement("li");
+
+    if (typeof message === "string" && message.startsWith("/uploads/")) {
+        const fileLink = document.createElement("a");
+        fileLink.href = message;
+        fileLink.textContent = message.split("/").pop(); // Extracts file name
+        fileLink.target = "_blank";
+
+        li.textContent = `${user}: `;
+        li.appendChild(fileLink);
+    } else {
+        li.textContent = `${user}: ${message}`;
+    }
+
+    // ✅ Ensure the message is ADDED to the list instead of replacing it
+    messagesList.appendChild(li);
+});
+```
+✅ **Messages and uploaded files now stay in the chat history.**
+
+---
+
+### **🛠 Fix 3: Ensure Online Users Stay Visible**
+**Problem:** The online users list was being **reset improperly**.  
+**Fix:** **Ensure `OnlineUsers` updates properly in `ChatHub.cs`**.
+
+#### **✅ Updated `ChatHub.cs`**
+```csharp
+private static readonly HashSet<string> OnlineUsers = new();
+
+public override async Task OnConnectedAsync()
+{
+    string userName = Context.User?.Identity?.Name;
+    if (!string.IsNullOrEmpty(userName))
+    {
+        OnlineUsers.Add(userName);
+        await Clients.All.SendAsync("UserJoined", userName);
+        await Clients.All.SendAsync("OnlineUsers", OnlineUsers); // ✅ Send updated list
+    }
+}
+
+public override async Task OnDisconnectedAsync(Exception? exception)
+{
+    string userName = Context.User?.Identity?.Name;
+    if (!string.IsNullOrEmpty(userName))
+    {
+        OnlineUsers.Remove(userName);
+        await Clients.All.SendAsync("UserLeft", userName);
+        await Clients.All.SendAsync("OnlineUsers", OnlineUsers); // ✅ Send updated list
+    }
+}
+
+// ✅ Allow users to manually request the current online users list
+public Task GetOnlineUsers()
+{
+    return Clients.Caller.SendAsync("OnlineUsers", OnlineUsers);
+}
+```
+✅ **Ensures online users update correctly when someone joins or leaves.**
+
+---
+
+# **🎉 Final Working Version**
+Everything is now working:
+✅ **Text messages persist in the chat.**  
+✅ **File uploads work, and images appear as clickable links.**  
+✅ **Online users remain visible and update correctly.**  
+
+---
+
+# **🖼️ Final Working Screenshots**
+Here’s how it looks now that everything is working:
+
+### **📌 Chat interface with uploaded image and messages**
+![Screenshot 2025-01-29 140500](https://github.com/user-attachments/assets/f45fcb37-8140-45de-a6ee-f9863efb8059)
+
+### **📌 `money.png` file successfully uploaded and stored**
+![Screenshot 2025-01-29 140545](https://github.com/user-attachments/assets/d4879f2a-6631-4fae-a83a-f02fb2205678)
+
+🔹 **Now your chat app fully supports real-time messaging and image uploads!** 🚀😊
 
 ### **Uploading Files to Server**
 ```csharp
