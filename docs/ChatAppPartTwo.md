@@ -209,94 +209,48 @@ To support the new structure of `Message` objects, the **Chat Model** (`Chat.csh
 
 ### **Adding `using ChatApp.Hubs;` in `Program.cs`**
 
-When configuring SignalR in `Program.cs` with the following line:
+When configuring SignalR in `Program.cs` with:
 
 ```csharp
 app.MapHub<ChatHub>("/chatHub");
 ```
 
-you must include the namespace where your `ChatHub` class resides by adding this `using` directive at the top of your `Program.cs` file:
+you must include the namespace where `ChatHub` is defined by adding this directive at the top of `Program.cs`:
 
 ```csharp
 using ChatApp.Hubs;
 ```
 
+Additionally, you can remove:
+
+```csharp
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+```
+
+as it is now inherited within `ChatHub`, making it redundant in `Program.cs`.
+
 ---
 
 ### **Why This Is Necessary**
 
-1. **Namespace Usage**  
-   In C#, classes like `ChatHub` are organized into **namespaces**. The `ChatHub` class is defined within the `ChatApp.Hubs` namespace. Without explicitly including this namespace in your file via the `using` directive, the compiler cannot resolve the reference to the `ChatHub` class when executing:
+1. **Namespace Resolution**  
+   C# organizes classes into **namespaces**. Since `ChatHub` is defined in `ChatApp.Hubs`, `Program.cs` must explicitly reference this namespace to resolve:
 
    ```csharp
    app.MapHub<ChatHub>("/chatHub");
    ```
 
 2. **Avoiding Fully Qualified Names**  
-   Without the `using` directive, you would have to fully qualify the class name in the `MapHub` call like this:
+   Without `using ChatApp.Hubs;`, you would need to write:
 
    ```csharp
    app.MapHub<ChatApp.Hubs.ChatHub>("/chatHub");
    ```
 
-   While this approach works, it results in more verbose and less readable code. Adding the `using` directive simplifies and cleans up the code.
+   This is unnecessary and makes the code less readable.
 
-3. **Code Organization**  
-   By placing `ChatHub` in the `ChatApp.Hubs` namespace, you’re adhering to best practices for organizing code. Adding the namespace reference in `Program.cs` ensures proper resolution and keeps your project maintainable as it scales.
-
----
-
-### **What Happens Without It?**
-
-If you forget to add `using ChatApp.Hubs;`, the compiler will produce an error like:
-
-```
-CS0246: The type or namespace name 'ChatHub' could not be found (are you missing a using directive or an assembly reference?)
-```
-
-This error arises because `Program.cs` cannot resolve the `ChatHub` class without knowledge of its namespace.
-
----
-
-### **How to Add It**
-
-Make sure you include the `ChatApp.Hubs` namespace in your `Program.cs` file:
-
-```csharp
-using ChatApp.Hubs;
-```
-
-Then, map the hub as usual:
-
-```csharp
-app.MapHub<ChatHub>("/chatHub");
-```
-
----
-
-### **Recap**
-
-Adding `using ChatApp.Hubs;` in `Program.cs` is essential because:
-
-- It ensures the `ChatHub` class, located in the `ChatApp.Hubs` namespace, is accessible without fully qualifying its name.
-- It maintains clean and readable code by avoiding verbose namespace references.
-- It prevents compilation errors when mapping the SignalR hub for real-time communication.
-
-By including the namespace, you ensure SignalR can properly locate your `ChatHub` class and register it for real-time messaging functionality.
-
-Here’s the updated section integrating the images and providing a structured write-up on the outcomes:
-
----
-
-### **Recap**
-
-Adding `using ChatApp.Hubs;` in `Program.cs` is essential because:
-
-- It ensures the `ChatHub` class, located in the `ChatApp.Hubs` namespace, is accessible without fully qualifying its name.
-- It maintains clean and readable code by avoiding verbose namespace references.
-- It prevents compilation errors when mapping the SignalR hub for real-time communication.
-
-By including the namespace, you ensure SignalR can properly locate your `ChatHub` class and register it for real-time messaging functionality.
+3. **Code Organization & Maintainability**  
+   Including the correct namespace ensures better code structure, making it easier to manage as the project scales.
 
 ---
 
@@ -327,6 +281,7 @@ With these improvements, the chat application has evolved into a **fully functio
 
 # **Real-Time User Presence**
 Users now receive **join/leave notifications**.
+Add to Chat.cshtml Script section:
 
 ```javascript
 connection.on("UserJoined", function (user) {
