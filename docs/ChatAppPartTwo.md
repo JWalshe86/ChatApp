@@ -398,43 +398,6 @@ public async Task<IActionResult> OnPostAsync(IFormFile file)
     return Content("No file selected.");
 }
 ```
----
-layout: default
-title: ChatApp Part Two
----
-
-## ChatApp: Bootstrap Modal Demo
-
-Here's a Bootstrap modal integrated into this Markdown file.
-
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#customModal">
-    Open Modal
-</button>
-
-
-<!-- Bootstrap Modal -->
-<div class="modal fade" id="customModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Bootstrap Modal in Markdown</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                This is a Bootstrap modal inside ChatAppPartTwo!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
----
 
 # **Private Messaging**
 ### **Updating `Message` Class**
