@@ -332,7 +332,10 @@ public override async Task OnDisconnectedAsync(Exception? exception)
 Here's a Bootstrap modal integrated into this Markdown file.
 
 <!-- Button to Open Modal -->
-<button type="button" class="btn btn-primary" onclick="openModal()">Open Modal</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customModal">
+    Open Modal
+</button>
+
 
 <!-- Modal -->
 <div id="customModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
