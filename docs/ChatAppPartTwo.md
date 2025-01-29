@@ -327,7 +327,6 @@ public override async Task OnDisconnectedAsync(Exception? exception)
     }
 }
 ```
-
 <!-- Button to Open Modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customModal">
     How This Works?
@@ -339,16 +338,35 @@ public override async Task OnDisconnectedAsync(Exception? exception)
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">How Real-Time Presence Works</h5>
-                <!-- Use Bootstrap's built-in dismiss attribute -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>This feature enables real-time tracking of online users:</p>
+                <p>This functionality enables real-time user presence tracking in the chat application.</p>
+
+                <h6>📌 Client-Side Handling (<code>Chat.cshtml</code>)</h6>
                 <ul>
-                    <li>When a user <strong>joins</strong>, their name is added to the online users list, and all connected clients receive a notification.</li>
-                    <li>When a user <strong>leaves</strong>, they are removed from the list, and the chat updates accordingly.</li>
-                    <li>The UI dynamically updates, ensuring all users see who is online at any moment.</li>
+                    <li>Listens for <code>"UserJoined"</code> and <code>"UserLeft"</code> events from the server.</li>
+                    <li>Appends a new <code>&lt;li&gt;</code> element to <code>messagesList</code> when a user joins or leaves.</li>
                 </ul>
+
+                <h6>📌 Server-Side Tracking (<code>ChatHub.cs</code>)</h6>
+                <ul>
+                    <li>Uses a static <code>HashSet&lt;string&gt;</code> to keep track of online users.</li>
+                    <li><strong>OnConnectedAsync():</strong>
+                        <ul>
+                            <li>When a user connects, their username is added to the <code>OnlineUsers</code> list.</li>
+                            <li>A <code>"UserJoined"</code> event is broadcast to all clients.</li>
+                        </ul>
+                    </li>
+                    <li><strong>OnDisconnectedAsync():</strong>
+                        <ul>
+                            <li>When a user disconnects, their username is removed.</li>
+                            <li>A <code>"UserLeft"</code> event is sent to all clients.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p>This ensures that all connected users are notified in real-time whenever someone joins or leaves the chat.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -359,8 +377,6 @@ public override async Task OnDisconnectedAsync(Exception? exception)
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
 
 ---
 
