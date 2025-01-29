@@ -382,6 +382,7 @@ public Task GetOnlineUsers()
                 <ul>
                     <li>Listens for <code>"UserJoined"</code> and <code>"UserLeft"</code> events from the server.</li>
                     <li>Appends a new <code>&lt;li&gt;</code> element to <code>messagesList</code> when a user joins or leaves.</li>
+                    <li>Fetches the current list of online users when the page loads.</li>
                 </ul>
 
                 <h6>📌 Server-Side Tracking (<code>ChatHub.cs</code>)</h6>
@@ -391,12 +392,19 @@ public Task GetOnlineUsers()
                         <ul>
                             <li>When a user connects, their username is added to the <code>OnlineUsers</code> list.</li>
                             <li>A <code>"UserJoined"</code> event is broadcast to all clients.</li>
+                            <li>The updated list of online users is sent to all clients.</li>
                         </ul>
                     </li>
                     <li><strong>OnDisconnectedAsync():</strong>
                         <ul>
                             <li>When a user disconnects, their username is removed.</li>
                             <li>A <code>"UserLeft"</code> event is sent to all clients.</li>
+                            <li>The updated list of online users is sent to all clients.</li>
+                        </ul>
+                    </li>
+                    <li><strong>GetOnlineUsers():</strong>
+                        <ul>
+                            <li>Allows a newly connected client to request the current list of online users.</li>
                         </ul>
                     </li>
                 </ul>
@@ -412,6 +420,7 @@ public Task GetOnlineUsers()
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 ---
 
