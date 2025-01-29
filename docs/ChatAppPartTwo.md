@@ -328,37 +328,8 @@ public override async Task OnDisconnectedAsync(Exception? exception)
 }
 ```
 
-```
-<!-- Button to Open Modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customModal">
-    How This Works?
-</button>
 
-<!-- Modal -->
-<div id="customModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">How Real-Time Presence Works</h5>
-                <!-- Use Bootstrap's built-in dismiss attribute -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                This feature enables real-time tracking of online users.  
-                - When a user **joins**, their name is added to the online users list, and all connected clients receive a notification.  
-                - When a user **leaves**, they are removed from the list, and the chat updates accordingly.  
-                - The UI dynamically updates, ensuring all users see who is online at any moment.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-```
+<!-- Button to Open Modal --> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customModal"> How This Works? </button> <!-- Modal --> <div id="customModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title">How Real-Time Presence Works</h5> <!-- Use Bootstrap's built-in dismiss attribute --> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body"> This feature enables real-time tracking of online users. - When a user **joins**, their name is added to the online users list, and all connected clients receive a notification. - When a user **leaves**, they are removed from the list, and the chat updates accordingly. - The UI dynamically updates, ensuring all users see who is online at any moment. </div> <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> </div> </div> </div> </div> <!-- Bootstrap JS --> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 ---
