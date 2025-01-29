@@ -303,6 +303,36 @@ connection.on("UserLeft", function (user) {
 });
 ```
 
+Update javascript
+
+```
+connection.on("OnlineUsers", function (users) {
+    const userList = document.getElementById("onlineUsers");
+    userList.innerHTML = ""; // Clear the list
+    users.forEach(function (user) {
+        const li = document.createElement("li");
+        li.textContent = user;
+        userList.appendChild(li);
+    });
+});
+
+// Request online users on connection start
+connection.start().then(() => {
+    connection.invoke("GetOnlineUsers");
+}).catch(err => console.error(err.toString()));
+
+```
+
+Update chat.cshtml to remove the user input and display the signed-in user's name:
+```
+<!-- Display online users -->
+<h3>Online Users</h3>
+<ul id="onlineUsers"></ul>
+
+
+// Get the signed-in user's name from the Razor page model
+const user = "@User.Identity.Name"; // Uses the logged-in user's name from the server-side model
+```
 ### **Tracking Online Users in `ChatHub`**
 ```csharp
 private static readonly HashSet<string> OnlineUsers = new();
@@ -326,6 +356,11 @@ public override async Task OnDisconnectedAsync(Exception? exception)
         await Clients.All.SendAsync("UserLeft", userName);
     }
 }
+public Task GetOnlineUsers()
+        {
+            return Clients.Caller.SendAsync("OnlineUsers", OnlineUsers);
+        }
+
 ```
 <!-- Button to Open Modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customModal">
