@@ -330,7 +330,7 @@ Update chat.cshtml to remove the user input and display the signed-in user's nam
 <ul id="onlineUsers"></ul>
 
 
-// Get the signed-in user's name from the Razor page model
+// In JavaScript - Get the signed-in user's name from the Razor page model
 const user = "@User.Identity.Name"; // Uses the logged-in user's name from the server-side model
 ```
 ### **Tracking Online Users in `ChatHub`**
