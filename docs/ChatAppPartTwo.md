@@ -790,8 +790,17 @@ Now that the image preview is inside the message box, the next improvement could
 ---
 
 
-# **Private Messaging**
-### **Updating `Message` Class**
+
+---
+
+## **🔒 Private Messaging Implementation**
+Now that **public messaging and file uploads** are working, let's add **private messaging** so users can send **direct messages** to each other.
+
+---
+
+### **1️⃣ Updating `Message` Class**
+First, modify your `Message` class to support **private messages**.
+
 ```csharp
 public class Message
 {
@@ -799,21 +808,150 @@ public class Message
     public string User { get; set; }
     public string Content { get; set; }
     public DateTime Timestamp { get; set; }
-    public bool IsPrivate { get; set; }
-    public string? Recipient { get; set; }
-}
-```
-
-### **Sending Private Messages**
-```csharp
-public async Task SendPrivateMessage(string recipientUserName, string message)
-{
-    var senderUserName = Context.User?.Identity?.Name;
-    await Clients.User(recipientUserName).SendAsync("ReceivePrivateMessage", senderUserName, message);
+    public bool IsPrivate { get; set; } // ✅ True for private messages
+    public string? Recipient { get; set; } // ✅ Null for public messages
 }
 ```
 
 ---
+
+### **2️⃣ Keeping Track of Connected Users**
+Modify `ChatHub.cs` to maintain a **dictionary** of connected users.
+
+```csharp
+private static readonly Dictionary<string, string> ConnectedUsers = new();
+
+public override async Task OnConnectedAsync()
+{
+    var userName = Context.User?.Identity?.Name ?? Context.ConnectionId;
+    ConnectedUsers[userName] = Context.ConnectionId;
+
+    // Notify clients about online users
+    await Clients.All.SendAsync("OnlineUsers", ConnectedUsers.Keys);
+    await base.OnConnectedAsync();
+}
+
+public override async Task OnDisconnectedAsync(Exception? exception)
+{
+    var userEntry = ConnectedUsers.FirstOrDefault(x => x.Value == Context.ConnectionId);
+    if (!string.IsNullOrEmpty(userEntry.Key))
+    {
+        ConnectedUsers.Remove(userEntry.Key);
+        await Clients.All.SendAsync("OnlineUsers", ConnectedUsers.Keys);
+    }
+    await base.OnDisconnectedAsync(exception);
+}
+```
+
+---
+
+### **3️⃣ Sending & Receiving Private Messages**
+Now, **add private messaging** to `ChatHub.cs`:
+
+```csharp
+public async Task SendPrivateMessage(string recipientUserName, string message)
+{
+    var senderUserName = Context.User?.Identity?.Name ?? Context.ConnectionId;
+
+    if (ConnectedUsers.TryGetValue(recipientUserName, out var recipientConnectionId))
+    {
+        // ✅ Send the private message only to the recipient
+        await Clients.Client(recipientConnectionId).SendAsync("ReceivePrivateMessage", senderUserName, message);
+
+        // ✅ Send acknowledgment to sender
+        await Clients.Caller.SendAsync("PrivateMessageSent", recipientUserName, message);
+    }
+    else
+    {
+        // ✅ Notify sender if recipient is offline
+        await Clients.Caller.SendAsync("UserNotAvailable", recipientUserName);
+    }
+}
+```
+
+---
+
+### **4️⃣ Updating the Chat Page (`Chat.cshtml`)**
+Modify the **UI** to include **private messaging**:
+
+```html
+<h3>🔒 Private Messaging</h3>
+<div>
+    <select id="privateRecipient">
+        <option value="" disabled selected>Select a user</option>
+    </select>
+    <input type="text" id="privateMessageInput" placeholder="Type your private message..." />
+    <button id="sendPrivateMessage">Send Private Message</button>
+</div>
+```
+
+---
+
+### **5️⃣ JavaScript for Private Messaging**
+Now, **update JavaScript** in `Chat.cshtml` to handle **sending & receiving private messages**:
+
+```javascript
+// ✅ Send a private message
+function sendPrivateMessage() {
+    const recipient = document.getElementById("privateRecipient").value;
+    const message = document.getElementById("privateMessageInput").value.trim();
+
+    if (!recipient || !message) {
+        alert("Please select a recipient and enter a message.");
+        return;
+    }
+
+    connection.invoke("SendPrivateMessage", recipient, message)
+        .catch(err => console.error(err.toString()));
+
+    document.getElementById("privateMessageInput").value = "";
+}
+
+// ✅ Listen for private messages
+connection.on("ReceivePrivateMessage", (senderUserName, message) => {
+    const privateLi = document.createElement("li");
+    privateLi.innerHTML = `<strong>${senderUserName} (private)</strong>: ${message}`;
+    privateLi.classList.add("private-message");
+    document.getElementById("messagesList").appendChild(privateLi);
+});
+
+// ✅ Populate dropdown with online users
+connection.on("OnlineUsers", function (users) {
+    const userDropdown = document.getElementById("privateRecipient");
+    userDropdown.innerHTML = '<option value="" disabled selected>Select a user</option>';
+    users.forEach(user => {
+        const option = document.createElement("option");
+        option.value = user;
+        option.textContent = user;
+        userDropdown.appendChild(option);
+    });
+});
+
+// ✅ Attach event listener to button
+document.getElementById("sendPrivateMessage").addEventListener("click", sendPrivateMessage);
+```
+
+---
+
+### **6️⃣ UI Styling for Private Messages**
+Add **CSS styling** to highlight **private messages**.
+
+```css
+.private-message {
+    background-color: #f0f8ff;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 0;
+    font-style: italic;
+}
+```
+
+---
+
+## **📸 Final Working Screenshot**
+
+![Screenshot 2025-01-29 205338](https://github.com/user-attachments/assets/9b42b81d-fcf6-476b-b1a4-4941b441b2b2)
+
 
 # **Next Steps**
 1. **Deploy the app to the cloud** (Azure/AWS/Heroku).
