@@ -284,9 +284,6 @@ In the screenshot below, the exact message stored in the database is rendered in
 With these improvements, the chat application has evolved into a **fully functional real-time messaging system with database-backed persistence**. 🎉
 --- 
 
-Here's the updated version of your Markdown file with **all corrections** applied and the **image included** at the bottom to visually demonstrate the working chat app.
-
-```markdown
 # **Real-Time User Presence**
 Users now receive **join/leave notifications**, and the list of online users is updated in real time.
 
