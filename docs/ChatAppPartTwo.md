@@ -614,16 +614,38 @@ Everything is now working:
 
 ---
 
-# **🖼️ Final Working Screenshots**
-Here’s how it looks now that everything is working:
+## **📌 Chat Interface with Uploaded Image & Messages**
+✨ **File upload, preview, and real-time messaging fully functional!**
 
-### **📌 Chat interface with uploaded image and messages**
-![Screenshot 2025-01-29 140500](https://github.com/user-attachments/assets/f45fcb37-8140-45de-a6ee-f9863efb8059)
+<table align="center" style="border: 2px solid #ddd; border-radius: 10px; padding: 10px; background: #fff;">
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/f45fcb37-8140-45de-a6ee-f9863efb8059" width="90%">
+    </td>
+  </tr>
+</table>
 
-### **📌 `money.png` file successfully uploaded and stored**
-![Screenshot 2025-01-29 140545](https://github.com/user-attachments/assets/d4879f2a-6631-4fae-a83a-f02fb2205678)
+---
 
-🔹 **Now your chat app fully supports real-time messaging and image uploads!** 🚀😊
+## **📌 `money.png` Successfully Uploaded & Stored**
+✨ **File uploaded and stored in `wwwroot/uploads` directory.**
+
+<div align="center" style="border: 2px solid #ddd; padding: 8px; border-radius: 8px; background: #fff; display: inline-block;">
+    <img src="https://github.com/user-attachments/assets/d4879f2a-6631-4fae-a83a-f02fb2205678" width="85%">
+</div>
+
+---
+
+### ✅ **Key Takeaways**
+- 🏆 **Real-time chat messages and file uploads work seamlessly.**
+- 🖼️ **Image preview appears inside the message box before sending.**
+- 📂 **Files are correctly stored in the server and accessible via links.**
+- 🚀 **Chat updates dynamically with online users and messages.**
+
+💡 **Next Step?** Consider adding a delete button (❌) to remove uploaded files before sending! 🎯
+
+---
+
 
 ### **Uploading Files to Server**
 ```csharp
@@ -641,6 +663,132 @@ public async Task<IActionResult> OnPostAsync(IFormFile file)
     return Content("No file selected.");
 }
 ```
+Here's how you can continue your Markdown documentation with the latest changes, including the **image preview inside the message container**.
+
+---
+
+```markdown
+# **Preview image displays in message container**
+To enhance the file upload experience, an image preview now **appears directly inside the message input field** before sending. This ensures users can see the selected image clearly before it is uploaded.
+
+![Image Preview in Message Box](https://github.com/user-attachments/assets/KWdKGvuGxPQ7dg6qhjFbdi)
+
+---
+
+### **💡 Changes Implemented**
+To achieve this, the following updates were made:
+
+## **1️⃣ HTML Changes**
+The **image preview element** was moved inside the **message input container** for better alignment.
+
+```html
+<form id="chatForm" method="post" enctype="multipart/form-data" asp-antiforgery="true" action="/Chat">
+    @Html.AntiForgeryToken()
+
+    <div class="chat-container">
+        <!-- ✅ Wraps input field and image preview together -->
+        <div class="message-input-container">
+            <input type="text" id="messageInput" placeholder="Type your message..." />
+            <img id="imagePreview" style="display: none;" />
+        </div>
+
+        <label for="fileInput" class="file-upload">
+            📎
+            <input type="file" id="fileInput" name="file" />
+        </label>
+
+        <button id="sendButton" type="button">Send</button>
+    </div>
+</form>
+```
+🔹 **Key Change**: `#imagePreview` is now inside `.message-input-container` rather than floating separately.
+
+---
+
+## **2️⃣ CSS Fixes**
+Adjustments were made to **properly align** the image inside the message input field.
+
+```css
+.chat-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 8px 12px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    margin: auto;
+    position: relative;
+}
+
+.message-input-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    border-radius: 8px;
+    background: #fff;
+    padding: 4px;
+}
+
+#messageInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+#imagePreview {
+    height: 140px;  /* ✅ Ensures proper size */
+    width: 140px;
+    object-fit: cover; /* ✅ Keeps aspect ratio */
+    border-radius: 8px;
+    margin-left: 10px; /* ✅ Adds spacing between text input and image */
+}
+```
+🔹 **Key Change**: `#imagePreview` now stays inside `.message-input-container` and is properly aligned with a **fixed size of 140px**.
+
+---
+
+## **3️⃣ JavaScript Enhancements**
+The file input change event was updated to correctly **display the preview inside the message box**.
+
+```js
+document.getElementById("fileInput").addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            document.getElementById("imagePreview").src = e.target.result;
+            document.getElementById("imagePreview").style.display = "block";
+        };
+        reader.readAsDataURL(file);
+    } else {
+        document.getElementById("imagePreview").style.display = "none";
+    }
+});
+```
+🔹 **Key Change**: The preview is dynamically shown **inside the message input field** when a file is selected.
+
+---
+
+## **🎯 Final Outcome**
+With these changes:
+✅ **Users now see a preview of their selected image before sending.**  
+✅ **The preview appears directly inside the message input field.**  
+✅ **Improved UI experience, making file uploads feel more intuitive.**  
+![Screenshot 2025-01-29 181445](https://github.com/user-attachments/assets/93034f3b-fd59-4d4b-b4df-23a746309a95)
+
+---
+
+**Next Steps:**  
+Now that the image preview is inside the message box, the next improvement could be **adding a close button (❌) on the preview** to allow users to remove an uploaded file before sending. 🚀
+
+---
+
 
 # **Private Messaging**
 ### **Updating `Message` Class**
