@@ -243,6 +243,66 @@ namespace ChatApp.Hubs
 - **`OnConnectedAsync()`**: Adds users to `OnlineUsers` and notifies all clients.
 - **`OnDisconnectedAsync()`**: Removes users and updates the client list.
 - **`SendOnlineUsers()`**: Updates the online users list dynamically.
+## **How This Works**
+
+<!-- Button to Open Modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customModal">
+    How This Works?
+</button>
+
+<!-- Modal -->
+<div id="customModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">How Real-Time Presence Works</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This functionality enables real-time user presence tracking in the chat application.</p>
+
+                <h6>📌 Client-Side Handling (<code>Chat.cshtml</code>)</h6>
+                <ul>
+                    <li>Listens for <code>"UserJoined"</code> and <code>"UserLeft"</code> events from the server.</li>
+                    <li>Appends a new <code>&lt;li&gt;</code> element to <code>messagesList</code> when a user joins or leaves.</li>
+                    <li>Fetches the current list of online users when the page loads.</li>
+                </ul>
+
+                <h6>📌 Server-Side Tracking (<code>ChatHub.cs</code>)</h6>
+                <ul>
+                    <li>Uses a static <code>HashSet&lt;string&gt;</code> to keep track of online users.</li>
+                    <li><strong>OnConnectedAsync():</strong>
+                        <ul>
+                            <li>When a user connects, their username is added to the <code>OnlineUsers</code> list.</li>
+                            <li>A <code>"UserJoined"</code> event is broadcast to all clients.</li>
+                            <li>The updated list of online users is sent to all clients.</li>
+                        </ul>
+                    </li>
+                    <li><strong>OnDisconnectedAsync():</strong>
+                        <ul>
+                            <li>When a user disconnects, their username is removed.</li>
+                            <li>A <code>"UserLeft"</code> event is sent to all clients.</li>
+                            <li>The updated list of online users is sent to all clients.</li>
+                        </ul>
+                    </li>
+                    <li><strong>GetOnlineUsers():</strong>
+                        <ul>
+                            <li>Allows a newly connected client to request the current list of online users.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p>This ensures that all connected users are notified in real-time whenever someone joins or leaves the chat.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 ---
 
@@ -395,168 +455,6 @@ This structure ensures a **smooth, real-time chat experience with proper authent
 - **Hardcoded test messages were removed**, ensuring that only actual messages sent by users appear.
 
 With these improvements, the chat application has evolved into a **fully functional real-time messaging system with database-backed persistence**. 🎉
---- 
-
-# **Real-Time User Presence**
-Users now receive **join/leave notifications**, and the list of online users is updated in real time.
-
----
-
-### **📌 Adding to `Chat.cshtml` Script Section**
-```javascript
-// Listen for when users join or leave
-connection.on("UserJoined", function (user) {
-    const li = document.createElement("li");
-    li.textContent = `${user} has joined the chat.`;
-    document.getElementById("messagesList").appendChild(li);
-});
-
-connection.on("UserLeft", function (user) {
-    const li = document.createElement("li");
-    li.textContent = `${user} has left the chat.`;
-    document.getElementById("messagesList").appendChild(li);
-});
-
-// Listen for online users and update the list dynamically
-connection.on("OnlineUsers", function (users) {
-    const userList = document.getElementById("onlineUsers");
-    userList.innerHTML = ""; // Clear the list
-    users.forEach(function (user) {
-        const li = document.createElement("li");
-        li.textContent = user;
-        userList.appendChild(li);
-    });
-});
-
-// Request online users on connection start
-connection.start().then(() => {
-    connection.invoke("GetOnlineUsers");
-}).catch(err => console.error(err.toString()));
-```
-
----
-
-### **📌 Tracking Online Users in `ChatHub.cs`**
-```csharp
-private static readonly HashSet<string> OnlineUsers = new();
-
-public override async Task OnConnectedAsync()
-{
-    string userName = Context.User?.Identity?.Name;
-    if (!string.IsNullOrEmpty(userName))
-    {
-        OnlineUsers.Add(userName);
-        await Clients.All.SendAsync("UserJoined", userName);
-        await Clients.All.SendAsync("OnlineUsers", OnlineUsers);
-    }
-}
-
-public override async Task OnDisconnectedAsync(Exception? exception)
-{
-    string userName = Context.User?.Identity?.Name;
-    if (!string.IsNullOrEmpty(userName))
-    {
-        OnlineUsers.Remove(userName);
-        await Clients.All.SendAsync("UserLeft", userName);
-        await Clients.All.SendAsync("OnlineUsers", OnlineUsers);
-    }
-}
-
-// Allow clients to request the current online users list
-public Task GetOnlineUsers()
-{
-    return Clients.Caller.SendAsync("OnlineUsers", OnlineUsers);
-}
-```
-
----
-
-### **📌 Update `Chat.cshtml`**
-```html
-<!-- Display online users -->
-<h3>Online Users</h3>
-<ul id="onlineUsers"></ul>
-
-<!-- Display signed-in user -->
-<p><strong>Signed in as:</strong> @User.Identity.Name</p>
-
-<!-- Message input field -->
-<input type="text" id="messageInput" placeholder="Type your message..." />
-<button onclick="sendMessage()">Send</button>
-```
-
----
-
-## **How This Works**
-
-<!-- Button to Open Modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customModal">
-    How This Works?
-</button>
-
-<!-- Modal -->
-<div id="customModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">How Real-Time Presence Works</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>This functionality enables real-time user presence tracking in the chat application.</p>
-
-                <h6>📌 Client-Side Handling (<code>Chat.cshtml</code>)</h6>
-                <ul>
-                    <li>Listens for <code>"UserJoined"</code> and <code>"UserLeft"</code> events from the server.</li>
-                    <li>Appends a new <code>&lt;li&gt;</code> element to <code>messagesList</code> when a user joins or leaves.</li>
-                    <li>Fetches the current list of online users when the page loads.</li>
-                </ul>
-
-                <h6>📌 Server-Side Tracking (<code>ChatHub.cs</code>)</h6>
-                <ul>
-                    <li>Uses a static <code>HashSet&lt;string&gt;</code> to keep track of online users.</li>
-                    <li><strong>OnConnectedAsync():</strong>
-                        <ul>
-                            <li>When a user connects, their username is added to the <code>OnlineUsers</code> list.</li>
-                            <li>A <code>"UserJoined"</code> event is broadcast to all clients.</li>
-                            <li>The updated list of online users is sent to all clients.</li>
-                        </ul>
-                    </li>
-                    <li><strong>OnDisconnectedAsync():</strong>
-                        <ul>
-                            <li>When a user disconnects, their username is removed.</li>
-                            <li>A <code>"UserLeft"</code> event is sent to all clients.</li>
-                            <li>The updated list of online users is sent to all clients.</li>
-                        </ul>
-                    </li>
-                    <li><strong>GetOnlineUsers():</strong>
-                        <ul>
-                            <li>Allows a newly connected client to request the current list of online users.</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <p>This ensures that all connected users are notified in real-time whenever someone joins or leaves the chat.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
----
-
-## **Working Example**
-Below is a screenshot demonstrating the chat application in action:
-
-![Screenshot 2025-01-29 130443](https://github.com/user-attachments/assets/90761caa-70ae-4307-abff-f189ffe574cf)
-
----
-Here’s the **updated documentation** with all the **fixes implemented** and your **images included** to show it working! 🚀
 
 ---
 
