@@ -1,3 +1,7 @@
 body {
-    background-color: yellow !important;
+    background-color: white !important;
+}
+
+#TableOfContents a {
+    color: black !important;
 }
