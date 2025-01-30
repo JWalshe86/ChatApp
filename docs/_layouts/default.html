@@ -6,3 +6,33 @@
     <!-- ✅ Load custom styles (ensure this file exists) -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ site.title }}</h1>
+        </header>
+
+        <!-- ✅ Table of Contents Section -->
+        <nav id="TableOfContents">
+            <h2>📖 Table of Contents</h2>
+            <ul>
+                <li>🔹 <a href="#introduction">Introduction</a></li>
+                <li>🛠️ <a href="#initial-housekeeping">Initial Housekeeping</a></li>
+                <li>💾 <a href="#persistent-message-storage">Persistent Message Storage</a></li>
+                <li>⚙️ <a href="#database-migrations">Database Migrations</a></li>
+                <li>🔗 <a href="#1-signalr-integration">1. SignalR Integration</a></li>
+                <li>👥 <a href="#2-online-users-display--user-joinleave-notifications">2. Online Users & Notifications</a></li>
+                <li>🚀 <a href="#real-time-user-presence">Real-Time User Presence</a></li>
+                <li>🔒 <a href="#private-messaging-implementation">Private Messaging</a></li>
+                <li>📸 <a href="#file-upload--image-preview">File Upload & Image Preview</a></li>
+                <li>💡 <a href="#final-thoughts">Final Thoughts</a></li>
+                <li>🚀 <a href="#next-steps">Next Steps</a></li>
+            </ul>
+        </nav>
+
+        <!-- ✅ This renders the actual page content -->
+        <main>
+            {{ content }}
+        </main>
+    </div>
+</body>
