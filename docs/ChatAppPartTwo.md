@@ -6,7 +6,8 @@ title: ChatApp Part Two
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
 # **ChatApp Part 2 - Real-Time Messaging with SignalR**
-
+* TOC
+{:toc}
 ![ChatApp](images/ChatApp.png)
 
 ## **Introduction**
