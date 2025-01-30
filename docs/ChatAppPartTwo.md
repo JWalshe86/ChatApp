@@ -9,12 +9,6 @@ title: ChatApp Part Two
 
 ![ChatApp](images/ChatApp.png)
 
----
-
-# **ChatApp Part 2 - Real-Time Messaging with SignalR**
-
-![ChatApp](images/ChatApp.png)
-
 ## **Introduction**
 After successfully setting up real-time messaging with SignalR, I enhanced the app with:
 - **Persistent chat storage**, ensuring messages are saved even after the application restarts.
