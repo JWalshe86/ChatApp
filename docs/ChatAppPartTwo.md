@@ -102,7 +102,17 @@ dotnet ef database update
 
 ---
 
-# **SignalR Integration**
+Your notes have been updated to reflect the change from a user manually entering their name to using the signed-in user's name for sending messages.
+
+---
+Got it! Here’s the structured version with **three sections**:  
+1. **SignalR Integration**  
+2. **Online Users Display & User Join/Leave Notifications**  
+3. **Username for Messages Taken from Signed-in User**
+
+---
+
+# **1. SignalR Integration**
 ### **Updating `ChatHub` to Save Messages in Database**
 Previously, messages were sent via SignalR but were **not persisted**. Now, messages are saved to the database before being broadcast.
 
@@ -143,137 +153,211 @@ namespace ChatApp.Hubs
 - `SendMessage()` now **saves messages to the database** before broadcasting them.
 - **Entity Framework** manages message persistence.
 
-## **Message Display Updates**
+---
 
-With messages now stored as **objects** instead of plain strings, updates were required to the Razor Page and its corresponding model. These changes ensure that message objects, including properties like user name, content, and timestamp, are properly handled and displayed.
+# **2. Online Users Display & User Join/Leave Notifications**
+Previously, the chat only handled messages, but now **online users are tracked**, and users joining or leaving the chat are displayed.
+
+### **Updated `ChatHub.cs` to Track Online Users**
+Added a **dictionary** to keep track of connected users and notify clients when a user joins or leaves.
+
+```csharp
+using ChatApp.Models;
+using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
+
+namespace ChatApp.Hubs
+{
+    public class ChatHub : Hub
+    {
+        private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
+
+        private readonly AppDbContext _context;
+
+        public ChatHub(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public override async Task OnConnectedAsync()
+        {
+            string userName = Context.User.Identity.Name;
+
+            if (!OnlineUsers.ContainsKey(Context.ConnectionId))
+            {
+                OnlineUsers[Context.ConnectionId] = userName;
+                await Clients.All.SendAsync("UserJoined", userName);
+                await SendOnlineUsers();
+            }
+
+            await base.OnConnectedAsync();
+        }
+
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
+            if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
+            {
+                await Clients.All.SendAsync("UserLeft", userName);
+                await SendOnlineUsers();
+            }
+
+            await base.OnDisconnectedAsync(exception);
+        }
+
+        private Task SendOnlineUsers()
+        {
+            var users = OnlineUsers.Values.Distinct().ToList();
+            return Clients.All.SendAsync("OnlineUsers", users);
+        }
+    }
+}
+```
+
+### **Key Changes**
+- **`OnConnectedAsync()`**: Adds users to `OnlineUsers` and notifies all clients.
+- **`OnDisconnectedAsync()`**: Removes users and updates the client list.
+- **`SendOnlineUsers()`**: Updates the online users list dynamically.
+
+---
+
+### **Updated JavaScript for Online Users & Notifications**
+```js
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .build();
+
+    // Handle receiving messages
+    connection.on("ReceiveMessage", function (user, message) {
+        const msg = `${user}: ${message}`;
+        const li = document.createElement("li");
+        li.textContent = msg;
+        document.getElementById("messagesList").appendChild(li);
+    });
+
+    // Handle user joining the chat
+    connection.on("UserJoined", function (user) {
+        const li = document.createElement("li");
+        li.textContent = `${user} has joined the chat.`;
+        document.getElementById("messagesList").appendChild(li);
+    });
+
+    // Handle user leaving the chat
+    connection.on("UserLeft", function (user) {
+        const li = document.createElement("li");
+        li.textContent = `${user} has left the chat.`;
+        document.getElementById("messagesList").appendChild(li);
+    });
+
+    // Update online users list
+    connection.on("OnlineUsers", function (users) {
+        const userList = document.getElementById("onlineUsers");
+        userList.innerHTML = ""; // Clear the list
+        users.forEach(function (user) {
+            const li = document.createElement("li");
+            li.textContent = user;
+            userList.appendChild(li);
+        });
+    });
+
+    // Request online users on connection start
+    connection.start().then(() => {
+        connection.invoke("GetOnlineUsers");
+    }).catch(err => console.error(err.toString()));
+</script>
+```
+
+### **Updated Razor Page to Display Online Users**
+```razor
+<h3>Online Users</h3>
+<ul id="onlineUsers"></ul>
+```
+
+### **What This Adds**
+✅ Users **appear in the online list** when they join.  
+✅ Users **disappear when they leave**.  
+✅ Users **see notifications when others join or leave**.
+
+---
+
+# **3. Username for Messages Taken from Signed-in User**
+Previously, users manually entered their name before sending a message. Now, messages **automatically use the signed-in user's name**.
+
+### **Updated `ChatHub.cs` to Remove Username Parameter**
+We no longer need the client to send the username—SignalR retrieves it from the authentication context.
+
+```csharp
+public async Task SendMessage(string message)
+{
+    string user = Context.User.Identity.Name;
+
+    var newMessage = new Message
+    {
+        User = user,
+        Content = message,
+        Timestamp = DateTime.UtcNow
+    };
+
+    _context.Messages.Add(newMessage);
+    await _context.SaveChangesAsync();
+
+    await Clients.All.SendAsync("ReceiveMessage", user, message);
+}
+```
+
+### **Updated JavaScript for Sending Messages**
+```js
+function sendMessage() {
+    const messageInput = document.getElementById("messageInput");
+
+    if (!messageInput) {
+        console.error("Message input field not found.");
+        return;
+    }
+
+    const message = messageInput.value.trim();
+
+    if (!message) {
+        console.error("Cannot send an empty message.");
+        return;
+    }
+
+    connection.invoke("SendMessage", message).catch(function (err) {
+        console.error(err.toString());
+    });
+
+    messageInput.value = ""; // Clear the input field after sending
+}
+```
 
 ### **Updated Razor Page**
-
-The Razor page was updated to loop through a list of `Message` objects, dynamically displaying the user name, content, and timestamp. For messages containing uploaded files, links are automatically generated for download.
-
 ```razor
-<ul id="messagesList">
-    @foreach (var message in Model.Messages)
-    {
-        <li>
-            <strong>@message.User</strong>: 
-            @if (message.Content.StartsWith("/uploads/"))
-            {
-                var fileName = System.IO.Path.GetFileName(message.Content);
-                <a href="@message.Content" target="_blank">@fileName</a>
-            }
-            else
-            {
-                @message.Content
-            }
-            (@message.Timestamp)
-        </li>
-    }
-</ul>
+<!-- Message input field -->
+<input type="text" id="messageInput" placeholder="Type your message..." />
+<button onclick="sendMessage()">Send</button>
 ```
 
-This ensures a clean and intuitive display of both text messages and file links in the chat interface.
+### **Key Changes**
+- **Removed `userInput`** from JavaScript.
+- **SignalR now automatically uses `User.Identity.Name`**.
+- **No need for clients to pass their username** anymore.
 
 ---
 
-### **Updates to the Chat Model**
-
-To support the new structure of `Message` objects, the **Chat Model** (`Chat.cshtml.cs`) was updated as follows:
-
-1. **Namespace Imports**  
-   Add the following namespaces at the top of the file:
-
-   ```csharp
-   using ChatApp.Models;
-   using ChatApp.Hubs;
-   ```
-
-2. **Update the `Messages` Property**  
-   Change the type of the `Messages` property from `List<string>` to `List<Message>`:
-
-   ```csharp
-   public List<Message> Messages { get; set; }
-   ```
-
-3. **Initialize the `Messages` Property**  
-   Update the initialization logic to:
-
-   ```csharp
-   Messages = new List<Message>();
-   ```
-
-4. **Remove Hardcoded Test Messages**  
-   Delete the following test message, as it’s no longer needed:
-
-   ```csharp
-   // Example: Adding a message for testing
-   Messages.Add("Welcome to the chat room!");
-   ```
-
----
-
-### **Adding `using ChatApp.Hubs;` in `Program.cs`**
-
-When configuring SignalR in `Program.cs` with:
-
-```csharp
-app.MapHub<ChatHub>("/chatHub");
-```
-
-you must include the namespace where `ChatHub` is defined by adding this directive at the top of `Program.cs`:
-
-```csharp
-using ChatApp.Hubs;
-```
-
-Additionally, you can remove:
-
-```csharp
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-```
-
-as it is now inherited within `ChatHub`, making it redundant in `Program.cs`.
-
----
-
-### **Why This Is Necessary**
-
-1. **Namespace Resolution**  
-   C# organizes classes into **namespaces**. Since `ChatHub` is defined in `ChatApp.Hubs`, `Program.cs` must explicitly reference this namespace to resolve:
-
-   ```csharp
-   app.MapHub<ChatHub>("/chatHub");
-   ```
-
-2. **Avoiding Fully Qualified Names**  
-   Without `using ChatApp.Hubs;`, you would need to write:
-
-   ```csharp
-   app.MapHub<ChatApp.Hubs.ChatHub>("/chatHub");
-   ```
-
-   This is unnecessary and makes the code less readable.
-
-3. **Code Organization & Maintainability**  
-   Including the correct namespace ensures better code structure, making it easier to manage as the project scales.
-
----
-
-## **Message Persistence: From Database to UI**
-With the latest update, messages are now **persisted in the database** instead of being stored temporarily in memory. Each message is saved with attributes such as `User`, `Content`, and `Timestamp`. This means that when users send messages, they are permanently recorded and can be retrieved upon refreshing the page or reopening the application.
-
-### **Database Storage Confirmation**
-The following screenshot verifies that messages are successfully stored in the SQLite database. The message, along with its associated username and timestamp, appears in the database, confirming that Entity Framework Core is handling message persistence correctly.
-
-![Screenshot 2025-01-28 171658](https://github.com/user-attachments/assets/f755097c-cd61-4487-a354-4077ff622735)
-
-
-### **Displaying Messages in the Chat Room**
-Once stored in the database, messages are then retrieved and dynamically displayed in the chat room UI. The **structured Message model** ensures that the displayed messages retain their original sender, content, and timestamp.
-
-In the screenshot below, the exact message stored in the database is rendered in the chat room. This real-time display is powered by **SignalR**, which updates the chat interface for all connected users without requiring a page refresh.
-
+## **Final Thoughts**
+### ✅ **SignalR Integration**
+- Messages are now stored in the database.
 ![Screenshot 2025-01-28 171737](https://github.com/user-attachments/assets/cac8d0d7-2ba2-421a-85c8-e0ad3ac2566a)
+
+### ✅ **Online Users Display**
+- Users appear/disappear in the online list dynamically.
+- Notifications when users join/leave.
+
+### ✅ **Username for Messages from Signed-in User**
+- No need for users to type their name.
+- Messages are automatically attributed to the authenticated user.
+
+This structure ensures a **smooth, real-time chat experience with proper authentication and user tracking**. 🚀
 
 ### **Recap of Changes**
 - The **Chat Model** was updated to use structured message objects (`Message` class) instead of simple strings.
