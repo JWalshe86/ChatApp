@@ -1,6 +1,6 @@
 html body div main #TableOfContents a,
 html body div main #TableOfContents a:visited {
-    color: black !important;
+    color: red !important;
     text-decoration: none !important;
 }
 
