@@ -1,4 +1,4 @@
-/* Force black text for Table of Contents links */
+/* Force black text for Table Contents links */
 #TableOfContents a {
     color: black !important;
     text-decoration: none !important;
