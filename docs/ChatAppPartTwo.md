@@ -15,60 +15,49 @@ I'll enhance the design of your **Table of Contents** to make it look more visua
 I've refined the **Table of Contents** to remove the blue color and the hollow bullet points (rings). Below is the updated version:
 
 ---
+Since you're using **Markdown with a Jekyll theme**, inline **HTML styling** may not work consistently. Instead, let's refine the **Markdown approach** to achieve the cleaner look you want. 
 
-### **📖 Table of Contents**
-<div style="border: 2px solid #4CAF50; padding: 15px; border-radius: 10px; background: #f9f9f9;">
-  <ul style="list-style: none; padding-left: 10px; font-size: 16px;">
-    <li>🔹 <a href="#introduction" style="color: black; text-decoration: none;"><strong>Introduction</strong></a></li>
-    <li>🛠️ <a href="#initial-housekeeping" style="color: black; text-decoration: none;"><strong>Initial Housekeeping</strong></a></li>
-    <li>💾 <a href="#persistent-message-storage" style="color: black; text-decoration: none;"><strong>Persistent Message Storage</strong></a>
-      <ul style="list-style-type: none;">
-        <li>📄 <a href="#creating-the-message-class" style="color: black; text-decoration: none;">Creating the <code>Message</code> Class</a></li>
-        <li>🗄️ <a href="#creating-appdbcontext" style="color: black; text-decoration: none;">Creating <code>AppDbContext</code></a></li>
-      </ul>
-    </li>
-    <li>⚙️ <a href="#database-migrations" style="color: black; text-decoration: none;"><strong>Database Migrations</strong></a></li>
-    <li>🔗 <a href="#1-signalr-integration" style="color: black; text-decoration: none;"><strong>1. SignalR Integration</strong></a>
-      <ul style="list-style-type: none;">
-        <li>📡 <a href="#updating-chathub-to-save-messages-in-database" style="color: black; text-decoration: none;">Updating <code>ChatHub</code> to Save Messages</a></li>
-      </ul>
-    </li>
-    <li>👥 <a href="#2-online-users-display--user-joinleave-notifications" style="color: black; text-decoration: none;"><strong>2. Online Users Display & User Join/Leave Notifications</strong></a>
-      <ul style="list-style-type: none;">
-        <li>📌 <a href="#updated-chathubcs-to-track-online-users" style="color: black; text-decoration: none;">Tracking Online Users in <code>ChatHub.cs</code></a></li>
-        <li>💬 <a href="#updated-javascript-for-online-users--notifications" style="color: black; text-decoration: none;">JavaScript for Online Users & Notifications</a></li>
-      </ul>
-    </li>
-    <li>📝 <a href="#3-username-for-messages-taken-from-signed-in-user" style="color: black; text-decoration: none;"><strong>3. Username for Messages Taken from Signed-in User</strong></a>
-      <ul style="list-style-type: none;">
-        <li>🔧 <a href="#updated-chathubcs-to-remove-username-parameter" style="color: black; text-decoration: none;">Updating <code>ChatHub.cs</code></a></li>
-        <li>🎯 <a href="#updated-javascript-for-sending-messages" style="color: black; text-decoration: none;">Updating JavaScript for Sending Messages</a></li>
-      </ul>
-    </li>
-    <li>🚀 <a href="#real-time-user-presence" style="color: black; text-decoration: none;"><strong>Real-Time User Presence</strong></a></li>
-    <li>🔒 <a href="#private-messaging-implementation" style="color: black; text-decoration: none;"><strong>Private Messaging Implementation</strong></a>
-      <ul style="list-style-type: none;">
-        <li>📄 <a href="#1️⃣-updating-message-class" style="color: black; text-decoration: none;">Updating the <code>Message</code> Class</a></li>
-        <li>🛠️ <a href="#2️⃣-keeping-track-of-connected-users" style="color: black; text-decoration: none;">Tracking Connected Users</a></li>
-        <li>📩 <a href="#3️⃣-sending--receiving-private-messages" style="color: black; text-decoration: none;">Sending & Receiving Private Messages</a></li>
-        <li>🖥️ <a href="#4️⃣-updating-the-chat-page-chatcshtml" style="color: black; text-decoration: none;">Updating the Chat Page</a></li>
-        <li>📜 <a href="#5️⃣-javascript-for-private-messaging" style="color: black; text-decoration: none;">JavaScript for Private Messaging</a></li>
-        <li>🎨 <a href="#6️⃣-ui-styling-for-private-messages" style="color: black; text-decoration: none;">UI Styling for Private Messages</a></li>
-      </ul>
-    </li>
-    <li>📸 <a href="#file-upload--image-preview" style="color: black; text-decoration: none;"><strong>File Upload & Image Preview</strong></a>
-      <ul style="list-style-type: none;">
-        <li>📂 <a href="#1️⃣-client-side-file-upload-handling" style="color: black; text-decoration: none;">Ensuring Both Text & Files Send Correctly</a></li>
-        <li>🔄 <a href="#2️⃣-ensuring-messages-persist-instead-of-being-overwritten" style="color: black; text-decoration: none;">Fixing Message Persistence</a></li>
-        <li>👥 <a href="#3️⃣-ensure-online-users-stay-visible" style="color: black; text-decoration: none;">Ensuring Online Users Stay Visible</a></li>
-      </ul>
-    </li>
-    <li>💡 <a href="#final-thoughts" style="color: black; text-decoration: none;"><strong>Final Thoughts</strong></a></li>
-    <li>🚀 <a href="#next-steps" style="color: black; text-decoration: none;"><strong>Next Steps</strong></a></li>
-  </ul>
-</div>
+### **Updated Markdown Table of Contents**
+```markdown
+## 📖 Table of Contents
 
+- 🔹 [Introduction](#introduction)
+- 🛠️ [Initial Housekeeping](#initial-housekeeping)
+- 💾 [Persistent Message Storage](#persistent-message-storage)
+  - 📄 [Creating the `Message` Class](#creating-the-message-class)
+  - 🗄️ [Creating `AppDbContext`](#creating-appdbcontext)
+- ⚙️ [Database Migrations](#database-migrations)
+- 🔗 [1. SignalR Integration](#1-signalr-integration)
+  - 📡 [Updating `ChatHub` to Save Messages](#updating-chathub-to-save-messages-in-database)
+- 👥 [2. Online Users Display & User Join/Leave Notifications](#2-online-users-display--user-joinleave-notifications)
+  - 📌 [Tracking Online Users in `ChatHub.cs`](#updated-chathubcs-to-track-online-users)
+  - 💬 [JavaScript for Online Users & Notifications](#updated-javascript-for-online-users--notifications)
+- 📝 [3. Username for Messages Taken from Signed-in User](#3-username-for-messages-taken-from-signed-in-user)
+  - 🔧 [Updating `ChatHub.cs`](#updated-chathubcs-to-remove-username-parameter)
+  - 🎯 [Updating JavaScript for Sending Messages](#updated-javascript-for-sending-messages)
+- 🚀 [Real-Time User Presence](#real-time-user-presence)
+- 🔒 [Private Messaging Implementation](#private-messaging-implementation)
+  - 📄 [Updating the `Message` Class](#1️⃣-updating-message-class)
+  - 🛠️ [Tracking Connected Users](#2️⃣-keeping-track-of-connected-users)
+  - 📩 [Sending & Receiving Private Messages](#3️⃣-sending--receiving-private-messages)
+  - 🖥️ [Updating the Chat Page](#4️⃣-updating-the-chat-page-chatcshtml)
+  - 📜 [JavaScript for Private Messaging](#5️⃣-javascript-for-private-messaging)
+  - 🎨 [UI Styling for Private Messages](#6️⃣-ui-styling-for-private-messages)
+- 📸 [File Upload & Image Preview](#file-upload--image-preview)
+  - 📂 [Ensuring Both Text & Files Send Correctly](#1️⃣-client-side-file-upload-handling)
+  - 🔄 [Fixing Message Persistence](#2️⃣-ensuring-messages-persist-instead-of-being-overwritten)
+  - 👥 [Ensuring Online Users Stay Visible](#3️⃣-ensure-online-users-stay-visible)
+- 💡 [Final Thoughts](#final-thoughts)
+- 🚀 [Next Steps](#next-steps)
+```
 
+### **Why This Fix Works Better for Jekyll Themes**
+✅ **No extra HTML styling**—Markdown handles all formatting.  
+✅ **No unnecessary bullet point rings** (since default Jekyll styles won’t interfere).  
+✅ **Black-colored links**—Markdown default styling follows your Jekyll theme.  
+✅ **Emoji icons remain for visual appeal** (Jekyll supports emoji rendering).  
+
+Try updating your Markdown file with this and see if the styling now fits your theme correctly! 🚀
 ---
 
 # **ChatApp Part 2 - Real-Time Messaging with SignalR**
