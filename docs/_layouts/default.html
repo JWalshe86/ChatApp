@@ -3,9 +3,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
 
-    <!-- ✅ Load custom styles (ensure this file exists) -->
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <!-- ✅ Load Cayman Theme CSS from GitHub CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jekyll-theme-cayman@0.2.0/style.min.css">
+
+    <!-- ✅ Load custom styles -->
+    <link rel="stylesheet" href="{{ '/docs/assets/css/style.css' | relative_url }}">
 </head>
+
 <body>
     <div class="container">
         <header>
