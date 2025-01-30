@@ -1,7 +1,6 @@
 ---
 layout: default
 title: ChatApp Part Two
-permalink: /ChatAppPartTwo/  # Ensures correct URL structure
 ---
 
 
