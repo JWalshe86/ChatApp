@@ -6,6 +6,9 @@ title: ChatApp Part Two
 {:toc}
 
 # **ChatApp Part 2 - Real-Time Messaging with SignalR**
+<div class="container">
+    <h1 class="text-primary">Bootstrap Test</h1>
+</div>
 
 ![ChatApp](images/ChatApp.png)
 
