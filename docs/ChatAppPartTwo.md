@@ -9,17 +9,9 @@ title: ChatApp Part Two
 
 ![ChatApp](images/ChatApp.png)
 
-I'll enhance the design of your **Table of Contents** to make it look more visually appealing while maintaining clarity. Here’s an improved version:
 
----
-I've refined the **Table of Contents** to remove the blue color and the hollow bullet points (rings). Below is the updated version:
-
----
-Since you're using **Markdown with a Jekyll theme**, inline **HTML styling** may not work consistently. Instead, let's refine the **Markdown approach** to achieve the cleaner look you want. 
-
-### **Updated Markdown Table of Contents**
-```markdown
 ## 📖 Table of Contents
+<div id="TableOfContents">
 
 - 🔹 [Introduction](#introduction)
 - 🛠️ [Initial Housekeeping](#initial-housekeeping)
@@ -49,15 +41,9 @@ Since you're using **Markdown with a Jekyll theme**, inline **HTML styling** may
   - 👥 [Ensuring Online Users Stay Visible](#3️⃣-ensure-online-users-stay-visible)
 - 💡 [Final Thoughts](#final-thoughts)
 - 🚀 [Next Steps](#next-steps)
-```
 
-### **Why This Fix Works Better for Jekyll Themes**
-✅ **No extra HTML styling**—Markdown handles all formatting.  
-✅ **No unnecessary bullet point rings** (since default Jekyll styles won’t interfere).  
-✅ **Black-colored links**—Markdown default styling follows your Jekyll theme.  
-✅ **Emoji icons remain for visual appeal** (Jekyll supports emoji rendering).  
+</div>
 
-Try updating your Markdown file with this and see if the styling now fits your theme correctly! 🚀
 ---
 
 # **ChatApp Part 2 - Real-Time Messaging with SignalR**
