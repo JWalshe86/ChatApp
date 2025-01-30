@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <style>
+        /* Force black text for Table of Contents links */
+#TableOfContents a {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+/* Ensure visited links stay black */
+#TableOfContents a:visited {
+    color: black !important;
+}
+
+/* Ensure hover effect doesn't change color */
+#TableOfContents a:hover {
+    text-decoration: underline;
+    color: #444 !important; /* Slightly darker gray on hover */
+}
+
+    </style>
 </head>
 <body>
     <div class="container">
