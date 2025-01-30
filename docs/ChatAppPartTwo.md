@@ -347,7 +347,8 @@ function sendMessage() {
 ### ✅ **Username for Messages from Signed-in User**
 - No need for users to type their name.
 - Messages are automatically attributed to the authenticated user.
-- ![image](https://github.com/user-attachments/assets/630d6171-c8eb-4862-863c-7732d2bf1984)
+![signinAsUserName](https://github.com/user-attachments/assets/4628f845-803e-41a4-9db9-47aeec72509d)
+
 
 This structure ensures a **smooth, real-time chat experience with proper authentication and user tracking**. 🚀
 
