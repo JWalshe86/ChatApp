@@ -1,7 +1,7 @@
 body {
-    background-color: white !important;
+    background-color: yellow !important;
 }
 
 #TableOfContents a {
-    color: black !important;
+    color: red !important;
 }
