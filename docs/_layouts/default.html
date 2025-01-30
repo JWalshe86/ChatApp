@@ -3,8 +3,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
 
-    <!-- ✅ Use the Correct Path for Your CSS -->
+    <!-- ✅ Load Jekyll’s Cayman Theme First (if using it) -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+    <!-- ✅ Load Your Custom CSS Last (Overrides Cayman) -->
+    <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 </head>
 
 <body>
