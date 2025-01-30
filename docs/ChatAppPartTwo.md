@@ -3,9 +3,11 @@ layout: default
 title: ChatApp Part Two
 ---
 
-# **ChatApp Part 2 - Real-Time Messaging with SignalR**
 * TOC
 {:toc}
+
+# **ChatApp Part 2 - Real-Time Messaging with SignalR**
+
 ![ChatApp](images/ChatApp.png)
 
 ## **Introduction**
@@ -22,7 +24,6 @@ After successfully setting up real-time messaging with SignalR, I enhanced the a
 To prevent conflicts with the previous project (which used `IdentityDbContext`), I performed a **fresh start** by:
 - Deleting the **existing database** (`ChatApp.db`).
 - Removing **migrations** from the previous project.
-
 ---
 
 # **Persistent Message Storage**
