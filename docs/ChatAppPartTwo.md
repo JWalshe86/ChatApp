@@ -9,6 +9,42 @@ title: ChatApp Part Two
 
 ![ChatApp](images/ChatApp.png)
 
+## **Table of Contents**
+- [Introduction](#introduction)
+- [Initial Housekeeping](#initial-housekeeping)
+- [Persistent Message Storage](#persistent-message-storage)
+  - [Creating the `Message` Class](#creating-the-message-class)
+  - [Creating `AppDbContext`](#creating-appdbcontext)
+- [Database Migrations](#database-migrations)
+- [1. SignalR Integration](#1-signalr-integration)
+  - [Updating `ChatHub` to Save Messages](#updating-chathub-to-save-messages-in-database)
+- [2. Online Users Display & User Join/Leave Notifications](#2-online-users-display--user-joinleave-notifications)
+  - [Tracking Online Users in `ChatHub.cs`](#updated-chathubcs-to-track-online-users)
+  - [JavaScript for Online Users & Notifications](#updated-javascript-for-online-users--notifications)
+- [3. Username for Messages Taken from Signed-in User](#3-username-for-messages-taken-from-signed-in-user)
+  - [Updating `ChatHub.cs`](#updated-chathubcs-to-remove-username-parameter)
+  - [Updating JavaScript for Sending Messages](#updated-javascript-for-sending-messages)
+- [Real-Time User Presence](#real-time-user-presence)
+- [Private Messaging Implementation](#private-messaging-implementation)
+  - [Updating the `Message` Class](#1️⃣-updating-message-class)
+  - [Tracking Connected Users](#2️⃣-keeping-track-of-connected-users)
+  - [Sending & Receiving Private Messages](#3️⃣-sending--receiving-private-messages)
+  - [Updating the Chat Page](#4️⃣-updating-the-chat-page-chatcshtml)
+  - [JavaScript for Private Messaging](#5️⃣-javascript-for-private-messaging)
+  - [UI Styling for Private Messages](#6️⃣-ui-styling-for-private-messages)
+- [File Upload & Image Preview](#file-upload--image-preview)
+  - [Ensuring Both Text & Files Send Correctly](#1️⃣-client-side-file-upload-handling)
+  - [Fixing Message Persistence](#2️⃣-ensuring-messages-persist-instead-of-being-overwritten)
+  - [Ensuring Online Users Stay Visible](#3️⃣-ensure-online-users-stay-visible)
+- [Final Thoughts](#final-thoughts)
+- [Next Steps](#next-steps)
+
+---
+
+# **ChatApp Part 2 - Real-Time Messaging with SignalR**
+
+![ChatApp](images/ChatApp.png)
+
 ## **Introduction**
 After successfully setting up real-time messaging with SignalR, I enhanced the app with:
 - **Persistent chat storage**, ensuring messages are saved even after the application restarts.
