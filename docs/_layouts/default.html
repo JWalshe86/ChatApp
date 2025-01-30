@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
 
-    <!-- ✅ Load Cayman Theme First -->
-    <link rel="stylesheet" href="{{ './assets/css/style.css' | relative_url }}">
+    <!-- ✅ Load Jekyll’s Cayman Theme First -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
-    <!-- ✅ Force Load Custom CSS Last -->
-    <link rel="stylesheet" href="{{ './assets/css/style.css' | relative_url }}">
+    <!-- ✅ Load Your Custom CSS Last (Overrides Cayman) -->
+    <link rel="stylesheet" href="{{ '/ChatApp/assets/css/style.css' | relative_url }}">
 </head>
-
-<body>
-    <main>
-        {{ content }}
-    </main>
-    
-    <div>Test2</div>
-</body>
-</html>
