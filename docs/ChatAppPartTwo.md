@@ -3,7 +3,6 @@ layout: default
 title: ChatApp Part Two
 ---
 
-* TOC
 {:toc}
 
 # **ChatApp Part 2 - Real-Time Messaging with SignalR**
