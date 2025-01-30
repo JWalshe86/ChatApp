@@ -8,10 +8,10 @@
     <!-- ✅ Load Jekyll Theme (Cayman) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jekyll-theme-cayman/0.2.0/style.min.css">
 
-    <!-- ✅ Load Custom Styles (Force Refresh with ?v=timestamp) -->
-    <link rel="stylesheet" href="{{ '/ChatApp/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-
+    <!-- ✅ Correct Path to Custom CSS -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 </head>
+
 <body>
     <div class="container">
         <header>
