@@ -102,16 +102,6 @@ dotnet ef database update
 
 ---
 
-Your notes have been updated to reflect the change from a user manually entering their name to using the signed-in user's name for sending messages.
-
----
-Got it! Here’s the structured version with **three sections**:  
-1. **SignalR Integration**  
-2. **Online Users Display & User Join/Leave Notifications**  
-3. **Username for Messages Taken from Signed-in User**
-
----
-
 # **1. SignalR Integration**
 ### **Updating `ChatHub` to Save Messages in Database**
 Previously, messages were sent via SignalR but were **not persisted**. Now, messages are saved to the database before being broadcast.
@@ -352,10 +342,12 @@ function sendMessage() {
 ### ✅ **Online Users Display**
 - Users appear/disappear in the online list dynamically.
 - Notifications when users join/leave.
+- ![image](https://github.com/user-attachments/assets/e8f7eeb0-dd76-4e47-b943-48748b80208f)
 
 ### ✅ **Username for Messages from Signed-in User**
 - No need for users to type their name.
 - Messages are automatically attributed to the authenticated user.
+- ![image](https://github.com/user-attachments/assets/630d6171-c8eb-4862-863c-7732d2bf1984)
 
 This structure ensures a **smooth, real-time chat experience with proper authentication and user tracking**. 🚀
 
