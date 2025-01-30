@@ -1,10 +1,3 @@
-html body #TableOfContents a,
-html body #TableOfContents a:visited {
+html body #TableOfContents a {
     color: red !important;
-    text-decoration: none !important;
-}
-
-html body #TableOfContents a:hover {
-    text-decoration: underline !important;
-    color: #444 !important; /* Slightly darker gray on hover */
 }
