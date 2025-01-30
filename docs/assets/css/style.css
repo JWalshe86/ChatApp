@@ -1,0 +1,16 @@
+/* Force black text for Table of Contents links */
+#TableOfContents a {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+/* Ensure visited links stay black */
+#TableOfContents a:visited {
+    color: black !important;
+}
+
+/* Ensure hover effect doesn't change color */
+#TableOfContents a:hover {
+    text-decoration: underline;
+    color: #444 !important; /* Slightly darker gray on hover */
+}
