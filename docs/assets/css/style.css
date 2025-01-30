@@ -1,5 +1,5 @@
-html body #TableOfContents a,
-html body #TableOfContents a:visited {
+html body div main #TableOfContents a,
+html body div main #TableOfContents a:visited {
     color: black !important;
     text-decoration: none !important;
 }
