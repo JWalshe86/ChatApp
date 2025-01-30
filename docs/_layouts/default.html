@@ -9,3 +9,26 @@
     <!-- ✅ Load Your Custom CSS Last (Overrides Cayman) -->
     <link rel="stylesheet" href="{{ '/ChatApp/assets/css/style.css' | relative_url }}">
 </head>
+<body>
+    <header>
+        <h1>{{ site.title }}</h1>
+    </header>
+
+    <!-- ✅ Navigation (Optional) -->
+    <nav id="TableOfContents">
+        <h2>📖 Table of Contents</h2>
+        {% if page.toc %}
+            {{ page.toc }}
+        {% endif %}
+    </nav>
+
+    <!-- ✅ Main Content Section -->
+    <main>
+        {{ content }}
+    </main>
+
+    <!-- ✅ Footer (Optional) -->
+    <footer>
+        <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
+    </footer>
+</body>
