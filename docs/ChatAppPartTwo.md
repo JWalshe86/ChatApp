@@ -160,7 +160,7 @@ Previously, the chat only handled messages, but now **online users are tracked**
 The **original code** is in _light gray_, while **updated code** is in bold black.
 
 <div class="code-block">
-    <button class="copy-button" onclick="copyCode(this)">📋 Copy</button>
+    <button class="copy-button">📋 Copy</button>
     <pre><code>
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
@@ -180,21 +180,21 @@ namespace ChatApp.Hubs
 
         public async Task SendMessage(string user, string message)
         {
-            <code class="original-code">var newMessage = new Message
+            <span class="original-code">var newMessage = new Message
             {
                 User = user,
                 Content = message,
                 Timestamp = DateTime.UtcNow
-            };</code>
+            };</span>
 
-            <code class="original-code">_context.Messages.Add(newMessage);
+            <span class="original-code">_context.Messages.Add(newMessage);
             await _context.SaveChangesAsync();
-            await Clients.All.SendAsync("ReceiveMessage", user, message);</code>
+            await Clients.All.SendAsync("ReceiveMessage", user, message);</span>
         }
 
         /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
 
-        <code class="updated-code">public override async Task OnConnectedAsync()</code>
+        <span class="updated-code">public override async Task OnConnectedAsync()</span>
         {
             string userName = Context.User.Identity.Name;
 
@@ -211,8 +211,6 @@ namespace ChatApp.Hubs
 }
     </code></pre>
 </div>
-
-
 
 
 ### **Key Changes**
