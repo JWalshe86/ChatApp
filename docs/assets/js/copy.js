@@ -5,13 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Select only the code inside <pre><code>, ignoring the toggle button
+            // Select all code blocks inside the code container
             block.querySelectorAll("pre code").forEach(codeBlock => {
                 codeText += codeBlock.innerText + "\n"; // Collect all code into a single string
             });
 
+            // Remove "🔽 Show Original Code..." from the copied text
+            codeText = codeText.replace(/🔽 Show Original Code...\n?/g, "").trim();
+
             // Copy text to clipboard
-            navigator.clipboard.writeText(codeText.trim()).then(() => {
+            navigator.clipboard.writeText(codeText).then(() => {
                 button.innerText = "✅ Copied!";
                 setTimeout(() => {
                     button.innerText = "📋 Copy";
