@@ -128,27 +128,27 @@ ul li {
 
 /* 🎨 Fix Code Block Colors */
 pre {
-    background-color: #e8f0fb;
+    background-color: #e8f0fb; /* Light blue background */
     padding: 10px;
     border-radius: 6px;
     overflow-x: auto;
 }
 
-/* 🎨 Ensure General Code Text Uses Default Colors */
+/* ✅ Ensure Code Uses Default Readable Color */
 pre code {
     color: #212529; /* Standard readable black */
     font-size: 0.95rem;
     font-family: 'Source Code Pro', monospace;
 }
 
-/* ✅ Ensure Original Code is Lighter */
-pre span.original-code {
+/* ✅ Make Original Code Light Gray */
+pre code span.original-code {
     color: #888 !important; /* Light gray */
     font-style: italic;
 }
 
-/* ✅ Ensure Updated Code Stands Out */
-pre span.updated-code {
+/* ✅ Make Updated Code Stand Out */
+pre code span.updated-code {
     color: #222 !important; /* Darker black */
     font-weight: bold;
 }
