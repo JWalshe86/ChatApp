@@ -126,31 +126,11 @@ ul li {
     text-decoration: underline;
 }
 
-/* 🎨 Fix Code Block Colors */
-pre {
-    background-color: #e8f0fb;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-x: auto;
-}
-
-/* 🎨 Ensure General Code Text Uses Default Colors */
-code {
-    color: inherit; /* Let it inherit colors from spans */
-    font-size: 0.95rem;
-    font-family: 'Source Code Pro', monospace;
-}
-
-/* ✅ Ensure Original Code is Lighter */
-pre code .original-code {
+pre span.original-code {
     color: #888 !important; /* Light gray */
     font-style: italic;
 }
-
-/* ✅ Ensure Updated Code Stands Out */
-pre code .updated-code {
+pre span.updated-code {
     color: #222 !important; /* Darker black */
     font-weight: bold;
-}
-
 }
