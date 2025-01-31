@@ -158,7 +158,55 @@ Previously, the chat only handled messages, but now **online users are tracked**
 ### **Updated `ChatHub.cs` to Track Online Users**
 Added a **dictionary** to keep track of connected users and notify clients when a user joins or leaves.
 
-```csharp
+```html
+<style>
+/* Light gray for original code */
+.original-code {
+    color: #bbb; /* Lighter gray */
+    font-style: italic;
+}
+
+/* Stronger black for updated code */
+.updated-code {
+    color: #222; /* Darker, clearer text */
+    font-weight: bold;
+}
+</style>
+
+<pre><code>
+// <span class="original-code">Original Code:</span>
+using ChatApp.Models;
+using Microsoft.AspNetCore.SignalR;
+
+namespace ChatApp.Hubs
+{
+    public class ChatHub : Hub
+    {
+        private readonly AppDbContext _context;
+
+        public ChatHub(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task SendMessage(string user, string message)
+        {
+            var newMessage = new Message
+            {
+                User = user,
+                Content = message,
+                Timestamp = DateTime.UtcNow
+            };
+
+            _context.Messages.Add(newMessage);
+            await _context.SaveChangesAsync();
+
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+    }
+}
+
+// <span class="updated-code">Updated Code:</span>
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
@@ -208,6 +256,7 @@ namespace ChatApp.Hubs
         }
     }
 }
+</code></pre>
 ```
 
 ### **Key Changes**
