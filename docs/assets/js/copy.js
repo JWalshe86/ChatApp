@@ -1,28 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Find all code blocks that are inside a div with class "code-block"
     document.querySelectorAll(".code-block").forEach(block => {
-        // Prevent duplicate buttons
-        if (!block.querySelector(".copy-button")) {
-            let button = document.createElement("button");
-            button.className = "copy-button";
-            button.innerText = "📋 Copy";
+        // Create the copy button
+        let button = document.createElement("button");
+        button.className = "copy-button";
+        button.innerText = "📋 Copy";
+        
+        // Insert the button before the code block
+        block.prepend(button);
 
-            // Insert the button before the pre block
-            block.insertBefore(button, block.firstChild);
-
-            button.addEventListener("click", function () {
-                let codeText = "";
-                
-                block.querySelectorAll("code").forEach(codeBlock => {
-                    codeText += codeBlock.innerText + "\n";
-                });
-
-                navigator.clipboard.writeText(codeText).then(() => {
-                    button.innerText = "✅ Copied!";
-                    setTimeout(() => {
-                        button.innerText = "📋 Copy";
-                    }, 1500);
-                }).catch(err => console.error("Failed to copy:", err));
+        // Add event listener for copying
+        button.addEventListener("click", function () {
+            let codeText = "";
+            
+            // Get all code elements inside the div
+            block.querySelectorAll("code").forEach(codeBlock => {
+                codeText += codeBlock.innerText + "\n"; // Collect all code into a single string
             });
-        }
+
+            // Copy text to clipboard
+            navigator.clipboard.writeText(codeText).then(() => {
+                button.innerText = "✅ Copied!";
+                setTimeout(() => {
+                    button.innerText = "📋 Copy";
+                }, 1500); // Reset button text after 1.5 seconds
+            }).catch(err => console.error("Failed to copy:", err));
+        });
     });
 });
