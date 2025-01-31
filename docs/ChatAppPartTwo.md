@@ -155,29 +155,39 @@ namespace ChatApp.Hubs
 # **2. Online Users Display & User Join/Leave Notifications**
 Previously, the chat only handled messages, but now **online users are tracked**, and users joining or leaving the chat are displayed.
 
-### **Updated `ChatHub.cs` to Track Online Users**
-Added a **dictionary** to keep track of connected users and notify clients when a user joins or leaves.
+It looks like GitHub Pages (or Jekyll) isn't processing the HTML inside the Markdown properly. Instead, we can achieve the same effect using **Markdown with CSS styling** while keeping it copy-paste friendly.
 
-```html
-<style>
+Try this approach:
+
+### **1️⃣ Update Your CSS**
+Add the following styles to your **custom.css** file:
+
+```css
 /* Light gray for original code */
 .original-code {
-    color: #bbb; /* Lighter gray */
+    color: #999;
     font-style: italic;
 }
 
-/* Stronger black for updated code */
+/* Strong black for updated code */
 .updated-code {
-    color: #222; /* Darker, clearer text */
+    color: #222;
     font-weight: bold;
 }
-</style>
+```
 
-<pre><code>
-// <span class="original-code">Original Code:</span>
+### **2️⃣ Update Your Markdown**
+Now, structure your **Markdown** like this:
+
+### ChatHub.cs - Code Update
+
+The original code is displayed in **light gray**, while the updated parts are shown in **darker black** for clarity.
+
+```csharp
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
+// <span class="original-code">Original code begins</span>
 namespace ChatApp.Hubs
 {
     public class ChatHub : Hub
@@ -189,41 +199,16 @@ namespace ChatApp.Hubs
             _context = context;
         }
 
-        public async Task SendMessage(string user, string message)
-        {
-            var newMessage = new Message
-            {
-                User = user,
-                Content = message,
-                Timestamp = DateTime.UtcNow
-            };
-
-            _context.Messages.Add(newMessage);
-            await _context.SaveChangesAsync();
-
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
-    }
-}
-
-// <span class="updated-code">Updated Code:</span>
-using ChatApp.Models;
-using Microsoft.AspNetCore.SignalR;
-using System.Collections.Concurrent;
-
-namespace ChatApp.Hubs
-{
-    public class ChatHub : Hub
-    {
+// </span><span class="updated-code">New Code: Added online user tracking</span>
         private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
 
-        private readonly AppDbContext _context;
-
+// <span class="original-code">Original constructor</span>
         public ChatHub(AppDbContext context)
         {
             _context = context;
         }
 
+// </span><span class="updated-code">New Code: Handles user connection events</span>
         public override async Task OnConnectedAsync()
         {
             string userName = Context.User.Identity.Name;
@@ -254,9 +239,24 @@ namespace ChatApp.Hubs
             var users = OnlineUsers.Values.Distinct().ToList();
             return Clients.All.SendAsync("OnlineUsers", users);
         }
+
+// <span class="original-code">Original method for sending messages</span>
+        public async Task SendMessage(string user, string message)
+        {
+            var newMessage = new Message
+            {
+                User = user,
+                Content = message,
+                Timestamp = DateTime.UtcNow
+            };
+
+            _context.Messages.Add(newMessage);
+            await _context.SaveChangesAsync();
+
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
     }
 }
-</code></pre>
 ```
 
 ### **Key Changes**
