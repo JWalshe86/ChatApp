@@ -135,13 +135,13 @@ pre, code {
 }
 /* Light gray for original code */
 .original-code {
-    color: #999;
+    color: #999; /* Lighter gray */
     font-style: italic;
 }
 
 /* Strong black for updated code */
 .updated-code {
-    color: #222;
+    color: #222; /* Standard black */
     font-weight: bold;
 }
 
