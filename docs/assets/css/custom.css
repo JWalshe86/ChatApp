@@ -134,23 +134,24 @@ pre, code {
     font-family: 'Source Code Pro', monospace;
 }
 /* Light gray for original code */
-pre code .original {
-    color: #999 !important; /* Lighter gray */
+.code-block .original {
+    color: #999 !important; /* Light gray */
     font-style: italic;
 }
 
 /* Darker black for updated code */
-pre code .updated {
-    color: #222 !important; /* Stronger contrast */
+.code-block .updated {
+    color: #222 !important; /* Strong contrast */
     font-weight: bold;
 }
 
-/* Optional: Add subtle background for clarity */
-pre code {
+/* Code block background */
+.code-block {
     background-color: #f8f9fa !important; /* Soft gray */
     padding: 10px;
     border-radius: 6px;
     overflow-x: auto;
+    font-family: 'Source Code Pro', monospace;
 }
 
 
