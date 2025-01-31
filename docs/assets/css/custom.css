@@ -155,4 +155,19 @@ pre, code {
     white-space: pre-wrap; /* Ensures wrapping */
 }
 
+.copy-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    transition: background 0.3s ease;
+}
+
+.copy-button:hover {
+    background: #0056b3;
+}
 
