@@ -157,11 +157,11 @@ Previously, the chat only handled messages, but now **online users are tracked**
 
 ### ChatHub.cs - Code Update
 
-The **original code** is in _light gray_, while **updated code** is in bold black.
+The **original code** is in _light gray_, while **updated code** is in **bold black**.
 
 <div class="code-block">
-    
-    <pre><code class="original">
+    <button class="copy-button" onclick="copyCode()">📋 Copy</button>
+    <pre><code id="code-block">
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
@@ -183,15 +183,15 @@ namespace ChatApp.Hubs
         {
             var newMessage = new Message
             {
-                User = user,
+                <span class="original-code">User = user,
                 Content = message,
-                Timestamp = DateTime.UtcNow
+                Timestamp = DateTime.UtcNow</span>
             };
 
-            _context.Messages.Add(newMessage);
+            <span class="original-code">_context.Messages.Add(newMessage);
             await _context.SaveChangesAsync();
 
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.All.SendAsync("ReceiveMessage", user, message);</span>
         }
 
         /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
@@ -228,12 +228,8 @@ namespace ChatApp.Hubs
         }
     }
 }
-
-</code></pre>
+    </code></pre>
 </div>
-
-
-
 
 ### **Key Changes**
 - **`OnConnectedAsync()`**: Adds users to `OnlineUsers` and notifies all clients.
