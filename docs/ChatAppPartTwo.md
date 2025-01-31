@@ -159,9 +159,14 @@ Previously, the chat only handled messages, but now **online users are tracked**
 
 The **original code** is in _light gray_, while **updated code** is in bold black.
 
+### ChatHub.cs - Code Update
+
+The **original code** is in _light gray_, while **updated code** is in bold black.
+
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
     <pre><code>
+<span class="original-code">
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
@@ -180,17 +185,18 @@ namespace ChatApp.Hubs
 
         public async Task SendMessage(string user, string message)
         {
-            <span class="original-code">var newMessage = new Message
+            var newMessage = new Message
             {
                 User = user,
                 Content = message,
                 Timestamp = DateTime.UtcNow
-            };</span>
+            };
 
-            <span class="original-code">_context.Messages.Add(newMessage);
+            _context.Messages.Add(newMessage);
             await _context.SaveChangesAsync();
-            await Clients.All.SendAsync("ReceiveMessage", user, message);</span>
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
+</span>
 
         /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
 
@@ -209,8 +215,9 @@ namespace ChatApp.Hubs
         }
     }
 }
-    </code></pre>
+        </code></pre>
 </div>
+
 
 
 ### **Key Changes**
