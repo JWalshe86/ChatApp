@@ -1,54 +1,78 @@
-/* Add padding around the main content for better spacing */
-.container {
-    max-width: 900px; /* Keeps content nicely centered */
-    padding: 2rem; /* Adds space around the content */
-    margin: auto;
-    background: #fff; /* Keeps a clean white background */
-    border-radius: 8px; /* Slight rounding for a modern look */
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/* Improve line spacing for readability */
+/* Apply a cleaner, more readable font */
 body {
-    line-height: 1.6; /* Makes text more comfortable to read */
+    font-family: 'Inter', 'Roboto', 'Open Sans', sans-serif;
     font-size: 1rem;
+    line-height: 1.7;
     color: #212529; /* Standard readable black */
+    background: #f9f9f9; /* Light gray background for a softer feel */
 }
 
-/* Center the ChatApp logo */
+/* Ensure headings stand out */
+h1, h2, h3, h4 {
+    font-family: 'Inter', 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #0056b3; /* Bootstrap blue */
+}
+
+/* Center and refine the ChatApp logo */
 img {
     display: block;
     margin: auto;
+    max-width: 100%;
 }
 
-/* Enhance the Table of Contents (TOC) */
-#TableOfContents {
-    background: #f8f9fa; /* Light gray background */
-    padding: 1rem;
+/* Add a container to center the content */
+.container {
+    max-width: 900px;
+    padding: 2rem;
+    margin: auto;
+    background: #fff;
     border-radius: 8px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Improve contrast for code blocks */
+/* Improve code block styling */
 pre, code {
-    background-color: #f8f9fa; /* Lighter for better readability */
-    color: #d63384; /* Bootstrap pink, easy on the eyes */
+    background-color: #f4f4f4;
+    color: #d63384;
     padding: 0.5rem;
     border-radius: 5px;
     font-size: 0.95rem;
+    font-family: 'Source Code Pro', monospace;
 }
 
-/* Adjust bullet point spacing */
+/* Better spacing for lists */
 ul, ol {
     margin-top: 0;
     margin-bottom: 1rem;
     padding-left: 1.2rem;
 }
 
-/* Make headings more distinct */
-h1, h2, h3 {
-    font-weight: bold;
-    color: #0056b3; /* Bootstrap blue */
+/* Improve table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
+th, td {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Style the Table of Contents */
+#TableOfContents {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Add spacing between sections */
