@@ -85,3 +85,29 @@ section {
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
+/* ✅ TOC Styling */
+#markdown-toc {
+    background: #f8f9fa; /* Light gray background */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Remove bullet point rings */
+#markdown-toc ul {
+    list-style: none; /* Removes default bullets */
+    padding-left: 0;
+}
+
+/* ✅ Custom TOC link colors */
+#markdown-toc a {
+    color: #007bff; /* Bootstrap blue (change this if needed) */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#markdown-toc a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
