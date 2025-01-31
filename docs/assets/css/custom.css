@@ -85,29 +85,28 @@ section {
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
-/* ✅ Target the entire TOC */
-#markdown-toc {
-    background: #f8f9fa; /* Light gray background */
-    padding: 15px;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* ✅ Remove bullet point rings */
-#markdown-toc ul {
-    list-style: none; /* Removes default bullets */
-    padding-left: 0;
-}
-
 /* ✅ Force TOC links to be black */
 #markdown-toc a {
     color: #333 !important; /* Darker black text */
     text-decoration: none !important; /* Remove underlines */
-    font-weight: 600; /* Make it bolder */
+    font-weight: 600 !important; /* Ensure bold */
 }
 
-/* ✅ Change TOC link color on hover */
+/* ✅ Force-hover effect */
 #markdown-toc a:hover {
-    color: #0056b3 !important; /* A darker blue when hovering */
-    text-decoration: underline !important; /* Bring back underline on hover */
+    color: #0056b3 !important; /* Darker blue on hover */
+    text-decoration: underline !important;
+}
+
+/* ✅ Override Bootstrap’s reboot.css (which applies default link styles) */
+#markdown-toc a:link,
+#markdown-toc a:visited,
+#markdown-toc a:active {
+    color: #333 !important; /* Force links to be dark */
+    text-decoration: none !important;
+}
+
+/* ✅ Make sure Bootstrap’s global styles don't interfere */
+a {
+    -webkit-text-fill-color: unset !important;
 }
