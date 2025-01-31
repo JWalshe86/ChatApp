@@ -160,7 +160,6 @@ Previously, the chat only handled messages, but now **online users are tracked**
 The **original code** is in _light gray_, while **updated code** is in bold black.
 
 <div class="code-block">
-    <button class="copy-button" onclick="copyCode()">📋 Copy</button>
     <pre><code>
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
@@ -228,8 +227,8 @@ namespace ChatApp.Hubs
     }
 }
 </code></pre>
-
 </div>
+
 
 ### **Key Changes**
 - **`OnConnectedAsync()`**: Adds users to `OnlineUsers` and notifies all clients.
