@@ -127,7 +127,7 @@ ul li {
 }
 /* ✅ Light pink background for code blocks */
 pre, code {
-    background-color: #fbe8f2; /* Soft pastel pink */
+    background-color:#e8f0fb;
     color: #212529; /* Standard readable black */
     border-radius: 6px;
     font-size: 0.95rem;
