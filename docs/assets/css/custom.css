@@ -85,7 +85,7 @@ section {
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
-/* ✅ TOC Styling */
+/* ✅ Target the entire TOC */
 #markdown-toc {
     background: #f8f9fa; /* Light gray background */
     padding: 15px;
@@ -99,15 +99,15 @@ section {
     padding-left: 0;
 }
 
-/* ✅ Custom TOC link colors */
+/* ✅ Force TOC links to be black */
 #markdown-toc a {
-    color: #007bff; /* Bootstrap blue (change this if needed) */
-    text-decoration: none;
-    font-weight: 500;
+    color: #333 !important; /* Darker black text */
+    text-decoration: none !important; /* Remove underlines */
+    font-weight: 600; /* Make it bolder */
 }
 
+/* ✅ Change TOC link color on hover */
 #markdown-toc a:hover {
-    color: #0056b3; /* Darker blue on hover */
-    text-decoration: underline;
+    color: #0056b3 !important; /* A darker blue when hovering */
+    text-decoration: underline !important; /* Bring back underline on hover */
 }
-
