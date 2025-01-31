@@ -134,14 +134,23 @@ pre, code {
     font-family: 'Source Code Pro', monospace;
 }
 /* Light gray for original code */
-.original-code {
-    color: #999; /* Lighter gray */
+pre code .original-code {
+    color: #999 !important; /* Lighter gray */
     font-style: italic;
 }
 
-/* Strong black for updated code */
-.updated-code {
-    color: #222; /* Standard black */
+/* Dark black for updated code */
+pre code .updated-code {
+    color: #222 !important; /* Stronger contrast */
     font-weight: bold;
 }
+
+/* Ensure entire pre block stays formatted correctly */
+pre {
+    background-color: #f8f9fa !important; /* Soft background */
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
 
