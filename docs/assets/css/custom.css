@@ -222,8 +222,9 @@ details[open] .original-code {
     text-decoration: underline;
 }
 
-/* Adjust spacing above Show Original Code */
-.code-block .toggle-original-code {
-    margin-top: -41px; /* Reduce this value to minimize the gap */
+
+/* Reduce gap above "Show Original Code..." */
+.code-block details {
+    margin-top: -41px; /* Adjust to align perfectly */
 }
 
