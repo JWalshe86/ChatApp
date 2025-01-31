@@ -139,19 +139,20 @@ pre, code {
     font-style: italic;
 }
 
-/* Darker black for updated code */
+/* Dark black for updated code */
 .code-block .updated {
     color: #222 !important; /* Strong contrast */
     font-weight: bold;
 }
 
-/* Code block background */
+/* Code block styling */
 .code-block {
-    background-color: #f8f9fa !important; /* Soft gray */
-    padding: 10px;
+    background-color: #f8f9fa !important; /* Light background */
+    padding: 12px;
     border-radius: 6px;
     overflow-x: auto;
     font-family: 'Source Code Pro', monospace;
+    white-space: pre-wrap; /* Ensures wrapping */
 }
 
 
