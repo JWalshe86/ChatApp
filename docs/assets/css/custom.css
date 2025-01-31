@@ -222,9 +222,10 @@ details[open] .original-code {
     text-decoration: underline;
 }
 
-
 /* Reduce gap above "Show Original Code..." */
 .code-block details {
     margin: -41px 0 -42px 0; /* top right bottom left */
 }
-
+element.style {
+    margin-top: -92px;
+}
