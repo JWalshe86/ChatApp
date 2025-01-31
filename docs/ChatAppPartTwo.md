@@ -192,7 +192,8 @@ namespace ChatApp.Hubs
     }
 }
 
-/* UPDATED CODE */
+/* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
+
 private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
 
 public override async Task OnConnectedAsync()
