@@ -212,6 +212,7 @@ namespace ChatApp.Hubs
 </div>
 
 
+
 ### **Key Changes**
 - **`OnConnectedAsync()`**: Adds users to `OnlineUsers` and notifies all clients.
 - **`OnDisconnectedAsync()`**: Removes users and updates the client list.
