@@ -224,6 +224,6 @@ details[open] .original-code {
 
 /* Adjust spacing above Show Original Code */
 .code-block .toggle-original-code {
-    margin-top: 2px; /* Reduce this value to minimize the gap */
+    margin-top: -41px; /* Reduce this value to minimize the gap */
 }
 
