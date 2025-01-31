@@ -161,7 +161,7 @@ The **original code** is in _light gray_, while **updated code** is in bold blac
 
 <div class="code-block">
     <button class="copy-button" onclick="copyCode()">📋 Copy</button>
-    <pre><code id="code-block">
+    <pre><code>
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
@@ -171,7 +171,6 @@ namespace ChatApp.Hubs
     public class ChatHub : Hub
     {
         private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
-
         private readonly AppDbContext _context;
 
         public ChatHub(AppDbContext context)
@@ -196,7 +195,7 @@ namespace ChatApp.Hubs
 
         /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
 
-        public override async Task OnConnectedAsync()
+        <span class="updated-code">public override async Task OnConnectedAsync()</span>
         {
             string userName = Context.User.Identity.Name;
 
@@ -210,7 +209,7 @@ namespace ChatApp.Hubs
             await base.OnConnectedAsync();
         }
 
-        public override async Task OnDisconnectedAsync(Exception exception)
+        <span class="updated-code">public override async Task OnDisconnectedAsync(Exception exception)</span>
         {
             if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
             {
@@ -228,7 +227,8 @@ namespace ChatApp.Hubs
         }
     }
 }
-    </code></pre>
+</code></pre>
+
 </div>
 
 ### **Key Changes**
