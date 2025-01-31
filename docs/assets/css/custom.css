@@ -7,11 +7,39 @@ body {
     background: #f9f9f9; /* Light gray background for a softer feel */
 }
 
-/* Ensure headings stand out */
-h1, h2, h3, h4 {
-    font-family: 'Inter', 'Roboto', sans-serif;
-    font-weight: bold;
-    color: #0056b3; /* Bootstrap blue */
+/* Ensure headings stand out with better hierarchy */
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #003366; /* Deep navy for strong contrast */
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #004488;
+    margin-top: 1.5rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0056b3;
+}
+
+h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0077cc;
+}
+
+/* Add subtle differentiation for subheadings */
+h2, h3, h4 {
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
 }
 
 /* Center and refine the ChatApp logo */
@@ -41,6 +69,21 @@ pre, code {
     font-family: 'Source Code Pro', monospace;
 }
 
+/* Improve "Key Changes" styling */
+.key-changes {
+    background: #fff3cd; /* Light yellow background */
+    border-left: 4px solid #ffa500; /* Orange left border */
+    padding: 10px;
+    margin: 15px 0;
+    font-weight: 600;
+}
+
+/* Subtle styling for emphasis */
+strong {
+    color: #333;
+    font-weight: 700;
+}
+
 /* Better spacing for lists */
 ul, ol {
     margin-top: 0;
@@ -67,69 +110,7 @@ th {
     color: white;
 }
 
-/* Style the Table of Contents */
-#TableOfContents {
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Add spacing between sections */
-section {
-    margin-bottom: 2rem;
-}
-
-/* Optional: Style the Bootstrap modal */
-.modal-content {
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-}
-/* ✅ Override Bootstrap’s forced blue color for TOC links */
-#markdown-toc a,
-#markdown-toc a:link,
-#markdown-toc a:visited {
-    color: #333 !important; /* Dark text */
-    text-decoration: none !important;
-    font-weight: 600 !important; /* Stronger weight */
-}
-
-/* ✅ Fix link hover effect */
-#markdown-toc a:hover {
-    color: #0056b3 !important;
-    text-decoration: underline !important;
-}
-
-/* ✅ Override Bootstrap’s global styles (reboot.css) */
-a[href^="#markdown-toc"] {
-    color: #333 !important; /* Ensure TOC links stay dark */
-    text-decoration: none !important;
-}
-
-/* ✅ Bullet Points Cleanup */
-#markdown-toc ul {
-    list-style-type: none !important; /* Removes bullet rings */
-    padding-left: 0 !important;
-}
-
-#markdown-toc li::marker {
-    display: none !important; /* Ensures no markers */
-}
-
-/* ✅ Higher specificity targeting Bootstrap’s `_reboot.scss` */
-#markdown-toc a, 
-#markdown-toc a:link, 
-#markdown-toc a:visited, 
-#markdown-toc a:active {
-    color: #222 !important; /* Even darker to contrast better */
-    text-decoration: none !important;
-}
-
-/* ✅ Prevent Bootstrap from overriding with link colors */
-a {
-    -webkit-text-fill-color: unset !important;
-}
-/* ✅ Make TOC title match other headers */
+/* ✅ Style the Table of Contents */
 #table-of-contents {
     font-size: 1.8rem;
     font-weight: bold;
@@ -156,7 +137,7 @@ a {
 
 /* ✅ Make TOC links easier to read */
 #markdown-toc a {
-    color: #333; /* Darker text color */
+    color: #444; /* Darker text color */
     font-weight: 500;
     text-decoration: none;
 }
@@ -165,4 +146,38 @@ a {
 #markdown-toc a:hover {
     color: #0056b3; /* Bootstrap darker blue */
     text-decoration: underline;
+}
+
+/* ✅ Subtle difference for subitems in TOC */
+#markdown-toc ul {
+    padding-left: 15px;
+    margin-bottom: 0;
+}
+
+#markdown-toc li {
+    font-size: 1rem;
+}
+
+#markdown-toc li ul li {
+    font-size: 0.9rem;
+    color: #666; /* Slightly dimmer for subitems */
+}
+
+/* ✅ Style key sections */
+.key-section {
+    background: #eef5ff; /* Very light blue */
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+/* ✅ Bootstrap button override */
+.btn-primary {
+    background-color: #0056b3;
+    border-color: #004494;
+}
+
+.btn-primary:hover {
+    background-color: #003366;
+    border-color: #002244;
 }
