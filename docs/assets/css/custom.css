@@ -1,7 +1,101 @@
+/* === GENERAL STYLING === */
 body {
-    background-color: yellow !important;
+    background-color: #f8f9fa; /* Light gray background */
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #212529; /* Dark gray text for better readability */
+    margin: 0;
+    padding: 20px;
+}
+
+/* === TABLE OF CONTENTS === */
+#TableOfContents {
+    background: #ffffff; /* White background */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+#TableOfContents h2 {
+    color: #007bff; /* Bootstrap primary blue */
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 #TableOfContents a {
-    color: red !important;
+    color: #0056b3 !important; /* Darker blue */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#TableOfContents a:hover {
+    text-decoration: underline;
+    color: #004085 !important; /* Even darker blue on hover */
+}
+
+/* === HEADINGS === */
+h1, h2, h3, h4, h5, h6 {
+    color: #343a40; /* Dark gray for strong contrast */
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+/* === LINKS === */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* === CODE BLOCKS === */
+pre, code {
+    background-color: #f3f3f3; /* Light gray background */
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    display: block;
+    white-space: pre-wrap;
+}
+
+/* === IMAGES === */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    border-radius: 8px;
+}
+
+/* === BOOTSTRAP CONTAINER === */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === SPACING BETWEEN SECTIONS === */
+section {
+    margin-bottom: 40px;
 }
