@@ -160,7 +160,6 @@ Previously, the chat only handled messages, but now **online users are tracked**
 The **original code** is in _light gray_, while **updated code** is in **bold black**.
 
 <div class="code-block">
-    <button class="copy-button" onclick="copyCode()">📋 Copy</button>
     <pre><code id="code-block">
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
