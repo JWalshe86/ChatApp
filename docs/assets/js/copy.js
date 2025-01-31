@@ -5,12 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Select all code blocks inside the code container
-            block.querySelectorAll("pre code").forEach(codeBlock => {
-                codeText += codeBlock.innerText + "\n"; // Collect all code into a single string
+            // Get the full code block, including hidden parts
+            let allCodeBlocks = block.querySelectorAll("pre code");
+
+            allCodeBlocks.forEach(codeBlock => {
+                codeText += codeBlock.innerText + "\n"; // Collect all code
             });
 
-            // Remove "🔽 Show Original Code..." from the copied text
+            // Remove "🔽 Show Original Code..." and other unnecessary UI elements
             codeText = codeText.replace(/🔽 Show Original Code...\n?/g, "").trim();
 
             // Copy text to clipboard
