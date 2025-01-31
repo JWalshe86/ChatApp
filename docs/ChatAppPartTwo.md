@@ -158,9 +158,6 @@ Previously, the chat only handled messages, but now **online users are tracked**
 ### ChatHub.cs - Code Update
 
 The **original code** is in _light gray_, while **updated code** is in bold black.
-
-<div class="code-block">
-    <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
     
     <pre><code class="original">
 using ChatApp.Models;
