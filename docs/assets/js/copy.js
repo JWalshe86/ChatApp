@@ -1,25 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".code-block").forEach(block => {
         let button = block.querySelector(".copy-button");
-        let details = block.querySelector("details"); // Find the <details> element
 
         button.addEventListener("click", function () {
-            let wasClosed = details && !details.open; // Check if <details> was collapsed
+            let codeText = "";
 
-            if (wasClosed) {
-                details.open = true; // Temporarily expand
-            }
+            // Select only the code inside <pre><code>, ignoring the toggle button
+            block.querySelectorAll("pre code").forEach(codeBlock => {
+                codeText += codeBlock.innerText + "\n"; // Collect all code into a single string
+            });
 
-            let codeText = block.querySelector("pre code").innerText;
-
-            if (wasClosed) {
-                details.open = false; // Collapse it back
-            }
-
-            // Copy to clipboard
-            navigator.clipboard.writeText(codeText).then(() => {
+            // Copy text to clipboard
+            navigator.clipboard.writeText(codeText.trim()).then(() => {
                 button.innerText = "✅ Copied!";
-                setTimeout(() => { button.innerText = "📋 Copy"; }, 1500);
+                setTimeout(() => {
+                    button.innerText = "📋 Copy";
+                }, 1500); // Reset button text after 1.5 seconds
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
