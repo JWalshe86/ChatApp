@@ -157,4 +157,27 @@ pre span.updated-code {
 pre code span {
     display: inline-block;
 }
+/* Make sure details has no borders */
+details {
+    margin: 10px 0;
+}
+
+/* Style the summary line */
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #0056b3;
+    padding: 5px 0;
+    user-select: none; /* Prevent accidental selection */
+}
+
+/* Style the original code inside details */
+details[open] .original-code {
+    display: block;
+}
+
+/* Ensure hidden original code still gets copied */
+.original-code {
+    display: none; /* Hide original code by default */
+}
 
