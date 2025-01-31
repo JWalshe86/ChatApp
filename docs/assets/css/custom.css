@@ -126,7 +126,7 @@ ul li {
     text-decoration: underline;
 }
 
-/* 🎨 Fix Code Block Colors */
+/* ✅ Fix Code Block Appearance */
 pre {
     background-color: #e8f0fb; /* Light blue background */
     padding: 10px;
@@ -134,21 +134,27 @@ pre {
     overflow-x: auto;
 }
 
-/* ✅ Ensure Code Uses Default Readable Color */
+/* ✅ Ensure Code is Readable */
 pre code {
-    color: #212529; /* Standard readable black */
+    color: #212529; /* Default readable black */
     font-size: 0.95rem;
     font-family: 'Source Code Pro', monospace;
 }
 
-/* ✅ Make Original Code Light Gray */
-pre code span.original-code {
+/* ✅ Fix Original Code Coloring */
+pre span.original-code {
     color: #888 !important; /* Light gray */
     font-style: italic;
 }
 
-/* ✅ Make Updated Code Stand Out */
-pre code span.updated-code {
+/* ✅ Fix Updated Code Coloring */
+pre span.updated-code {
     color: #222 !important; /* Darker black */
     font-weight: bold;
 }
+
+/* ✅ Ensure Spans Are Properly Displayed */
+pre code span {
+    display: inline-block;
+}
+
