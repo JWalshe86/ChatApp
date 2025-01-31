@@ -85,28 +85,47 @@ section {
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
-/* ✅ Force TOC links to be black */
-#markdown-toc a {
-    color: #333 !important; /* Darker black text */
-    text-decoration: none !important; /* Remove underlines */
-    font-weight: 600 !important; /* Ensure bold */
+/* ✅ Override Bootstrap’s forced blue color for TOC links */
+#markdown-toc a,
+#markdown-toc a:link,
+#markdown-toc a:visited {
+    color: #333 !important; /* Dark text */
+    text-decoration: none !important;
+    font-weight: 600 !important; /* Stronger weight */
 }
 
-/* ✅ Force-hover effect */
+/* ✅ Fix link hover effect */
 #markdown-toc a:hover {
-    color: #0056b3 !important; /* Darker blue on hover */
+    color: #0056b3 !important;
     text-decoration: underline !important;
 }
 
-/* ✅ Override Bootstrap’s reboot.css (which applies default link styles) */
-#markdown-toc a:link,
-#markdown-toc a:visited,
-#markdown-toc a:active {
-    color: #333 !important; /* Force links to be dark */
+/* ✅ Override Bootstrap’s global styles (reboot.css) */
+a[href^="#markdown-toc"] {
+    color: #333 !important; /* Ensure TOC links stay dark */
     text-decoration: none !important;
 }
 
-/* ✅ Make sure Bootstrap’s global styles don't interfere */
+/* ✅ Bullet Points Cleanup */
+#markdown-toc ul {
+    list-style-type: none !important; /* Removes bullet rings */
+    padding-left: 0 !important;
+}
+
+#markdown-toc li::marker {
+    display: none !important; /* Ensures no markers */
+}
+
+/* ✅ Higher specificity targeting Bootstrap’s `_reboot.scss` */
+#markdown-toc a, 
+#markdown-toc a:link, 
+#markdown-toc a:visited, 
+#markdown-toc a:active {
+    color: #222 !important; /* Even darker to contrast better */
+    text-decoration: none !important;
+}
+
+/* ✅ Prevent Bootstrap from overriding with link colors */
 a {
     -webkit-text-fill-color: unset !important;
 }
