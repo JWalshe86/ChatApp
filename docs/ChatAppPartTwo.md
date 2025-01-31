@@ -29,7 +29,8 @@ After successfully setting up real-time messaging with SignalR, I enhanced the a
 ## **Initial Housekeeping**
 To prevent conflicts with the previous project (which used `IdentityDbContext`), I performed a **fresh start** by:
 - Deleting the **existing database** (`ChatApp.db`).
-- Removing **migrations** from the previous project.
+- Removing **migrations** (`Migrations Folder) from the previous project.
+  
 ---
 
 # **Persistent Message Storage**
