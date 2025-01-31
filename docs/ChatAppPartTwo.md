@@ -21,6 +21,7 @@ After successfully setting up real-time messaging with SignalR, I enhanced the a
 
 <!-- ✅ TOC NOW MOVED BELOW INTRO -->
 ## **Table of Contents**
+* TOC
 {:toc}
 
 ---
