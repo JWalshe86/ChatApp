@@ -159,16 +159,17 @@ Previously, the chat only handled messages, but now **online users are tracked**
 
 The **original code** is in _light gray_, while **updated code** is in bold black.
 
+<div class="code-block">
+    
+    <pre><code class="original">
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
-using System.Collections.Concurrent;
 
+/* ORIGINAL CODE */
 namespace ChatApp.Hubs
 {
     public class ChatHub : Hub
     {
-        private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
-
         private readonly AppDbContext _context;
 
         public ChatHub(AppDbContext context)
@@ -190,41 +191,47 @@ namespace ChatApp.Hubs
 
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
-
-        /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
-
-        public override async Task OnConnectedAsync()
-        {
-            string userName = Context.User.Identity.Name;
-
-            if (!OnlineUsers.ContainsKey(Context.ConnectionId))
-            {
-                OnlineUsers[Context.ConnectionId] = userName;
-                await Clients.All.SendAsync("UserJoined", userName);
-                await SendOnlineUsers();
-            }
-
-            await base.OnConnectedAsync();
-        }
-
-        public override async Task OnDisconnectedAsync(Exception exception)
-        {
-            if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
-            {
-                await Clients.All.SendAsync("UserLeft", userName);
-                await SendOnlineUsers();
-            }
-
-            await base.OnDisconnectedAsync(exception);
-        }
-
-        private Task SendOnlineUsers()
-        {
-            var users = OnlineUsers.Values.Distinct().ToList();
-            return Clients.All.SendAsync("OnlineUsers", users);
-        }
-      }
     }
+</code></pre>
+
+    <pre><code class="updated">
+/* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
+
+private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
+
+public override async Task OnConnectedAsync()
+{
+    string userName = Context.User.Identity.Name;
+
+    if (!OnlineUsers.ContainsKey(Context.ConnectionId))
+    {
+        OnlineUsers[Context.ConnectionId] = userName;
+        await Clients.All.SendAsync("UserJoined", userName);
+        await SendOnlineUsers();
+    }
+
+    await base.OnConnectedAsync();
+}
+
+public override async Task OnDisconnectedAsync(Exception exception)
+{
+    if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
+    {
+        await Clients.All.SendAsync("UserLeft", userName);
+        await SendOnlineUsers();
+    }
+
+    await base.OnDisconnectedAsync(exception);
+}
+
+private Task SendOnlineUsers()
+{
+    var users = OnlineUsers.Values.Distinct().ToList();
+    return Clients.All.SendAsync("OnlineUsers", users);
+}
+</code></pre>
+</div>
+
 
 
 
