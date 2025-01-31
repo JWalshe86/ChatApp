@@ -129,9 +129,7 @@ ul li {
 pre, code {
     background-color: #fbe8f2; /* Soft pastel pink */
     color: #212529; /* Standard readable black */
-    padding: 0.75rem;
     border-radius: 6px;
     font-size: 0.95rem;
     font-family: 'Source Code Pro', monospace;
-    border-left: 4px solid #e91e63; /* Slight left accent */
 }
