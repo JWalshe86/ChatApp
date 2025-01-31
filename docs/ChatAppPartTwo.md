@@ -2,8 +2,6 @@
 layout: default
 title: ChatApp Part Two
 ---
-* TOC
-{:toc}
 
 # **ChatApp Part 2 - Real-Time Messaging with SignalR**
 
@@ -18,6 +16,14 @@ After successfully setting up real-time messaging with SignalR, I enhanced the a
 - **Message history with pagination**, so users can load older messages on demand.
 - **User profiles and avatars**, adding personalization.
 - **Security enhancements**, including authentication, rate-limiting, and HTTPS.
+
+---
+
+<!-- ✅ TOC NOW MOVED BELOW INTRO -->
+## **Table of Contents**
+{:toc}
+
+---
 
 ## **Initial Housekeeping**
 To prevent conflicts with the previous project (which used `IdentityDbContext`), I performed a **fresh start** by:
