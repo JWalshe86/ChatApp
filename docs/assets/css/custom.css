@@ -143,6 +143,12 @@ pre, code {
     font-weight: bold;
 }
 
+/* Make sure all spans inside code blocks inherit correct colors */
+pre code span {
+    display: inline-block;
+}
+
+
 /* Optional: Style the code container */
 .code-block {
     background: #f5f5f5;
