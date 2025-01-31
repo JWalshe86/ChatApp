@@ -158,11 +158,6 @@ Previously, the chat only handled messages, but now **online users are tracked**
 ### ChatHub.cs - Code Update
 
 The **original code** is in _light gray_, while **updated code** is in bold black.
-```
- <div class="code-block">   
-    <pre><code class="original">
-using ChatApp.Models;
-using Microsoft.AspNetCore.SignalR;
 
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
@@ -228,9 +223,9 @@ namespace ChatApp.Hubs
             var users = OnlineUsers.Values.Distinct().ToList();
             return Clients.All.SendAsync("OnlineUsers", users);
         }
+      }
     }
-}
-```
+
 
 
 ### **Key Changes**
