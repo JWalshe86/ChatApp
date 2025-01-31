@@ -129,3 +129,40 @@ a[href^="#markdown-toc"] {
 a {
     -webkit-text-fill-color: unset !important;
 }
+/* ✅ Make TOC title match other headers */
+#table-of-contents {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1a1a1a; /* Dark gray for better readability */
+    margin-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0; /* Light underline to separate it */
+    padding-bottom: 5px;
+}
+
+/* ✅ Refine TOC layout */
+#markdown-toc {
+    background: #f8f9fa; /* Light gray background */
+    padding: 15px;
+    border-radius: 8px;
+    list-style: none;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Improve TOC list spacing */
+#markdown-toc li {
+    margin-bottom: 8px; /* Add space between items */
+    padding-left: 5px;
+}
+
+/* ✅ Make TOC links easier to read */
+#markdown-toc a {
+    color: #333; /* Darker text color */
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* ✅ TOC links hover effect */
+#markdown-toc a:hover {
+    color: #0056b3; /* Bootstrap darker blue */
+    text-decoration: underline;
+}
