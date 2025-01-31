@@ -160,7 +160,9 @@ Previously, the chat only handled messages, but now **online users are tracked**
 The **original code** is in _light gray_, while **updated code** is in bold black.
 
 <div class="code-block">
-<code class="original">
+    <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+    
+    <pre><code class="original">
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
@@ -191,9 +193,9 @@ namespace ChatApp.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
     }
-</code>
+</code></pre>
 
-<code class="updated">
+    <pre><code class="updated">
 /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
 
 private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
@@ -228,8 +230,9 @@ private Task SendOnlineUsers()
     var users = OnlineUsers.Values.Distinct().ToList();
     return Clients.All.SendAsync("OnlineUsers", users);
 }
-</code>
+</code></pre>
 </div>
+
 
 
 ### **Key Changes**
