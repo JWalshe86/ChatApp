@@ -155,39 +155,15 @@ namespace ChatApp.Hubs
 # **2. Online Users Display & User Join/Leave Notifications**
 Previously, the chat only handled messages, but now **online users are tracked**, and users joining or leaving the chat are displayed.
 
-It looks like GitHub Pages (or Jekyll) isn't processing the HTML inside the Markdown properly. Instead, we can achieve the same effect using **Markdown with CSS styling** while keeping it copy-paste friendly.
-
-Try this approach:
-
-### **1️⃣ Update Your CSS**
-Add the following styles to your **custom.css** file:
-
-```css
-/* Light gray for original code */
-.original-code {
-    color: #999;
-    font-style: italic;
-}
-
-/* Strong black for updated code */
-.updated-code {
-    color: #222;
-    font-weight: bold;
-}
-```
-
-### **2️⃣ Update Your Markdown**
-Now, structure your **Markdown** like this:
-
 ### ChatHub.cs - Code Update
 
-The original code is displayed in **light gray**, while the updated parts are shown in **darker black** for clarity.
+The **original code** is in _light gray_, while **updated code** is in bold black.
 
 ```csharp
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
-// <span class="original-code">Original code begins</span>
+/* ORIGINAL CODE */
 namespace ChatApp.Hubs
 {
     public class ChatHub : Hub
@@ -199,48 +175,6 @@ namespace ChatApp.Hubs
             _context = context;
         }
 
-// </span><span class="updated-code">New Code: Added online user tracking</span>
-        private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
-
-// <span class="original-code">Original constructor</span>
-        public ChatHub(AppDbContext context)
-        {
-            _context = context;
-        }
-
-// </span><span class="updated-code">New Code: Handles user connection events</span>
-        public override async Task OnConnectedAsync()
-        {
-            string userName = Context.User.Identity.Name;
-
-            if (!OnlineUsers.ContainsKey(Context.ConnectionId))
-            {
-                OnlineUsers[Context.ConnectionId] = userName;
-                await Clients.All.SendAsync("UserJoined", userName);
-                await SendOnlineUsers();
-            }
-
-            await base.OnConnectedAsync();
-        }
-
-        public override async Task OnDisconnectedAsync(Exception exception)
-        {
-            if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
-            {
-                await Clients.All.SendAsync("UserLeft", userName);
-                await SendOnlineUsers();
-            }
-
-            await base.OnDisconnectedAsync(exception);
-        }
-
-        private Task SendOnlineUsers()
-        {
-            var users = OnlineUsers.Values.Distinct().ToList();
-            return Clients.All.SendAsync("OnlineUsers", users);
-        }
-
-// <span class="original-code">Original method for sending messages</span>
         public async Task SendMessage(string user, string message)
         {
             var newMessage = new Message
@@ -257,7 +191,42 @@ namespace ChatApp.Hubs
         }
     }
 }
+
+/* UPDATED CODE */
+private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
+
+public override async Task OnConnectedAsync()
+{
+    string userName = Context.User.Identity.Name;
+
+    if (!OnlineUsers.ContainsKey(Context.ConnectionId))
+    {
+        OnlineUsers[Context.ConnectionId] = userName;
+        await Clients.All.SendAsync("UserJoined", userName);
+        await SendOnlineUsers();
+    }
+
+    await base.OnConnectedAsync();
+}
+
+public override async Task OnDisconnectedAsync(Exception exception)
+{
+    if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
+    {
+        await Clients.All.SendAsync("UserLeft", userName);
+        await SendOnlineUsers();
+    }
+
+    await base.OnDisconnectedAsync(exception);
+}
+
+private Task SendOnlineUsers()
+{
+    var users = OnlineUsers.Values.Distinct().ToList();
+    return Clients.All.SendAsync("OnlineUsers", users);
+}
 ```
+
 
 ### **Key Changes**
 - **`OnConnectedAsync()`**: Adds users to `OnlineUsers` and notifies all clients.
