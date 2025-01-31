@@ -225,6 +225,6 @@ details[open] .original-code {
 
 /* Reduce gap above "Show Original Code..." */
 .code-block details {
-    margin-top: -41px; /* Adjust to align perfectly */
+    margin: -41px 0 -42px 0; /* top right bottom left */
 }
 
