@@ -163,11 +163,16 @@ The **original code** is in _light gray_, while **updated code** is in bold blac
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
-/* ORIGINAL CODE */
+using ChatApp.Models;
+using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
+
 namespace ChatApp.Hubs
 {
     public class ChatHub : Hub
     {
+        private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
+
         private readonly AppDbContext _context;
 
         public ChatHub(AppDbContext context)
@@ -189,11 +194,8 @@ namespace ChatApp.Hubs
 
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
-    }
-</code></pre>
 
-    <pre><code class="updated">
-        private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
+        /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
 
         public override async Task OnConnectedAsync()
         {
@@ -227,8 +229,6 @@ namespace ChatApp.Hubs
         }
     }
 }
-</code></pre>
-</div>
 
 
 
