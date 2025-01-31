@@ -157,16 +157,15 @@ Previously, the chat only handled messages, but now **online users are tracked**
 
 ### ChatHub.cs - Code Update
 
-The **original code** is in _light gray_, while **updated code** is in bold black.
-
-### ChatHub.cs - Code Update
-
-The **original code** is in _light gray_, while **updated code** is in bold black.
+The **original code** is collapsed by default (_click to expand_), while **updated code** is always visible.
 
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
+
     <pre><code>
-<span class="original-code">
+        <details>
+            <summary>🔽 Show Original Code...</summary>
+            <span class="original-code">
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
@@ -196,43 +195,27 @@ namespace ChatApp.Hubs
             await _context.SaveChangesAsync();
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
-</span>
+            </span>
+        </details>
 
         /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
 
-        public override async Task OnConnectedAsync()
-{
-    string userName = Context.User.Identity.Name;
+        <span class="updated-code">public override async Task OnConnectedAsync()</span>
+        {
+            string userName = Context.User.Identity.Name;
 
-    if (!OnlineUsers.ContainsKey(Context.ConnectionId))
-    {
-        OnlineUsers[Context.ConnectionId] = userName;
-        await Clients.All.SendAsync("UserJoined", userName);
-        await SendOnlineUsers();
-    }
+            if (!OnlineUsers.ContainsKey(Context.ConnectionId))
+            {
+                OnlineUsers[Context.ConnectionId] = userName;
+                await Clients.All.SendAsync("UserJoined", userName);
+                await SendOnlineUsers();
+            }
 
-    await base.OnConnectedAsync();
-}
-
-public override async Task OnDisconnectedAsync(Exception exception)
-{
-    if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
-    {
-        await Clients.All.SendAsync("UserLeft", userName);
-        await SendOnlineUsers();
-    }
-
-    await base.OnDisconnectedAsync(exception);
-}
-
-private Task SendOnlineUsers()
-{
-    var users = OnlineUsers.Values.Distinct().ToList();
-    return Clients.All.SendAsync("OnlineUsers", users);
-}
+            await base.OnConnectedAsync();
+        }
     }
 }
-        </code></pre>
+    </code></pre>
 </div>
 
 
