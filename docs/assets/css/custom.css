@@ -226,6 +226,6 @@ details[open] .original-code {
 .code-block details {
     margin: -41px 0 -42px 0; /* top right bottom left */
 }
-element.style {
+details[open] .original-code {
     margin-top: -92px;
 }
