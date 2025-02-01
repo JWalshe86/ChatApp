@@ -65,7 +65,10 @@ To keep the project organized, I placed `Message.cs` inside a **Models** folder.
 ## **Creating `AppDbContext`**
 Previously, `IdentityDbContext<IdentityUser>` handled user authentication. However, to store custom entities like messages, I created an `AppDbContext` that **inherits** from `IdentityDbContext<IdentityUser>`.
 
-```csharp
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+  <pre>
+    <code>
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -83,7 +86,9 @@ namespace ChatApp
         }
     }
 }
-```
+ </code>
+ </pre>
+</div>
 
 ### **Key Updates**
 - `DbSet<Message>` tells EF that `Message` should be included in the database.
