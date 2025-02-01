@@ -25,7 +25,7 @@ h1, h2, h3, h4 {
 }
 
 /* ChatApp Main Title */
-h1.chatapp-title {
+h1#chatapp-part-2 {
     font-size: 2.8rem;
     font-weight: bold;
     background: linear-gradient(90deg, #3498db, #9b59b6);
@@ -36,7 +36,7 @@ h1.chatapp-title {
 }
 
 /* ChatApp Subtitle */
-h2.chatapp-subtitle {
+h2#real-time-messaging-with-signalr {
     font-size: 1.8rem;
     font-weight: 600;
     background: linear-gradient(90deg, #3498db, #9b59b6);
@@ -48,7 +48,7 @@ h2.chatapp-subtitle {
 }
 
 /* Underline Animation */
-h1.chatapp-title::after, h2.chatapp-subtitle::after {
+h1#chatapp-part-2::after, h2#real-time-messaging-with-signalr::after {
     content: "";
     display: block;
     width: 60%;
