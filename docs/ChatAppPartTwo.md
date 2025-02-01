@@ -69,9 +69,9 @@ Previously, `IdentityDbContext<IdentityUser>` handled user authentication. Howev
     <button class="copy-button">📋 Copy</button>
 
     <pre><code>
-namespace ChatApp.Models
+namespace ChatApp
 {
-    public class Message
+    public class AppDbContext
     {
         public int Id { get; set; } // Primary key
         public string User { get; set; } // Username of the sender
