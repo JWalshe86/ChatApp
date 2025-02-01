@@ -5,15 +5,20 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Select ALL code including hidden parts
+            // If there's an original code block, include both original & updated code
             let allCodeBlocks = block.querySelectorAll("pre code, pre .original-code");
 
-            allCodeBlocks.forEach(codeBlock => {
-                codeText += codeBlock.textContent + "\n"; // Collect all code
-            });
+            if (allCodeBlocks.length > 0) {
+                allCodeBlocks.forEach(codeBlock => {
+                    codeText += codeBlock.textContent + "\n"; // Collect all code
+                });
 
-            // Remove "🔽 Show Original Code..." from copied text
-            codeText = codeText.replace(/🔽 Show Original Code...\n?/g, "").trim();
+                // Remove "🔽 Show Original Code..." from copied text
+                codeText = codeText.replace(/🔽 Show Original Code...\n?/g, "").trim();
+            } else {
+                // No original code, just copy the main block
+                codeText = block.querySelector("pre code").textContent.trim();
+            }
 
             // Copy text to clipboard
             navigator.clipboard.writeText(codeText).then(() => {
