@@ -47,9 +47,9 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     <pre><code>
 namespace ChatApp.Models
 {
-    public class Message
+    public class AppDbContext
     {
-        public int Id { get; set; } // Primary key
+        public DbSet<Message> Messages { get; set; } // Primary key
         public string User { get; set; } // Username of the sender
         public string Content { get; set; } // The actual message content
         public DateTime Timestamp { get; set; } // When the message was sent
