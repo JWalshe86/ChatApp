@@ -41,7 +41,10 @@ Initially, messages were stored as simple strings. However, to persist messages 
 
 I created a `Message` class that Entity Framework (EF) maps into a database table.
 
-```csharp
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+
+    <pre><code>
 namespace ChatApp.Models
 {
     public class Message
@@ -52,7 +55,8 @@ namespace ChatApp.Models
         public DateTime Timestamp { get; set; } // When the message was sent
     }
 }
-```
+    </code></pre>
+</div>
 
 To keep the project organized, I placed `Message.cs` inside a **Models** folder.
 
