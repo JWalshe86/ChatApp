@@ -129,23 +129,34 @@ dotnet ef database update
 ### **Updating `ChatHub` to Save Messages in Database**
 Previously, messages were sent via SignalR but were **not persisted**. Now, messages are saved to the database before being broadcast.
 
-```csharp
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+
+<pre><code>
+    <details>
+        <summary>🔽 Show Original Code...</summary>
+ <span class="original-code">        
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChatApp.Hubs
 {
     public class ChatHub : Hub
-    {
+    {   
+ </span>
+        <span class="updated-code">
         private readonly AppDbContext _context;
 
         public ChatHub(AppDbContext context)
         {
             _context = context;
         }
-
+        </span>
+        <span class="original-code">
         public async Task SendMessage(string user, string message)
         {
+        </span>
+        <span class="updated-code">
             var newMessage = new Message
             {
                 User = user,
@@ -155,12 +166,15 @@ namespace ChatApp.Hubs
 
             _context.Messages.Add(newMessage);
             await _context.SaveChangesAsync();
-
+        </span>
+             <span class="original-code">
             await Clients.All.SendAsync("ReceiveMessage", user, message);
+             </span>
         }
     }
 }
-```
+    </details></code></pre>
+</div>
 
 ### **Key Changes**
 - `SendMessage()` now **saves messages to the database** before broadcasting them.
