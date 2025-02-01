@@ -25,7 +25,7 @@ h1, h2, h3, h4 {
 }
 
 /* ChatApp Main Title */
-h1#chatapp-part-2 {
+h1.chatapp-title {
     font-size: 2.8rem;
     font-weight: bold;
     background: linear-gradient(90deg, #3498db, #9b59b6);
@@ -36,7 +36,7 @@ h1#chatapp-part-2 {
 }
 
 /* ChatApp Subtitle */
-h2#real-time-messaging-with-signalr {
+h2.chatapp-subtitle {
     font-size: 1.8rem;
     font-weight: 600;
     background: linear-gradient(90deg, #3498db, #9b59b6);
@@ -48,7 +48,7 @@ h2#real-time-messaging-with-signalr {
 }
 
 /* Underline Animation */
-h1#chatapp-part-2::after, h2#real-time-messaging-with-signalr::after {
+h1.chatapp-title::after, h2.chatapp-subtitle::after {
     content: "";
     display: block;
     width: 60%;
@@ -144,6 +144,7 @@ pre {
     padding: 10px;
     border-radius: 6px;
     overflow-x: auto;
+    position: relative;
 }
 
 pre code {
@@ -160,5 +161,31 @@ pre span.original-code {
 pre span.updated-code {
     color: #222 !important;
     font-weight: bold;
+}
+
+/* =============================
+   Copy Button Styling
+   ============================= */
+.copy-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 6px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.copy-button:hover {
+    background: #0056b3;
 }
 
