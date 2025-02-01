@@ -229,3 +229,51 @@ details[open] .original-code {
 details[open] .original-code {
     margin-top: -92px;
 }
+h1#chatapp-part-2---real-time-messaging-with-signalr {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50; /* Dark blue for emphasis */
+    text-align: center;
+}
+h1#chatapp-part-2---real-time-messaging-with-signalr {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+h1#chatapp-part-2---real-time-messaging-with-signalr {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #34495e;
+    text-align: center;
+    position: relative;
+}
+
+h1#chatapp-part-2---real-time-messaging-with-signalr::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #3498db;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    animation: underline 1s ease-in-out infinite alternate;
+}
+
+@keyframes underline {
+    0% { width: 50%; }
+    100% { width: 100%; }
+}
+
+h1#chatapp-part-2---real-time-messaging-with-signalr {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding-bottom: 15px;
+    border-bottom: 3px solid #3498db;
+    display: inline-block;
+}
