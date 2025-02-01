@@ -67,8 +67,7 @@ Previously, `IdentityDbContext<IdentityUser>` handled user authentication. Howev
 
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
-    <pre><code>
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    <pre><code>using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ChatApp.Models;
@@ -84,9 +83,9 @@ namespace ChatApp
         {
         }
     }
-}
-    </code></pre>
+}</code></pre>
 </div>
+
 
 ### **Key Updates**
 - `DbSet<Message>` tells EF that `Message` should be included in the database.
