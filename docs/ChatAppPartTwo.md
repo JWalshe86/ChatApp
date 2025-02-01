@@ -96,11 +96,11 @@ namespace ChatApp
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
     <pre><code>
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>()
+builder.Services.AddIdentity&lt;IdentityUser, IdentityRole&gt;()
+    .AddEntityFrameworkStores&lt;AppDbContext&gt;()
     .AddDefaultTokenProviders();
     
 </code></pre>
@@ -112,10 +112,13 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 Before migrating, I ensured `AppDbContext` was saved, as missing updates **caused issues earlier**.
 
 ### **Commands to Create and Update the Database**
-```sh
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+    <pre><code>
 dotnet ef migrations add AddMessagesTable
 dotnet ef database update
-```
+    </code></pre>
+</div>
 
 ### **Migration Output**
 ![Migrations](images/Migrations.png)
