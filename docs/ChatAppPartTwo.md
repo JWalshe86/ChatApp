@@ -47,7 +47,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     <pre><code>
 namespace ChatApp.Models
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class Message
     {
         public int Id { get; set; } // Primary key
         public string User { get; set; } // Username of the sender
