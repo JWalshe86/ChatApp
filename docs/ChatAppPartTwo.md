@@ -71,9 +71,9 @@ Previously, `IdentityDbContext<IdentityUser>` handled user authentication. Howev
     <pre><code>
 namespace ChatApp
 {
-    public class AppDbContext
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        public int Id { get; set; } // Primary key
+        public DbSet<Message> Messages { get; set; }
         public string User { get; set; } // Username of the sender
         public string Content { get; set; } // The actual message content
         public DateTime Timestamp { get; set; } // When the message was sent
