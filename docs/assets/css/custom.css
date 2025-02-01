@@ -18,13 +18,14 @@ img {
 /* =============================
    Typography
    ============================= */
-h1, h2 {
+h1, h2, h3, h4 {
     font-weight: 700;
     text-align: center;
+    color: #2c3e50;
 }
 
 /* ChatApp Main Title */
-h1 {
+h1.chatapp-title {
     font-size: 2.8rem;
     font-weight: bold;
     background: linear-gradient(90deg, #3498db, #9b59b6);
@@ -35,7 +36,7 @@ h1 {
 }
 
 /* ChatApp Subtitle */
-h2 {
+h2.chatapp-subtitle {
     font-size: 1.8rem;
     font-weight: 600;
     color: #555;
@@ -45,7 +46,7 @@ h2 {
 }
 
 /* Underline Animation */
-h1::after, h2::after {
+h1.chatapp-title::after, h2.chatapp-subtitle::after {
     content: "";
     display: block;
     width: 60%;
@@ -60,16 +61,19 @@ h1::after, h2::after {
     100% { width: 60%; }
 }
 
-h3 {
-    font-size: 1.5rem;
-    color: #555;
-    font-weight: 600;
+/* Standard Styling for Other Headings */
+h1, h2, h3, h4 {
+    font-weight: 700;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 10px;
 }
 
-h4 {
-    font-size: 1.25rem;
-    color: #666;
+h2, h3, h4 {
+    font-size: 1.8rem;
     font-weight: 600;
+    color: #333;
+    margin-top: 20px;
 }
 
 /* =============================
