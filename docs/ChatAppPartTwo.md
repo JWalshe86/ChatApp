@@ -73,7 +73,7 @@ namespace ChatApp
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        public DbSet<Message> Messages { get; set; }
+        public int Id { get; set; } // Primary key
         public string User { get; set; } // Username of the sender
         public string Content { get; set; } // The actual message content
         public DateTime Timestamp { get; set; } // When the message was sent
