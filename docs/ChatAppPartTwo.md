@@ -67,21 +67,26 @@ Previously, `IdentityDbContext<IdentityUser>` handled user authentication. Howev
 
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
-
     <pre><code>
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ChatApp.Models;
+
 namespace ChatApp
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        public class AppDbContext { get; set; } // Primary key
-        public string User { get; set; } // Username of the sender
-        public string Content { get; set; } // The actual message content
-        public DateTime Timestamp { get; set; } // When the message was sent
+        public DbSet<Message> Messages { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        {
+        }
     }
 }
     </code></pre>
 </div>
-
 
 ---
 
