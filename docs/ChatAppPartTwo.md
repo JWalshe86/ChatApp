@@ -71,21 +71,14 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     <button class="copy-button">📋 Copy</button>
 
     <pre><code>
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using ChatApp.Models;
-
-namespace ChatApp
+namespace ChatApp.Models
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class Message
     {
-        public DbSet<Message> Messages { get; set; }
-
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
-        {
-        }
+        public int Id { get; set; } // Primary key
+        public string User { get; set; } // Username of the sender
+        public string Content { get; set; } // The actual message content
+        public DateTime Timestamp { get; set; } // When the message was sent
     }
 }
     </code></pre>
