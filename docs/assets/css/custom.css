@@ -1,30 +1,39 @@
-/* Apply a cleaner, more readable font */
+/* =============================
+   General Styles
+   ============================= */
 body {
     font-family: 'Inter', 'Roboto', 'Open Sans', sans-serif;
     font-size: 1rem;
     line-height: 1.7;
-    color: #212529; /* Standard readable black */
-    background: #f9f9f9; /* Light gray background for a softer feel */
+    color: #212529;
+    background: #f9f9f9;
 }
 
-/* 🎨 Title Styling */
+img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+}
+
+/* =============================
+   Typography
+   ============================= */
+h1, h2, h3, h4 {
+    font-weight: 700;
+    text-align: center;
+}
+
 h1 {
     font-size: 2.2rem;
-    font-weight: 700;
-    color: #333; /* Slightly softer black */
-    text-align: center;
+    color: #333;
     margin-bottom: 1rem;
     letter-spacing: -0.5px;
 }
 
-/* 🎨 Adjust the Main Page Title */
 .page-title {
     font-size: 2.5rem;
-    font-weight: 700;
     color: #222;
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem;
     letter-spacing: -0.8px;
     padding: 10px;
     border-radius: 8px;
@@ -32,11 +41,9 @@ h1 {
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* ✨ Refine Subheading Colors */
 h2 {
     font-size: 1.75rem;
-    font-weight: 700;
-    color: #444; /* Softer dark gray */
+    color: #444;
     margin-top: 1.5rem;
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
@@ -44,24 +51,17 @@ h2 {
 
 h3 {
     font-size: 1.5rem;
-    font-weight: 600;
-    color: #555; /* Mid-tone gray */
+    color: #555;
 }
 
 h4 {
     font-size: 1.25rem;
-    font-weight: 600;
-    color: #666; /* Slightly lighter gray */
+    color: #666;
 }
 
-/* Center and refine the ChatApp logo */
-img {
-    display: block;
-    margin: auto;
-    max-width: 100%;
-}
-
-/* Add a container to center the content */
+/* =============================
+   Layout & Containers
+   ============================= */
 .container {
     max-width: 900px;
     padding: 2rem;
@@ -71,17 +71,18 @@ img {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* ✅ Key Updates Block */
 .key-updates {
-    background: #eef5ff; /* Soft light blue */
-    border-left: 4px solid #0073e6; /* A subtle highlight */
+    background: #eef5ff;
+    border-left: 4px solid #0073e6;
     padding: 10px 15px;
     border-radius: 6px;
     font-weight: 600;
     margin: 15px 0;
 }
 
-/* ✅ Better Bullet Points */
+/* =============================
+   Lists & Table of Contents
+   ============================= */
 ul, ol {
     margin-top: 0;
     margin-bottom: 1rem;
@@ -93,18 +94,16 @@ ul li {
     line-height: 1.6;
 }
 
-/* ✅ Styling the Table of Contents */
 #table-of-contents {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #222; /* Softer black */
+    color: #222;
     margin-bottom: 10px;
-    border-bottom: 2px solid #e0e0e0; /* Light separator */
+    border-bottom: 2px solid #e0e0e0;
     padding-bottom: 5px;
     text-align: center;
 }
 
-/* ✅ TOC Styling */
 #markdown-toc {
     background: #f8f9fa;
     padding: 15px;
@@ -113,140 +112,52 @@ ul li {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ Make TOC links easier to read */
 #markdown-toc a {
-    color: #444; /* Darker text */
+    color: #444;
     font-weight: 500;
     text-decoration: none;
 }
 
-/* ✅ TOC links hover effect */
 #markdown-toc a:hover {
     color: #0056b3;
     text-decoration: underline;
 }
 
-/* ✅ Fix Code Block Appearance */
+/* =============================
+   Code Blocks
+   ============================= */
 pre {
-    background-color: #e8f0fb; /* Light blue background */
+    background-color: #e8f0fb;
     padding: 10px;
     border-radius: 6px;
     overflow-x: auto;
 }
 
-/* ✅ Ensure Code is Readable */
 pre code {
-    color: #212529; /* Default readable black */
+    color: #212529;
     font-size: 0.95rem;
     font-family: 'Source Code Pro', monospace;
 }
 
-/* ✅ Fix Original Code Coloring */
 pre span.original-code {
-    color: #888 !important; /* Light gray */
+    color: #888 !important;
     font-style: italic;
 }
 
-/* ✅ Fix Updated Code Coloring */
 pre span.updated-code {
-    color: #222 !important; /* Darker black */
+    color: #222 !important;
     font-weight: bold;
 }
 
-/* ✅ Ensure Spans Are Properly Displayed */
-pre code span {
-    display: inline-block;
-}
-/* Make sure details has no borders */
-details {
-    margin: 10px 0;
-}
-
-/* Style the summary line */
-summary {
-    cursor: pointer;
-    font-weight: bold;
-    color: #0056b3;
-    padding: 5px 0;
-    user-select: none; /* Prevent accidental selection */
-}
-
-/* Style the original code inside details */
-details[open] .original-code {
-    display: block;
-}
-
-/* Ensure hidden original code still gets copied */
-.original-code {
-    display: none; /* Hide original code by default */
-}
-
-/* 📋 Improve Copy Button Styling */
-.copy-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: background 0.2s ease-in-out;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px; /* Adds spacing between icon and text */
-    margin-bottom: 6px; /* Adds spacing before "Show Original Code" */
-}
-
-/* 📋 Hover effect for Copy Button */
-.copy-button:hover {
-    background: #0056b3;
-}
-
-/* 🔼 Style the Show Original Code button */
-.toggle-original-code {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #0056b3;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px; /* Adds spacing between icon and text */
-    padding: 6px 0;
-    border: none;
-    background: none;
-}
-
-/* 🔼 Hover effect */
-.toggle-original-code:hover {
-    text-decoration: underline;
-}
-
-/* Reduce gap above "Show Original Code..." */
-.code-block details {
-    margin: -41px 0 -42px 0; /* top right bottom left */
-}
-details[open] .original-code {
-    margin-top: -92px;
-}
-h1#chatapp-part-2---real-time-messaging-with-signalr {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #2c3e50; /* Dark blue for emphasis */
-    text-align: center;
-}
+/* =============================
+   ChatApp Part 2 Title Styling
+   ============================= */
 h1#chatapp-part-2---real-time-messaging-with-signalr {
     font-size: 2.5rem;
     font-weight: bold;
     background: linear-gradient(90deg, #3498db, #9b59b6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-align: center;
-}
-h1#chatapp-part-2---real-time-messaging-with-signalr {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #34495e;
     text-align: center;
     position: relative;
 }
@@ -263,17 +174,3 @@ h1#chatapp-part-2---real-time-messaging-with-signalr::after {
     animation: underline 1s ease-in-out infinite alternate;
 }
 
-@keyframes underline {
-    0% { width: 50%; }
-    100% { width: 100%; }
-}
-
-h1#chatapp-part-2---real-time-messaging-with-signalr {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #2c3e50;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    padding-bottom: 15px;
-    border-bottom: 3px solid #3498db;
-    display: inline-block;
-}
