@@ -69,25 +69,22 @@ Previously, `IdentityDbContext<IdentityUser>` handled user authentication. Howev
     <button class="copy-button">📋 Copy</button>
 
     <pre><code>
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using ChatApp.Models;
-namespace ChatApp.Models
+namespace ChatApp
 {
-    public class Message
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        public int Id { get; set; } // Primary key
-        public string User { get; set; } // Username of the sender
-        public string Content { get; set; } // The actual message content
-        public DateTime Timestamp { get; set; } // When the message was sent
+        public DbSet<Message> Messages { get; set; }
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+            {
+            }
     }
 }
     </code></pre>
 </div>
 
-To keep the project organized, I placed `Message.cs` inside a **Models** folder.
 
+---
 
 ### **Key Updates**
 - `DbSet<Message>` tells EF that `Message` should be included in the database.
