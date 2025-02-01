@@ -75,11 +75,11 @@ using ChatApp.Models;
 
 namespace ChatApp
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext&lt;IdentityUser&gt;
     {
-        public DbSet<Message> Messages { get; set; }
+        public DbSet&lt;Message&gt; Messages { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        public AppDbContext(DbContextOptions&lt;AppDbContext&gt; options)
             : base(options)
         {
         }
@@ -87,6 +87,7 @@ namespace ChatApp
 }
     </code></pre>
 </div>
+
 
 ---
 
