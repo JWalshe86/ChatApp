@@ -67,8 +67,7 @@ Previously, `IdentityDbContext<IdentityUser>` handled user authentication. Howev
 
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
-  <pre>
-    <code>
+    <pre><code>
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -86,8 +85,7 @@ namespace ChatApp
         }
     }
 }
- </code>
- </pre>
+    </code></pre>
 </div>
 
 ### **Key Updates**
