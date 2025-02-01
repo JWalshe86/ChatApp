@@ -3,9 +3,11 @@ layout: default
 title: ChatApp Part Two
 ---
 
-# **ChatApp Part 2 - Real-Time Messaging with SignalR**
+# **ChatApp Part 2**  
+## **Real-Time Messaging with SignalR**
 
 ![ChatApp](images/ChatApp.png)
+
 
 ## **Introduction**
 After successfully setting up real-time messaging with SignalR, I enhanced the app with:
