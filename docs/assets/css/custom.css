@@ -139,6 +139,12 @@ ul li {
 /* =============================
    Code Blocks
    ============================= */
+/* Ensure copy button is inside the code block */
+.code-block {
+    position: relative;
+    padding-top: 2rem; /* Add space for button */
+}
+
 pre {
     background-color: #e8f0fb;
     padding: 10px;
@@ -166,6 +172,7 @@ pre span.updated-code {
 /* =============================
    Copy Button Styling
    ============================= */
+.* Copy Button Styling */
 .copy-button {
     background: #007bff;
     color: white;
@@ -179,12 +186,12 @@ pre span.updated-code {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    margin-bottom: 6px;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
 }
 
+/* Hover Effect */
 .copy-button:hover {
     background: #0056b3;
 }
