@@ -63,7 +63,7 @@ To keep the project organized, I placed `Message.cs` inside a **Models** folder.
 ---
 
 ## **Creating `AppDbContext`**
-Previously, `IdentityDbContext<IdentityUser>` handled user authentication. However, to store custom entities like messages, I created an `AppDbContext` that **inherits** from `IdentityDbContext<IdentityUser>`.
+Previously, `IdentityDbContext<IdentityUser>` handled user authentication. However, to store custom entities like messages, I created an `AppDbContext` that **inherits** from `IdentityDbContext<IdentityUser>`. `DbSet<Message>` tells EF that `Message` should be included in the database. The **identity framework** is still supported, allowing user authentication.
 
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
@@ -91,19 +91,20 @@ namespace ChatApp
 
 ---
 
-### **Key Updates**
-- `DbSet<Message>` tells EF that `Message` should be included in the database.
-- The **identity framework** is still supported, allowing user authentication.
-- `AppDbContext` is registered in **Program.cs**:
+- `AppDbContext` is then registered in **Program.cs** in place of IdentyDbContext:
 
-```csharp
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+    <pre><code>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
-```
+    
+</code></pre>
+</div>
 
 ---
 
