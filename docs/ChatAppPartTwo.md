@@ -83,9 +83,9 @@ namespace ChatApp
         {
         }
     }
-}</code></pre>
+}
+    </code></pre>
 </div>
-
 
 ### **Key Updates**
 - `DbSet<Message>` tells EF that `Message` should be included in the database.
