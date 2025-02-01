@@ -139,6 +139,15 @@ ul li {
 /* =============================
    Code Blocks
    ============================= */
+.code-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
 pre {
     background-color: #e8f0fb;
     padding: 10px;
@@ -180,6 +189,9 @@ button.copy-button {
     align-items: center;
     gap: 5px;
     margin-bottom: 6px;
+
+    /* Fix: Add Positioning */
+    position: absolute;
     top: 10px;
     right: 10px;
 }
@@ -187,4 +199,5 @@ button.copy-button {
 button.copy-button:hover {
     background: #0056b3;
 }
+
 
