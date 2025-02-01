@@ -39,7 +39,9 @@ h1.chatapp-title {
 h2.chatapp-subtitle {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #555;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-top: 5px;
     letter-spacing: 0.5px;
     position: relative;
@@ -62,18 +64,12 @@ h1.chatapp-title::after, h2.chatapp-subtitle::after {
 }
 
 /* Standard Styling for Other Headings */
-h1, h2, h3, h4 {
-    font-weight: 700;
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-h2, h3, h4 {
+h2:not(.chatapp-subtitle), h3, h4 {
     font-size: 1.8rem;
     font-weight: 600;
     color: #333;
     margin-top: 20px;
+    text-align: center;
 }
 
 /* =============================
