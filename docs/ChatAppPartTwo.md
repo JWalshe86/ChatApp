@@ -8,43 +8,15 @@ title: ChatApp Part Two
 
 ![ChatApp](images/ChatApp.png)
 
-
-## **Introduction**
-After successfully setting up real-time messaging with SignalR, I enhanced the app with:
-- **Persistent chat storage**, ensuring messages are saved even after the application restarts.
-- **User notifications**, so participants are informed when someone joins or leaves.
-- **Rich media support**, allowing users to send images, videos, and files.
-- **Private messaging**, enabling direct communication between users.
-- **Message history with pagination**, so users can load older messages on demand.
-- **User profiles and avatars**, adding personalization.
-- **Security enhancements**, including authentication, rate-limiting, and HTTPS.
-
 ---
 
-<!-- ✅ TOC NOW MOVED BELOW INTRO -->
-## **Table of Contents**
-* TOC
-{:toc}
-
----
-
-## **Initial Housekeeping**
-To prevent conflicts with the previous project (which used `IdentityDbContext`), I performed a **fresh start** by:
-- Deleting the **existing database** (`ChatApp.db`).
-- Removing **migrations** (`Migrations Folder) from the previous project.
-  
----
-
-# **Persistent Message Storage**
-## **Creating the `Message` Class**
-Initially, messages were stored as simple strings. However, to persist messages between logins, they needed to be stored in a **database** as objects.
-
+## **Persistent Message Storage**
+### **Creating the `Message` Class**
 I created a `Message` class that Entity Framework (EF) maps into a database table.
 
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
-
-    <pre><code>
+    <pre><code class="updated-code">
 namespace ChatApp.Models
 {
     public class Message
@@ -58,78 +30,14 @@ namespace ChatApp.Models
     </code></pre>
 </div>
 
-To keep the project organized, I placed `Message.cs` inside a **Models** folder.
-
 ---
 
-## **Creating `AppDbContext`**
-Previously, `IdentityDbContext<IdentityUser>` handled user authentication. However, to store custom entities like messages, I created an `AppDbContext` that **inherits** from `IdentityDbContext<IdentityUser>`. `DbSet<Message>` tells EF that `Message` should be included in the database. The **identity framework** is still supported, allowing user authentication.
+### **Updating `ChatHub.cs` to Save Messages in Database**
+Previously, messages were sent via SignalR but were **not persisted**. Now, messages are saved to the database before being broadcast.
 
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
-    <pre><code>
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using ChatApp.Models;
 
-namespace ChatApp
-{
-    public class AppDbContext : IdentityDbContext&lt;IdentityUser&gt;
-    {
-        public DbSet&lt;Message&gt; Messages { get; set; }
-
-        public AppDbContext(DbContextOptions&lt;AppDbContext&gt; options)
-            : base(options)
-        {
-        }
-    }
-}
-    </code></pre>
-</div>
-
-
----
-
-- `AppDbContext` is then registered in **Program.cs** in place of IdentyDbContext:
-
-<div class="code-block">
-    <button class="copy-button">📋 Copy</button>
-    <pre><code>
-builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddIdentity&lt;IdentityUser, IdentityRole&gt;()
-    .AddEntityFrameworkStores&lt;AppDbContext&gt;()
-    .AddDefaultTokenProviders();
-    
-</code></pre>
-</div>
-
----
-
-# **Database Migrations**
-Before migrating, I ensured `AppDbContext` was saved, as missing updates **caused issues earlier**.
-
-### **Commands to Create and Update the Database**
-<div class="code-block">
-    <button class="copy-button">📋 Copy</button>
-    <pre><code>
-dotnet ef migrations add AddMessagesTable
-dotnet ef database update
-    </code></pre>
-</div>
-
-### **Migration Output**
-![Migrations](images/Migrations.png)
-
----
-
-# **1. SignalR Integration**
-<h2>Updating <span style="color:#d63384;">ChatHub</span> to Save Messages in Database</h2>
-
-<p>
-    Previously, messages were sent via SignalR but were <strong>not persisted</strong>. Now, messages are saved to the database before being broadcast.
     <details>
         <summary>🔽 Show Original Code...</summary>
         <pre><code class="original-code">
@@ -148,10 +56,7 @@ namespace ChatApp.Hubs
 }
         </code></pre>
     </details>
-</p>
 
-<div class="code-block">
-    <button class="copy-button">📋 Copy</button>
     <pre><code class="updated-code">
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
@@ -183,226 +88,98 @@ namespace ChatApp.Hubs
         }
     }
 }
-</code></pre>
+    </code></pre>
 </div>
 
 ---
 
-# **2. Online Users Display & User Join/Leave Notifications**
-Previously, the chat only handled messages, but now **online users are tracked**, and users joining or leaving the chat are displayed.
+### **Tracking Online Users & Notifications**
+Chat now displays **online users** and **notifies when users join or leave**.
 
-### ChatHub.cs - Code Update
-
-<!-- ✅ Now wrapping BOTH original and updated code in .code-block -->
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
 
     <details>
         <summary>🔽 Show Original Code...</summary>
         <pre><code class="original-code">
-using ChatApp.Models;
-using Microsoft.AspNetCore.SignalR;
-using System.Collections.Concurrent;
-
-namespace ChatApp.Hubs
+public class ChatHub : Hub
 {
-    public class ChatHub : Hub
+    public async Task SendMessage(string user, string message)
     {
-        private static readonly ConcurrentDictionary<string, string> OnlineUsers = new();
-        private readonly AppDbContext _context;
-
-        public ChatHub(AppDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task SendMessage(string user, string message)
-        {
-            var newMessage = new Message
-            {
-                User = user,
-                Content = message,
-                Timestamp = DateTime.UtcNow
-            };
-
-            _context.Messages.Add(newMessage);
-            await _context.SaveChangesAsync();
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
+        await Clients.All.SendAsync("ReceiveMessage", user, message);
     }
 }
         </code></pre>
     </details>
 
     <pre><code class="updated-code">
-        <mark>
-        public override async Task OnConnectedAsync()
-        {
-            string userName = Context.User.Identity.Name;
+<mark>public override async Task OnConnectedAsync()
+{
+    string userName = Context.User.Identity.Name;
 
-            if (!OnlineUsers.ContainsKey(Context.ConnectionId))
-            {
-                OnlineUsers[Context.ConnectionId] = userName;
-                await Clients.All.SendAsync("UserJoined", userName);
-                await SendOnlineUsers();
-            }
+    if (!OnlineUsers.ContainsKey(Context.ConnectionId))
+    {
+        OnlineUsers[Context.ConnectionId] = userName;
+        await Clients.All.SendAsync("UserJoined", userName);
+        await SendOnlineUsers();
+    }
 
-            await base.OnConnectedAsync();
-        }
-        </mark>
+    await base.OnConnectedAsync();
+}</mark>
 
-        <mark>
-        public override async Task OnDisconnectedAsync(Exception exception)
-        {
-            if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
-            {
-                await Clients.All.SendAsync("UserLeft", userName);
-                await SendOnlineUsers();
-            }
+<mark>public override async Task OnDisconnectedAsync(Exception exception)
+{
+    if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
+    {
+        await Clients.All.SendAsync("UserLeft", userName);
+        await SendOnlineUsers();
+    }
 
-            await base.OnDisconnectedAsync(exception);
-        }
-        </mark>
+    await base.OnDisconnectedAsync(exception);
+}</mark>
 
-        <mark>
-        private async Task SendOnlineUsers()
-        {
-            var users = OnlineUsers.Values.Distinct().ToList();
-            await Clients.All.SendAsync("UpdateOnlineUsers", users);
-        }
-        </mark>
+<mark>private async Task SendOnlineUsers()
+{
+    var users = OnlineUsers.Values.Distinct().ToList();
+    await Clients.All.SendAsync("UpdateOnlineUsers", users);
+}</mark>
     </code></pre>
-
-</div> 
-
-
-
-### **Key Changes**
-- **`OnConnectedAsync()`**: Adds users to `OnlineUsers` and notifies all clients.
-- **`OnDisconnectedAsync()`**: Removes users and updates the client list.
-- **`SendOnlineUsers()`**: Updates the online users list dynamically.
-## **How This Works**
-
-<!-- Button to Open Modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customModal">
-    How This Works?
-</button>
-
-<!-- Modal -->
-<div id="customModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">How Real-Time Presence Works</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>This functionality enables real-time user presence tracking in the chat application.</p>
-
-                <h6>📌 Client-Side Handling (<code>Chat.cshtml</code>)</h6>
-                <ul>
-                    <li>Listens for <code>"UserJoined"</code> and <code>"UserLeft"</code> events from the server.</li>
-                    <li>Appends a new <code>&lt;li&gt;</code> element to <code>messagesList</code> when a user joins or leaves.</li>
-                    <li>Fetches the current list of online users when the page loads.</li>
-                </ul>
-
-                <h6>📌 Server-Side Tracking (<code>ChatHub.cs</code>)</h6>
-                <ul>
-                    <li>Uses a static <code>HashSet&lt;string&gt;</code> to keep track of online users.</li>
-                    <li><strong>OnConnectedAsync():</strong>
-                        <ul>
-                            <li>When a user connects, their username is added to the <code>OnlineUsers</code> list.</li>
-                            <li>A <code>"UserJoined"</code> event is broadcast to all clients.</li>
-                            <li>The updated list of online users is sent to all clients.</li>
-                        </ul>
-                    </li>
-                    <li><strong>OnDisconnectedAsync():</strong>
-                        <ul>
-                            <li>When a user disconnects, their username is removed.</li>
-                            <li>A <code>"UserLeft"</code> event is sent to all clients.</li>
-                            <li>The updated list of online users is sent to all clients.</li>
-                        </ul>
-                    </li>
-                    <li><strong>GetOnlineUsers():</strong>
-                        <ul>
-                            <li>Allows a newly connected client to request the current list of online users.</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <p>This ensures that all connected users are notified in real-time whenever someone joins or leaves the chat.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 ---
-<!-- Chat Page Update Section -->
+
+### **Updating `Chat.cshtml` for Online Users**
+Previously, the chat only handled messages, but now **online users are tracked**, and users joining or leaving are displayed.
+
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
-
-    <!-- Collapsible Original Code with HTML Entities -->
-    <details>
-        <summary>🔽 Show Original Code...</summary>
-        <pre><code class="original-code">
-&lt;!-- Razor Page --&gt;
-@page
-@model ChatApp.Pages.Chat.ChatModel
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]  &lt;!-- This restricts access to authenticated users --&gt;
-
-&lt;h2&gt;Chat Room&lt;/h2&gt;
-
-&lt;ul id=&quot;messagesList&quot;&gt;
-    @foreach (var message in Model.Messages)
-    {
-        &lt;li&gt;@message&lt;/li&gt;
-    }
-&lt;/ul&gt;
-
-&lt;input type=&quot;text&quot; id=&quot;userInput&quot; placeholder=&quot;Your name&quot; /&gt;
-&lt;input type=&quot;text&quot; id=&quot;messageInput&quot; placeholder=&quot;Type your message...&quot; /&gt;
-&lt;button onclick=&quot;sendMessage()&quot;&gt;Send&lt;/button&gt;
-
-&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.0/signalr.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-    const connection = new signalR.HubConnectionBuilder()
-        .withUrl(&quot;/chatHub&quot;)
-        .build();
-
-    connection.on(&quot;ReceiveMessage&quot;, function (user, message) {
-        const msg = `${user}: ${message}`;
-        const li = document.createElement(&quot;li&quot;);
-        li.textContent = msg;
-        document.getElementById(&quot;messagesList&quot;).appendChild(li);
-    });
-
-    connection.start().catch(function (err) {
-        return console.error(err.toString());
-    });
-
-    function sendMessage() {
-        const user = document.getElementById(&quot;userInput&quot;).value;
-        const message = document.getElementById(&quot;messageInput&quot;).value;
-
-        connection.invoke(&quot;SendMessage&quot;, user, message).catch(function (err) {
-            return console.error(err.toString());
-        });
-    }
-&lt;/script&gt;
-        </code></pre>
-    </details>
-
-    <!-- Updated Code (Always Visible & Highlighted) -->
     <pre><code class="updated-code">
+<mark>&lt;h3&gt;Online Users&lt;/h3&gt;</mark>
+<mark>&lt;ul id="onlineUsers"&gt;&lt;/ul&gt;</mark>
+    </code></pre>
+</div>
 
-    <mark>
+---
+
+### **JavaScript Updates for Real-Time User Notifications**
+Handles **user join/leave events** and displays online users dynamically.
+
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+    <pre><code class="updated-code">
+&lt;script&gt;
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/chatHub")
+    .build();
+
+connection.on("ReceiveMessage", function (user, message) {
+    const msg = `${user}: ${message}`;
+    const li = document.createElement("li");
+    li.textContent = msg;
+    document.getElementById("messagesList").appendChild(li);
+});
+
+<mark>
 // Handle user joining the chat
 connection.on("UserJoined", function (user) {
     const li = document.createElement("li");
@@ -411,7 +188,7 @@ connection.on("UserJoined", function (user) {
 });
 </mark>
 
-    <mark>
+<mark>
 // Handle user leaving the chat
 connection.on("UserLeft", function (user) {
     const li = document.createElement("li");
@@ -420,7 +197,7 @@ connection.on("UserLeft", function (user) {
 });
 </mark>
 
-    <mark>
+<mark>
 // Update online users list
 connection.on("OnlineUsers", function (users) {
     const userList = document.getElementById("onlineUsers");
@@ -433,22 +210,13 @@ connection.on("OnlineUsers", function (users) {
 });
 </mark>
 
-    <mark>
+<mark>
 // Request online users on connection start
 connection.start().then(() => {
     connection.invoke("GetOnlineUsers");
 }).catch(err => console.error(err.toString()));
 </mark>
 &lt;/script&gt;
-    </code></pre>
-</div>
-
-<!-- Razor Page Update Section -->
-<div class="code-block">
-    <button class="copy-button">📋 Copy</button>
-    <pre><code class="updated-code">
-<mark>&lt;h3&gt;Online Users&lt;/h3&gt;</mark>
-<mark>&lt;ul id="onlineUsers"&gt;&lt;/ul&gt;</mark>
     </code></pre>
 </div>
 
