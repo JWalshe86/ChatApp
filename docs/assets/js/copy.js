@@ -5,20 +5,20 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Find the nearest parent container and select both original & updated code
-            let container = block.closest("div"); 
+            // Find the closest parent section containing both original and updated code
+            let container = block.closest("section, div"); 
             let originalCodeBlock = container.querySelector(".original-code"); 
-            let updatedCodeBlock = container.querySelector(".updated-code");
+            let updatedCodeBlock = block.querySelector(".updated-code"); 
 
             if (originalCodeBlock) {
-                codeText += originalCodeBlock.innerText + "\n\n"; // Add original code first
+                codeText += originalCodeBlock.innerText.trim() + "\n\n"; // Add original code first
             }
             
             if (updatedCodeBlock) {
-                codeText += updatedCodeBlock.innerText; // Then add updated code
+                codeText += updatedCodeBlock.innerText.trim(); // Then add updated code
             }
 
-            // Remove any "Show Original Code..." text from the copied output
+            // Remove "🔽 Show Original Code..." from copied text
             codeText = codeText.replace(/🔽 Show Original Code...\n?/g, "").trim();
 
             // Fix for C# Generics: Convert "<T>" into safe characters before copying
