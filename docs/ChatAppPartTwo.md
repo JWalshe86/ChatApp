@@ -160,15 +160,18 @@ namespace ChatApp.Hubs
 {
     public class ChatHub : Hub
     {   
+        <span class="highlight">
         private readonly AppDbContext _context;
 
         public ChatHub(AppDbContext context)
         {
             _context = context;
         }
+        </span>
 
         public async Task SendMessage(string user, string message)
         {
+            <span class="highlight">
             var newMessage = new Message
             {
                 User = user,
@@ -178,6 +181,7 @@ namespace ChatApp.Hubs
 
             _context.Messages.Add(newMessage);
             await _context.SaveChangesAsync();
+            </span>
 
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
