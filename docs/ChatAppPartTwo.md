@@ -343,9 +343,62 @@ namespace ChatApp.Hubs
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 ---
-<!-- JavaScript Update Section -->
+<!-- Chat Page Update Section -->
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
+
+    <!-- Collapsible Original Code -->
+    <details>
+        <summary>🔽 Show Original Code...</summary>
+        <pre><code class="original-code">
+@page
+@model ChatApp.Pages.Chat.ChatModel
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]  // This restricts access to authenticated users
+
+<h2>Chat Room</h2>
+
+<ul id="messagesList">
+    @foreach (var message in Model.Messages)
+    {
+        <li>@message</li>
+    }
+</ul>
+
+<input type="text" id="userInput" placeholder="Your name" />
+<input type="text" id="messageInput" placeholder="Type your message..." />
+<button onclick="sendMessage()">Send</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.0/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .build();
+
+    connection.on("ReceiveMessage", function (user, message) {
+        const msg = `${user}: ${message}`;
+        const li = document.createElement("li");
+        li.textContent = msg;
+        document.getElementById("messagesList").appendChild(li);
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    function sendMessage() {
+        const user = document.getElementById("userInput").value;
+        const message = document.getElementById("messageInput").value;
+
+        connection.invoke("SendMessage", user, message).catch(function (err) {
+            return console.error(err.toString());
+        });
+    }
+</script>
+        </code></pre>
+    </details>
+
+    <!-- Updated Code (Always Visible & Highlighted) -->
     <pre><code class="updated-code">
 &lt;script&gt;
     const connection = new signalR.HubConnectionBuilder()
@@ -400,6 +453,7 @@ connection.start().then(() => {
 &lt;/script&gt;
     </code></pre>
 </div>
+
 
 <!-- Razor Page Update Section -->
 <div class="code-block">
