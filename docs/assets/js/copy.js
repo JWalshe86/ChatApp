@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Select code blocks properly, ensuring C# generics aren't treated as HTML
-            let allCodeBlocks = block.querySelectorAll("pre code, pre .original-code");
+            // Select both original and updated code blocks inside the same container
+            let allCodeBlocks = block.closest("div").querySelectorAll("pre code, pre .original-code");
 
             if (allCodeBlocks.length > 0) {
                 allCodeBlocks.forEach(codeBlock => {
@@ -16,11 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Remove "🔽 Show Original Code..." from copied text
                 codeText = codeText.replace(/🔽 Show Original Code...\n?/g, "").trim();
             } else {
-                // No original code, just copy the main block
+                // If no original code is found, just copy the updated block
                 codeText = block.querySelector("pre code").innerText.trim();
             }
 
-            // Fix for C# Generics: Convert "<T>" into safe characters before copying
+            // Fix C# Generics: Convert "<T>" into safe characters before copying
             codeText = codeText.replace(/<([^>]+)>/g, "<$1>"); // Ensures angle brackets are not removed
 
             // Copy text to clipboard
