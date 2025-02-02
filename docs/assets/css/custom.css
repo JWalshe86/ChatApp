@@ -95,73 +95,73 @@ h2:not(.chatapp-subtitle), h3, h4 {
 }
 
 /* =============================
-   Lists & Table of Contents
-   ============================= */
-ul, ol {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    padding-left: 1.2rem;
-}
-
-ul li {
-    padding-left: 5px;
-    line-height: 1.6;
-}
-
-#table-of-contents {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 5px;
-    text-align: center;
-}
-
-#markdown-toc {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    list-style: none;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-#markdown-toc a {
-    color: #444;
-    font-weight: 500;
-    text-decoration: none;
-}
-
-#markdown-toc a:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
-
-/* =============================
    GitHub-Style Code Blocks
    ============================= */
 
-/* General Code Block Styling */
+/* Code Block Wrapper */
+.code-block {
+    border-radius: 8px;
+    background: #f6f8fa; /* Matches GitHub */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* GitHub-Style Code Header */
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f6f8fa;
+    padding: 8px 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* GitHub Copy Button */
+.copy-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.copy-button svg {
+    fill: #57606a; /* GitHub icon color */
+    transition: fill 0.2s;
+}
+
+.copy-button:hover svg {
+    fill: #24292f; /* Darker on hover */
+}
+
+/* Code Block */
 pre {
-    background-color: #f6f8fa; /* GitHub-style light gray background */
-    border-radius: 6px;
+    background-color: #f6f8fa;
     padding: 12px;
+    border-radius: 6px;
     overflow-x: auto;
     font-family: "Courier New", monospace;
     font-size: 14px;
     border: 1px solid #ddd;
-    position: relative;
+    margin-top: 0;
 }
 
 /* Ensuring JavaScript & Razor Code Uses the Same Background */
 pre code {
-    background-color: inherit; /* Match parent pre */
+    background-color: inherit;
     display: block;
     padding: 0;
     border: none;
 }
 
-/* GitHub-like Diff Styling for Code Updates */
+/* GitHub-Like Diff Styling */
 pre .original-code {
     color: #6a737d !important;
     font-style: italic;
@@ -170,16 +170,6 @@ pre .original-code {
 pre .updated-code {
     color: #24292e !important;
     font-weight: bold;
-}
-
-/* GitHub-Style Code Blocks */
-.code-block {
-    background: #f6f8fa; /* Matches GitHub */
-    border-radius: 8px;
-    padding: 12px;
-    position: relative;
-    margin-bottom: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
 }
 
 /* GitHub-Like Diff Marking */
@@ -205,29 +195,4 @@ mark:hover {
 /* Ensuring Updated Code Blocks Stand Out */
 .updated-code {
     padding-top: 6px;
-}
-
-/* =============================
-   Copy Button Styling
-   ============================= */
-button.copy-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: background 0.2s ease-in-out;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 6px;
-    top: 10px;
-    right: 10px;
-}
-
-button.copy-button:hover {
-    background: #0056b3;
 }
