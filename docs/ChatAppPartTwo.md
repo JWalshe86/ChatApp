@@ -347,39 +347,40 @@ namespace ChatApp.Hubs
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
 
-    <!-- Collapsible Original Code -->
+    <!-- Collapsible Original Code with HTML Entities -->
     <details>
         <summary>🔽 Show Original Code...</summary>
         <pre><code class="original-code">
+&lt;!-- Razor Page --&gt;
 @page
 @model ChatApp.Pages.Chat.ChatModel
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]  // This restricts access to authenticated users
+@attribute [Authorize]  &lt;!-- This restricts access to authenticated users --&gt;
 
-<h2>Chat Room</h2>
+&lt;h2&gt;Chat Room&lt;/h2&gt;
 
-<ul id="messagesList">
+&lt;ul id=&quot;messagesList&quot;&gt;
     @foreach (var message in Model.Messages)
     {
-        <li>@message</li>
+        &lt;li&gt;@message&lt;/li&gt;
     }
-</ul>
+&lt;/ul&gt;
 
-<input type="text" id="userInput" placeholder="Your name" />
-<input type="text" id="messageInput" placeholder="Type your message..." />
-<button onclick="sendMessage()">Send</button>
+&lt;input type=&quot;text&quot; id=&quot;userInput&quot; placeholder=&quot;Your name&quot; /&gt;
+&lt;input type=&quot;text&quot; id=&quot;messageInput&quot; placeholder=&quot;Type your message...&quot; /&gt;
+&lt;button onclick=&quot;sendMessage()&quot;&gt;Send&lt;/button&gt;
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.0/signalr.min.js"></script>
-<script>
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.0/signalr.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
     const connection = new signalR.HubConnectionBuilder()
-        .withUrl("/chatHub")
+        .withUrl(&quot;/chatHub&quot;)
         .build();
 
-    connection.on("ReceiveMessage", function (user, message) {
+    connection.on(&quot;ReceiveMessage&quot;, function (user, message) {
         const msg = `${user}: ${message}`;
-        const li = document.createElement("li");
+        const li = document.createElement(&quot;li&quot;);
         li.textContent = msg;
-        document.getElementById("messagesList").appendChild(li);
+        document.getElementById(&quot;messagesList&quot;).appendChild(li);
     });
 
     connection.start().catch(function (err) {
@@ -387,14 +388,14 @@ namespace ChatApp.Hubs
     });
 
     function sendMessage() {
-        const user = document.getElementById("userInput").value;
-        const message = document.getElementById("messageInput").value;
+        const user = document.getElementById(&quot;userInput&quot;).value;
+        const message = document.getElementById(&quot;messageInput&quot;).value;
 
-        connection.invoke("SendMessage", user, message).catch(function (err) {
+        connection.invoke(&quot;SendMessage&quot;, user, message).catch(function (err) {
             return console.error(err.toString());
         });
     }
-</script>
+&lt;/script&gt;
         </code></pre>
     </details>
 
@@ -453,7 +454,6 @@ connection.start().then(() => {
 &lt;/script&gt;
     </code></pre>
 </div>
-
 
 <!-- Razor Page Update Section -->
 <div class="code-block">
