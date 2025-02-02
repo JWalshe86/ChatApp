@@ -194,3 +194,9 @@ button.copy-button:hover {
     border-radius: 4px;
     display: inline; /* Ensures it only highlights text, not the entire block */
 }
+mark {
+    background-color: #ffeb99; /* Light yellow */
+    font-weight: bold;
+    padding: 0 2px; /* Prevents extra spacing */
+    border-radius: 4px;
+}
