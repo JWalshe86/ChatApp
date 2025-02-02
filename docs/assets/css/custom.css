@@ -195,13 +195,16 @@ button.copy-button:hover {
     display: inline; /* Ensures it only highlights text, not the entire block */
 }
 mark {
-    background-color: #fff5cc; /* Softer yellow */
-    font-weight: bold;
-    padding: 4px 8px; /* Slightly more padding for a cleaner block */
-    border-radius: 6px; /* Smooth rounded corners */
-    display: block; /* Ensures it wraps full function blocks properly */
-    white-space: pre-wrap; /* Maintains proper formatting */
-    word-break: break-word; /* Prevents overflow */
-    margin-bottom: 6px; /* Adds slight spacing between blocks */
-    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #fff8dc; /* A softer pastel yellow */
+    font-weight: normal; /* Regular weight for better contrast */
+    padding: 6px 12px; /* A bit more padding for a cleaner feel */
+    border-radius: 6px; /* Smooth rounded edges */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Light border for contrast */
+    display: block; /* Ensures full function wrapping */
+    white-space: pre-wrap; /* Maintains code formatting */
+    word-break: break-word; /* Prevents long lines from overflowing */
+    margin-bottom: 8px; /* Adds spacing between function blocks */
+    margin-top: 10px; /* Creates a clearer separation */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
 }
+
