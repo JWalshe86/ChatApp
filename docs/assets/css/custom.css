@@ -195,11 +195,12 @@ button.copy-button:hover {
     display: inline; /* Ensures it only highlights text, not the entire block */
 }
 mark {
-    background-color: #ffecb3; /* Softer yellow */
+    background-color: #fff5cc; /* Softer yellow */
     font-weight: bold;
-    padding: 2px 4px; /* Tight padding */
-    border-radius: 3px;
-    display: inline-block; /* Ensures proper width */
-    white-space: pre-wrap; /* Prevents overflow while maintaining indentation */
-    word-break: break-word; /* Ensures long lines wrap */
+    padding: 1px 6px; /* Slight padding for readability */
+    border-radius: 4px; /* Smooth rounded corners */
+    display: inline-block; /* Ensures proper wrapping */
+    white-space: pre-wrap; /* Prevents text overflow */
+    word-break: break-word; /* Wraps long lines nicely */
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
 }
