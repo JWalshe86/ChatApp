@@ -195,6 +195,11 @@ Previously, the chat only handled messages, but now **online users are tracked**
 
 The **original code** is collapsed by default (_click to expand_), while **updated code** is always visible.
 
+<!-- Move Copy Button ABOVE Show Original Code -->
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+</div>
+
 <details>
     <summary>🔽 Show Original Code...</summary>
     <pre><code class="original-code">
@@ -232,28 +237,24 @@ namespace ChatApp.Hubs
     </code></pre>
 </details>
 
-<div class="code-block">
-    <button class="copy-button">📋 Copy</button>
-    <pre><code class="updated-code">
-        /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
+<pre><code class="updated-code">
+    /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
 
-        <mark>public override async Task OnConnectedAsync()
+    <mark>public override async Task OnConnectedAsync()
+    {
+        string userName = Context.User.Identity.Name;
+
+        if (!OnlineUsers.ContainsKey(Context.ConnectionId))
         {
-            string userName = Context.User.Identity.Name;
+            OnlineUsers[Context.ConnectionId] = userName;
+            await Clients.All.SendAsync("UserJoined", userName);
+            await SendOnlineUsers();
+        }
 
-            if (!OnlineUsers.ContainsKey(Context.ConnectionId))
-            {
-                OnlineUsers[Context.ConnectionId] = userName;
-                await Clients.All.SendAsync("UserJoined", userName);
-                await SendOnlineUsers();
-            }
-
-            await base.OnConnectedAsync();
-        }</mark>
-    }
+        await base.OnConnectedAsync();
+    }</mark>
 }
-    </code></pre>
-</div>
+</code></pre>
 
 ### **Key Changes**
 - **`OnConnectedAsync()`**: Adds users to `OnlineUsers` and notifies all clients.
