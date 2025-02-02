@@ -234,39 +234,38 @@ namespace ChatApp.Hubs
         </code></pre>
     </details>
 
-        <pre><code class="updated-code">
-        /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
+           <pre><code class="updated-code">
 
-        public override async Task OnConnectedAsync()
+        <mark>public override async Task OnConnectedAsync()
         {
-            <mark>string userName = Context.User.Identity.Name;
+            string userName = Context.User.Identity.Name;
 
             if (!OnlineUsers.ContainsKey(Context.ConnectionId))
             {
                 OnlineUsers[Context.ConnectionId] = userName;
                 await Clients.All.SendAsync("UserJoined", userName);
                 await SendOnlineUsers();
-            }</mark>
+            }
 
             await base.OnConnectedAsync();
-        }
+        }</mark>
 
-        public override async Task OnDisconnectedAsync(Exception exception)
+        <mark>public override async Task OnDisconnectedAsync(Exception exception)
         {
-            <mark>if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
+            if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
             {
                 await Clients.All.SendAsync("UserLeft", userName);
                 await SendOnlineUsers();
-            }</mark>
+            }
 
             await base.OnDisconnectedAsync(exception);
-        }
+        }</mark>
 
-        private async Task SendOnlineUsers()
+        <mark>private async Task SendOnlineUsers()
         {
-            <mark>var users = OnlineUsers.Values.Distinct().ToList();
-            await Clients.All.SendAsync("UpdateOnlineUsers", users);</mark>
-        }
+            var users = OnlineUsers.Values.Distinct().ToList();
+            await Clients.All.SendAsync("UpdateOnlineUsers", users);
+        }</mark>
     </code></pre>
 </div> 
 
