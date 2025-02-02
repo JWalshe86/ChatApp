@@ -3,12 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Get the closest .code-block to the clicked button
+            // Get the closest .code-block container
             let codeBlock = button.closest(".code-block");
 
-            // Select the original and updated code ONLY within the current .code-block
+            // Detect original and updated code sections (if present)
             let originalCodeBlock = codeBlock.querySelector(".original-code"); 
-            let updatedCodeBlock = codeBlock.querySelector(".updated-code"); 
+            let updatedCodeBlock = codeBlock.querySelector("pre code:not(.original-code)"); // Select any code block that isn't marked as original
 
             if (originalCodeBlock) {
                 codeText += originalCodeBlock.innerText.trim() + "\n\n"; // Add original code first
@@ -16,6 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
             
             if (updatedCodeBlock) {
                 codeText += updatedCodeBlock.innerText.trim(); // Then add updated code
+            }
+
+            // If no original code exists, just copy the single code block
+            if (!originalCodeBlock && !updatedCodeBlock) {
+                codeText = codeBlock.querySelector("pre code").innerText.trim();
             }
 
             // Remove "🔽 Show Original Code..." from copied text
