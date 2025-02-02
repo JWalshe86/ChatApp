@@ -190,6 +190,7 @@ button.copy-button:hover {
 .highlight {
     background-color: #ffeb99; /* Light yellow */
     font-weight: bold;
-    padding: 2px 4px;
+    padding: 0 4px; /* Remove vertical padding */
     border-radius: 4px;
+    display: inline; /* Ensures it only highlights text, not the entire block */
 }
