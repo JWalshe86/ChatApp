@@ -126,12 +126,32 @@ dotnet ef database update
 ---
 
 # **1. SignalR Integration**
-### **Updating `ChatHub` to Save Messages in Database**
-Previously, messages were sent via SignalR but were **not persisted**. Now, messages are saved to the database before being broadcast.
+<h2>Updating <span style="color:#d63384;">ChatHub</span> to Save Messages in Database</h2>
+
+<p>
+    Previously, messages were sent via SignalR but were <strong>not persisted</strong>. Now, messages are saved to the database before being broadcast.
+    <details>
+        <summary>🔽 Show Original Code...</summary>
+        <pre><code class="original-code">
+using ChatApp.Models;
+using Microsoft.AspNetCore.SignalR;
+
+namespace ChatApp.Hubs
+{
+    public class ChatHub : Hub
+    {   
+        public async Task SendMessage(string user, string message)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+    }
+}
+        </code></pre>
+    </details>
+</p>
 
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
-
     <pre><code class="updated-code">
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
@@ -164,31 +184,7 @@ namespace ChatApp.Hubs
     }
 }
     </code></pre>
-
-    <details>
-        <summary>🔽 Show Original Code...</summary>
-        <pre><code class="original-code">
-using ChatApp.Models;
-using Microsoft.AspNetCore.SignalR;
-
-namespace ChatApp.Hubs
-{
-    public class ChatHub : Hub
-    {   
-        public async Task SendMessage(string user, string message)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
-    }
-}
-        </code></pre>
-    </details>
 </div>
-
-
-### **Key Changes**
-- `SendMessage()` now **saves messages to the database** before broadcasting them.
-- **Entity Framework** manages message persistence.
 
 ---
 
