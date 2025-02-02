@@ -197,10 +197,11 @@ button.copy-button:hover {
 mark {
     background-color: #fff5cc; /* Softer yellow */
     font-weight: bold;
-    padding: 1px 6px; /* Slight padding for readability */
-    border-radius: 4px; /* Smooth rounded corners */
-    display: inline-block; /* Ensures proper wrapping */
-    white-space: pre-wrap; /* Prevents text overflow */
-    word-break: break-word; /* Wraps long lines nicely */
-    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    padding: 4px 8px; /* Slightly more padding for a cleaner block */
+    border-radius: 6px; /* Smooth rounded corners */
+    display: block; /* Ensures it wraps full function blocks properly */
+    white-space: pre-wrap; /* Maintains proper formatting */
+    word-break: break-word; /* Prevents overflow */
+    margin-bottom: 6px; /* Adds slight spacing between blocks */
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
