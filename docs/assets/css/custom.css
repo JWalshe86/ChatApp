@@ -193,14 +193,7 @@ button.copy-button {
 button.copy-button:hover {
     background: #0056b3;
 }
-.highlight {
-    background-color: #e9f5ff; /* Light blue */
-    padding: 8px 12px;
-    border-radius: 6px;
-    white-space: pre-wrap;
-    margin-bottom: 8px;
-    display: inline; /* Ensures it only highlights text, not the entire block */
-}
+
 mark {
     background-color: #adc2df; 
     font-weight: normal; /* Regular weight for better contrast */
