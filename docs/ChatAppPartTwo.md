@@ -41,7 +41,7 @@ Previously, messages were sent via SignalR but were **not persisted**. Now, mess
         <span class="code-filename">ChatHub.cs</span>
         <button class="copy-button" aria-label="Copy code">📋 Copy</button>
     </div>
-    <pre><code class="updated-code">using ChatApp.Models;
+    <pre class="updated-code"><code>using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChatApp.Hubs
@@ -72,6 +72,7 @@ namespace ChatApp.Hubs
     }
 }</code></pre>
 </div>
+
 
 ---
 
