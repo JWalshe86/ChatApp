@@ -236,6 +236,8 @@ namespace ChatApp.Hubs
 
     <pre><code class="updated-code">
    
+        /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
+
         <mark>public override async Task OnConnectedAsync()
         {
             string userName = Context.User.Identity.Name;
@@ -249,9 +251,28 @@ namespace ChatApp.Hubs
 
             await base.OnConnectedAsync();
         }</mark>
+
+        <mark>public override async Task OnDisconnectedAsync(Exception exception)
+        {
+            if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
+            {
+                await Clients.All.SendAsync("UserLeft", userName);
+                await SendOnlineUsers();
+            }
+
+            await base.OnDisconnectedAsync(exception);
+        }</mark>
+
+        <mark>private async Task SendOnlineUsers()
+        {
+            var users = OnlineUsers.Values.Distinct().ToList();
+            await Clients.All.SendAsync("UpdateOnlineUsers", users);
+        }</mark>
+
     }
     </code></pre>
-</div> <!-- ✅ Closing .code-block now includes everything -->
+</div> 
+
 
 
 ### **Key Changes**
