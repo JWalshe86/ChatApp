@@ -195,8 +195,11 @@ button.copy-button:hover {
     display: inline; /* Ensures it only highlights text, not the entire block */
 }
 mark {
-    background-color: #ffeb99; /* Light yellow */
+    background-color: #ffecb3; /* Softer yellow */
     font-weight: bold;
-    padding: 0 2px; /* Prevents extra spacing */
-    border-radius: 4px;
+    padding: 2px 4px; /* Tighter padding to prevent block effect */
+    border-radius: 3px;
+    display: inline; /* Ensures inline highlighting without breaking layout */
+    white-space: nowrap; /* Prevents weird wrapping issues */
 }
+
