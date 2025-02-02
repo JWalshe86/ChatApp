@@ -220,7 +220,7 @@ namespace ChatApp.Hubs
 
         public async Task SendMessage(string user, string message)
         {
-            var newMessage = new Message
+            var newMessage = a new Message
             {
                 User = user,
                 Content = message,
@@ -255,6 +255,7 @@ namespace ChatApp.Hubs
     }
     </code></pre>
 </div> <!-- Closing .code-block -->
+
 
 
 ### **Key Changes**
