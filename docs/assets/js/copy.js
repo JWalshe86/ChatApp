@@ -14,60 +14,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Handle Copy Button Clicks
-    document.querySelectorAll(".code-block .copy-button").forEach(button => {
+    // Handle GitHub-Style Copy Button Clicks
+    document.querySelectorAll(".copy-button").forEach(button => {
         button.addEventListener("click", function () {
-            let codeText = "";
-
-            // Get the closest .code-block container
-            let codeBlock = button.closest(".code-block");
-
-            // Find the original and updated code (if they exist)
-            let originalCodeBlock = codeBlock.querySelector("details .original-code");
-            let updatedCodeBlock = codeBlock.querySelector(".updated-code");
-
-            // Ensure details tag is open while copying
-            let details = codeBlock.querySelector("details");
-            let wasClosed = false;
-
-            if (details && !details.open) {
-                details.open = true; // Temporarily expand details
-                wasClosed = true;
-            }
-
-            if (originalCodeBlock) {
-                codeText += originalCodeBlock.innerText.trim() + "\n\n"; // Add original code first
-            }
-
-            if (updatedCodeBlock) {
-                codeText += updatedCodeBlock.innerText.trim(); // Then add updated code
-            }
-
-            // If there's no original or updated code, copy the only available code block
-            if (!originalCodeBlock && !updatedCodeBlock) {
-                let singleCodeBlock = codeBlock.querySelector("pre code");
-                if (singleCodeBlock) {
-                    codeText = singleCodeBlock.innerText.trim();
-                }
-            }
-
-            // Restore details tag state if it was closed before
-            if (details && wasClosed) {
-                details.open = false;
-            }
-
-            // Remove "🔽 Show Original Code..." from copied text
-            codeText = codeText.replace(/🔽 Show Original Code...\n?/g, "").trim();
-
-            // Fix for C# Generics: Convert "<T>" into safe characters before copying
-            codeText = codeText.replace(/<([^>]+)>/g, "<$1>"); // Ensures angle brackets are not removed
+            let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("code");
+            let codeText = codeBlock.innerText.trim();
 
             // Copy text to clipboard
             navigator.clipboard.writeText(codeText).then(() => {
-                button.innerText = "✅ Copied!";
+                button.innerHTML = `<svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
+                    <path fill-rule="evenodd"
+                        d="M13 3H7c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7 4h6c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V5c0-.6.4-1 1-1z"></path>
+                </svg>`; // Show "Copied" icon
+
                 setTimeout(() => {
-                    button.innerText = "📋 Copy";
-                }, 1500); // Reset button text after 1.5 seconds
+                    button.innerHTML = `<svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
+                        <path fill-rule="evenodd"
+                            d="M0 1.75A1.75 1.75 0 011.75 0h6.5A1.75 1.75 0 0110 1.75v1.5h3.25A1.75 1.75 0 0115 5v9.25A1.75 1.75 0 0113.25 16h-9.5A1.75 1.75 0 012 14.25V5a1.75 1.75 0 011.75-1.75H8v-1.5H1.75a.25.25 0 00-.25.25v13.5a.25.25 0 00.25.25h11.5a.25.25 0 00.25-.25V5a.25.25 0 00-.25-.25H10v8.75A1.75 1.75 0 018.25 15h-6.5A1.75 1.75 0 010 13.25V1.75z"></path>
+                    </svg>`; // Restore original copy icon
+                }, 1500);
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
