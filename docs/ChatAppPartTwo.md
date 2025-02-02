@@ -160,19 +160,16 @@ namespace ChatApp.Hubs
 {
     public class ChatHub : Hub
     {   
-        <span class="highlight">
-        private readonly AppDbContext _context;
+        <mark>private readonly AppDbContext _context;</mark>
 
-        public ChatHub(AppDbContext context)
+        <mark>public ChatHub(AppDbContext context)
         {
             _context = context;
-        }
-        </span>
+        }</mark>
 
         public async Task SendMessage(string user, string message)
         {
-            <span class="highlight">
-            var newMessage = new Message
+            <mark>var newMessage = new Message
             {
                 User = user,
                 Content = message,
@@ -180,14 +177,13 @@ namespace ChatApp.Hubs
             };
 
             _context.Messages.Add(newMessage);
-            await _context.SaveChangesAsync();
-            </span>
+            await _context.SaveChangesAsync();</mark>
 
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
     }
 }
-    </code></pre>
+</code></pre>
 </div>
 
 ---
