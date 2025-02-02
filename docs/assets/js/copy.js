@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Find the closest section containing both original & updated code
-            let container = button.closest("section, div"); 
+            // Get the closest parent container that holds both the original & updated code
+            let container = button.closest(".code-block").parentElement; 
             let originalCodeBlock = container.querySelector(".original-code"); 
             let updatedCodeBlock = container.querySelector(".updated-code"); 
 
