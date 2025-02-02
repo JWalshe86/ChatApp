@@ -193,8 +193,6 @@ Previously, the chat only handled messages, but now **online users are tracked**
 
 ### ChatHub.cs - Code Update
 
-The **original code** is collapsed by default (_click to expand_), while **updated code** is always visible.
-
 <!-- ✅ Now wrapping BOTH original and updated code in .code-block -->
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
