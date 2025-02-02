@@ -197,9 +197,9 @@ button.copy-button:hover {
 mark {
     background-color: #ffecb3; /* Softer yellow */
     font-weight: bold;
-    padding: 2px 4px; /* Tighter padding to prevent block effect */
+    padding: 2px 4px; /* Tight padding */
     border-radius: 3px;
-    display: inline; /* Ensures inline highlighting without breaking layout */
-    white-space: nowrap; /* Prevents weird wrapping issues */
+    display: inline-block; /* Ensures proper width */
+    white-space: pre-wrap; /* Prevents overflow while maintaining indentation */
+    word-break: break-word; /* Ensures long lines wrap */
 }
-
