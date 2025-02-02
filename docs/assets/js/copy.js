@@ -5,22 +5,23 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Select both original and updated code blocks inside the same container
-            let allCodeBlocks = block.closest("div").querySelectorAll("pre code, pre .original-code");
+            // Find the nearest parent container and select both original & updated code
+            let container = block.closest("div"); 
+            let originalCodeBlock = container.querySelector(".original-code"); 
+            let updatedCodeBlock = container.querySelector(".updated-code");
 
-            if (allCodeBlocks.length > 0) {
-                allCodeBlocks.forEach(codeBlock => {
-                    codeText += codeBlock.innerText + "\n"; // Use innerText instead of textContent
-                });
-
-                // Remove "🔽 Show Original Code..." from copied text
-                codeText = codeText.replace(/🔽 Show Original Code...\n?/g, "").trim();
-            } else {
-                // If no original code is found, just copy the updated block
-                codeText = block.querySelector("pre code").innerText.trim();
+            if (originalCodeBlock) {
+                codeText += originalCodeBlock.innerText + "\n\n"; // Add original code first
+            }
+            
+            if (updatedCodeBlock) {
+                codeText += updatedCodeBlock.innerText; // Then add updated code
             }
 
-            // Fix C# Generics: Convert "<T>" into safe characters before copying
+            // Remove any "Show Original Code..." text from the copied output
+            codeText = codeText.replace(/🔽 Show Original Code...\n?/g, "").trim();
+
+            // Fix for C# Generics: Convert "<T>" into safe characters before copying
             codeText = codeText.replace(/<([^>]+)>/g, "<$1>"); // Ensures angle brackets are not removed
 
             // Copy text to clipboard
