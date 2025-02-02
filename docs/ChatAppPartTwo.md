@@ -347,51 +347,61 @@ namespace ChatApp.Hubs
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
     <pre><code class="updated-code">
-<script>
+&lt;script&gt;
     const connection = new signalR.HubConnectionBuilder()
-        .withUrl("/chatHub")
+        .withUrl(&quot;/chatHub&quot;)
         .build();
 
     // Handle receiving messages
-    connection.on("ReceiveMessage", function (user, message) {
+    connection.on(&quot;ReceiveMessage&quot;, function (user, message) {
         const msg = `${user}: ${message}`;
-        const li = document.createElement("li");
+        const li = document.createElement(&quot;li&quot;);
         li.textContent = msg;
-        document.getElementById("messagesList").appendChild(li);
+        document.getElementById(&quot;messagesList&quot;).appendChild(li);
     });
 
-    <mark>// Handle user joining the chat</mark>
-    <mark>connection.on("UserJoined", function (user) {
-        const li = document.createElement("li");
+    &lt;mark&gt;// Handle user joining the chat&lt;/mark&gt;
+    &lt;mark&gt;connection.on(&quot;UserJoined&quot;, function (user) {
+        const li = document.createElement(&quot;li&quot;);
         li.textContent = `${user} has joined the chat.`;
-        document.getElementById("messagesList").appendChild(li);
-    });</mark>
+        document.getElementById(&quot;messagesList&quot;).appendChild(li);
+    });&lt;/mark&gt;
 
-    <mark>// Handle user leaving the chat</mark>
-    <mark>connection.on("UserLeft", function (user) {
-        const li = document.createElement("li");
+    &lt;mark&gt;// Handle user leaving the chat&lt;/mark&gt;
+    &lt;mark&gt;connection.on(&quot;UserLeft&quot;, function (user) {
+        const li = document.createElement(&quot;li&quot;);
         li.textContent = `${user} has left the chat.`;
-        document.getElementById("messagesList").appendChild(li);
-    });</mark>
+        document.getElementById(&quot;messagesList&quot;).appendChild(li);
+    });&lt;/mark&gt;
 
-    <mark>// Update online users list</mark>
-    <mark>connection.on("OnlineUsers", function (users) {
-        const userList = document.getElementById("onlineUsers");
-        userList.innerHTML = ""; // Clear the list
+    &lt;mark&gt;// Update online users list&lt;/mark&gt;
+    &lt;mark&gt;connection.on(&quot;OnlineUsers&quot;, function (users) {
+        const userList = document.getElementById(&quot;onlineUsers&quot;);
+        userList.innerHTML = &quot;&quot;; // Clear the list
         users.forEach(function (user) {
-            const li = document.createElement("li");
+            const li = document.createElement(&quot;li&quot;);
             li.textContent = user;
             userList.appendChild(li);
         });
-    });</mark>
+    });&lt;/mark&gt;
 
-    <mark>// Request online users on connection start</mark>
-    <mark>connection.start().then(() => {
-        connection.invoke("GetOnlineUsers");
-    }).catch(err => console.error(err.toString()));</mark>
-</script>
+    &lt;mark&gt;// Request online users on connection start&lt;/mark&gt;
+    &lt;mark&gt;connection.start().then(() =&gt; {
+        connection.invoke(&quot;GetOnlineUsers&quot;);
+    }).catch(err =&gt; console.error(err.toString()));&lt;/mark&gt;
+&lt;/script&gt;
     </code></pre>
 </div>
+
+<!-- Razor Page Update Section -->
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+    <pre><code class="updated-code">
+&lt;mark&gt;&lt;h3&gt;Online Users&lt;/h3&gt;&lt;/mark&gt;
+&lt;mark&gt;&lt;ul id=&quot;onlineUsers&quot;&gt;&lt;/ul&gt;&lt;/mark&gt;
+    </code></pre>
+</div>
+
 
 <!-- Razor Page Update Section -->
 <div class="code-block">
