@@ -237,8 +237,7 @@ namespace ChatApp.Hubs
     </details>
 
     <pre><code class="updated-code">
-        /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
-
+   
         <mark>public override async Task OnConnectedAsync()
         {
             string userName = Context.User.Identity.Name;
