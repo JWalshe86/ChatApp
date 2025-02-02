@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".code-block").forEach(block => {
-        let button = block.querySelector(".copy-button");
-
+    document.querySelectorAll(".code-block .copy-button").forEach(button => {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Find the closest parent section containing both original and updated code
-            let container = block.closest("section, div"); 
+            // Find the closest section containing both original & updated code
+            let container = button.closest("section, div"); 
             let originalCodeBlock = container.querySelector(".original-code"); 
-            let updatedCodeBlock = block.querySelector(".updated-code"); 
+            let updatedCodeBlock = container.querySelector(".updated-code"); 
 
             if (originalCodeBlock) {
                 codeText += originalCodeBlock.innerText.trim() + "\n\n"; // Add original code first
