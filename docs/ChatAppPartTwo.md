@@ -360,35 +360,43 @@ namespace ChatApp.Hubs
         document.getElementById(&quot;messagesList&quot;).appendChild(li);
     });
 
-    <span class="highlight">// Handle user joining the chat</span>
-    <span class="highlight">connection.on(&quot;UserJoined&quot;, function (user) {
-        const li = document.createElement(&quot;li&quot;);
-        li.textContent = `${user} has joined the chat.`;
-        document.getElementById(&quot;messagesList&quot;).appendChild(li);
-    });</span>
+    <mark>
+// Handle user joining the chat
+connection.on("UserJoined", function (user) {
+    const li = document.createElement("li");
+    li.textContent = `${user} has joined the chat.`;
+    document.getElementById("messagesList").appendChild(li);
+});
+</mark>
 
-    <span class="highlight">// Handle user leaving the chat</span>
-    <span class="highlight">connection.on(&quot;UserLeft&quot;, function (user) {
-        const li = document.createElement(&quot;li&quot;);
-        li.textContent = `${user} has left the chat.`;
-        document.getElementById(&quot;messagesList&quot;).appendChild(li);
-    });</span>
+    <mark>
+// Handle user leaving the chat
+connection.on("UserLeft", function (user) {
+    const li = document.createElement("li");
+    li.textContent = `${user} has left the chat.`;
+    document.getElementById("messagesList").appendChild(li);
+});
+</mark>
 
-    <span class="highlight">// Update online users list</span>
-    <span class="highlight">connection.on(&quot;OnlineUsers&quot;, function (users) {
-        const userList = document.getElementById(&quot;onlineUsers&quot;);
-        userList.innerHTML = &quot;&quot;; // Clear the list
-        users.forEach(function (user) {
-            const li = document.createElement(&quot;li&quot;);
-            li.textContent = user;
-            userList.appendChild(li);
-        });
-    });</span>
+    <mark>
+// Update online users list
+connection.on("OnlineUsers", function (users) {
+    const userList = document.getElementById("onlineUsers");
+    userList.innerHTML = ""; // Clear the list
+    users.forEach(function (user) {
+        const li = document.createElement("li");
+        li.textContent = user;
+        userList.appendChild(li);
+    });
+});
+</mark>
 
-    <span class="highlight">// Request online users on connection start</span>
-    <span class="highlight">connection.start().then(() =&gt; {
-        connection.invoke(&quot;GetOnlineUsers&quot;);
-    }).catch(err =&gt; console.error(err.toString()));</span>
+    <mark>
+// Request online users on connection start
+connection.start().then(() => {
+    connection.invoke("GetOnlineUsers");
+}).catch(err => console.error(err.toString()));
+</mark>
 &lt;/script&gt;
     </code></pre>
 </div>
@@ -401,8 +409,6 @@ namespace ChatApp.Hubs
 <mark><ul id="onlineUsers"></ul></mark>
     </code></pre>
 </div>
-
-
 
 ---
 
