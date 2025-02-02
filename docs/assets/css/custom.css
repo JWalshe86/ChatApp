@@ -139,18 +139,24 @@ ul li {
 /* =============================
    Code Blocks
    ============================= */
+/* General Code Block Styling */
 pre {
-    background-color: #e8f0fb;
-    padding: 10px;
+    background-color: #f8f9fa; /* Light gray background */
     border-radius: 6px;
+    padding: 12px;
     overflow-x: auto;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    border: 1px solid #ddd;
     position: relative;
 }
 
+/* Ensuring JavaScript & Razor Code Uses the Same Background */
 pre code {
-    color: #212529;
-    font-size: 0.95rem;
-    font-family: 'Source Code Pro', monospace;
+    background-color: inherit; /* Match parent pre */
+    display: block;
+    padding: 0;
+    border: none;
 }
 
 pre span.original-code {
@@ -188,10 +194,11 @@ button.copy-button:hover {
     background: #0056b3;
 }
 .highlight {
-    background-color: #ffeb99; /* Light yellow */
-    font-weight: bold;
-    padding: 0 4px; /* Remove vertical padding */
-    border-radius: 4px;
+    background-color: #e9f5ff; /* Light blue */
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: pre-wrap;
+    margin-bottom: 8px;
     display: inline; /* Ensures it only highlights text, not the entire block */
 }
 mark {
