@@ -405,8 +405,8 @@ connection.start().then(() => {
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
     <pre><code class="updated-code">
-<mark><h3>Online Users</h3></mark>
-<mark><ul id="onlineUsers"></ul></mark>
+<mark>&lt;h3&gt;Online Users&lt;/h3&gt;</mark>
+<mark>&lt;ul id="onlineUsers"&gt;&lt;/ul&gt;</mark>
     </code></pre>
 </div>
 
