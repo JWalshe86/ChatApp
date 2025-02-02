@@ -3,13 +3,16 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeText = "";
 
-            // Get the closest parent container that holds both the original & updated code
-            let container = button.closest(".code-block").parentElement; 
-            let originalCodeBlock = container.querySelector(".original-code"); 
-            let updatedCodeBlock = container.querySelector(".updated-code"); 
+            // Find the closest .code-block container that holds the button
+            let codeBlock = button.closest(".code-block");
 
-            if (originalCodeBlock) {
-                codeText += originalCodeBlock.innerText.trim() + "\n\n"; // Add original code first
+            // Find the closest parent section that holds both original & updated code
+            let container = codeBlock.closest("section, div"); 
+            let originalCodeBlock = container.querySelector(".original-code"); 
+            let updatedCodeBlock = codeBlock.querySelector("pre code"); // Now correctly finds updated code in its block
+
+            if (originalCodeBlock && codeBlock.contains(originalCodeBlock)) {
+                codeText += originalCodeBlock.innerText.trim() + "\n\n"; // Add original code first if in the same section
             }
             
             if (updatedCodeBlock) {
