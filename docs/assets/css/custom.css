@@ -196,3 +196,16 @@ mark:hover {
 .updated-code {
     padding-top: 6px;
 }
+/* Style for Original Code Drop-Down */
+details {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    background: #fafbfc;
+}
+
+details summary {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 6px;
+}
