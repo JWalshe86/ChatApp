@@ -48,7 +48,8 @@ h2#real-time-messaging-with-signalr {
 }
 
 /* Underline Animation */
-h1#chatapp-part-2::after, h2#real-time-messaging-with-signalr::after {
+h1#chatapp-part-2::after, 
+h2#real-time-messaging-with-signalr::after {
     content: "";
     display: block;
     width: 60%;
@@ -137,11 +138,12 @@ ul li {
 }
 
 /* =============================
-   Code Blocks
+   GitHub-Style Code Blocks
    ============================= */
+
 /* General Code Block Styling */
 pre {
-    background-color: #f8f9fa; /* Light gray background */
+    background-color: #f6f8fa; /* GitHub-style light gray background */
     border-radius: 6px;
     padding: 12px;
     overflow-x: auto;
@@ -159,14 +161,50 @@ pre code {
     border: none;
 }
 
-pre span.original-code {
-    color: #888 !important;
+/* GitHub-like Diff Styling for Code Updates */
+pre .original-code {
+    color: #6a737d !important;
     font-style: italic;
 }
 
-pre span.updated-code {
-    color: #222 !important;
+pre .updated-code {
+    color: #24292e !important;
     font-weight: bold;
+}
+
+/* GitHub-Style Code Blocks */
+.code-block {
+    background: #f6f8fa; /* Matches GitHub */
+    border-radius: 8px;
+    padding: 12px;
+    position: relative;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* GitHub-Like Diff Marking */
+mark {
+    background-color: #e6ffed; /* Light green like GitHub */
+    font-weight: normal;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border-left: 4px solid #28a745; /* GitHub green for new additions */
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 8px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
+}
+
+/* Highlight Hover Effect */
+mark:hover {
+    background-color: #d4f5d6;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Ensuring Updated Code Blocks Stand Out */
+.updated-code {
+    padding-top: 6px;
 }
 
 /* =============================
@@ -193,25 +231,3 @@ button.copy-button {
 button.copy-button:hover {
     background: #0056b3;
 }
-
-mark {
-    background-color: #adc2df; 
-    font-weight: normal; /* Regular weight for better contrast */
-    padding: 6px 12px; /* A bit more padding for a cleaner feel */
-    border-radius: 8px; /* Smooth rounded edges */
-    border: 1px solid rgba(0, 0, 0, 0.1); /* Light border for contrast */
-    display: block; /* Ensures full function wrapping */
-    white-space: pre-wrap; /* Maintains code formatting */
-    word-break: break-word; /* Prevents long lines from overflowing */
-    margin-bottom: 8px; /* Adds spacing between function blocks */
-    margin-top: 10px; /* Creates a clearer separation */
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
-}
-mark:hover {
-    background-color: #fff2b3; /* Slightly brighter yellow on hover */
-    transition: background-color 0.2s ease-in-out;
-}
-.updated-code {
-    padding-top: 6px; /* Small extra spacing for balance */
-}
-
