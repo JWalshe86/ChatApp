@@ -7,20 +7,29 @@ document.addEventListener("DOMContentLoaded", function () {
             let codeBlock = button.closest(".code-block");
 
             // Find the original and updated code
-            let originalCodeBlock = codeBlock.querySelector("details .original-code"); 
+            let originalCodeBlock = codeBlock.querySelector("details .original-code");
             let updatedCodeBlock = codeBlock.querySelector(".updated-code");
+
+            // Ensure details tag is open while copying
+            let details = codeBlock.querySelector("details");
+            let wasClosed = false;
+
+            if (details && !details.open) {
+                details.open = true;  // Temporarily expand details
+                wasClosed = true;
+            }
 
             if (originalCodeBlock) {
                 codeText += originalCodeBlock.innerText.trim() + "\n\n"; // Add original code first
             }
-            
+
             if (updatedCodeBlock) {
                 codeText += updatedCodeBlock.innerText.trim(); // Then add updated code
             }
 
-            // If no original code exists, just copy the updated code
-            if (!originalCodeBlock && !updatedCodeBlock) {
-                codeText = codeBlock.querySelector("pre code").innerText.trim();
+            // Restore details tag state if it was closed before
+            if (details && wasClosed) {
+                details.open = false;
             }
 
             // Remove "🔽 Show Original Code..." from copied text
