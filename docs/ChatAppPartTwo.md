@@ -234,10 +234,12 @@ namespace ChatApp.Hubs
         </code></pre>
     </details>
 
-               <pre><code class="updated-code">
+    <pre><code class="updated-code">
+        /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
 
-        <mark>public override async Task OnConnectedAsync()</mark>
-        <mark>{
+        <mark>
+        public override async Task OnConnectedAsync()
+        {
             string userName = Context.User.Identity.Name;
 
             if (!OnlineUsers.ContainsKey(Context.ConnectionId))
@@ -248,10 +250,12 @@ namespace ChatApp.Hubs
             }
 
             await base.OnConnectedAsync();
-        }</mark>
+        }
+        </mark>
 
-        <mark>public override async Task OnDisconnectedAsync(Exception exception)</mark>
-        <mark>{
+        <mark>
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
             if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
             {
                 await Clients.All.SendAsync("UserLeft", userName);
@@ -259,14 +263,18 @@ namespace ChatApp.Hubs
             }
 
             await base.OnDisconnectedAsync(exception);
-        }</mark>
+        }
+        </mark>
 
-        <mark>private async Task SendOnlineUsers()</mark>
-        <mark>{
+        <mark>
+        private async Task SendOnlineUsers()
+        {
             var users = OnlineUsers.Values.Distinct().ToList();
             await Clients.All.SendAsync("UpdateOnlineUsers", users);
-        }</mark>
+        }
+        </mark>
     </code></pre>
+
 </div> 
 
 
