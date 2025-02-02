@@ -401,18 +401,6 @@ namespace ChatApp.Hubs
 
     <!-- Updated Code (Always Visible & Highlighted) -->
     <pre><code class="updated-code">
-&lt;script&gt;
-    const connection = new signalR.HubConnectionBuilder()
-        .withUrl(&quot;/chatHub&quot;)
-        .build();
-
-    // Handle receiving messages
-    connection.on(&quot;ReceiveMessage&quot;, function (user, message) {
-        const msg = `${user}: ${message}`;
-        const li = document.createElement(&quot;li&quot;);
-        li.textContent = msg;
-        document.getElementById(&quot;messagesList&quot;).appendChild(li);
-    });
 
     <mark>
 // Handle user joining the chat
