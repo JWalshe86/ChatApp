@@ -162,7 +162,7 @@ pre.updated-code {
 }
 
 /* ✅ Individual Line Highlighting */
-.updated-code mark {
+code.updated-code mark {
     background-color: #e6ffed !important;
     display: block;
     padding: 4px 8px;
