@@ -343,7 +343,6 @@ namespace ChatApp.Hubs
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 ---
-
 <!-- JavaScript Update Section -->
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
@@ -402,6 +401,7 @@ namespace ChatApp.Hubs
 <mark><ul id="onlineUsers"></ul></mark>
     </code></pre>
 </div>
+
 
 
 ---
