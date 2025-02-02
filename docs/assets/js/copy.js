@@ -1,4 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Handle "Show Original Code" toggle
+    document.querySelectorAll("details").forEach(detail => {
+        const summary = detail.querySelector("summary");
+
+        summary.addEventListener("click", function () {
+            setTimeout(() => {
+                if (detail.open) {
+                    summary.innerHTML = "🔼 Original Code...";
+                } else {
+                    summary.innerHTML = "🔽 Show Original Code...";
+                }
+            }, 100); // Ensures toggle state is applied before changing text
+        });
+    });
+
+    // Handle Copy Button Clicks
     document.querySelectorAll(".code-block .copy-button").forEach(button => {
         button.addEventListener("click", function () {
             let codeText = "";
