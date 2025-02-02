@@ -195,7 +195,6 @@ Previously, the chat only handled messages, but now **online users are tracked**
 
 The **original code** is collapsed by default (_click to expand_), while **updated code** is always visible.
 
-<!-- Move "Show Original Code" to the top -->
 <details>
     <summary>🔽 Show Original Code...</summary>
     <pre><code class="original-code">
@@ -235,9 +234,10 @@ namespace ChatApp.Hubs
 
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
-    <pre><code>
-        
-        <mark>public override async Task OnConnectedAsync()</mark>
+    <pre><code class="updated-code">
+        /* ⬇️ UPDATED CODE STARTS HERE ⬇️ */
+
+        <mark>public override async Task OnConnectedAsync()
         {
             string userName = Context.User.Identity.Name;
 
@@ -249,7 +249,7 @@ namespace ChatApp.Hubs
             }
 
             await base.OnConnectedAsync();
-        }
+        }</mark>
     }
 }
     </code></pre>
