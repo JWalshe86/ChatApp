@@ -187,3 +187,9 @@ button.copy-button {
 button.copy-button:hover {
     background: #0056b3;
 }
+.highlight {
+    background-color: #ffeb99; /* Light yellow */
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
