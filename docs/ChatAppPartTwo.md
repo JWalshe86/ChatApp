@@ -195,7 +195,7 @@ Previously, the chat only handled messages, but now **online users are tracked**
 
 The **original code** is collapsed by default (_click to expand_), while **updated code** is always visible.
 
-<!-- Move Copy Button ABOVE Show Original Code -->
+<!-- ✅ Now wrapping BOTH original and updated code in .code-block -->
 <div class="code-block">
     <button class="copy-button">📋 Copy</button>
 
@@ -220,7 +220,7 @@ namespace ChatApp.Hubs
 
         public async Task SendMessage(string user, string message)
         {
-            var newMessage = a new Message
+            var newMessage = new Message
             {
                 User = user,
                 Content = message,
@@ -254,8 +254,7 @@ namespace ChatApp.Hubs
         }</mark>
     }
     </code></pre>
-</div> <!-- Closing .code-block -->
-
+</div> <!-- ✅ Closing .code-block now includes everything -->
 
 
 ### **Key Changes**
