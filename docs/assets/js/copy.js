@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Get the closest .code-block container
             let codeBlock = button.closest(".code-block");
 
-            // Find the original and updated code
+            // Find the original and updated code (if they exist)
             let originalCodeBlock = codeBlock.querySelector("details .original-code");
             let updatedCodeBlock = codeBlock.querySelector(".updated-code");
 
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let wasClosed = false;
 
             if (details && !details.open) {
-                details.open = true;  // Temporarily expand details
+                details.open = true; // Temporarily expand details
                 wasClosed = true;
             }
 
@@ -25,6 +25,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (updatedCodeBlock) {
                 codeText += updatedCodeBlock.innerText.trim(); // Then add updated code
+            }
+
+            // If there's no original or updated code, copy the only available code block
+            if (!originalCodeBlock && !updatedCodeBlock) {
+                let singleCodeBlock = codeBlock.querySelector("pre code");
+                if (singleCodeBlock) {
+                    codeText = singleCodeBlock.innerText.trim();
+                }
             }
 
             // Restore details tag state if it was closed before
