@@ -344,8 +344,10 @@ namespace ChatApp.Hubs
 
 ---
 
-### **Updated JavaScript for Online Users & Notifications**
-```js
+<!-- JavaScript Update Section -->
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+    <pre><code class="updated-code">
 <script>
     const connection = new signalR.HubConnectionBuilder()
         .withUrl("/chatHub")
@@ -359,22 +361,22 @@ namespace ChatApp.Hubs
         document.getElementById("messagesList").appendChild(li);
     });
 
-    // Handle user joining the chat
-    connection.on("UserJoined", function (user) {
+    <mark>// Handle user joining the chat</mark>
+    <mark>connection.on("UserJoined", function (user) {
         const li = document.createElement("li");
         li.textContent = `${user} has joined the chat.`;
         document.getElementById("messagesList").appendChild(li);
-    });
+    });</mark>
 
-    // Handle user leaving the chat
-    connection.on("UserLeft", function (user) {
+    <mark>// Handle user leaving the chat</mark>
+    <mark>connection.on("UserLeft", function (user) {
         const li = document.createElement("li");
         li.textContent = `${user} has left the chat.`;
         document.getElementById("messagesList").appendChild(li);
-    });
+    });</mark>
 
-    // Update online users list
-    connection.on("OnlineUsers", function (users) {
+    <mark>// Update online users list</mark>
+    <mark>connection.on("OnlineUsers", function (users) {
         const userList = document.getElementById("onlineUsers");
         userList.innerHTML = ""; // Clear the list
         users.forEach(function (user) {
@@ -382,25 +384,25 @@ namespace ChatApp.Hubs
             li.textContent = user;
             userList.appendChild(li);
         });
-    });
+    });</mark>
 
-    // Request online users on connection start
-    connection.start().then(() => {
+    <mark>// Request online users on connection start</mark>
+    <mark>connection.start().then(() => {
         connection.invoke("GetOnlineUsers");
-    }).catch(err => console.error(err.toString()));
+    }).catch(err => console.error(err.toString()));</mark>
 </script>
-```
+    </code></pre>
+</div>
 
-### **Updated Razor Page to Display Online Users**
-```razor
-<h3>Online Users</h3>
-<ul id="onlineUsers"></ul>
-```
+<!-- Razor Page Update Section -->
+<div class="code-block">
+    <button class="copy-button">📋 Copy</button>
+    <pre><code class="updated-code">
+<mark><h3>Online Users</h3></mark>
+<mark><ul id="onlineUsers"></ul></mark>
+    </code></pre>
+</div>
 
-### **What This Adds**
-✅ Users **appear in the online list** when they join.  
-✅ Users **disappear when they leave**.  
-✅ Users **see notifications when others join or leave**.
 
 ---
 
