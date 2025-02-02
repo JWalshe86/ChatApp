@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
             // Get the closest .code-block container
             let codeBlock = button.closest(".code-block");
 
-            // Detect original and updated code sections (if present)
-            let originalCodeBlock = codeBlock.querySelector(".original-code"); 
-            let updatedCodeBlock = codeBlock.querySelector("pre code:not(.original-code)"); // Select any code block that isn't marked as original
+            // Find the original and updated code
+            let originalCodeBlock = codeBlock.querySelector("details .original-code"); 
+            let updatedCodeBlock = codeBlock.querySelector(".updated-code");
 
             if (originalCodeBlock) {
                 codeText += originalCodeBlock.innerText.trim() + "\n\n"; // Add original code first
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 codeText += updatedCodeBlock.innerText.trim(); // Then add updated code
             }
 
-            // If no original code exists, just copy the single code block
+            // If no original code exists, just copy the updated code
             if (!originalCodeBlock && !updatedCodeBlock) {
                 codeText = codeBlock.querySelector("pre code").innerText.trim();
             }
