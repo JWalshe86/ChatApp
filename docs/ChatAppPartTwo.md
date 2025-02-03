@@ -43,7 +43,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
 
 ---
 
-  <div class="code-block">
+<div class="code-block">
     <div class="code-header">
         <span class="code-filename">ChatHub.cs</span>
         <button class="expand-button" aria-label="Expand all lines">
@@ -60,6 +60,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
 
     <div class="code-container">
+        <!-- Default Updated Code (Always Visible) -->
         <pre class="updated-code"><code class="language-csharp">
         {% highlight csharp %}
 using ChatApp.Models;
@@ -94,8 +95,22 @@ namespace ChatApp.Hubs
 }
         {% endhighlight %}
         </code></pre>
+
+        <!-- Original Code (Hidden Until Expanded) -->
+        <pre class="unchanged-code"><code class="language-csharp">
+        {% highlight csharp %}
+public class ChatHub : Hub
+{
+    public async Task SendMessage(string user, string message)
+    {
+        await Clients.All.SendAsync("ReceiveMessage", user, message);
+    }
+}
+        {% endhighlight %}
+        </code></pre>
     </div>
 </div>
+
 
 
 ### **Tracking Online Users & Notifications**
