@@ -19,106 +19,61 @@ img {
    GitHub-Style Code Blocks
    ============================= */
 
-/* GitHub-Style Code Block */
+/* Default: Show only updated code */
+.updated-code .unchanged-code {
+    display: none;
+}
+
+/* When expanded: Show unchanged code */
+.expanded .updated-code .unchanged-code {
+    display: block;
+}
+
+/* Ensure the added-line class is visible */
+.updated-code .added-line {
+    background-color: #e6ffed;
+    border-left: 4px solid #28a745;
+    display: block;
+    padding: 2px 8px;
+    white-space: pre-wrap;
+}
+
+/* Code block styling */
 .code-block {
-    background: white;
+    background: white !important;
     border: 1px solid #d1d5da;
     border-radius: 6px;
     margin-bottom: 16px;
 }
 
-/* Code Header */
-.code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f6f8fa;
-    padding: 8px 12px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Code Container */
+/* Ensure the code container is structured properly */
 .code-container {
     font-size: 14px;
     line-height: 1.5;
     overflow: hidden;
+    max-height: 200px; /* Only a portion visible initially */
     transition: max-height 0.3s ease-in-out;
 }
 
-/* Rouge Syntax Highlighting */
-.highlight pre, .highlight code {
-    background-color: #282c34 !important;
+/* Expanded state */
+.code-block.expanded .code-container {
+    max-height: 1000px;
+    overflow: visible;
+}
+
+/* Syntax highlighting (Rouge) */
+.highlight pre {
+    background: #282c34 !important;
     color: #abb2bf !important;
     padding: 10px;
     border-radius: 6px;
-    font-family: "Courier New", Courier, monospace;
-    display: block;
     overflow-x: auto;
 }
 
-/* Updated Code Highlighting */
-.updated-code {
-    background-color: #e6ffed;
-    border-left: 4px solid #28a745;
-    padding: 5px 10px;
-    display: block !important;
-    font-family: monospace;
-    font-size: smaller;
-    white-space: pre-wrap;
-}
-
-/* Hide unchanged lines by default */
-.updated-code .unchanged-code {
-    display: none;
-}
-
-/* Show unchanged lines when expanded */
-.expanded .updated-code .unchanged-code {
-    display: block;
-}
-
-/* Plus sign for added lines */
-.updated-code span.added-line::before {
+/* Show plus signs for added lines */
+.updated-code .added-line::before {
     content: "+ ";
     color: #28a745;
     font-weight: bold;
     user-select: none;
-}
-
-/* Expand button styles */
-.expand-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    margin-left: auto;
-    font-size: 14px;
-    color: #0366d6;
-}
-/* Rouge Syntax Highlighting */
-.highlight pre, .highlight code {
-    background-color: #282c34 !important; /* Dark background */
-    color: #abb2bf !important; /* Text color */
-    padding: 10px;
-    border-radius: 6px;
-    font-family: "Courier New", Courier, monospace;
-    display: block;
-    overflow-x: auto;
-}
-
-/* Ensure Rouge Syntax Colors */
-.k { color: #c678dd; }  /* Keywords (e.g., using, class) - Purple */
-.nn { color: #e5c07b; } /* Namespace - Yellow */
-.p { color: #56b6c2; }  /* Punctuation - Cyan */
-.n { color: #abb2bf; }  /* Normal text - White */
-.s { color: #98c379; }  /* Strings - Green */
-.f { color: #61afef; }  /* Functions - Blue */
-
-/* Ensure syntax highlighting elements are displayed */
-.highlight span {
-    display: inline;
 }
