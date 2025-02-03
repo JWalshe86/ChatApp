@@ -18,6 +18,29 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
 
+    <!-- Load Prism.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+
+<!-- Hook for Adding Classes -->
+<script>
+Prism.hooks.add('wrap', function (env) {
+    let lineText = env.content.trim(); // Get the actual code line
+
+    // ✅ Detect "added" lines (assumes added lines start with '+ ')
+    if (lineText.startsWith('+ ')) {
+        env.classes.push('added-line');
+    }
+
+    // ✅ Detect "unchanged" lines (adjust conditions based on your case)
+    if (lineText === "using Microsoft.AspNetCore.SignalR;" ||
+        lineText.startsWith("public class ChatHub") ||
+        lineText.startsWith("await Clients.All.SendAsync")) {
+        env.classes.push('unchanged-code');
+    }
+});
+</script>
+
 
 </head>
 <body>
