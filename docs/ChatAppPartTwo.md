@@ -59,42 +59,41 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
 
     <div class="code-container">
+    <pre class="updated-code">
         {% highlight csharp %}
-using ChatApp.Models;
-using Microsoft.AspNetCore.SignalR;
+        using ChatApp.Models;
+        using Microsoft.AspNetCore.SignalR;
 
-namespace ChatApp.Hubs
-{
-    public class ChatHub : Hub
-    {
-        private readonly AppDbContext _context;
-
-        public ChatHub(AppDbContext context)
+        namespace ChatApp.Hubs
         {
-            _context = context;
-        }
-
-        public async Task SendMessage(string user, string message)
-        {
-            var newMessage = new Message
+            public class ChatHub : Hub
             {
-                User = user,
-                Content = message,
-                Timestamp = DateTime.UtcNow
-            };
+                private readonly AppDbContext _context;
 
-            _context.Messages.Add(newMessage);
-            await _context.SaveChangesAsync();
+                public ChatHub(AppDbContext context)
+                {
+                    _context = context;
+                }
 
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+                public async Task SendMessage(string user, string message)
+                {
+                    var newMessage = new Message
+                    {
+                        User = user,
+                        Content = message,
+                        Timestamp = DateTime.UtcNow
+                    };
+
+                    _context.Messages.Add(newMessage);
+                    await _context.SaveChangesAsync();
+
+                    await Clients.All.SendAsync("ReceiveMessage", user, message);
+                }
+            }
         }
-    }
-}
         {% endhighlight %}
-    </div>
+    </pre>
 </div>
-
-
 
 ### **Tracking Online Users & Notifications**
 Chat now displays **online users** and **notifies when users join or leave**.
