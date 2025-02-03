@@ -58,7 +58,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
     
 <div class="code-container">
-    <pre class="updated-code language-csharp" tabindex="0">
+    <pre class="updated-code language-csharp" data-manual><code class="language-csharp">
         <code class="language-csharp">
             <div class="unchanged-line">using Microsoft.AspNetCore.SignalR;</div>
             <div class="unchanged-line">public class ChatHub : Hub</div>
