@@ -26,7 +26,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         </button>
     </div> <!-- Closing code-header -->
 
-    <pre><code class="updated-code language-csharp">
+    <pre><code class="updated-code">
         <span class="added-line">namespace ChatApp.Models</span>
         <span class="added-line">{</span>
         <span class="added-line">    public class Message</span>
@@ -57,37 +57,49 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         </button>
     </div>
     
-<div class="code-container">
-    <pre class="updated-code language-csharp" data-manual><code class="language-csharp">
-        <code class="language-csharp">
-            <div class="unchanged-line">using Microsoft.AspNetCore.SignalR;</div>
-            <div class="unchanged-line">public class ChatHub : Hub</div>
-            <div class="unchanged-line">{</div>
+    <div class="code-container">
 
-            <span class="added-line">private readonly AppDbContext _context;</span>
+        <!-- Updated Code (Always Visible) -->
+<pre class="updated-code">
+<code>         
+    <span class="added-line">  using ChatApp.Models;</span>  
+  
+    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
+    public class ChatHub : Hub
+    {
+    </span>
+    
+        <span class="added-line">  namespace ChatApp.Hubs</span>  
+        <span class="added-line"> { </span>  
+        <span class="added-line">private readonly AppDbContext _context;</span>  
+        <span class="added-line">public ChatHub(AppDbContext context)</span>  
+        <span class="added-line">{</span>  
+        <span class="added-line">_context = context;</span>  
+        <span class="added-line">}</span>  
 
-            <span class="added-line">public ChatHub(AppDbContext context)</span>
-            <span class="added-line">{</span>
-            <span class="added-line">    _context = context;</span>
-            <span class="added-line">}</span>
+       <span class="unchanged-code">public async Task SendMessage(string user, string message)
+       {
+       </span>
+       
+       <span class="added-line">    var newMessage = new Message</span>
+       <span class="added-line">    {</span>
+       <span class="added-line">        User = user,</span>
+       <span class="added-line">        Content = message,</span>
+       <span class="added-line">        Timestamp = DateTime.UtcNow</span>
+       <span class="added-line">    };</span>
 
-            <div class="unchanged-line">public async Task SendMessage(string user, string message)</div>
-            <div class="unchanged-line">{</div>
+       <span class="added-line">    _context.Messages.Add(newMessage);</span>
+       <span class="added-line">    await _context.SaveChangesAsync();</span>
 
-            <span class="added-line">    var newMessage = new Message</span>
-            <span class="added-line">    {</span>
-            <span class="added-line">        User = user,</span>
-            <span class="added-line">        Content = message,</span>
-            <span class="added-line">        Timestamp = DateTime.UtcNow</span>
-            <span class="added-line">    };</span>
+       <span class="unchanged-code">        await Clients.All.SendAsync("ReceiveMessage", user, message);
+       }
+    }
+    </span>
+</code>
+</pre>
 
-            <span class="added-line">    _context.Messages.Add(newMessage);</span>
-            <span class="added-line">    await _context.SaveChangesAsync();</span>
 
-            <div class="unchanged-line">    await Clients.All.SendAsync("ReceiveMessage", user, message);</div>
-            <div class="unchanged-line">}</div>
-        </code>
-    </pre>
+    </div>
 </div>
 
 ---
@@ -135,4 +147,3 @@ private async Task SendOnlineUsers()
 ---
 
 This update ensures all code blocks have **GitHub-style headers and copy buttons** while maintaining correct formatting for **HTML entities** in Markdown. Let me know if you need any further refinements! 🚀
-
