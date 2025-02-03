@@ -4,17 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const summary = detail.querySelector("summary");
         summary.addEventListener("click", function () {
             setTimeout(() => {
-                if (detail.open) {
-                    summary.innerHTML = "🔼 Original Code...";
-                } else {
-                    summary.innerHTML = "🔽 Show Original Code...";
-                }
+                summary.innerHTML = detail.open ? "🔼 Original Code..." : "🔽 Show Original Code...";
             }, 100);
         });
     });
 
     // Handle GitHub-Style Copy Button Clicks
-   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".copy-button").forEach(button => {
         button.addEventListener("click", function () {
             let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("code");
