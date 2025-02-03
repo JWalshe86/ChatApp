@@ -60,45 +60,11 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
 
     <div class="code-container">
-        <!-- Default Updated Code (Always Visible) -->
+        <!-- Updated Code (Always Visible) -->
         <pre class="updated-code"><code class="language-csharp">
-        {% highlight csharp %}
-using ChatApp.Models;
+{% highlight csharp %}
 using Microsoft.AspNetCore.SignalR;
 
-namespace ChatApp.Hubs
-{
-    public class ChatHub : Hub
-    {
-        private readonly AppDbContext _context;
-
-        public ChatHub(AppDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task SendMessage(string user, string message)
-        {
-            var newMessage = new Message
-            {
-                User = user,
-                Content = message,
-                Timestamp = DateTime.UtcNow
-            };
-
-            _context.Messages.Add(newMessage);
-            await _context.SaveChangesAsync();
-
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
-    }
-}
-        {% endhighlight %}
-        </code></pre>
-
-        <!-- Original Code (Hidden Until Expanded) -->
-        <pre class="unchanged-code"><code class="language-csharp">
-        {% highlight csharp %}
 public class ChatHub : Hub
 {
     public async Task SendMessage(string user, string message)
@@ -106,12 +72,43 @@ public class ChatHub : Hub
         await Clients.All.SendAsync("ReceiveMessage", user, message);
     }
 }
-        {% endhighlight %}
+{% endhighlight %}
+        </code></pre>
+
+        <!-- Full Code (Expanded View) -->
+        <pre class="updated-code full-code" style="display: none;"><code class="language-csharp">
+{% highlight csharp %}
+using ChatApp.Models;
+using Microsoft.AspNetCore.SignalR;
+
+namespace ChatApp.Hubs
+{
+    private readonly AppDbContext _context;
+
+    public ChatHub(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task SendMessage(string user, string message)
+    {
+        var newMessage = new Message
+        {
+            User = user,
+            Content = message,
+            Timestamp = DateTime.UtcNow
+        };
+
+        _context.Messages.Add(newMessage);
+        await _context.SaveChangesAsync();
+
+        await Clients.All.SendAsync("ReceiveMessage", user, message);
+    }
+}
+{% endhighlight %}
         </code></pre>
     </div>
 </div>
-
-
 
 ### **Tracking Online Users & Notifications**
 Chat now displays **online users** and **notifies when users join or leave**.
