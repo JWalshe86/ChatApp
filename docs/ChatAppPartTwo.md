@@ -18,17 +18,18 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     <div class="code-header">
         <span class="code-filename">Message.cs</span>
        <button class="copy-button" aria-label="Copy code">
-<svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
-    <!-- Bottom Square -->
-    <path fill="none" stroke="#57606a" stroke-width="1.5"
+<svg aria-hidden="true" height="18" viewBox="0 0 18 18" width="18">
+    <!-- Bottom Square (Scaled Up) -->
+    <path fill="none" stroke="#57606a" stroke-width="1.5" transform="scale(1.2)"
         d="M3 3.5A.5.5 0 012.5 4v8A.5.5 0 013 12.5h7A.5.5 0 0110.5 12V4A.5.5 0 0110 3.5H3z">
     </path>
 
-    <!-- Top Square (Shifted Right & Up) -->
-    <path fill="none" stroke="#57606a" stroke-width="1.5" transform="translate(4,-4)"
+    <!-- Top Square (Scaled, Shifted Right & Lowered Slightly) -->
+    <path fill="none" stroke="#57606a" stroke-width="1.5" transform="translate(4,-3.5) scale(1.2)"
         d="M3 3.5A.5.5 0 012.5 4v8A.5.5 0 013 12.5h7A.5.5 0 0110.5 12V4A.5.5 0 0110 3.5H3z">
     </path>
 </svg>
+
 
 
 
