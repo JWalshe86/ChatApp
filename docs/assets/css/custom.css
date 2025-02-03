@@ -54,7 +54,7 @@ img {
     background-color: #e6ffed;
     border-left: 4px solid #28a745;
     padding: 5px 10px;
-    display: block;
+    display: block !important;
     font-family: monospace;
     font-size: smaller;
     white-space: pre-wrap;
