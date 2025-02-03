@@ -122,16 +122,38 @@ h2:not(.chatapp-subtitle), h3, h4 {
     color: #333;
 }
 
-/* GitHub Copy Button */
-.copy-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
+/* Ensure the Copy Button & SVG scale properly */
+.code-header .copy-button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    width: 20px !important; /* Adjust to match GitHub size */
+    height: 20px !important;
 }
+
+/* Ensure SVG scales correctly */
+.code-header .copy-button svg {
+    width: 16px !important;
+    height: 16px !important;
+    fill: #57606a !important; /* Default GitHub color */
+    transition: fill 0.2s ease-in-out !important;
+}
+
+/* Fix possible background issues */
+.code-header .copy-button::before,
+.code-header .copy-button::after {
+    content: none !important;
+}
+
+/* Darker color on hover */
+.code-header .copy-button:hover svg {
+    fill: #24292f !important;
+}
+
 
 /* Ensure SVG Icon is Correctly Styled */
 .code-header .copy-button svg {
