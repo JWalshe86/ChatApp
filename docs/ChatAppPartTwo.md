@@ -66,13 +66,15 @@ public class ChatHub : Hub
         <!-- Updated Code (Always Visible) -->
         <pre class="updated-code">
 <code>
-    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
+   
+    
+    using ChatApp.Models;
+  
+  <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
     public class ChatHub : Hub
 {
     </span>
     
-    using ChatApp.Models;
-
     namespace ChatApp.Hubs
     {
        private readonly AppDbContext _context;
