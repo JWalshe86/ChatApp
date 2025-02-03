@@ -59,12 +59,12 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         </button>
     </div>
 
+    
     <div class="code-container">
         <!-- Updated Code (Always Visible) -->
         <pre class="updated-code"><code class="language-csharp">
 {% highlight csharp %}
 using Microsoft.AspNetCore.SignalR;
-
 public class ChatHub : Hub
 {
     public async Task SendMessage(string user, string message)
@@ -76,78 +76,41 @@ public class ChatHub : Hub
         </code></pre>
 
         <!-- Full Code (Expanded View) -->
-        <pre class="updated-code full-code" style="display: none;"><code class="language-csharp">
+        <pre class="full-code"><code class="language-csharp">
 {% highlight csharp %}
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChatApp.Hubs
 {
-    private readonly AppDbContext _context;
-
-    public ChatHub(AppDbContext context)
+    public class ChatHub : Hub
     {
-        _context = context;
-    }
+        private readonly AppDbContext _context;
 
-    public async Task SendMessage(string user, string message)
-    {
-        var newMessage = new Message
+        public ChatHub(AppDbContext context)
         {
-            User = user,
-            Content = message,
-            Timestamp = DateTime.UtcNow
-        };
+            _context = context;
+        }
 
-        _context.Messages.Add(newMessage);
-        await _context.SaveChangesAsync();
+        public async Task SendMessage(string user, string message)
+        {
+            var newMessage = new Message
+            {
+                User = user,
+                Content = message,
+                Timestamp = DateTime.UtcNow
+            };
 
-        await Clients.All.SendAsync("ReceiveMessage", user, message);
+            _context.Messages.Add(newMessage);
+            await _context.SaveChangesAsync();
+
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
     }
 }
 {% endhighlight %}
         </code></pre>
     </div>
-</div>
-
-### **Tracking Online Users & Notifications**
-Chat now displays **online users** and **notifies when users join or leave**.
-
-<div class="code-block">
-    <div class="code-header">
-        <span class="code-filename">ChatHub.cs</span>
-        <button class="copy-button" aria-label="Copy code">📋 Copy</button>
-    </div>
-    <pre><code class="updated-code">public override async Task OnConnectedAsync()
-{
-    string userName = Context.User.Identity.Name;
-
-    if (!OnlineUsers.ContainsKey(Context.ConnectionId))
-    {
-        OnlineUsers[Context.ConnectionId] = userName;
-        await Clients.All.SendAsync("UserJoined", userName);
-        await SendOnlineUsers();
-    }
-
-    await base.OnConnectedAsync();
-}
-
-public override async Task OnDisconnectedAsync(Exception exception)
-{
-    if (OnlineUsers.TryRemove(Context.ConnectionId, out string userName))
-    {
-        await Clients.All.SendAsync("UserLeft", userName);
-        await SendOnlineUsers();
-    }
-
-    await base.OnDisconnectedAsync(exception);
-}
-
-private async Task SendOnlineUsers()
-{
-    var users = OnlineUsers.Values.Distinct().ToList();
-    await Clients.All.SendAsync("UpdateOnlineUsers", users);
-}</code></pre>
 </div>
 
 ---
