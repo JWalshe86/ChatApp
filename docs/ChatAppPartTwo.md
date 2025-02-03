@@ -19,9 +19,17 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         <span class="code-filename">Message.cs</span>
        <button class="copy-button" aria-label="Copy code">
     <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
-        <path fill-rule="evenodd"
-            d="M0 1.75A1.75 1.75 0 011.75 0h6.5A1.75 1.75 0 0110 1.75v1.5h3.25A1.75 1.75 0 0115 5v9.25A1.75 1.75 0 0113.25 16h-9.5A1.75 1.75 0 012 14.25V5a1.75 1.75 0 011.75-1.75H8v-1.5H1.75a.25.25 0 00-.25.25v13.5a.25.25 0 00.25.25h11.5a.25.25 0 00.25-.25V5a.25.25 0 00-.25-.25H10v8.75A1.75 1.75 0 018.25 15h-6.5A1.75 1.75 0 010 13.25V1.75z"></path>
-    </svg>
+    <!-- Background (Back Sheet) -->
+    <path fill="#f6f8fa" stroke="#57606a" stroke-width="1"
+        d="M13 3H7c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7 4h6c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V5c0-.6.4-1 1-1z">
+    </path>
+
+    <!-- Front Document -->
+    <path fill="#57606a"
+        d="M0 1.75A1.75 1.75 0 011.75 0h6.5A1.75 1.75 0 0110 1.75v1.5h3.25A1.75 1.75 0 0115 5v9.25A1.75 1.75 0 0113.25 16h-9.5A1.75 1.75 0 012 14.25V5a1.75 1.75 0 011.75-1.75H8v-1.5H1.75a.25.25 0 00-.25.25v13.5a.25.25 0 00.25.25h11.5a.25.25 0 00.25-.25V5a.25.25 0 00-.25-.25H10v8.75A1.75 1.75 0 018.25 15h-6.5A1.75 1.75 0 010 13.25V1.75z">
+    </path>
+</svg>
+
 </button>
 
     </div>
