@@ -59,40 +59,41 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
 
     <div class="code-container">
-        ```csharp
-        using ChatApp.Models;
-        using Microsoft.AspNetCore.SignalR;
+        {% highlight csharp %}
+using ChatApp.Models;
+using Microsoft.AspNetCore.SignalR;
 
-        namespace ChatApp.Hubs
+namespace ChatApp.Hubs
+{
+    public class ChatHub : Hub
+    {
+        private readonly AppDbContext _context;
+
+        public ChatHub(AppDbContext context)
         {
-            public class ChatHub : Hub
-            {
-                private readonly AppDbContext _context;
-
-                public ChatHub(AppDbContext context)
-                {
-                    _context = context;
-                }
-
-                public async Task SendMessage(string user, string message)
-                {
-                    var newMessage = new Message
-                    {
-                        User = user,
-                        Content = message,
-                        Timestamp = DateTime.UtcNow
-                    };
-
-                    _context.Messages.Add(newMessage);
-                    await _context.SaveChangesAsync();
-
-                    await Clients.All.SendAsync("ReceiveMessage", user, message);
-                }
-            }
+            _context = context;
         }
-        ```
+
+        public async Task SendMessage(string user, string message)
+        {
+            var newMessage = new Message
+            {
+                User = user,
+                Content = message,
+                Timestamp = DateTime.UtcNow
+            };
+
+            _context.Messages.Add(newMessage);
+            await _context.SaveChangesAsync();
+
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+    }
+}
+        {% endhighlight %}
     </div>
 </div>
+
 
 
 ### **Tracking Online Users & Notifications**
