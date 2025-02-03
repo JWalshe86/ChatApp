@@ -53,10 +53,10 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         </button>
     </div>
 
-    <div class="code-container">
+   <div class="code-container">
         <figure class="highlight">
             <pre class="updated-code"><code class="language-csharp">
-                {% highlight csharp %}
+                {% raw %}{% highlight csharp %}
                 <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
                 public class ChatHub : Hub
                 {
@@ -86,7 +86,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
                 }
                 }
                 </span>
-                {% endhighlight %}
+                {% endhighlight %}{% endraw %}
             </code></pre>
         </figure>
     </div>
