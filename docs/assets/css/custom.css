@@ -142,22 +142,3 @@ details summary {
     font-weight: bold;
     user-select: none; /* Prevent selection when copying */
 }
-[data-line="unchanged"] {
-    background: white !important;  /* Keep unchanged lines white */
-    display: block;
-    width: 100%;
-    padding: 2px 8px;
-    box-sizing: border-box;
-}
-pre.updated-code .unchanged-line {
-    background: white !important;
-    display: block;
-    width: 100%;
-    padding: 2px 8px;
-    box-sizing: border-box;
-}
-.added-line {
-    color: #22863a;
-    font-weight: bold;
-    display: block;
-}
