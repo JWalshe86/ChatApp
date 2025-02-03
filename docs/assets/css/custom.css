@@ -79,7 +79,7 @@ img {
 
 /* Show unchanged lines when expanded */
 .expanded .updated-code .unchanged-code {
-    display: block;
+    display: inline-block;
 }
 
 /* Plus sign for added lines */
@@ -88,6 +88,14 @@ img {
     color: #28a745;
     font-weight: bold;
     user-select: none;
+}
+* Fix added-line visibility */
+.updated-code .added-line {
+    background-color: #e6ffed;
+    border-left: 4px solid #28a745;
+    display: block;
+    padding: 2px 8px;
+    white-space: pre-wrap;
 }
 
 /* Expand button styles */
@@ -107,6 +115,14 @@ img {
     border-radius: 6px;
     font-family: "Courier New", Courier, monospace;
     display: block;
+    overflow-x: auto;
+}
+/* Ensure correct Rouge syntax highlighting */
+.highlight pre {
+    background: #282c34 !important;
+    color: #abb2bf !important;
+    padding: 10px;
+    border-radius: 6px;
     overflow-x: auto;
 }
 
