@@ -135,14 +135,6 @@ h2:not(.chatapp-subtitle), h3, h4 {
     height: 20px !important;
 }
 
-/* Ensure SVG scales correctly */
-.code-header .copy-button svg {
-    width: 16px !important;
-    height: 16px !important;
-    fill: #57606a !important; /* Default GitHub color */
-    transition: fill 0.2s ease-in-out !important;
-}
-
 /* Fix possible background issues */
 .code-header .copy-button::before,
 .code-header .copy-button::after {
