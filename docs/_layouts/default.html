@@ -15,12 +15,26 @@
 
     <!-- Prism.js GitHub Theme -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-
-    <!-- Load Prism.js -->
+<!-- Load Prism -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+
+<!-- Custom Hook -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof Prism !== "undefined") {
+        console.log("✅ Prism is loaded");
+
+        Prism.hooks.add('wrap', function (env) {
+            console.log("Prism processed:", env);
+        });
+
+        Prism.highlightAll();
+    } else {
+        console.error("❌ Prism is NOT loaded.");
+    }
+});
+</script>
 
 <!-- Hook for Adding Classes -->
 <script>
