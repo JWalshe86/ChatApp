@@ -100,9 +100,9 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
 
 <div class="code-container">
     <pre class="updated-code language-csharp"><code class="language-csharp">
-        <span data-line="unchanged">using Microsoft.AspNetCore.SignalR;</span>
-        <span data-line="unchanged">public class ChatHub : Hub</span>
-        <span data-line="unchanged">{</span>
+        <div data-line="unchanged">using Microsoft.AspNetCore.SignalR;</div>
+        <div data-line="unchanged">public class ChatHub : Hub</div>
+        <div data-line="unchanged">{</div>
 
         namespace ChatApp.Hubs
         {
@@ -113,8 +113,8 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
                 _context = context;
             }
 
-            <span data-line="unchanged">public async Task SendMessage(string user, string message)</span>
-            <span data-line="unchanged">{</span>
+            <div data-line="unchanged">public async Task SendMessage(string user, string message)</div>
+            <div data-line="unchanged">{</div>
 
                 var newMessage = new Message
                 {
@@ -126,15 +126,10 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
                 _context.Messages.Add(newMessage);
                 await _context.SaveChangesAsync();
 
-            <span data-line="unchanged">await Clients.All.SendAsync("ReceiveMessage", user, message);</span>
-            <span data-line="unchanged">}</span>
+            <div data-line="unchanged">await Clients.All.SendAsync("ReceiveMessage", user, message);</div>
+            <div data-line="unchanged">}</div>
         }
     </code></pre>
-</div>
-
-
-
-    </div>
 </div>
 
 ---
