@@ -66,7 +66,10 @@ public class ChatHub : Hub
         <!-- Updated Code (Always Visible) -->
         <pre class="updated-code">
 <code>
-    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;</span>
+    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
+    public class ChatHub : Hub
+{
+    </span>
     
     using ChatApp.Models;
 
@@ -78,7 +81,9 @@ public class ChatHub : Hub
             {
                 _context = context;
             }
-
+  <span class="unchanged-code">public async Task SendMessage(string user, string message)
+{
+    </span>
             
                 var newMessage = new Message
                 {
@@ -90,6 +95,10 @@ public class ChatHub : Hub
                 _context.Messages.Add(newMessage);
                 await _context.SaveChangesAsync();
 
+<span class="unchanged-code">        await Clients.All.SendAsync("ReceiveMessage", user, message);
+    }
+}
+    </span>
             }
 </code>
 </pre>
