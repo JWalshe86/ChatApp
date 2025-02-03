@@ -41,3 +41,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".updated-code code").forEach(block => {
+        let lines = block.innerHTML.split("\n");
+        block.innerHTML = lines.map(line => {
+            if (line.includes("using ChatApp.Models;")) {
+                return `<span class="added-line">${line}</span>`;
+            }
+            return `<span class="unchanged-code">${line}</span>`;
+        }).join("\n");
+    });
+});
