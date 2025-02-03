@@ -121,4 +121,6 @@ details summary {
 .expanded .updated-code .unchanged-code {
     display: inline; /* Show them when expanded */
 }
-
+.unchanged-code {
+   background: white;
+}
