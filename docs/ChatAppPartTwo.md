@@ -54,10 +54,8 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     <div class="code-container">
 
         <!-- Updated Code (Always Visible) -->
-        <pre class="updated-code">
-<code>
-   
-    
+<pre class="updated-code">
+<code>  
     using ChatApp.Models;
   
   <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
