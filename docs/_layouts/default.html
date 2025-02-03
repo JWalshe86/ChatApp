@@ -31,10 +31,12 @@
 
 <!-- Initialize Highlight.js -->
 <script>
-  document.addEventListener("DOMContentLoaded", (event) => {
-    hljs.highlightAll();
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("pre code").forEach((block) => {
+      hljs.highlightElement(block);
+    });
   });
 </script>
-
+    
 </body>
 </html>
