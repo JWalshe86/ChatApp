@@ -18,18 +18,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     <div class="code-header">
         <span class="code-filename">Message.cs</span>
        <button class="copy-button" aria-label="Copy code">
-<svg aria-hidden="true" height="18" viewBox="0 0 18 18" width="18">
-    <!-- Bottom Square (Scaled Up) -->
-    <path fill="none" stroke="#57606a" stroke-width="1.5" transform="scale(1.2)"
-        d="M3 3.5A.5.5 0 012.5 4v8A.5.5 0 013 12.5h7A.5.5 0 0110.5 12V4A.5.5 0 0110 3.5H3z">
-    </path>
-
-    <!-- Top Square (Scaled, Shifted Right & Lowered Slightly) -->
-    <path fill="none" stroke="#57606a" stroke-width="1.5" transform="translate(4,-3.5) scale(1.2)"
-        d="M3 3.5A.5.5 0 012.5 4v8A.5.5 0 013 12.5h7A.5.5 0 0110.5 12V4A.5.5 0 0110 3.5H3z">
-    </path>
-</svg>
-
+<svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg>
 
 
 
