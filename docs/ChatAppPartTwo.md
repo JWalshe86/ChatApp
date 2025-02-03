@@ -93,7 +93,27 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         }
         {% endhighlight %}
     </pre>
+
+    <!-- Original Code Block (Hidden by Default) -->
+    <pre class="unchanged-code">
+        {% highlight csharp %}
+        // Original Code Before Changes
+        using Microsoft.AspNetCore.SignalR;
+
+        namespace ChatApp.Hubs
+        {
+            public class ChatHub : Hub
+            {
+                public async Task SendMessage(string user, string message)
+                {
+                    await Clients.All.SendAsync("ReceiveMessage", user, message);
+                }
+            }
+        }
+        {% endhighlight %}
+    </pre>
 </div>
+
 
 ### **Tracking Online Users & Notifications**
 Chat now displays **online users** and **notifies when users join or leave**.
