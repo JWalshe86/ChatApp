@@ -127,19 +127,23 @@ h2:not(.chatapp-subtitle), h3, h4 {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;
-    border: none;
+    padding: 6px;
     background: transparent;
+    border: none;
     cursor: pointer;
 }
 
-.copy-button svg {
-    fill: #57606a; /* GitHub icon color */
+/* Ensure SVG Icon is Correctly Styled */
+.code-header .copy-button svg {
+    width: 16px !important;
+    height: 16px !important;
+    fill: #57606a !important; /* GitHub-style gray */
     transition: fill 0.2s;
 }
 
-.copy-button:hover svg {
-    fill: #24292f; /* Darker on hover */
+/* Hover Effect for Better Visibility */
+.code-header .copy-button:hover svg {
+    fill: #24292f !important; /* Darker on hover */
 }
 
 /* Code Block */
