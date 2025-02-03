@@ -64,36 +64,43 @@ public class ChatHub : Hub
 }</code></pre>
 
         <!-- Updated Code (Always Visible) -->
-        <pre class="updated-code"><code>using ChatApp.Models;
-using Microsoft.AspNetCore.SignalR;
+        <pre class="updated-code">
+<code>
+    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;</span>
+    
+    using ChatApp.Models;
+    using Microsoft.AspNetCore.SignalR;
 
-namespace ChatApp.Hubs
-{
-    public class ChatHub : Hub
-    {   
-        private readonly AppDbContext _context;
-
-        public ChatHub(AppDbContext context)
+    namespace ChatApp.Hubs
+    {
+        public class ChatHub : Hub
         {
-            _context = context;
-        }
+            private readonly AppDbContext _context;
 
-        public async Task SendMessage(string user, string message)
-        {
-            var newMessage = new Message
+            public ChatHub(AppDbContext context)
             {
-                User = user,
-                Content = message,
-                Timestamp = DateTime.UtcNow
-            };
+                _context = context;
+            }
 
-            _context.Messages.Add(newMessage);
-            await _context.SaveChangesAsync();
+            public async Task SendMessage(string user, string message)
+            {
+                var newMessage = new Message
+                {
+                    User = user,
+                    Content = message,
+                    Timestamp = DateTime.UtcNow
+                };
 
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+                _context.Messages.Add(newMessage);
+                await _context.SaveChangesAsync();
+
+                await Clients.All.SendAsync("ReceiveMessage", user, message);
+            }
         }
     }
-}</code></pre>
+</code>
+</pre>
+
     </div>
 </div>
 
