@@ -35,14 +35,38 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".expand-button").forEach(button => {
         button.addEventListener("click", function () {
-            let codeBlock = button.closest(".code-block").querySelector(".code-container");
-            codeBlock.classList.toggle("expanded");
+            let codeContainer = button.closest(".code-block").querySelector(".code-container");
+            codeContainer.classList.toggle("expanded");
 
-            // Wait for CSS transition, then reapply syntax highlighting
+            // ✅ Delay Prism re-highlight to ensure classes are applied first
             setTimeout(() => {
-                Prism.highlightAll();
+                reapplyCodeStyles(codeContainer); // Custom function to restore spans
+                Prism.highlightElement(codeContainer.querySelector("code"));
             }, 100);
         });
     });
 });
 
+/**
+ * ✅ Function to reapply 'unchanged-code' and 'added-line' spans after expansion
+ */
+function reapplyCodeStyles(codeContainer) {
+    const codeElement = codeContainer.querySelector("code");
+
+    // Reset previous spans to avoid duplication
+    codeElement.innerHTML = codeElement.innerHTML
+        .replace(/<span class="unchanged-code">/g, "")
+        .replace(/<\/span>/g, "");
+
+    // Wrap unchanged lines inside spans again
+    let lines = codeElement.innerHTML.split("\n").map(line => {
+        if (line.trim().startsWith("using Microsoft.AspNetCore.SignalR") ||
+            line.trim().startsWith("public class ChatHub") ||
+            line.trim().startsWith("await Clients.All.SendAsync")) {
+            return `<span class="unchanged-code">${line}</span>`;
+        }
+        return line;
+    });
+
+    codeElement.innerHTML = lines.join("\n");
+}
