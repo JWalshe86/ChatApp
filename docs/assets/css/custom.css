@@ -68,11 +68,19 @@ pre {
 }
 
 /* Updated Code Highlighting (GitHub Green) */
-/* Updated Code: Apply Green Background to Text */
 .updated-code {
     background: white !important; /* Keeps the block white */
     padding: 0;
     border-left: 3px solid #28a745; /* GitHub green */
+}
+
+/* Highlight the changed lines with a green background */
+.updated-code code {
+    display: block;
+    background: #e6ffed; /* GitHub green */
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 2px;
 }
 
 /* Original Code (Greyed Out) */
