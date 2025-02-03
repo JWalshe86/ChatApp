@@ -129,3 +129,6 @@ details summary {
     box-sizing: border-box; /* Ensure padding doesn't break layout */
 }
 
+.hidden {
+    display: none !important; /* Ensures hidden lines are removed */
+}
