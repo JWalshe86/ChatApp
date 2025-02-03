@@ -21,14 +21,15 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
 <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
     <!-- Outer Square (Back) -->
     <path fill="#f6f8fa" stroke="#57606a" stroke-width="1.2"
-        d="M2.75 1A1.75 1.75 0 001 2.75v9.5C1 13.216 1.784 14 2.75 14h8.5A1.75 1.75 0 0013 12.25v-9.5A1.75 1.75 0 0011.25 1h-8.5z">
+        d="M2.5 1A1.5 1.5 0 001 2.5v10A1.5 1.5 0 002.5 14h10A1.5 1.5 0 0014 12.5v-10A1.5 1.5 0 0012.5 1h-10z">
     </path>
 
     <!-- Inner Document (Front) -->
-    <path fill="none" stroke="#24292f" stroke-width="1.3"
-        d="M4.5 3.75A1.5 1.5 0 003 5.25v5.5A1.5 1.5 0 004.5 12.25h5A1.5 1.5 0 0011 10.75v-5.5A1.5 1.5 0 009.5 3.75h-5z">
+    <path fill="none" stroke="#24292f" stroke-width="1.2"
+        d="M5 4A1 1 0 004 5v5A1 1 0 005 11h5A1 1 0 0011 10V5A1 1 0 0010 4H5z">
     </path>
 </svg>
+
 
 
 </button>
