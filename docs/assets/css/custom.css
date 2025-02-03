@@ -138,3 +138,41 @@ img {
 .highlight span {
     display: inline;
 }
+/* ✅ Updated Code (always visible) */
+.updated-code {
+    background-color: #e6ffed; /* Light green */
+    border-left: 4px solid #28a745; /* Green border */
+    padding: 5px 10px;
+    font-family: monospace;
+    font-size: smaller;
+    white-space: pre-wrap;
+}
+
+/* ✅ Hide unchanged lines by default */
+.updated-code .unchanged-code {
+    display: none;
+}
+
+/* ✅ Show unchanged code when expanded */
+.expanded .updated-code .unchanged-code {
+    display: block;
+}
+
+/* ✅ Added-line styling */
+.updated-code .added-line {
+    background-color: #e6ffed; /* Green background */
+    border-left: 4px solid #28a745;
+    display: block;
+    padding: 2px 8px;
+}
+
+/* ✅ Expand button styles */
+.expand-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    font-size: 14px;
+    color: #0366d6;
+}
+
