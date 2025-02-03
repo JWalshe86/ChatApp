@@ -59,40 +59,43 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
 
     <div class="code-container">
-        {% highlight csharp %}
-        <pre class="updated-code">
-    <span class="added-line">using ChatApp.Models;</span>
-    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;</span>
+    {% highlight csharp %}
+    {% raw %}
+    <pre class="updated-code">
+        <span class="added-line">using ChatApp.Models;</span>
+        <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;</span>
 
-    <span class="added-line">namespace ChatApp.Hubs;</span>
-    <span class="unchanged-code">&lcub;</span>
+        <span class="added-line">namespace ChatApp.Hubs;</span>
+        <span class="unchanged-code">{
+            public class ChatHub : Hub
+            {</span>
 
-    <span class="added-line">    private readonly AppDbContext _context;</span>
-    <span class="added-line">    public ChatHub(AppDbContext context)</span>
-    <span class="added-line">    &lcub;</span>
-    <span class="added-line">        _context = context;</span>
-    <span class="added-line">    &rcub;</span>
+        <span class="added-line">        private readonly AppDbContext _context;</span>
+        <span class="added-line">        public ChatHub(AppDbContext context)</span>
+        <span class="added-line">        {</span>
+        <span class="added-line">            _context = context;</span>
+        <span class="added-line">        }</span>
 
-    <span class="unchanged-code">    public async Task SendMessage(string user, string message)</span>
-    <span class="unchanged-code">    &lcub;</span>
+        <span class="unchanged-code">        public async Task SendMessage(string user, string message)
+        {</span>
 
-    <span class="added-line">        var newMessage = new Message</span>
-    <span class="added-line">        &lcub;</span>
-    <span class="added-line">            User = user,</span>
-    <span class="added-line">            Content = message,</span>
-    <span class="added-line">            Timestamp = DateTime.UtcNow</span>
-    <span class="added-line">        &rcub;;</span>
+        <span class="added-line">            var newMessage = new Message</span>
+        <span class="added-line">            {</span>
+        <span class="added-line">                User = user,</span>
+        <span class="added-line">                Content = message,</span>
+        <span class="added-line">                Timestamp = DateTime.UtcNow</span>
+        <span class="added-line">            };</span>
 
-    <span class="added-line">        _context.Messages.Add(newMessage);</span>
-    <span class="added-line">        await _context.SaveChangesAsync();</span>
+        <span class="added-line">            _context.Messages.Add(newMessage);</span>
+        <span class="added-line">            await _context.SaveChangesAsync();</span>
 
-    <span class="unchanged-code">        await Clients.All.SendAsync("ReceiveMessage", user, message);</span>
-    <span class="unchanged-code">    &rcub;</span>
-    <span class="unchanged-code">&rcub;</span>
-</pre>
-
-        {% endhighlight %}
-    </div>
+        <span class="unchanged-code">            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }</span>
+        <span class="unchanged-code">    }
+        }</span>
+    </pre>
+    {% endraw %}
+    {% endhighlight %}
 </div>
 
 
