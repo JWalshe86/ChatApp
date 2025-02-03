@@ -20,12 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Ensure updated code is visible by default
-    document.querySelectorAll(".updated-code").forEach(code => {
-        code.style.display = "block";
-    });
-
-    document.querySelectorAll(".full-code").forEach(code => {
-        code.style.display = "none";
+    // Interweave updated lines dynamically
+    document.querySelectorAll(".full-code code").forEach(block => {
+        let lines = block.innerHTML.split("\n");
+        block.innerHTML = lines.map(line => {
+            if (line.includes("ChatApp.Models") || line.includes("_context = context;")) {
+                return `<span class="added-line">${line}</span>`;
+            }
+            return `<span class="unchanged-code">${line}</span>`;
+        }).join("\n");
     });
 });
