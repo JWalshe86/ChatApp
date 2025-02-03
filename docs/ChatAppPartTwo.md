@@ -59,18 +59,35 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     
 <div class="code-container">
     <pre class="updated-code language-csharp" data-manual><code class="language-csharp">
-    <span class="added-line">using ChatApp.Models;</span>
-    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;</span>
+        <code class="language-csharp">
+            <div class="unchanged-line">using Microsoft.AspNetCore.SignalR;</div>
+            <div class="unchanged-line">public class ChatHub : Hub</div>
+            <div class="unchanged-line">{</div>
 
-    <span class="added-line">public class ChatHub : Hub</span>
-    <span class="unchanged-code">{
-        public async Task SendMessage(string user, string message)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
-    }</span>
-</code></pre>
+            <span class="added-line">private readonly AppDbContext _context;</span>
 
+            <span class="added-line">public ChatHub(AppDbContext context)</span>
+            <span class="added-line">{</span>
+            <span class="added-line">    _context = context;</span>
+            <span class="added-line">}</span>
+
+            <div class="unchanged-line">public async Task SendMessage(string user, string message)</div>
+            <div class="unchanged-line">{</div>
+
+            <span class="added-line">    var newMessage = new Message</span>
+            <span class="added-line">    {</span>
+            <span class="added-line">        User = user,</span>
+            <span class="added-line">        Content = message,</span>
+            <span class="added-line">        Timestamp = DateTime.UtcNow</span>
+            <span class="added-line">    };</span>
+
+            <span class="added-line">    _context.Messages.Add(newMessage);</span>
+            <span class="added-line">    await _context.SaveChangesAsync();</span>
+
+            <div class="unchanged-line">    await Clients.All.SendAsync("ReceiveMessage", user, message);</div>
+            <div class="unchanged-line">}</div>
+        </code>
+    </pre>
 </div>
 
 ---
