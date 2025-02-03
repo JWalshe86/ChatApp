@@ -26,7 +26,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         </button>
     </div> <!-- Closing code-header -->
 
-    <pre><code class="updated-code">
+    <pre><code class="updated-code language-csharp">
         <span class="added-line">namespace ChatApp.Models</span>
         <span class="added-line">{</span>
         <span class="added-line">    public class Message</span>
