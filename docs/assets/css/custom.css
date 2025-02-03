@@ -164,7 +164,6 @@ h2:not(.chatapp-subtitle), h3, h4 {
 /* Fix for Dark Box or Overlay Issue */
 .code-header .copy-button svg rect,
 .code-header .copy-button svg path {
-    fill: #57606a !important; /* Ensure the path color matches */
     background: transparent !important;
     box-shadow: none !important;
     border: none !important;
