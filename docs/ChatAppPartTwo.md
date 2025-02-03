@@ -69,21 +69,17 @@ public class ChatHub : Hub
     <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;</span>
     
     using ChatApp.Models;
-    using Microsoft.AspNetCore.SignalR;
 
     namespace ChatApp.Hubs
     {
-        public class ChatHub : Hub
-        {
-            private readonly AppDbContext _context;
+       private readonly AppDbContext _context;
 
             public ChatHub(AppDbContext context)
             {
                 _context = context;
             }
 
-            public async Task SendMessage(string user, string message)
-            {
+            
                 var newMessage = new Message
                 {
                     User = user,
@@ -94,10 +90,7 @@ public class ChatHub : Hub
                 _context.Messages.Add(newMessage);
                 await _context.SaveChangesAsync();
 
-                await Clients.All.SendAsync("ReceiveMessage", user, message);
             }
-        }
-    }
 </code>
 </pre>
 
