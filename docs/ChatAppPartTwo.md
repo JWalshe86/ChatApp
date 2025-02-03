@@ -17,7 +17,13 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
 <div class="code-block">
     <div class="code-header">
         <span class="code-filename">Message.cs</span>
-        <button class="copy-button" aria-label="Copy code">📋 Copy</button>
+       <button class="copy-button" aria-label="Copy code">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
+        <path fill-rule="evenodd"
+            d="M0 1.75A1.75 1.75 0 011.75 0h6.5A1.75 1.75 0 0110 1.75v1.5h3.25A1.75 1.75 0 0115 5v9.25A1.75 1.75 0 0113.25 16h-9.5A1.75 1.75 0 012 14.25V5a1.75 1.75 0 011.75-1.75H8v-1.5H1.75a.25.25 0 00-.25.25v13.5a.25.25 0 00.25.25h11.5a.25.25 0 00.25-.25V5a.25.25 0 00-.25-.25H10v8.75A1.75 1.75 0 018.25 15h-6.5A1.75 1.75 0 010 13.25V1.75z"></path>
+    </svg>
+</button>
+
     </div>
     <pre><code class="updated-code">namespace ChatApp.Models
 {
