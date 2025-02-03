@@ -57,29 +57,6 @@ img {
     user-select: none; /* Prevents text selection */
 }
 
-/* Ensure Copy Button SVG is Styled Correctly */
-.copy-button svg {
-    width: 16px;
-    height: 16px;
-    fill: currentColor; /* Uses text color */
-    display: inline-block;
-    vertical-align: text-bottom;
-    overflow: visible;
-    transition: fill 0.2s;
-}
-
-/* Hover Effect */
-.copy-button:hover svg {
-    fill: #24292f;
-}
-
-/* Ensure SVG Elements are Transparent */
-.copy-button svg path {
-    fill: none;
-    stroke: #59636e; /* Matches GitHub */
-    stroke-width: 1.5;
-}
-
 /* Code Block */
 pre {
     background-color: #f6f8fa;
