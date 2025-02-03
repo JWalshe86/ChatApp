@@ -58,40 +58,41 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
 <code>  
     using ChatApp.Models;
   
-  <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
+    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
     public class ChatHub : Hub
-{
+    {
     </span>
     
     namespace ChatApp.Hubs
     {
        private readonly AppDbContext _context;
 
-            public ChatHub(AppDbContext context)
-            {
-                _context = context;
-            }
-  <span class="unchanged-code">public async Task SendMessage(string user, string message)
-{
-    </span>
-            
-                var newMessage = new Message
-                {
-                    User = user,
-                    Content = message,
-                    Timestamp = DateTime.UtcNow
-                };
+       public ChatHub(AppDbContext context)
+       {
+           _context = context;
+       }
+       
+       <span class="unchanged-code">public async Task SendMessage(string user, string message)
+       {
+       </span>
+       
+       <span class="added-line">    var newMessage = new Message</span>
+       <span class="added-line">    {</span>
+       <span class="added-line">        User = user,</span>
+       <span class="added-line">        Content = message,</span>
+       <span class="added-line">        Timestamp = DateTime.UtcNow</span>
+       <span class="added-line">    };</span>
 
-                _context.Messages.Add(newMessage);
-                await _context.SaveChangesAsync();
+       <span class="added-line">    _context.Messages.Add(newMessage);</span>
+       <span class="added-line">    await _context.SaveChangesAsync();</span>
 
-<span class="unchanged-code">        await Clients.All.SendAsync("ReceiveMessage", user, message);
+       <span class="unchanged-code">        await Clients.All.SendAsync("ReceiveMessage", user, message);
+       }
     }
-}
     </span>
-            }
 </code>
 </pre>
+
 
     </div>
 </div>
