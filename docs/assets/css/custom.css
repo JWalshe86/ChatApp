@@ -175,3 +175,26 @@ pre.highlight {
     border-radius: 6px;
     font-family: "Courier New", Courier, monospace;
 }
+/* Rouge Syntax Highlighting Fix */
+.highlight pre, .highlight code {
+    background-color: #282c34 !important; /* Dark theme */
+    color: #abb2bf !important; /* Light text */
+    padding: 10px;
+    border-radius: 6px;
+    font-family: "Courier New", Courier, monospace;
+    display: block;
+    overflow-x: auto;
+}
+
+/* Specific styling for Rouge token classes */
+.k { color: #c678dd; }  /* Keywords (e.g., using, class) - Purple */
+.nn { color: #e5c07b; } /* Namespace - Yellow */
+.p { color: #56b6c2; }  /* Punctuation - Cyan */
+.n { color: #abb2bf; }  /* Normal text - White */
+.s { color: #98c379; }  /* Strings - Green */
+.f { color: #61afef; }  /* Functions - Blue */
+
+/* Ensure span elements are displayed correctly */
+.highlight span {
+    display: inline;
+}
