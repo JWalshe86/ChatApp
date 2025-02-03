@@ -112,7 +112,7 @@ details summary {
 }
 
 .expanded .updated-code .unchanged-code {
-    display: inline; /* Show them when expanded */
+    display: block; /* Show them when expanded */
 }
 .unchanged-code {
     display: inline-block; /* Allow inline elements to stay aligned properly */
