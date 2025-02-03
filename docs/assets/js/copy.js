@@ -31,3 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".expand-button").forEach(button => {
+        button.addEventListener("click", function () {
+            let codeBlock = button.closest(".code-block").querySelector(".code-container");
+            codeBlock.classList.toggle("expanded");
+        });
+    });
+});
+
