@@ -105,7 +105,7 @@ pre {
     border-left: 4px solid #28a745;
     padding: 5px 10px;
     margin: 0;
-    display: block;
+    display: block !important;
     font-family: monospace;
     font-size: smaller;
     white-space: pre-wrap;
@@ -140,7 +140,7 @@ pre.original-code {
 
 /* Improve spacing for unchanged lines */
 .unchanged-code {
-    display: inline;
+    display: none;
     background: white;
     padding: 0;
     margin: 0;
@@ -163,4 +163,7 @@ pre.original-code {
     color: #28a745;
     font-weight: bold;
     user-select: none;
+}
+expanded .unchanged-code {
+    display: block;
 }
