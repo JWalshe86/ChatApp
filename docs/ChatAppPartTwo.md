@@ -65,37 +65,36 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
             <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;</span>
 
             <span class="added-line">namespace ChatApp.Hubs;</span>
-            <span class="unchanged-code">&lbrace;</span> <!-- { -->
+            <span class="unchanged-code">&#123;</span> <!-- { -->
                 public class ChatHub : Hub
-                <span class="unchanged-code">&lbrace;</span> <!-- { -->
+                <span class="unchanged-code">&#123;</span> <!-- { -->
 
             <span class="added-line">        private readonly AppDbContext _context;</span>
             <span class="added-line">        public ChatHub(AppDbContext context)</span>
-            <span class="added-line">        &lbrace;</span> <!-- { -->
+            <span class="added-line">        &#123;</span> <!-- { -->
             <span class="added-line">            _context = context;</span>
-            <span class="added-line">        &rbrace;</span> <!-- } -->
+            <span class="added-line">        &#125;</span> <!-- } -->
 
             <span class="unchanged-code">        public async Task SendMessage(string user, string message)
-            &lbrace;</span>
+            &#123;</span>
 
             <span class="added-line">            var newMessage = new Message</span>
-            <span class="added-line">            &lbrace;</span>
+            <span class="added-line">            &#123;</span>
             <span class="added-line">                User = user,</span>
             <span class="added-line">                Content = message,</span>
             <span class="added-line">                Timestamp = DateTime.UtcNow</span>
-            <span class="added-line">            &rbrace;;</span>
+            <span class="added-line">            &#125;;</span>
 
             <span class="added-line">            _context.Messages.Add(newMessage);</span>
             <span class="added-line">            await _context.SaveChangesAsync();</span>
 
             <span class="unchanged-code">            await Clients.All.SendAsync("ReceiveMessage", user, message);
-            &rbrace;</span>
-            <span class="unchanged-code">&rbrace;</span> <!-- } -->
+            &#125;</span>
+            <span class="unchanged-code">&#125;</span> <!-- } -->
         </pre>
         {% endhighlight %}
     </div>
 </div>
-
 ---
 
 ### **Tracking Online Users & Notifications**
