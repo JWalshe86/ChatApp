@@ -124,12 +124,13 @@ h2:not(.chatapp-subtitle), h3, h4 {
 
 /* GitHub Copy Button */
 .copy-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 }
 
 .copy-button svg {
