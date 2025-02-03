@@ -58,12 +58,12 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
     
 <div class="code-container">
-    <pre class="updated-code language-csharp" data-line="3,7,18,25"><code class="language-csharp">
-using ChatApp.Models;
-using Microsoft.AspNetCore.SignalR;
+    <pre class="updated-code language-csharp" tabindex="0">
+        <code class="language-csharp">
+<span class="unchanged-line">using Microsoft.AspNetCore.SignalR;</span>
+<span class="unchanged-line">public class ChatHub : Hub</span>
+<span class="unchanged-line">{</span>
 
-public class ChatHub : Hub
-{
     private readonly AppDbContext _context;
 
     public ChatHub(AppDbContext context)
@@ -71,8 +71,8 @@ public class ChatHub : Hub
         _context = context;
     }
 
-    public async Task SendMessage(string user, string message)
-    {
+<span class="unchanged-line">    public async Task SendMessage(string user, string message)</span>
+<span class="unchanged-line">    {</span>
         var newMessage = new Message
         {
             User = user,
@@ -83,10 +83,11 @@ public class ChatHub : Hub
         _context.Messages.Add(newMessage);
         await _context.SaveChangesAsync();
 
-        await Clients.All.SendAsync("ReceiveMessage", user, message);
-    }
-}
-    </code></pre>
+<span class="unchanged-line">        await Clients.All.SendAsync("ReceiveMessage", user, message);</span>
+<span class="unchanged-line">    }</span>
+<span class="unchanged-line">}</span>
+        </code>
+    </pre>
 </div>
 
 ---
