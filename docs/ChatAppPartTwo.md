@@ -57,78 +57,35 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         </button>
     </div>
     
-    <div class="code-container">
-
-        <!-- Updated Code (Always Visible) -->
-<pre class="updated-code language-csharp">
-<code>         
-    <span class="added-line">  using ChatApp.Models;</span>  
-  
-    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
-    public class ChatHub : Hub
-    {
-    </span>
-    
-        <span class="added-line">  namespace ChatApp.Hubs</span>  
-        <span class="added-line"> { </span>  
-        <span class="added-line">private readonly AppDbContext _context;</span>  
-        <span class="added-line">public ChatHub(AppDbContext context)</span>  
-        <span class="added-line">{</span>  
-        <span class="added-line">_context = context;</span>  
-        <span class="added-line">}</span>  
-
-       <span class="unchanged-code">public async Task SendMessage(string user, string message)
-       {
-       </span>
-       
-       <span class="added-line">    var newMessage = new Message</span>
-       <span class="added-line">    {</span>
-       <span class="added-line">        User = user,</span>
-       <span class="added-line">        Content = message,</span>
-       <span class="added-line">        Timestamp = DateTime.UtcNow</span>
-       <span class="added-line">    };</span>
-
-       <span class="added-line">    _context.Messages.Add(newMessage);</span>
-       <span class="added-line">    await _context.SaveChangesAsync();</span>
-
-       <span class="unchanged-code">        await Clients.All.SendAsync("ReceiveMessage", user, message);
-       }
-    }
-    </span>
-</code>
-</pre>
-
 <div class="code-container">
-    <pre class="updated-code language-csharp"><code class="language-csharp">
-        <div data-line="unchanged">using Microsoft.AspNetCore.SignalR;</div>
-        <div data-line="unchanged">public class ChatHub : Hub</div>
-        <div data-line="unchanged">{</div>
+    <pre class="updated-code language-csharp" data-line="3,7,18,25"><code class="language-csharp">
+using ChatApp.Models;
+using Microsoft.AspNetCore.SignalR;
 
-        namespace ChatApp.Hubs
+public class ChatHub : Hub
+{
+    private readonly AppDbContext _context;
+
+    public ChatHub(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task SendMessage(string user, string message)
+    {
+        var newMessage = new Message
         {
-            private readonly AppDbContext _context;
+            User = user,
+            Content = message,
+            Timestamp = DateTime.UtcNow
+        };
 
-            public ChatHub(AppDbContext context)
-            {
-                _context = context;
-            }
+        _context.Messages.Add(newMessage);
+        await _context.SaveChangesAsync();
 
-            <div data-line="unchanged">public async Task SendMessage(string user, string message)</div>
-            <div data-line="unchanged">{</div>
-
-                var newMessage = new Message
-                {
-                    User = user,
-                    Content = message,
-                    Timestamp = DateTime.UtcNow
-                };
-
-                _context.Messages.Add(newMessage);
-                await _context.SaveChangesAsync();
-
-            <div data-line="unchanged">await Clients.All.SendAsync("ReceiveMessage", user, message);</div>
-            <div data-line="unchanged">}</div>
-        }
+        await Clients.All.SendAsync("ReceiveMessage", user, message);
+    }
+}
     </code></pre>
 </div>
 
