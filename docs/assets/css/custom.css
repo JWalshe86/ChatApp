@@ -99,11 +99,26 @@ img {
     font-size: 14px;
     color: #0366d6;
 }
+/* Rouge Syntax Highlighting */
+.highlight pre, .highlight code {
+    background-color: #282c34 !important; /* Dark background */
+    color: #abb2bf !important; /* Text color */
+    padding: 10px;
+    border-radius: 6px;
+    font-family: "Courier New", Courier, monospace;
+    display: block;
+    overflow-x: auto;
+}
 
 /* Ensure Rouge Syntax Colors */
-.k { color: #c678dd; }
-.nn { color: #e5c07b; }
-.p { color: #56b6c2; }
-.n { color: #abb2bf; }
-.s { color: #98c379; }
-.f { color: #61afef; }
+.k { color: #c678dd; }  /* Keywords (e.g., using, class) - Purple */
+.nn { color: #e5c07b; } /* Namespace - Yellow */
+.p { color: #56b6c2; }  /* Punctuation - Cyan */
+.n { color: #abb2bf; }  /* Normal text - White */
+.s { color: #98c379; }  /* Strings - Green */
+.f { color: #61afef; }  /* Functions - Blue */
+
+/* Ensure syntax highlighting elements are displayed */
+.highlight span {
+    display: inline;
+}
