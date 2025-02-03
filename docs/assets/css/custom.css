@@ -79,7 +79,7 @@ pre.updated-code {
 
 /* Original Code (Greyed Out) */
 pre.original-code {
-    background: #f6f8fa;
+    background: #ffffff !important; /* ✅ Ensure it stays white */
     border-left: 4px solid #d1d5da;
     color: #6a737d;
     font-style: italic;
