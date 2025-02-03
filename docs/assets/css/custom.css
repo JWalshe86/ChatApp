@@ -138,18 +138,9 @@ img {
 .highlight span {
     display: inline;
 }
-/* ✅ Updated Code (always visible) */
-.updated-code {
-    background-color: #e6ffed; /* Light green */
-    border-left: 4px solid #28a745; /* Green border */
-    padding: 5px 10px;
-    font-family: monospace;
-    font-size: smaller;
-    white-space: pre-wrap;
-}
 
 /* ✅ Hide unchanged lines by default */
-.updated-code .unchanged-code {
+.unchanged-code {
     display: none;
 }
 
