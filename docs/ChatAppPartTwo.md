@@ -37,17 +37,23 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
 
 ---
 
-### **Updating `ChatHub.cs` to Save Messages in Database**
-Previously, messages were sent via SignalR but were **not persisted**. Now, messages are saved to the database before being broadcast.
-
 <div class="code-block">
     <div class="code-header">
         <span class="code-filename">ChatHub.cs</span>
+        <button class="expand-button" aria-label="Expand all lines">
+            <svg aria-hidden="true" focusable="false" class="octicon octicon-expand" viewBox="0 0 16 16" width="16" height="16">
+                <path d="M1.5 1A.5.5 0 0 1 2 1.5V5H1V1.5a.5.5 0 0 1 .5-.5zm13 0a.5.5 0 0 1 .5.5V5h-1V1.5a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5H5v1H2.5a.5.5 0 0 1-.5-.5zm10.5.5a.5.5 0 0 1 .5-.5V11h-3v1h2.5z"></path>
+            </svg>
+        </button>
         <button class="copy-button" aria-label="Copy code">
-<svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg>
-</button>
+            <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16">
+                <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
+                <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+            </svg>
+        </button>
     </div>
-    <pre class="updated-code"><code>using ChatApp.Models;
+    <div class="code-container">
+        <pre class="updated-code"><code>using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChatApp.Hubs
@@ -77,8 +83,18 @@ namespace ChatApp.Hubs
         }
     }
 }</code></pre>
-</div>
 
+        <pre class="original-code hidden"><code>using Microsoft.AspNetCore.SignalR;
+
+public class ChatHub : Hub
+{
+    public async Task SendMessage(string user, string message)
+    {
+        await Clients.All.SendAsync("ReceiveMessage", user, message);
+    }
+}</code></pre>
+    </div>
+</div>
 
 ---
 
