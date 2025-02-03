@@ -59,7 +59,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     
 <div class="code-container">
     <pre class="updated-code language-csharp" tabindex="0">
-        <code class="language-csharp">
+        <code>
 <span class="unchanged-line">using Microsoft.AspNetCore.SignalR;</span>
 <span class="unchanged-line">public class ChatHub : Hub</span>
 <span class="unchanged-line">{</span>
