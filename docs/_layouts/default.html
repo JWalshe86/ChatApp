@@ -12,50 +12,6 @@
     
     <!-- ✅ Load Custom CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
-
-    <!-- Prism.js GitHub Theme -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-<!-- Load Prism -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-
-<!-- Custom Hook -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    if (typeof Prism !== "undefined") {
-        console.log("✅ Prism is loaded");
-
-        Prism.hooks.add('wrap', function (env) {
-            console.log("Prism processed:", env);
-        });
-
-        Prism.highlightAll();
-    } else {
-        console.error("❌ Prism is NOT loaded.");
-    }
-});
-</script>
-
-<!-- Hook for Adding Classes -->
-<script>
-Prism.hooks.add('wrap', function (env) {
-    let lineText = env.content.trim(); // Get the actual code line
-
-    // ✅ Detect "added" lines (assumes added lines start with '+ ')
-    if (lineText.startsWith('+ ')) {
-        env.classes.push('added-line');
-    }
-
-    // ✅ Detect "unchanged" lines (adjust conditions based on your case)
-    if (lineText === "using Microsoft.AspNetCore.SignalR;" ||
-        lineText.startsWith("public class ChatHub") ||
-        lineText.startsWith("await Clients.All.SendAsync")) {
-        env.classes.push('unchanged-code');
-    }
-});
-</script>
-
-
 </head>
 <body>
 
@@ -67,10 +23,5 @@ Prism.hooks.add('wrap', function (env) {
     <!-- ✅ Load Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ '/assets/js/copy.js' | relative_url }}"></script>
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
-    Prism.highlightAll();
-});
-</script>
 </body>
 </html>
