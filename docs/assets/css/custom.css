@@ -167,3 +167,11 @@ pre.original-code {
 expanded .unchanged-code {
     display: block;
 }
+/* Force syntax highlighting */
+pre.highlight {
+    background-color: #282c34 !important; /* Dark theme */
+    color: #abb2bf !important; /* Light text */
+    padding: 10px;
+    border-radius: 6px;
+    font-family: "Courier New", Courier, monospace;
+}
