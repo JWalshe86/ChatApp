@@ -139,6 +139,7 @@ h2:not(.chatapp-subtitle), h3, h4 {
 .code-header .copy-button::before,
 .code-header .copy-button::after {
     content: none !important;
+    display: none !important;
 }
 
 /* Darker color on hover */
@@ -158,6 +159,15 @@ h2:not(.chatapp-subtitle), h3, h4 {
 /* Hover Effect for Better Visibility */
 .code-header .copy-button:hover svg {
     fill: #24292f !important; /* Darker on hover */
+}
+
+/* Fix for Dark Box or Overlay Issue */
+.code-header .copy-button svg rect,
+.code-header .copy-button svg path {
+    fill: #57606a !important; /* Ensure the path color matches */
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
 }
 
 /* Code Block */
