@@ -19,28 +19,15 @@ img {
    GitHub-Style Code Blocks
    ============================= */
 
-/* Code Block Wrapper */
+/* GitHub-Style Code Block */
 .code-block {
     background: white;
-    border: 1px solid #d1d5da; /* Matches GitHub's code block border */
+    border: 1px solid #d1d5da;
     border-radius: 6px;
     margin-bottom: 16px;
 }
 
-/* Ensure the code container is structured properly */
-.code-container {
-    font-size: 14px;
-    line-height: 1.5;
-    overflow: hidden; /* Prevents unchanged code from showing by default */
-    transition: max-height 0.3s ease-in-out;
-}
-
-/* Expanded state */
-.code-block.expanded .code-container {
-    overflow: visible;
-}
-
-/* GitHub-Style Code Header */
+/* Code Header */
 .code-header {
     display: flex;
     justify-content: space-between;
@@ -55,48 +42,26 @@ img {
     color: #333;
 }
 
-/* GitHub Copy Button */
-.copy-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    padding: 4px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    user-select: none;
-    transition: opacity 0.2s ease-in-out;
-}
-
-.copy-button:hover {
-    opacity: 0.7;
-}
-
-/* Code Block */
-pre {
-    background-color: #f6f8fa;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-x: auto;
-    font-family: monospace;
-    border: 1px solid #ddd;
+/* Code Container */
+.code-container {
+    font-size: 14px;
     line-height: 1.5;
-    margin: 0;
-    white-space: pre-wrap;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
 }
 
-/* Syntax highlighting */
-.highlight pre {
-    background: #282c34;
-    color: #abb2bf;
+/* Rouge Syntax Highlighting */
+.highlight pre, .highlight code {
+    background-color: #282c34 !important;
+    color: #abb2bf !important;
     padding: 10px;
     border-radius: 6px;
+    font-family: "Courier New", Courier, monospace;
+    display: block;
     overflow-x: auto;
 }
 
-/* Updated Code (Always Visible) */
+/* Updated Code Highlighting */
 .updated-code {
     background-color: #e6ffed;
     border-left: 4px solid #28a745;
@@ -117,7 +82,7 @@ pre {
     display: inline;
 }
 
-/* Show plus sign for added lines */
+/* Plus sign for added lines */
 .updated-code span.added-line::before {
     content: "+ ";
     color: #28a745;
@@ -135,19 +100,10 @@ pre {
     color: #0366d6;
 }
 
-/* Ensure Rouge syntax highlighting is applied */
-.highlight code {
-    background-color: #282c34;
-    color: #abb2bf;
-    padding: 10px;
-    border-radius: 6px;
-    font-family: "Courier New", Courier, monospace;
-}
-
-/* Rouge token classes */
-.k { color: #c678dd; }  /* Keywords */
-.nn { color: #e5c07b; } /* Namespace */
-.p { color: #56b6c2; }  /* Punctuation */
-.n { color: #abb2bf; }  /* Normal text */
-.s { color: #98c379; }  /* Strings */
-.f { color: #61afef; }  /* Functions */
+/* Ensure Rouge Syntax Colors */
+.k { color: #c678dd; }
+.nn { color: #e5c07b; }
+.p { color: #56b6c2; }
+.n { color: #abb2bf; }
+.s { color: #98c379; }
+.f { color: #61afef; }
