@@ -19,14 +19,14 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         <span class="code-filename">Message.cs</span>
        <button class="copy-button" aria-label="Copy code">
 <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
-    <!-- Back Square -->
-    <path fill="#f6f8fa" stroke="#57606a" stroke-width="1"
+    <!-- Back Square (Outer) -->
+    <path fill="#f6f8fa" stroke="#57606a" stroke-width="1.2" 
         d="M2.75 1A1.75 1.75 0 001 2.75v9.5C1 13.216 1.784 14 2.75 14h8.5A1.75 1.75 0 0013 12.25v-9.5A1.75 1.75 0 0011.25 1h-8.5z">
     </path>
 
-    <!-- Front Document -->
-    <path fill="none" stroke="#57606a" stroke-width="1"
-        d="M4.75 3A1.75 1.75 0 003 4.75v6.5C3 12.216 3.784 13 4.75 13h6.5A1.75 1.75 0 0013 11.25v-6.5A1.75 1.75 0 0011.25 3h-6.5z">
+    <!-- Front Document (Inner) -->
+    <path fill="none" stroke="#57606a" stroke-width="1.2" 
+        d="M4.25 3.5A1.5 1.5 0 003 5v6.25A1.5 1.5 0 004.25 13h5.5A1.5 1.5 0 0011 11.25V5a1.5 1.5 0 00-1.25-1.5h-5.5z">
     </path>
 </svg>
 
