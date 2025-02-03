@@ -114,4 +114,11 @@ details summary {
     cursor: pointer;
     margin-left: auto;
 }
+.updated-code .unchanged-code {
+    display: none; /* Hide unchanged lines in the updated code block */
+}
+
+.expanded .updated-code .unchanged-code {
+    display: inline; /* Show them when expanded */
+}
 
