@@ -156,3 +156,8 @@ pre.updated-code .unchanged-line {
     padding: 2px 8px;
     box-sizing: border-box;
 }
+.added-line {
+    color: #22863a;
+    font-weight: bold;
+    display: block;
+}
