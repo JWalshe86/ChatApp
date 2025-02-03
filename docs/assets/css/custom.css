@@ -21,7 +21,7 @@ img {
 
 /* Code Block Wrapper */
 .code-block {
-    background: white !important;
+    background: white;
     border: 1px solid #d1d5da; /* Matches GitHub's code block border */
     border-radius: 6px;
     margin-bottom: 16px;
@@ -32,13 +32,11 @@ img {
     font-size: 14px;
     line-height: 1.5;
     overflow: hidden; /* Prevents unchanged code from showing by default */
-    max-height: 200px; /* Ensures only a portion is visible initially */
     transition: max-height 0.3s ease-in-out;
 }
 
 /* Expanded state */
 .code-block.expanded .code-container {
-    max-height: 1000px; /* Adjust based on content size */
     overflow: visible;
 }
 
@@ -72,12 +70,11 @@ img {
     transition: opacity 0.2s ease-in-out;
 }
 
-/* Change appearance when hovering over copy button */
 .copy-button:hover {
     opacity: 0.7;
 }
 
-/* Code Block - Default Appearance */
+/* Code Block */
 pre {
     background-color: #f6f8fa;
     padding: 10px;
@@ -87,45 +84,27 @@ pre {
     border: 1px solid #ddd;
     line-height: 1.5;
     margin: 0;
-    white-space: pre-wrap; /* Ensures code lines wrap properly */
+    white-space: pre-wrap;
 }
 
-/* Syntax highlighting for Rouge */
+/* Syntax highlighting */
 .highlight pre {
-    background: #282c34 !important; /* Dark theme */
-    color: #abb2bf !important; /* Text color */
+    background: #282c34;
+    color: #abb2bf;
     padding: 10px;
     border-radius: 6px;
     overflow-x: auto;
 }
 
-/* Updated Code Highlighting (GitHub Green) */
+/* Updated Code (Always Visible) */
 .updated-code {
     background-color: #e6ffed;
     border-left: 4px solid #28a745;
     padding: 5px 10px;
-    margin: 0;
     display: block !important;
     font-family: monospace;
     font-size: smaller;
     white-space: pre-wrap;
-}
-
-/* Highlight the changed lines with a green background */
-.updated-code code {
-    display: block;
-    background: #e6ffed;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-bottom: 2px;
-}
-
-/* Original Code (Greyed Out) */
-pre.original-code {
-    background: #ffffff !important;
-    border-left: 4px solid #d1d5da;
-    color: #6a737d;
-    font-style: italic;
 }
 
 /* Hide unchanged lines by default */
@@ -135,16 +114,15 @@ pre.original-code {
 
 /* Show unchanged lines when expanded */
 .expanded .updated-code .unchanged-code {
-    display: block;
+    display: inline;
 }
 
-/* Improve spacing for unchanged lines */
-.unchanged-code {
-    display: none;
-    background: white;
-    padding: 0;
-    margin: 0;
-    white-space: pre-wrap;
+/* Show plus sign for added lines */
+.updated-code span.added-line::before {
+    content: "+ ";
+    color: #28a745;
+    font-weight: bold;
+    user-select: none;
 }
 
 /* Expand button styles */
@@ -157,44 +135,19 @@ pre.original-code {
     color: #0366d6;
 }
 
-/* Show plus sign for added lines */
-.updated-code span.added-line::before {
-    content: "+ ";
-    color: #28a745;
-    font-weight: bold;
-    user-select: none;
-}
-expanded .unchanged-code {
-    display: block;
-}
-/* Force syntax highlighting */
-pre.highlight {
-    background-color: #282c34 !important; /* Dark theme */
-    color: #abb2bf !important; /* Light text */
+/* Ensure Rouge syntax highlighting is applied */
+.highlight code {
+    background-color: #282c34;
+    color: #abb2bf;
     padding: 10px;
     border-radius: 6px;
     font-family: "Courier New", Courier, monospace;
 }
-/* Rouge Syntax Highlighting Fix */
-.highlight pre, .highlight code {
-    background-color: #282c34 !important; /* Dark theme */
-    color: #abb2bf !important; /* Light text */
-    padding: 10px;
-    border-radius: 6px;
-    font-family: "Courier New", Courier, monospace;
-    display: block;
-    overflow-x: auto;
-}
 
-/* Specific styling for Rouge token classes */
-.k { color: #c678dd; }  /* Keywords (e.g., using, class) - Purple */
-.nn { color: #e5c07b; } /* Namespace - Yellow */
-.p { color: #56b6c2; }  /* Punctuation - Cyan */
-.n { color: #abb2bf; }  /* Normal text - White */
-.s { color: #98c379; }  /* Strings - Green */
-.f { color: #61afef; }  /* Functions - Blue */
-
-/* Ensure span elements are displayed correctly */
-.highlight span {
-    display: inline;
-}
+/* Rouge token classes */
+.k { color: #c678dd; }  /* Keywords */
+.nn { color: #e5c07b; } /* Namespace */
+.p { color: #56b6c2; }  /* Punctuation */
+.n { color: #abb2bf; }  /* Normal text */
+.s { color: #98c379; }  /* Strings */
+.f { color: #61afef; }  /* Functions */
