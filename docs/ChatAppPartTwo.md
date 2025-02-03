@@ -60,7 +60,7 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     <div class="code-container">
 
         <!-- Updated Code (Always Visible) -->
-<pre class="updated-code">
+<pre class="updated-code language-csharp">
 <code>         
     <span class="added-line">  using ChatApp.Models;</span>  
   
