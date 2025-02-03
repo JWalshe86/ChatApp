@@ -69,9 +69,13 @@ pre {
 
 /* Updated Code Highlighting (GitHub Green) */
 .updated-code {
-    background: white !important; /* Keeps the block white */
-    padding: 0;
-    border-left: 3px solid #28a745; /* GitHub green */
+    background-color: #e6ffed; /* GitHub green */
+    border-left: 4px solid #28a745;
+    padding: 5px 10px; /* Reduce excessive padding */
+    margin: 0;
+    display: block;
+    font-family: monospace;
+    white-space: pre-wrap;
 }
 
 /* Highlight the changed lines with a green background */
@@ -121,9 +125,9 @@ details summary {
     display: block; /* Show them when expanded */
 }
 .unchanged-code {
-    display: inline-block; /* Allow inline elements to stay aligned properly */
+    display: inline; /* Prevent block-level spacing */
     background: white;
-    width: 100%; /* Make sure it spans the width */
-    padding: 2px 8px; /* Adjust padding for better spacing */
-    box-sizing: border-box; /* Ensure padding doesn't break layout */
+    padding: 0; /* Remove unnecessary padding */
+    margin: 0; /* Remove unnecessary margin */
+    white-space: pre-wrap; /* Preserve spacing while preventing large gaps */
 }
