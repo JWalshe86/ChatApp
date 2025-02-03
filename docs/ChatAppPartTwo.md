@@ -52,44 +52,41 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         </button>
     </div>
 
-    <div class="code-container">
-        <!-- Updated Code (Always Visible) -->
-        <pre class="updated-code">
-<code>
-    <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
-    public class ChatHub : Hub
-    {</span>
+   <div class="code-container">
+    <pre class="updated-code">
+        {% highlight csharp %}
+        using ChatApp.Models;
+        using Microsoft.AspNetCore.SignalR;
 
-    <span class="added-line">using ChatApp.Models;</span>
-
-    <span class="added-line">namespace ChatApp.Hubs
-    {</span>
-
-    <span class="added-line">    private readonly AppDbContext _context;</span>
-    <span class="added-line">    public ChatHub(AppDbContext context)
+        namespace ChatApp.Hubs
         {
-            _context = context;
-        }</span>
+            public class ChatHub : Hub
+            {
+                private readonly AppDbContext _context;
 
-    <span class="unchanged-code">    public async Task SendMessage(string user, string message)
-    {</span>
+                public ChatHub(AppDbContext context)
+                {
+                    _context = context;
+                }
 
-    <span class="added-line">        var newMessage = new Message
-        {
-            User = user,
-            Content = message,
-            Timestamp = DateTime.UtcNow
-        };
+                public async Task SendMessage(string user, string message)
+                {
+                    var newMessage = new Message
+                    {
+                        User = user,
+                        Content = message,
+                        Timestamp = DateTime.UtcNow
+                    };
 
-        _context.Messages.Add(newMessage);
-        await _context.SaveChangesAsync();</span>
+                    _context.Messages.Add(newMessage);
+                    await _context.SaveChangesAsync();
 
-    <span class="unchanged-code">        await Clients.All.SendAsync("ReceiveMessage", user, message);
-    }
-}</span>
-</code>
-        </pre>
-    </div>
+                    await Clients.All.SendAsync("ReceiveMessage", user, message);
+                }
+            }
+        }
+        {% endhighlight %}
+    </pre>
 </div>
 
 
