@@ -19,7 +19,7 @@ img {
    GitHub-Style Code Blocks
    ============================= */
 
-/* GitHub-Style Code Block */
+/* Code Block */
 .code-block {
     background: white;
     border: 1px solid #d1d5da;
@@ -27,7 +27,7 @@ img {
     margin-bottom: 16px;
 }
 
-/* Code Header */
+/* Header */
 .code-header {
     display: flex;
     justify-content: space-between;
@@ -50,7 +50,43 @@ img {
     transition: max-height 0.3s ease-in-out;
 }
 
-/* Rouge Syntax Highlighting */
+/* Updated Code (Always Visible) */
+.updated-code {
+    background-color: #e6ffed;
+    border-left: 4px solid #28a745;
+    padding: 5px 10px;
+    display: block;
+    font-family: monospace;
+    font-size: smaller;
+    white-space: pre-wrap;
+}
+
+/* Full Code (Expanded View) - Hidden by Default */
+.full-code {
+    display: none;
+}
+
+/* Expand Button */
+.expand-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    font-size: 14px;
+    color: #0366d6;
+}
+
+/* Copy Button */
+.copy-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 8px;
+    font-size: 14px;
+    color: #0366d6;
+}
+
+/* Syntax Highlighting (Rouge) */
 .highlight pre, .highlight code {
     background-color: #282c34 !important;
     color: #abb2bf !important;
@@ -61,117 +97,19 @@ img {
     overflow-x: auto;
 }
 
-/* Updated Code Highlighting */
-.updated-code {
-    background-color: #e6ffed;
-    border-left: 4px solid #28a745;
-    padding: 5px 10px;
-    display: block !important;
-    font-family: monospace;
-    font-size: smaller;
-    white-space: pre-wrap;
-}
+/* Rouge Syntax Colors */
+.k { color: #c678dd; }  /* Keywords */
+.nn { color: #e5c07b; } /* Namespace */
+.p { color: #56b6c2; }  /* Punctuation */
+.n { color: #abb2bf; }  /* Normal text */
+.s { color: #98c379; }  /* Strings */
+.f { color: #61afef; }  /* Functions */
 
-/* Hide unchanged lines by default */
-.updated-code .unchanged-code {
+/* Show Full Code When Expanded */
+.code-block.expanded .updated-code {
     display: none;
 }
 
-/* Show unchanged lines when expanded */
-.expanded .updated-code .unchanged-code {
-    display: inline-block;
-}
-
-/* Plus sign for added lines */
-.updated-code span.added-line::before {
-    content: "+ ";
-    color: #28a745;
-    font-weight: bold;
-    user-select: none;
-}
-* Fix added-line visibility */
-.updated-code .added-line {
-    background-color: #e6ffed;
-    border-left: 4px solid #28a745;
+.code-block.expanded .full-code {
     display: block;
-    padding: 2px 8px;
-    white-space: pre-wrap;
-}
-
-/* Expand button styles */
-.expand-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    margin-left: auto;
-    font-size: 14px;
-    color: #0366d6;
-}
-/* Rouge Syntax Highlighting */
-.highlight pre, .highlight code {
-    background-color: #282c34 !important; /* Dark background */
-    color: #abb2bf !important; /* Text color */
-    padding: 10px;
-    border-radius: 6px;
-    font-family: "Courier New", Courier, monospace;
-    display: block;
-    overflow-x: auto;
-}
-/* Ensure correct Rouge syntax highlighting */
-.highlight pre {
-    background: #282c34 !important;
-    color: #abb2bf !important;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-x: auto;
-}
-
-/* Ensure Rouge Syntax Colors */
-.k { color: #c678dd; }  /* Keywords (e.g., using, class) - Purple */
-.nn { color: #e5c07b; } /* Namespace - Yellow */
-.p { color: #56b6c2; }  /* Punctuation - Cyan */
-.n { color: #abb2bf; }  /* Normal text - White */
-.s { color: #98c379; }  /* Strings - Green */
-.f { color: #61afef; }  /* Functions - Blue */
-
-/* Ensure syntax highlighting elements are displayed */
-.highlight span {
-    display: inline;
-}
-/* ✅ Updated Code (always visible) */
-.updated-code {
-    background-color: #e6ffed; /* Light green */
-    border-left: 4px solid #28a745; /* Green border */
-    padding: 5px 10px;
-    font-family: monospace;
-    font-size: smaller;
-    white-space: pre-wrap;
-}
-
-/* ✅ Hide unchanged lines by default */
-.updated-code .unchanged-code {
-    display: none;
-}
-
-/* ✅ Show unchanged code when expanded */
-.expanded .updated-code .unchanged-code {
-    display: block;
-}
-
-/* ✅ Added-line styling */
-.updated-code .added-line {
-    background-color: #e6ffed; /* Green background */
-    border-left: 4px solid #28a745;
-    display: block;
-    padding: 2px 8px;
-}
-
-/* ✅ Expand button styles */
-.expand-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    margin-left: auto;
-    font-size: 14px;
-    color: #0366d6;
 }
