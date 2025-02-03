@@ -100,3 +100,18 @@ details summary {
     cursor: pointer;
     padding: 6px;
 }
+.code-container .original-code {
+    display: none;
+}
+
+.code-container.expanded .original-code {
+    display: block;
+}
+
+.expand-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+}
+
