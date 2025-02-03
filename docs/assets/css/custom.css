@@ -25,6 +25,10 @@ img {
     background: white !important;
     border: 1px solid #d1d5da; /* Matches GitHub's code block border */
 }
+.code-container {
+    font-size: 14px; /* Adjust to match GitHub */
+    line-height: 1.5; /* Reduce excessive line spacing */
+}
 
 /* GitHub-Style Code Header */
 .code-header {
