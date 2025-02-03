@@ -59,42 +59,40 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
 
     <div class="code-container">
-        {% highlight csharp %}
-        <pre class="updated-code">
-            <span class="added-line">using ChatApp.Models;</span>
-            <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;</span>
+```csharp
+using ChatApp.Models;
+using Microsoft.AspNetCore.SignalR;
 
-            <span class="added-line">namespace ChatApp.Hubs;</span>
-            <span class="unchanged-code">&#123;</span> <!-- { -->
-                public class ChatHub : Hub
-                <span class="unchanged-code">&#123;</span> <!-- { -->
+namespace ChatApp.Hubs
+{
+    public class ChatHub : Hub
+    {
+        private readonly AppDbContext _context;
 
-            <span class="added-line">        private readonly AppDbContext _context;</span>
-            <span class="added-line">        public ChatHub(AppDbContext context)</span>
-            <span class="added-line">        &#123;</span> <!-- { -->
-            <span class="added-line">            _context = context;</span>
-            <span class="added-line">        &#125;</span> <!-- } -->
+        public ChatHub(AppDbContext context)
+        {
+            _context = context;
+        }
 
-            <span class="unchanged-code">        public async Task SendMessage(string user, string message)
-            &#123;</span>
+        public async Task SendMessage(string user, string message)
+        {
+            var newMessage = new Message
+            {
+                User = user,
+                Content = message,
+                Timestamp = DateTime.UtcNow
+            };
 
-            <span class="added-line">            var newMessage = new Message</span>
-            <span class="added-line">            &#123;</span>
-            <span class="added-line">                User = user,</span>
-            <span class="added-line">                Content = message,</span>
-            <span class="added-line">                Timestamp = DateTime.UtcNow</span>
-            <span class="added-line">            &#125;;</span>
+            _context.Messages.Add(newMessage);
+            await _context.SaveChangesAsync();
 
-            <span class="added-line">            _context.Messages.Add(newMessage);</span>
-            <span class="added-line">            await _context.SaveChangesAsync();</span>
-
-            <span class="unchanged-code">            await Clients.All.SendAsync("ReceiveMessage", user, message);
-            &#125;</span>
-            <span class="unchanged-code">&#125;</span> <!-- } -->
-        </pre>
-        {% endhighlight %}
-    </div>
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+    }
+}
 </div>
+   </div>
+```
 ---
 
 ### **Tracking Online Users & Notifications**
