@@ -142,3 +142,10 @@ details summary {
     font-weight: bold;
     user-select: none; /* Prevent selection when copying */
 }
+[data-line="unchanged"] {
+    background: white !important;  /* Keep unchanged lines white */
+    display: block;
+    width: 100%;
+    padding: 2px 8px;
+    box-sizing: border-box;
+}
