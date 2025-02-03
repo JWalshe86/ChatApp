@@ -32,9 +32,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.querySelectorAll(".expand-button").forEach(button => {
-    button.addEventListener("click", function () {
-        let codeContainer = button.closest(".code-block");
-        codeContainer.classList.toggle("expanded");
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".expand-button").forEach(button => {
+        button.addEventListener("click", function () {
+            let codeBlock = button.closest(".code-block").querySelector(".code-container");
+            codeBlock.classList.toggle("expanded");
+
+            // Wait for CSS transition, then reapply syntax highlighting
+            setTimeout(() => {
+                Prism.highlightAll();
+            }, 100);
+        });
     });
 });
+
