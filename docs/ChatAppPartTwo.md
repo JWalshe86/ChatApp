@@ -58,7 +58,8 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
 
     <div class="code-container">
-        {% highlight csharp %}
+        <pre class="updated-code">
+{% highlight csharp %}
 using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
@@ -89,7 +90,8 @@ namespace ChatApp.Hubs
         }
     }
 }
-        {% endhighlight %}
+{% endhighlight %}
+        </pre>
     </div>
 </div>
 
