@@ -79,7 +79,7 @@ img {
 
 /* Show unchanged lines when expanded */
 .expanded .updated-code .unchanged-code {
-    display: inline;
+    display: block;
 }
 
 /* Plus sign for added lines */
