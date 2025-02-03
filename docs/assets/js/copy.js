@@ -32,9 +32,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.querySelectorAll(".expand-button").forEach(button => {
-    button.addEventListener("click", function () {
-        let codeContainer = button.closest(".code-block");
-        codeContainer.classList.toggle("expanded");
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".expand-button").forEach(button => {
+        button.addEventListener("click", function () {
+            let codeBlock = button.closest(".code-block").querySelector(".code-container");
+            let unchangedLines = button.closest(".code-block").querySelectorAll(".unchanged-code");
+
+            // Toggle expanded class
+            codeBlock.classList.toggle("expanded");
+
+            // Toggle visibility of unchanged code lines
+            unchangedLines.forEach(line => {
+                line.classList.toggle("hidden");
+            });
+        });
     });
 });
+
