@@ -122,8 +122,5 @@ details summary {
     display: inline; /* Show them when expanded */
 }
 .unchanged-code {
-    display: block !important; /* Ensure it spans the full row */
-    background: white;
-    width: 100%; /* Make it take full width */
-    padding: 2px 0; /* Adjust padding for spacing */
+   background: white;
 }
