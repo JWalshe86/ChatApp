@@ -79,6 +79,7 @@ pre {
     margin: 0;
     display: block;
     font-family: monospace;
+    font-size: smaller;
     white-space: pre-wrap;
 }
 
