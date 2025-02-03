@@ -55,23 +55,22 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
 
         <!-- Updated Code (Always Visible) -->
 <pre class="updated-code">
-<code>  
-    using ChatApp.Models;
+<code>         
+    <span class="added-line">  using ChatApp.Models;</span>  
   
     <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
     public class ChatHub : Hub
     {
     </span>
     
-    namespace ChatApp.Hubs
-    {
-       private readonly AppDbContext _context;
+        <span class="added-line">  namespace ChatApp.Hubs</span>  
+        <span class="added-line"> { </span>  
+        <span class="added-line">private readonly AppDbContext _context;</span>  
+        <span class="added-line">public ChatHub(AppDbContext context)</span>  
+        <span class="added-line">{</span>  
+        <span class="added-line">_context = context;</span>  
+        <span class="added-line">}</span>  
 
-       public ChatHub(AppDbContext context)
-       {
-           _context = context;
-       }
-       
        <span class="unchanged-code">public async Task SendMessage(string user, string message)
        {
        </span>
