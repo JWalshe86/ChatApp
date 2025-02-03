@@ -53,42 +53,39 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
 
    <div class="code-container">
-    <pre class="updated-code">
-        {% highlight csharp %}
-        using ChatApp.Models;
-        using Microsoft.AspNetCore.SignalR;
+        <!-- Updated Code (Always Visible) -->
+        <figure class="highlight">
+            <pre class="updated-code"><code class="language-csharp">
+                <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;
+                public class ChatHub : Hub
+                {</span>
 
-        namespace ChatApp.Hubs
-        {
-            public class ChatHub : Hub
-            {
-                private readonly AppDbContext _context;
+                <span class="added-line">using ChatApp.Models;</span>
+                <span class="added-line">namespace ChatApp.Hubs {</span>
 
-                public ChatHub(AppDbContext context)
-                {
-                    _context = context;
-                }
+                <span class="added-line">    private readonly AppDbContext _context;</span>
+                <span class="added-line">    public ChatHub(AppDbContext context) {</span>
+                <span class="added-line">        _context = context;</span>
+                <span class="added-line">    }</span>
 
-                public async Task SendMessage(string user, string message)
-                {
-                    var newMessage = new Message
-                    {
-                        User = user,
-                        Content = message,
-                        Timestamp = DateTime.UtcNow
-                    };
+                <span class="unchanged-code">    public async Task SendMessage(string user, string message) {</span>
 
-                    _context.Messages.Add(newMessage);
-                    await _context.SaveChangesAsync();
+                <span class="added-line">        var newMessage = new Message {</span>
+                <span class="added-line">            User = user,</span>
+                <span class="added-line">            Content = message,</span>
+                <span class="added-line">            Timestamp = DateTime.UtcNow</span>
+                <span class="added-line">        };</span>
 
-                    await Clients.All.SendAsync("ReceiveMessage", user, message);
-                }
-            }
-        }
-        {% endhighlight %}
-    </pre>
+                <span class="added-line">        _context.Messages.Add(newMessage);</span>
+                <span class="added-line">        await _context.SaveChangesAsync();</span>
+
+                <span class="unchanged-code">        await Clients.All.SendAsync("ReceiveMessage", user, message);
+                }</span>
+                <span class="unchanged-code">}</span>
+            </code></pre>
+        </figure>
+    </div>
 </div>
-
 
 ### **Tracking Online Users & Notifications**
 Chat now displays **online users** and **notifies when users join or leave**.
