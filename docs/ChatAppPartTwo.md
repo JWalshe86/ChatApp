@@ -20,15 +20,16 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
        <button class="copy-button" aria-label="Copy code">
 <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
     <!-- Bottom Square (Main Document) -->
-    <path fill="none" stroke="#57606a" stroke-width="1.5"
+    <path fill="#ffffff" stroke="#57606a" stroke-width="1.5"
         d="M3 2.5A.5.5 0 012.5 3v10A.5.5 0 013 13.5h7A.5.5 0 0110.5 13V6H7.5A.5.5 0 017 5.5V2.5H3z">
     </path>
 
     <!-- Top Square (Overlay Copy Symbol) - Shifted to Top-Right -->
-    <path fill="none" stroke="#57606a" stroke-width="1.5"
+    <path fill="#ffffff" stroke="#24292f" stroke-width="1.5"
         d="M6 4.5A.5.5 0 015.5 5v8A.5.5 0 016 13.5h7A.5.5 0 0113.5 13V5A.5.5 0 0113 4.5H6z">
     </path>
 </svg>
+
 
 
 
