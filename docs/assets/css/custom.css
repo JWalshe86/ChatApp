@@ -16,64 +16,6 @@ img {
 }
 
 /* =============================
-   Typography
-   ============================= */
-h1, h2, h3, h4 {
-    font-weight: 700;
-    text-align: center;
-    color: #2c3e50;
-}
-
-/* ChatApp Main Title */
-h1#chatapp-part-2 {
-    font-size: 2.8rem;
-    font-weight: bold;
-    background: linear-gradient(90deg, #3498db, #9b59b6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0;
-    position: relative;
-}
-
-/* ChatApp Subtitle */
-h2#real-time-messaging-with-signalr {
-    font-size: 1.8rem;
-    font-weight: 600;
-    background: linear-gradient(90deg, #3498db, #9b59b6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 5px;
-    letter-spacing: 0.5px;
-    position: relative;
-}
-
-/* Underline Animation */
-h1#chatapp-part-2::after, 
-h2#real-time-messaging-with-signalr::after {
-    content: "";
-    display: block;
-    width: 60%;
-    height: 3px;
-    background: #3498db;
-    margin: 5px auto 0;
-    animation: underline 1s ease-in-out infinite alternate;
-}
-
-@keyframes underline {
-    0% { width: 40%; }
-    100% { width: 60%; }
-}
-
-/* Standard Styling for Other Headings */
-h2:not(.chatapp-subtitle), h3, h4 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #333;
-    margin-top: 20px;
-    text-align: center;
-}
-
-/* =============================
    Layout & Containers
    ============================= */
 .container {
@@ -85,15 +27,6 @@ h2:not(.chatapp-subtitle), h3, h4 {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.key-updates {
-    background: #eef5ff;
-    border-left: 4px solid #0073e6;
-    padding: 10px 15px;
-    border-radius: 6px;
-    font-weight: 600;
-    margin: 15px 0;
-}
-
 /* =============================
    GitHub-Style Code Blocks
    ============================= */
@@ -101,7 +34,7 @@ h2:not(.chatapp-subtitle), h3, h4 {
 /* Code Block Wrapper */
 .code-block {
     border-radius: 8px;
-    background: #f6f8fa; /* Matches GitHub */
+    background: #f6f8fa;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
     margin-bottom: 20px;
     position: relative;
@@ -122,51 +55,37 @@ h2:not(.chatapp-subtitle), h3, h4 {
     color: #333;
 }
 
-/* Ensure the Copy Button & SVG scale properly */
-.code-header .copy-button {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-    border: none !important;
-    background: transparent !important;
-    cursor: pointer !important;
-    width: 20px !important; /* Adjust to match GitHub size */
-    height: 20px !important;
+/* GitHub Copy Button */
+.copy-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
-/* Fix possible background issues */
-.code-header .copy-button::before,
-.code-header .copy-button::after {
-    content: none !important;
-    display: none !important;
-}
-
-/* Darker color on hover */
-.code-header .copy-button:hover svg {
-    fill: #24292f !important;
-}
-
-
-/* Ensure SVG Icon is Correctly Styled */
-.code-header .copy-button svg {
-    width: 16px !important;
-    height: 16px !important;
-    fill: #57606a !important; /* GitHub-style gray */
+/* Ensure Copy Button SVG is Styled Correctly */
+.copy-button svg {
+    width: 16px;
+    height: 16px;
+    fill: #57606a;
     transition: fill 0.2s;
 }
 
-/* Hover Effect for Better Visibility */
-.code-header .copy-button:hover svg {
-    fill: #24292f !important; /* Darker on hover */
+/* Darker color on hover */
+.copy-button:hover svg {
+    fill: #24292f;
 }
 
-/* Fix for Dark Box or Overlay Issue */
-.code-header .copy-button svg rect,
-.code-header .copy-button svg path {
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
+/* Ensure SVG Elements are Transparent */
+.copy-button svg path {
+    fill: none;
+    stroke: #57606a;
+    stroke-width: 1.5;
 }
 
 /* Code Block */
@@ -181,41 +100,23 @@ pre {
     margin-top: 0;
 }
 
-/* ✅ Updated Code: Apply GitHub-Style Green Background */
+/* Updated Code Highlighting (GitHub Green) */
 pre.updated-code {
-    background-color: #e6ffed !important; /* ✅ Light green background */
-    border-left: 4px solid #28a745 !important; /* ✅ GitHub Green */
+    background-color: #e6ffed;
+    border-left: 4px solid #28a745;
     padding: 10px;
     display: block;
 }
 
-/* ✅ Individual Line Highlighting */
-code.updated-code mark {
-    background-color: #e6ffed !important;
-    display: block;
-    padding: 4px 8px;
-    border-left: 4px solid #28a745; /* ✅ GitHub green */
-    font-weight: normal;
-    margin-bottom: 4px;
-}
-
-/* Ensure JavaScript & Razor Code Uses the Same Background */
-pre code {
-    background-color: inherit;
-    display: block;
-    padding: 0;
-    border: none;
-}
-
-/* ✅ Original Code: Keep It Grey */
+/* Original Code (Greyed Out) */
 pre.original-code {
-    background: #f6f8fa !important;
-    border-left: 4px solid #d1d5da !important;
-    color: #6a737d !important;
+    background: #f6f8fa;
+    border-left: 4px solid #d1d5da;
+    color: #6a737d;
     font-style: italic;
 }
 
-/* ✅ Ensure `details` Tag Doesn't Hide Code */
+/* Toggle Dropdown for Original Code */
 details {
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -224,27 +125,9 @@ details {
     transition: all 0.2s ease-in-out;
 }
 
-/* Show original code properly inside details */
-details[open] pre.original-code {
-    background: #f6f8fa !important;
-    padding: 12px;
-    border-left: 4px solid #d1d5da;
-}
-
-/* Original Code Dropdown Styling */
+/* Original Code Dropdown Summary */
 details summary {
     font-weight: bold;
     cursor: pointer;
     padding: 6px;
-}
-
-/* ✅ Ensuring Updated Code Blocks Stand Out */
-.updated-code {
-    padding-top: 6px;
-}
-
-/* ✅ Highlight Hover Effect */
-mark:hover {
-    background-color: #d4f5d6;
-    transition: background-color 0.2s ease-in-out;
 }
