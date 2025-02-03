@@ -52,16 +52,6 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
     </div>
     
     <div class="code-container">
-        <!-- Original Code (Hidden by Default) -->
-        <pre class="original-code"><code>using Microsoft.AspNetCore.SignalR;
-
-public class ChatHub : Hub
-{
-    public async Task SendMessage(string user, string message)
-    {
-        await Clients.All.SendAsync("ReceiveMessage", user, message);
-    }
-}</code></pre>
 
         <!-- Updated Code (Always Visible) -->
         <pre class="updated-code">
