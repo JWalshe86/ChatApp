@@ -20,15 +20,16 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
        <button class="copy-button" aria-label="Copy code">
 <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
     <!-- Bottom Square (Main Document) -->
-    <path fill="none" stroke="#57606a" stroke-width="1.2"
-        d="M1.75 1A.75.75 0 011 1.75v10.5c0 .41.34.75.75.75h7.5a.75.75 0 00.75-.75V4.75A.75.75 0 009.25 4H5.5a.75.75 0 01-.75-.75V1.75A.75.75 0 014.75 1h-3z">
+    <path fill="#ffffff" stroke="#57606a" stroke-width="1.5"
+        d="M2.75 1.5A.75.75 0 012 2.25v10.5c0 .41.34.75.75.75h7.5a.75.75 0 00.75-.75V5.25A.75.75 0 009.25 4.5H6a.75.75 0 01-.75-.75V2.25A.75.75 0 014.75 1.5h-2z">
     </path>
 
-    <!-- Top Square (Offset to Top-Right) -->
-    <path fill="none" stroke="#24292f" stroke-width="1.2"
-        d="M5.75 3.5A.75.75 0 015 4.25v7.5c0 .41.34.75.75.75h7.5a.75.75 0 00.75-.75v-7.5A.75.75 0 0013.25 3.5h-7.5z">
+    <!-- Top Square (Offset Copy Symbol) -->
+    <path fill="#ffffff" stroke="#24292f" stroke-width="1.5"
+        d="M5.75 4.5A.75.75 0 015 5.25v7.5c0 .41.34.75.75.75h7.5a.75.75 0 00.75-.75v-7.5A.75.75 0 0013.25 4.5h-7.5z">
     </path>
 </svg>
+
 
 
 
