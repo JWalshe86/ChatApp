@@ -136,3 +136,9 @@ details summary {
     margin: 0; /* Remove unnecessary margin */
     white-space: pre-wrap; /* Preserve spacing while preventing large gaps */
 }
+.updated-code span.added-line::before {
+    content: "+ "; /* Adds the plus sign */
+    color: #28a745; /* GitHub Green */
+    font-weight: bold;
+    user-select: none; /* Prevent selection when copying */
+}
