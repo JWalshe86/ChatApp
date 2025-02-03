@@ -149,3 +149,10 @@ details summary {
     padding: 2px 8px;
     box-sizing: border-box;
 }
+pre.updated-code .unchanged-line {
+    background: white !important;
+    display: block;
+    width: 100%;
+    padding: 2px 8px;
+    box-sizing: border-box;
+}
