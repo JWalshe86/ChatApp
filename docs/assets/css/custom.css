@@ -18,9 +18,6 @@ img {
 /* =============================
    GitHub-Style Code Blocks
    ============================= */
-/* =============================
-   GitHub-Style Code Blocks
-   ============================= */
 
 /* Code Block Container */
 .code-block {
@@ -46,15 +43,19 @@ img {
     color: #333;
 }
 
-/* Default Hidden for Unchanged Code */
-.unchanged-code {
+/* Default Hidden for Unchanged and Removed Lines */
+.hidden {
     display: none;
 }
 
-/* Show unchanged code when expanded */
-.updated-code.expanded .unchanged-code {
-    display: block !important;
-    color: #ffffff !important; /* White for unchanged code */
+/* Removed Code (Red - Hidden by Default) */
+.removed-line {
+    display: none;
+    color: #ff6b6b !important; /* GitHub-style red */
+    background-color: rgba(255, 107, 107, 0.15);
+    border-left: 4px solid #ff6b6b;
+    padding: 2px 8px;
+    white-space: pre-wrap;
 }
 
 /* Added Code (Green - Always Visible) */
@@ -66,6 +67,19 @@ img {
     white-space: pre-wrap;
     color: black;
     font-family: "Source Code Pro", monospace;
+}
+
+/* Unchanged Code (Hidden by Default) */
+.unchanged-code {
+    display: none; /* Hide unchanged lines by default */
+    color: #ffffff !important; /* White for unchanged code */
+    font-family: "Source Code Pro", monospace;
+}
+
+/* When expanded, show unchanged and removed code */
+.expanded .unchanged-code,
+.expanded .removed-line {
+    display: block !important;
 }
 
 /* Expand Button */
