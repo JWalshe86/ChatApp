@@ -27,4 +27,22 @@ document.addEventListener("DOMContentLoaded", function () {
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
+
+    // ✅ Apply correct classification to diff output
+    document.querySelectorAll(".updated-code code").forEach(codeBlock => {
+        let lines = codeBlock.innerHTML.split("\n").map(line => line.trim());
+        let formattedHtml = "";
+
+        lines.forEach(line => {
+            if (line.startsWith("+")) {
+                formattedHtml += `<span class="added-line">${line}</span>\n`;
+            } else if (line.startsWith("-")) {
+                formattedHtml += `<span class="removed-line">${line}</span>\n`;
+            } else {
+                formattedHtml += `<span class="unchanged-code hidden">${line}</span>\n`;
+            }
+        });
+
+        codeBlock.innerHTML = formattedHtml;
+    });
 });
