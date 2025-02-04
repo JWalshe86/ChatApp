@@ -46,9 +46,9 @@ namespace ChatApp.Hubs
         if (part.added) {
             diffHtml += `<span class="added-line">+ ${escapeHtml(part.value)}</span>\n`;
         } else if (part.removed) {
-            diffHtml += `<span class="removed-line hidden">- ${escapeHtml(part.value)}</span>\n`; // Initially hidden
+            diffHtml += `<span class="removed-line hidden">- ${escapeHtml(part.value)}</span>\n`;
         } else {
-            diffHtml += `<span class="unchanged-code hidden">${escapeHtml(part.value)}</span>\n`; // Initially hidden
+            diffHtml += `<span class="unchanged-code hidden">${escapeHtml(part.value)}</span>\n`;
         }
     });
 
