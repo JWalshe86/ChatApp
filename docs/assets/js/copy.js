@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
+    if (typeof Diff === "undefined") {
+        console.error("jsdiff library is not loaded!");
+        return;
+    }
+    // Your jsdiff code here...
+});
+
+document.addEventListener("DOMContentLoaded", function () {
     let originalCode = `public class ChatHub : Hub {
         public async Task SendMessage(string user, string message) {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
