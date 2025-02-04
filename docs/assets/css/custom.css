@@ -19,126 +19,47 @@ img {
    GitHub-Style Code Blocks
    ============================= */
 
-/* Code Block Wrapper */
-/* Ensure the background remains white */
-.code-block {
-    background: white !important;
-    border: 1px solid #d1d5da; /* Matches GitHub's code block border */
-}
-.code-container {
-    font-size: 14px; /* Adjust to match GitHub */
-    line-height: 1.5; /* Reduce excessive line spacing */
+/* Unchanged Code (Hidden by Default) */
+.unchanged-code {
+    display: none; /* Hide unchanged lines initially */
+    color: black !important;
+    font-family: "Source Code Pro", monospace;
 }
 
-/* GitHub-Style Code Header */
-.code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f6f8fa;
-    padding: 8px 12px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* GitHub Copy Button */
-.copy-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    user-select: none; /* Prevents text selection */
-}
-
-/* Code Block */
-pre {
-    background-color: #f6f8fa;
-    padding: 0;
-    border-radius: 6px;
-    overflow-x: auto;
-    font-family: monospace;
-    border: 1px solid #ddd;
-    line-height: 1.5;
-    margin: 0;
-}
-
-/* Updated Code Highlighting (GitHub Green) */
-.updated-code {
-    background-color: #e6ffed; /* GitHub green */
-    border-left: 4px solid #28a745;
-    padding: 5px 10px; /* Reduce excessive padding */
-    margin: 0;
-    display: block;
-    font-family: monospace;
-    font-size: smaller;
+/* Removed Code (Red - Hidden by Default) */
+.removed-line {
+    display: none;
+    color: #ff6b6b !important;
+    background-color: rgba(255, 107, 107, 0.15);
+    border-left: 4px solid #ff6b6b;
+    padding: 2px 8px;
     white-space: pre-wrap;
 }
 
-/* Highlight the changed lines with a green background */
-.updated-code code {
+/* Added Code (Green - Always Visible) */
+.added-line {
     display: block;
-    background: #e6ffed; /* GitHub green */
+    background-color: #e6ffed !important;
+    border-left: 4px solid #28a745;
     padding: 2px 8px;
-    border-radius: 4px;
-    margin-bottom: 2px;
+    white-space: pre-wrap;
+    color: black;
+    font-family: "Source Code Pro", monospace;
 }
 
-/* Original Code (Greyed Out) */
-pre.original-code {
-    background: #ffffff !important; /* ✅ Ensure it stays white */
-    border-left: 4px solid #d1d5da;
-    color: #6a737d;
-    font-style: italic;
+/* When expanded, show unchanged and removed code */
+.expanded .unchanged-code,
+.expanded .removed-line {
+    display: inline-block !important;
+    width: 100%;
 }
 
-/* Toggle Dropdown for Original Code */
-details {
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 8px;
-    background: #fafbfc;
-    transition: all 0.2s ease-in-out;
-}
-
-/* Original Code Dropdown Summary */
-details summary {
-    font-weight: bold;
-    cursor: pointer;
-    padding: 6px;
-}
-
+/* Expand Button */
 .expand-button {
     background: transparent;
     border: none;
     cursor: pointer;
-    margin-left: auto;
-}
-.updated-code .unchanged-code {
-    display: none; /* Hide unchanged lines in the updated code block */
-}
-
-.expanded .updated-code .unchanged-code {
-    display: block; /* Show them when expanded */
-}
-.unchanged-code {
-    display: inline; /* Prevent block-level spacing */
-    background: white;
-    padding: 0; /* Remove unnecessary padding */
-    margin: 0; /* Remove unnecessary margin */
-    white-space: pre-wrap; /* Preserve spacing while preventing large gaps */
-}
-.updated-code span.added-line::before {
-    content: "+ "; /* Adds the plus sign */
-    color: #28a745; /* GitHub Green */
-    font-weight: bold;
-    user-select: none; /* Prevent selection when copying */
+    font-size: 14px;
+    color: #0366d6;
+    text-decoration: underline;
 }
