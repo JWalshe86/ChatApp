@@ -114,7 +114,7 @@ pre {
 /* Ensure they are visible when expanded */
 .expanded .unchanged-code,
 .expanded .removed-line {
-    display: inline-block;
+    display: block;
 }
 
 /* Fix Highlighting Overwrites */
