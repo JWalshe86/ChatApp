@@ -46,9 +46,9 @@ namespace ChatApp.Hubs
         if (part.added) {
             diffHtml += `<span class="added-line">+ ${escapeHtml(part.value)}</span>`;
         } else if (part.removed) {
-            diffHtml += `<span class="removed-line">- ${escapeHtml(part.value)}</span>`; // Hidden by default
+            diffHtml += `<span class="removed-line">- ${escapeHtml(part.value)}</span>`; // Initially hidden
         } else {
-            diffHtml += `<span class="unchanged-code">${escapeHtml(part.value)}</span>`; // Hidden by default
+            diffHtml += `<span class="unchanged-code">${escapeHtml(part.value)}</span>`; // Initially hidden
         }
     });
 
@@ -58,9 +58,16 @@ namespace ChatApp.Hubs
         hljs.highlightElement(codeElement);
     }
 
-    // Expand Button
+    // Expand Button Toggle Functionality
     document.querySelector(".expand-button").addEventListener("click", function () {
-        document.querySelector(".updated-code").classList.toggle("expanded");
+        let updatedCodeBlock = document.querySelector(".updated-code");
+        updatedCodeBlock.classList.toggle("expanded");
+
+        if (updatedCodeBlock.classList.contains("expanded")) {
+            this.textContent = "Collapse"; // Change button text
+        } else {
+            this.textContent = "Expand"; // Change back
+        }
     });
 });
 
