@@ -18,6 +18,10 @@ img {
 /* =============================
    GitHub-Style Code Blocks
    ============================= */
+/* Default hidden for unchanged and removed lines */
+.hidden {
+    display: none;
+}
 
 /* Code Block Container */
 .code-block {
@@ -43,20 +47,13 @@ img {
     color: #333;
 }
 
-/* Default hidden for unchanged and removed lines */
-.hidden {
-    display: none !important;
-}
-
 /* Removed Code (Red - Hidden by Default) */
 .removed-line {
-    display: none; /* Hide removed code by default */
     color: #ff6b6b !important; /* GitHub-style red */
     background-color: rgba(255, 107, 107, 0.15);
     border-left: 4px solid #ff6b6b;
     padding: 2px 8px;
     white-space: pre-wrap;
-    font-family: "Source Code Pro", monospace;
 }
 
 /* Added Code (Green - Always Visible) */
