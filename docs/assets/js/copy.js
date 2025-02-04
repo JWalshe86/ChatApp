@@ -44,38 +44,30 @@ namespace ChatApp.Hubs
 
     diff.forEach(part => {
         if (part.added) {
-            diffHtml += `<span class="added-line">+ ${escapeHtml(part.value)}</span>\n`;
+            diffHtml += `<span class="added-line">+ ${escapeHtml(part.value)}</span>`;
         } else if (part.removed) {
-            diffHtml += `<span class="removed-line hidden">- ${escapeHtml(part.value)}</span>\n`;
+            diffHtml += `<span class="removed-line hidden">- ${escapeHtml(part.value)}</span>`; // Initially hidden
         } else {
-            diffHtml += `<span class="unchanged-code hidden">${escapeHtml(part.value)}</span>\n`;
+            diffHtml += `<span class="unchanged-code hidden">${escapeHtml(part.value)}</span>`; // Initially hidden
         }
     });
 
     let codeElement = document.querySelector(".updated-code code");
     if (codeElement) {
         codeElement.innerHTML = diffHtml;
-        hljs.highlightElement(codeElement);
     }
 
     // Expand Button Toggle Functionality
-    let expandButton = document.querySelector(".expand-button");
-    if (expandButton) {
-        expandButton.addEventListener("click", function () {
-            let updatedCodeBlock = document.querySelector(".updated-code");
-            let unchangedLines = document.querySelectorAll(".unchanged-code, .removed-line");
+    document.querySelector(".expand-button").addEventListener("click", function () {
+        let updatedCodeBlock = document.querySelector(".updated-code");
+        updatedCodeBlock.classList.toggle("expanded");
 
-            if (updatedCodeBlock.classList.contains("expanded")) {
-                unchangedLines.forEach(line => line.classList.add("hidden")); // Hide original code
-                updatedCodeBlock.classList.remove("expanded");
-                this.textContent = "Expand"; // Change button text
-            } else {
-                unchangedLines.forEach(line => line.classList.remove("hidden")); // Show original code
-                updatedCodeBlock.classList.add("expanded");
-                this.textContent = "Collapse"; // Change button text
-            }
-        });
-    }
+        if (updatedCodeBlock.classList.contains("expanded")) {
+            this.textContent = "Collapse"; // Change button text
+        } else {
+            this.textContent = "Expand"; // Change back
+        }
+    });
 });
 
 // Function to escape HTML characters
