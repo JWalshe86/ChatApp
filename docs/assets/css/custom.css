@@ -21,6 +21,7 @@ img {
 /* =============================
    GitHub-Style Code Blocks
    ============================= */
+
 /* Code Block Container */
 .code-block {
     background: white;
@@ -45,24 +46,15 @@ img {
     color: #333;
 }
 
-/* Default hidden for unchanged and removed lines */
-.unchanged-code, .removed-line {
-    display: none; /* Hide unchanged & removed lines by default */
+/* Default Hidden for Unchanged Code */
+.unchanged-code {
+    display: none;
 }
 
-/* When expanded, show unchanged and removed code */
-.updated-code.expanded .unchanged-code,
-.updated-code.expanded .removed-line {
+/* Show unchanged code when expanded */
+.updated-code.expanded .unchanged-code {
     display: block !important;
-}
-
-/* Removed Code (Red - Initially Hidden) */
-.removed-line {
-    color: #ff6b6b !important; /* GitHub-style red */
-    background-color: rgba(255, 107, 107, 0.15);
-    border-left: 4px solid #ff6b6b;
-    padding: 2px 8px;
-    white-space: pre-wrap;
+    color: #ffffff !important; /* White for unchanged code */
 }
 
 /* Added Code (Green - Always Visible) */
