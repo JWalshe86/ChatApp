@@ -142,3 +142,14 @@ details summary {
     font-weight: bold;
     user-select: none; /* Prevent selection when copying */
 }
+/* Hide unchanged and removed code by default */
+.unchanged-code, .removed-line {
+    display: none;
+}
+
+/* Show unchanged and removed code when expanded */
+.expanded .unchanged-code,
+.expanded .removed-line {
+    display: inline-block;
+}
+
