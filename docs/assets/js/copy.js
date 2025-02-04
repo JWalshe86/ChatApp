@@ -31,28 +31,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    document.querySelectorAll(".expand-button").forEach(button => {
-        button.addEventListener("click", function () {
-            let codeContainer = button.closest(".code-block");
-            codeContainer.classList.toggle("expanded");
+   document.querySelectorAll(".expand-button").forEach(button => {
+    button.addEventListener("click", function () {
+        let codeContainer = button.closest(".code-block");
+        codeContainer.classList.toggle("expanded");
 
-            // ✅ Reapply syntax highlighting after expansion
-            document.querySelectorAll("pre code").forEach((block) => {
-                if (window.Prism) {
-                    Prism.highlightElement(block);
-                } else if (window.hljs) {
-                    hljs.highlightElement(block);
-                }
-            });
+        // ✅ Re-run the syntax highlighter after expanding
+        document.querySelectorAll("pre code").forEach(block => {
+            hljs.highlightElement(block); // 🔹 For Highlight.js
+            // Prism.highlightElement(block); // 🔹 If using Prism.js
         });
-    });
-
-    // ✅ Apply Syntax Highlighting Initially
-    document.querySelectorAll("pre code").forEach((block) => {
-        if (window.Prism) {
-            Prism.highlightElement(block);
-        } else if (window.hljs) {
-            hljs.highlightElement(block);
-        }
     });
 });
