@@ -59,15 +59,14 @@ img {
     display: none;
 }
 
-/* Expand Mode - Show Unchanged Lines */
-.updated-code.expanded .unchanged-code {
+/* Expand Mode - Show Unchanged and Removed Lines */
+.updated-code.expanded .unchanged-code,
+.updated-code.expanded .removed-line {
     display: block;
-    color: #abb2bf;
 }
 
 /* Removed Lines */
-.updated-code.expanded .removed-line {
-    display: block;
+.removed-line {
     color: #ff6b6b; /* Red for removed code */
 }
 
