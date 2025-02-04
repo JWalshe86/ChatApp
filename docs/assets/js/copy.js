@@ -4,22 +4,34 @@ document.addEventListener("DOMContentLoaded", function () {
             let codeBlock = button.closest(".code-block");
             codeBlock.classList.toggle("expanded");
 
+            // ✅ Log expansion state
+            console.log("Toggled expansion:", codeBlock.classList.contains("expanded"));
+
             // ✅ Select the <code> element inside the expanded block
             let codeElement = codeBlock.querySelector("pre code");
+            if (!codeElement) {
+                console.warn("Code element not found inside expanded block");
+                return;
+            }
+
+            // ✅ Log before applying highlight
+            console.log("Applying syntax highlighting to:", codeElement);
 
             // ✅ Clear previous highlighting classes
             codeElement.classList.remove("hljs"); // If using Highlight.js
             codeElement.classList.remove("language-csharp"); // If using Prism.js
 
-            // ✅ Delay to allow reflow before reapplying syntax highlighting
+            // ✅ Apply syntax highlighting after a short delay
             setTimeout(() => {
                 if (typeof hljs !== "undefined") {
-                    hljs.highlightElement(codeElement); // 🔹 For Highlight.js
+                    hljs.highlightElement(codeElement);
+                    console.log("Highlight.js applied");
                 }
                 if (typeof Prism !== "undefined") {
-                    Prism.highlightElement(codeElement); // 🔹 For Prism.js
+                    Prism.highlightElement(codeElement);
+                    console.log("Prism.js applied");
                 }
-            }, 10); // Small delay to allow class toggle to take effect
+            }, 50);
         });
     });
 });
