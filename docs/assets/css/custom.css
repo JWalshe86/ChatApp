@@ -18,124 +18,38 @@ img {
 /* =============================
    GitHub-Style Code Blocks
    ============================= */
-/* Code block container */
-.code-block {
-    background: white;
-    border: 1px solid #d1d5da;
-    border-radius: 6px;
-    margin-bottom: 16px;
-    overflow: hidden; /* Ensures content doesn’t break */
-}
-
-/* Code Header */
-.code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f6f8fa;
-    padding: 8px 12px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Code Content */
-.updated-code {
-    font-size: 14px;
-    font-family: "Source Code Pro", monospace;
-    line-height: 1.5;
-    padding: 10px;
-    background-color: #f6f8fa;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    border-radius: 6px;
-}
-
-/* Hide unchanged and removed lines by default */
-.updated-code .unchanged-code,
-.updated-code .removed-line {
-    display: none;
-}
-
-/* Expand Mode - Show Unchanged and Removed Lines */
-.updated-code.expanded .unchanged-code,
-.updated-code.expanded .removed-line {
-    display: block;
-}
-
-/* Removed Lines (Red, '-') */
-.removed-line {
-    display: none;
-    color: #ff6b6b;
-    background-color: #ffecec;
-    border-left: 4px solid #d73a49;
-    padding: 2px 8px;
-}
-
-/* Added Lines (Green, '+') */
-.added-line {
-    display: block;
-    background-color: #e6ffed;
-    border-left: 4px solid #28a745;
-    padding: 2px 8px;
-    white-space: pre-wrap;
-    color: black;
-}
-
-/* Expand Button */
-.expand-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    color: #0366d6;
-}
-
-/* Improve Syntax Highlighting */
-pre {
-    background: #282c34 !important;
-    color: #abb2bf !important;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-x: auto;
-}
-
-/* Rouge Syntax Colors */
-.k { color: #c678dd; }  /* Keywords */
-.nn { color: #e5c07b; } /* Namespace */
-.p { color: #56b6c2; }  /* Punctuation */
-.n { color: #abb2bf; }  /* Normal text */
-.s { color: #98c379; }  /* Strings */
-.f { color: #61afef; }  /* Functions */
+/* Default hidden for unchanged and removed lines */
 .hidden {
     display: none;
 }
 
-/* Updated Code (Always Visible) */
+/* Removed Code (Red - Hidden by Default) */
+.removed-line {
+    display: none;
+    color: #ff6b6b !important; /* GitHub-style red */
+    background-color: rgba(255, 107, 107, 0.15);
+    border-left: 4px solid #ff6b6b;
+    padding: 2px 8px;
+    white-space: pre-wrap;
+}
+
+/* Added Code (Green - Always Visible) */
 .added-line {
     display: block;
-    background-color: #e6ffed; /* Light green */
+    background-color: #e6ffed !important; /* Light green */
     border-left: 4px solid #28a745;
     padding: 2px 8px;
     white-space: pre-wrap;
     color: black;
-}
-
-/* Removed Code (Hidden by Default) */
-.removed-line {
-    display: none;
-    color: #ff6b6b; /* Red for removed code */
 }
 
 /* Unchanged Code (Hidden by Default) */
 .unchanged-code {
     display: none;
+    color: #ffffff !important; /* Keep white */
 }
 
-/* Expand Mode: Show Removed and Unchanged Code */
+/* When expanded, show unchanged and removed code */
 .expanded .unchanged-code,
 .expanded .removed-line {
     display: block;
