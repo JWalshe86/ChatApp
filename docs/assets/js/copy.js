@@ -60,12 +60,13 @@ namespace ChatApp.Hubs
     // Expand Button Toggle Functionality
     document.querySelector(".expand-button").addEventListener("click", function () {
         let updatedCodeBlock = document.querySelector(".updated-code");
-        updatedCodeBlock.classList.toggle("expanded");
-
+        
         if (updatedCodeBlock.classList.contains("expanded")) {
-            this.textContent = "Collapse"; // Change button text
+            updatedCodeBlock.classList.remove("expanded");
+            this.textContent = "Expand";
         } else {
-            this.textContent = "Expand"; // Change back
+            updatedCodeBlock.classList.add("expanded");
+            this.textContent = "Collapse";
         }
     });
 });
