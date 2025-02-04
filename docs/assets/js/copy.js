@@ -1,4 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Function to apply syntax highlighting
+    function applySyntaxHighlighting() {
+        document.querySelectorAll("pre code").forEach(codeElement => {
+            if (typeof hljs !== "undefined") {
+                hljs.highlightElement(codeElement);
+            }
+            if (typeof Prism !== "undefined") {
+                Prism.highlightElement(codeElement);
+            }
+        });
+    }
+
+    // ✅ Apply syntax highlighting on page load
+    applySyntaxHighlighting();
+
     // Handle "Show Original Code" toggle
     document.querySelectorAll("details").forEach(detail => {
         const summary = detail.querySelector("summary");
@@ -16,40 +31,28 @@ document.addEventListener("DOMContentLoaded", function () {
             let codeText = codeBlock.innerText.trim();
 
             navigator.clipboard.writeText(codeText).then(() => {
-                // ✅ Change SVG icon directly instead of replacing button content
-                let originalIcon = button.innerHTML; // Store original HTML
+                let originalIcon = button.innerHTML;
                 button.innerHTML = `
                     <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
                         <path fill-rule="evenodd"
                             d="M13 3H7c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7 4h6c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V5c0-.6.4-1 1-1z"></path>
-                    </svg> Copied!`; // Change icon + message
+                    </svg> Copied!`;
 
                 setTimeout(() => {
-                    button.innerHTML = originalIcon; // Restore original icon
+                    button.innerHTML = originalIcon;
                 }, 1500);
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
 
+    // Expand Button: Toggle & Apply Syntax Highlighting
     document.querySelectorAll(".expand-button").forEach(button => {
         button.addEventListener("click", function () {
             let codeBlock = button.closest(".code-block");
             codeBlock.classList.toggle("expanded");
 
-            // ✅ Select the <code> element inside the expanded block
-            let codeElement = codeBlock.querySelector("pre code");
-
-            // ✅ Clear previous highlighting classes
-            codeElement.classList.remove("hljs"); // If using Highlight.js
-            codeElement.classList.remove("language-csharp"); // If using Prism.js
-
-            // ✅ Reapply syntax highlighting
-            if (typeof hljs !== "undefined") {
-                hljs.highlightElement(codeElement); // 🔹 For Highlight.js
-            }
-            if (typeof Prism !== "undefined") {
-                Prism.highlightElement(codeElement); // 🔹 For Prism.js
-            }
+            // ✅ Apply syntax highlighting after expanding
+            setTimeout(applySyntaxHighlighting, 10);
         });
     });
-}); // ✅ **This closing brace was missing**
+});
