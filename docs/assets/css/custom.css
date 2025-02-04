@@ -16,13 +16,13 @@ img {
 }
 
 /* =============================
-   GitHub-Style Code Blocks
+   Code Block Styling
    ============================= */
 
 /* Unchanged Code (Hidden by Default) */
 .unchanged-code {
     display: none; /* Hide unchanged lines initially */
-    color: black !important;
+    color: #333 !important; /* Normal text color */
     font-family: "Source Code Pro", monospace;
 }
 
@@ -50,16 +50,6 @@ img {
 /* When expanded, show unchanged and removed code */
 .expanded .unchanged-code,
 .expanded .removed-line {
-    display: inline-block !important;
+    display: block !important;
     width: 100%;
-}
-
-/* Expand Button */
-.expand-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    color: #0366d6;
-    text-decoration: underline;
 }
