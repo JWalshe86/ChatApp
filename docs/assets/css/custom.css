@@ -18,19 +18,45 @@ img {
 /* =============================
    GitHub-Style Code Blocks
    ============================= */
+
+/* Code Block Container */
+.code-block {
+    background: white;
+    border: 1px solid #d1d5da;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+}
+
+/* Code Header */
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f6f8fa;
+    padding: 8px 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
 /* Default hidden for unchanged and removed lines */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* Removed Code (Red - Hidden by Default) */
 .removed-line {
-    display: none;
+    display: none; /* Hide removed code by default */
     color: #ff6b6b !important; /* GitHub-style red */
     background-color: rgba(255, 107, 107, 0.15);
     border-left: 4px solid #ff6b6b;
     padding: 2px 8px;
     white-space: pre-wrap;
+    font-family: "Source Code Pro", monospace;
 }
 
 /* Added Code (Green - Always Visible) */
@@ -41,16 +67,28 @@ img {
     padding: 2px 8px;
     white-space: pre-wrap;
     color: black;
+    font-family: "Source Code Pro", monospace;
 }
 
 /* Unchanged Code (Hidden by Default) */
 .unchanged-code {
-    display: none;
-    color: #ffffff !important; /* Keep white */
+    display: none; /* Hide unchanged lines by default */
+    color: #ffffff !important; /* White for unchanged code */
+    font-family: "Source Code Pro", monospace;
 }
 
 /* When expanded, show unchanged and removed code */
 .expanded .unchanged-code,
 .expanded .removed-line {
-    display: block;
+    display: block !important;
+}
+
+/* Expand Button */
+.expand-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #0366d6;
+    text-decoration: underline;
 }
