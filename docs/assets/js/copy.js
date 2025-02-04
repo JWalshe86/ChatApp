@@ -33,13 +33,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
    document.querySelectorAll(".expand-button").forEach(button => {
     button.addEventListener("click", function () {
-        let codeContainer = button.closest(".code-block");
-        codeContainer.classList.toggle("expanded");
+        let codeBlock = button.closest(".code-block");
+        codeBlock.classList.toggle("expanded");
 
-        // ✅ Re-run the syntax highlighter after expanding
-        document.querySelectorAll("pre code").forEach(block => {
-            hljs.highlightElement(block); // 🔹 For Highlight.js
-            // Prism.highlightElement(block); // 🔹 If using Prism.js
-        });
+        // ✅ Select the <code> element inside the expanded block
+        let codeElement = codeBlock.querySelector("pre code");
+
+        // ✅ Clear previous highlighting classes
+        codeElement.classList.remove("hljs"); // If using Highlight.js
+        codeElement.classList.remove("language-csharp"); // If using Prism.js
+
+        // ✅ Reapply syntax highlighting
+        if (typeof hljs !== "undefined") {
+            hljs.highlightElement(codeElement); // 🔹 For Highlight.js
+        }
+        if (typeof Prism !== "undefined") {
+            Prism.highlightElement(codeElement); // 🔹 For Prism.js
+        }
     });
 });
