@@ -18,7 +18,7 @@ img {
 /* =============================
    GitHub-Style Code Blocks
    ============================= */
-/* Code Block */
+/* Code block container */
 .code-block {
     background: white;
     border: 1px solid #d1d5da;
@@ -26,22 +26,7 @@ img {
     margin-bottom: 16px;
 }
 
-/* Header */
-.code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f6f8fa;
-    padding: 8px 12px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Code Container */
+/* Code container */
 .code-container {
     font-size: 14px;
     line-height: 1.5;
@@ -49,23 +34,25 @@ img {
     transition: max-height 0.3s ease-in-out;
 }
 
-/* Updated Code (Always Visible) */
-.updated-code {
-    background-color: #e6ffed;
-    border-left: 4px solid #28a745;
-    padding: 5px 10px;
-    display: block !important;
-    font-family: monospace;
-    font-size: smaller;
-    white-space: pre-wrap;
-}
-
-/* Full Code (Expanded View) - Hidden by Default */
-.full-code {
+/* Hide unchanged lines by default */
+.unchanged-code {
     display: none;
 }
 
-/* Expand Button */
+/* Show unchanged lines when expanded */
+.expanded .unchanged-code {
+    display: inline-block;
+}
+
+/* Highlight added lines */
+.added-line {
+    background-color: #e6ffed;
+    border-left: 4px solid #28a745;
+    display: block;
+    padding: 2px 8px;
+}
+
+/* Expand button */
 .expand-button {
     background: transparent;
     border: none;
@@ -73,42 +60,4 @@ img {
     margin-left: auto;
     font-size: 14px;
     color: #0366d6;
-}
-
-/* Copy Button */
-.copy-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    margin-left: 8px;
-    font-size: 14px;
-    color: #0366d6;
-}
-
-/* Syntax Highlighting (Rouge) */
-.highlight pre, .highlight code {
-    background-color: #282c34 !important;
-    color: #abb2bf !important;
-    padding: 10px;
-    border-radius: 6px;
-    font-family: "Courier New", Courier, monospace;
-    display: block;
-    overflow-x: auto;
-}
-
-/* Rouge Syntax Colors */
-.k { color: #c678dd; }  /* Keywords */
-.nn { color: #e5c07b; } /* Namespace */
-.p { color: #56b6c2; }  /* Punctuation */
-.n { color: #abb2bf; }  /* Normal text */
-.s { color: #98c379; }  /* Strings */
-.f { color: #61afef; }  /* Functions */
-
-/* Show Full Code When Expanded */
-.code-block.expanded .updated-code {
-    display: none;
-}
-
-.code-block.expanded .full-code {
-    display: block;
 }
