@@ -1,3 +1,6 @@
+console.log("✅ JavaScript is running!");
+
+
 document.addEventListener("click", function (event) {
     let button = event.target.closest(".expand-button");
     if (!button) return;
