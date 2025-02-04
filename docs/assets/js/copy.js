@@ -3,10 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("jsdiff library is not loaded!");
         return;
     }
-    // Your jsdiff code here...
-});
 
-document.addEventListener("DOMContentLoaded", function () {
     let originalCode = `public class ChatHub : Hub {
         public async Task SendMessage(string user, string message) {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
@@ -33,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }`;
 
+    // Generate diff
     let diff = Diff.diffLines(originalCode, updatedCode);
     let diffHtml = '';
 
@@ -46,19 +44,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Insert diff into code block
     let codeElement = document.querySelector(".updated-code code");
-    codeElement.innerHTML = diffHtml;
+    if (codeElement) {
+        codeElement.innerHTML = diffHtml;
+        hljs.highlightElement(codeElement); // Apply syntax highlighting
+    }
 
-    // Apply syntax highlighting after inserting diff
-    hljs.highlightElement(codeElement);
+    // Expand button functionality
+    document.querySelectorAll(".expand-button").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelector(".updated-code").classList.toggle("expanded");
+        });
+    });
 });
 
 // Function to escape HTML characters
-function escapeHtml(unsafe) {
-    return unsafe.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;");
 }
-
-// Expand button functionality
-document.querySelector(".expand-button").addEventListener("click", function () {
-    document.querySelector(".updated-code").classList.toggle("expanded");
-});
