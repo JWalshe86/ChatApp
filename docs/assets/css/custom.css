@@ -19,6 +19,7 @@ img {
    GitHub-Style Code Blocks
    ============================= */
 /* Code block container */
+/* Code Block */
 .code-block {
     background: white;
     border: 1px solid #d1d5da;
@@ -26,38 +27,65 @@ img {
     margin-bottom: 16px;
 }
 
-/* Code container */
-.code-container {
+/* Code Header */
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f6f8fa;
+    padding: 8px 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    font-family: monospace;
     font-size: 14px;
-    line-height: 1.5;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
+    font-weight: bold;
+    color: #333;
 }
 
-/* Hide unchanged lines by default */
-.unchanged-code {
+/* Updated Code */
+.updated-code {
+    font-size: 14px;
+    font-family: "Source Code Pro", monospace;
+    line-height: 1.5;
+    padding: 10px;
+    background-color: #f6f8fa;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+/* Default Hidden Lines */
+.updated-code .unchanged-code,
+.updated-code .removed-line {
     display: none;
 }
 
-/* Show unchanged lines when expanded */
-.expanded .unchanged-code {
-    display: inline-block;
-}
-
-/* Highlight added lines */
-.added-line {
-    background-color: #e6ffed;
-    border-left: 4px solid #28a745;
+/* Expand Mode - Show Unchanged Lines */
+.updated-code.expanded .unchanged-code {
     display: block;
-    padding: 2px 8px;
+    color: #abb2bf;
 }
 
-/* Expand button */
+/* Removed Lines */
+.updated-code.expanded .removed-line {
+    display: block;
+    color: #ff6b6b; /* Red for removed code */
+}
+
+/* Added Lines */
+.added-line {
+    display: block;
+    background-color: #e6ffed; /* Light green */
+    border-left: 4px solid #28a745;
+    padding: 2px 8px;
+    white-space: pre-wrap;
+    color: black;
+}
+
+/* Expand Button */
 .expand-button {
     background: transparent;
     border: none;
     cursor: pointer;
-    margin-left: auto;
     font-size: 14px;
     color: #0366d6;
 }
