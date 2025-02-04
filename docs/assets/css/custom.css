@@ -110,3 +110,33 @@ pre {
 .n { color: #abb2bf; }  /* Normal text */
 .s { color: #98c379; }  /* Strings */
 .f { color: #61afef; }  /* Functions */
+.hidden {
+    display: none;
+}
+
+/* Updated Code (Always Visible) */
+.added-line {
+    display: block;
+    background-color: #e6ffed; /* Light green */
+    border-left: 4px solid #28a745;
+    padding: 2px 8px;
+    white-space: pre-wrap;
+    color: black;
+}
+
+/* Removed Code (Hidden by Default) */
+.removed-line {
+    display: none;
+    color: #ff6b6b; /* Red for removed code */
+}
+
+/* Unchanged Code (Hidden by Default) */
+.unchanged-code {
+    display: none;
+}
+
+/* Expand Mode: Show Removed and Unchanged Code */
+.expanded .unchanged-code,
+.expanded .removed-line {
+    display: block;
+}
