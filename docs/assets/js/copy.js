@@ -45,13 +45,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Expand Button: Toggle & Apply Syntax Highlighting
+    // ✅ Expand Button: Toggle Original Code & Reapply Syntax Highlighting
     document.querySelectorAll(".expand-button").forEach(button => {
         button.addEventListener("click", function () {
             let codeBlock = button.closest(".code-block");
             codeBlock.classList.toggle("expanded");
 
-            // ✅ Apply syntax highlighting after expanding
+            let unchangedLines = codeBlock.querySelectorAll(".unchanged-code, .removed-line");
+
+            if (codeBlock.classList.contains("expanded")) {
+                // ✅ Show original code
+                unchangedLines.forEach(line => line.style.display = "inline-block");
+                button.innerText = "Collapse";
+            } else {
+                // ✅ Hide original code again
+                unchangedLines.forEach(line => line.style.display = "none");
+                button.innerText = "Expand";
+            }
+
+            // ✅ Reapply syntax highlighting
             setTimeout(applySyntaxHighlighting, 10);
         });
     });
