@@ -30,11 +30,29 @@ document.addEventListener("DOMContentLoaded", function () {
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
-});
 
-document.querySelectorAll(".expand-button").forEach(button => {
-    button.addEventListener("click", function () {
-        let codeContainer = button.closest(".code-block");
-        codeContainer.classList.toggle("expanded");
+    document.querySelectorAll(".expand-button").forEach(button => {
+        button.addEventListener("click", function () {
+            let codeContainer = button.closest(".code-block");
+            codeContainer.classList.toggle("expanded");
+
+            // ✅ Reapply syntax highlighting after expansion
+            document.querySelectorAll("pre code").forEach((block) => {
+                if (window.Prism) {
+                    Prism.highlightElement(block);
+                } else if (window.hljs) {
+                    hljs.highlightElement(block);
+                }
+            });
+        });
+    });
+
+    // ✅ Apply Syntax Highlighting Initially
+    document.querySelectorAll("pre code").forEach((block) => {
+        if (window.Prism) {
+            Prism.highlightElement(block);
+        } else if (window.hljs) {
+            hljs.highlightElement(block);
+        }
     });
 });
