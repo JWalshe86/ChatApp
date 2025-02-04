@@ -146,3 +146,4 @@ private async Task SendOnlineUsers()
 ---
 
 This update ensures all code blocks have **GitHub-style headers and copy buttons** while maintaining correct formatting for **HTML entities** in Markdown. Let me know if you need any further refinements! 🚀
+](https://github.com/JWalshe86/ChatApp/blob/81a814570538447d5b25f98f046100781ffb5baf/docs/ChatAppPartTwo.md)
