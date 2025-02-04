@@ -1,79 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
-    if (typeof Diff === "undefined") {
-        console.error("jsdiff library is not loaded!");
-        return;
-    }
-
-    let originalCode = `using Microsoft.AspNetCore.SignalR;
-
-public class ChatHub : Hub
-{
-    public async Task SendMessage(string user, string message)
-    {
-        await Clients.All.SendAsync("ReceiveMessage", user, message);
-    }
-}`;
-
-    let updatedCode = `using ChatApp.Models;
-namespace ChatApp.Hubs
-{
-    public class ChatHub : Hub
-    {
-        private readonly AppDbContext _context;
-        public ChatHub(AppDbContext context)
-        {
-            _context = context;
-        }
-        public async Task SendMessage(string user, string message)
-        {
-            var newMessage = new Message
-            {
-                User = user,
-                Content = message,
-                Timestamp = DateTime.UtcNow
-            };
-            _context.Messages.Add(newMessage);
-            await _context.SaveChangesAsync();
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
-    }
-}`;
-
-    let diff = Diff.diffLines(originalCode, updatedCode);
-    let diffHtml = '';
-
-    diff.forEach(part => {
-        if (part.added) {
-            diffHtml += `<span class="added-line">+ ${escapeHtml(part.value)}</span>\n`;
-        } else if (part.removed) {
-            diffHtml += `<span class="removed-line hidden">- ${escapeHtml(part.value)}</span>\n`; 
-        } else {
-            diffHtml += `<span class="unchanged-code hidden">${escapeHtml(part.value)}</span>\n`; 
-        }
+    // Handle "Show Original Code" toggle
+    document.querySelectorAll("details").forEach(detail => {
+        const summary = detail.querySelector("summary");
+        summary.addEventListener("click", function () {
+            setTimeout(() => {
+                summary.innerHTML = detail.open ? "🔼 Original Code..." : "🔽 Show Original Code...";
+            }, 100);
+        });
     });
 
-    let codeElement = document.querySelector(".updated-code code");
-    if (codeElement) {
-        codeElement.innerHTML = diffHtml;
-        hljs.highlightElement(codeElement);
-    }
+    // Handle GitHub-Style Copy Button Clicks
+    document.querySelectorAll(".copy-button").forEach(button => {
+        button.addEventListener("click", function () {
+            let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("code");
+            let codeText = codeBlock.innerText.trim();
 
-    // Expand Button Toggle Functionality
-    document.querySelector(".expand-button").addEventListener("click", function () {
-        let updatedCodeBlock = document.querySelector(".updated-code");
-        updatedCodeBlock.classList.toggle("expanded");
+            navigator.clipboard.writeText(codeText).then(() => {
+                // ✅ Change SVG icon directly instead of replacing button content
+                let originalIcon = button.innerHTML; // Store original HTML
+                button.innerHTML = `
+                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
+                        <path fill-rule="evenodd"
+                            d="M13 3H7c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7 4h6c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V5c0-.6.4-1 1-1z"></path>
+                    </svg> Copied!`; // Change icon + message
 
-        if (updatedCodeBlock.classList.contains("expanded")) {
-            this.textContent = "Collapse"; // Change button text
-        } else {
-            this.textContent = "Expand"; // Change back
-        }
+                setTimeout(() => {
+                    button.innerHTML = originalIcon; // Restore original icon
+                }, 1500);
+            }).catch(err => console.error("Failed to copy:", err));
+        });
     });
 });
 
-// Function to escape HTML characters
-function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;")
-              .replace(/</g, "&lt;")
-              .replace(/>/g, "&gt;");
-}
+document.querySelectorAll(".expand-button").forEach(button => {
+    button.addEventListener("click", function () {
+        let codeContainer = button.closest(".code-block");
+        codeContainer.classList.toggle("expanded");
+    });
+});
