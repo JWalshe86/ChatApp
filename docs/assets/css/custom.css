@@ -106,16 +106,22 @@ pre {
     margin-left: auto;
 }
 
-/* ✅ Hide unchanged and removed lines by default */
+/* Default: Hide unchanged and removed lines */
 .unchanged-code, .removed-line {
     display: none;
 }
 
-/* ✅ Show unchanged and removed lines when expanded */
+/* Ensure they are visible when expanded */
 .expanded .unchanged-code,
 .expanded .removed-line {
     display: block;
 }
+
+/* Fix Highlighting Overwrites */
+.expanded code.hljs {
+    background: inherit; /* Keep background from being overwritten */
+}
+
 
 /* ✅ Keep inline spacing consistent */
 .unchanged-code {
