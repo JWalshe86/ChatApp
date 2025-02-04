@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }`;
 
-    let diff = JsDiff.diffLines(originalCode, updatedCode);
+    let diff = Diff.diffLines(originalCode, updatedCode);
     let diffHtml = '';
 
     diff.forEach(part => {
