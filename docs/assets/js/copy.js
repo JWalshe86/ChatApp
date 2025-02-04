@@ -6,10 +6,15 @@ document.querySelectorAll(".expand-button").forEach(button => {
         let codeElement = codeBlock.querySelector("pre code");
         if (!codeElement) return;
 
-        // ✅ Wait a moment before applying highlighting
+        // ✅ Temporarily remove & re-add the code block to force re-render
+        let parent = codeElement.parentElement;
+        let clonedCode = codeElement.cloneNode(true);
+        parent.replaceChild(clonedCode, codeElement);
+
+        // ✅ Wait and reapply Highlight.js
         setTimeout(() => {
             if (typeof hljs !== "undefined") {
-                hljs.highlightElement(codeElement);
+                hljs.highlightElement(clonedCode);
                 console.log("Highlight.js applied to expanded block");
             }
         }, 100);
