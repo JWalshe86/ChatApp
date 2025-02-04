@@ -61,7 +61,10 @@ I created a `Message` class that Entity Framework (EF) maps into a database tabl
         <code>
             <span class="added-line">using ChatApp.Models;</span>  
             <span class="unchanged-code">using Microsoft.AspNetCore.SignalR;</span>
-            <span class="unchanged-code">public class ChatHub : Hub {</span>
+            <span class="unchanged-code">{% highlight csharp %}
+public class ChatHub : Hub
+{% endhighlight %}
+{</span>
             <span class="added-line">namespace ChatApp.Hubs {</span>  
             <span class="added-line">private readonly AppDbContext _context;</span>  
             <span class="added-line">public ChatHub(AppDbContext context) {</span>  
