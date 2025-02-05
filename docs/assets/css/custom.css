@@ -43,11 +43,12 @@ pre {
 
 /* Highlighting */
 .added-line {
-    background: #e6ffed;
+    background: #e6ffed !important; /* Force green highlight */
     color: #22863a;
-    display: block;
+    display: inline-block !important; /* Prevent syntax highlighter from changing this */
     padding: 2px 8px;
     border-left: 3px solid #28a745;
+    width: 100%; /* Ensure full-row highlight */
 }
 
 .original-code {
