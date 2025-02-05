@@ -1,15 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("pre code").forEach((block) => {
-        hljs.highlightElement(block);
+    hljs.highlightAll(); // Apply syntax highlighting first
+
+    // Reapply 'original-code' and 'new-line' classes after highlight.js modifies DOM
+    document.querySelectorAll(".original-code").forEach(originalElement => {
+        let highlightedElements = originalElement.parentNode.querySelectorAll("span");
+
+        highlightedElements.forEach(span => {
+            // Ensure each highlighted span inside the original code keeps its class
+            span.classList.add("original-code");
+        });
     });
 
-    // Reapply added-line styling AFTER syntax highlighting runs
-    setTimeout(() => {
-        document.querySelectorAll(".added-line").forEach((line) => {
-            line.style.backgroundColor = "#e6ffed"; // Reapply green color
-            line.style.borderLeft = "3px solid #28a745"; // Reapply left border
-            line.style.display = "inline-block"; // Ensures background extends full width
-            line.style.width = "100%";
+    document.querySelectorAll(".new-line").forEach(line => {
+        let highlightedElements = line.parentNode.querySelectorAll("span");
+
+        highlightedElements.forEach(span => {
+            span.classList.add("new-line");
         });
-    }, 500); // Give time for Highlight.js to modify DOM
+    });
 });
