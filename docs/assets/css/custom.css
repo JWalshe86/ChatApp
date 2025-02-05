@@ -78,7 +78,7 @@ body {
 
 /* ✅ Ensure Highlight.js Syntax Colors Work Properly */
 pre code {
-    background-color: #24292e !important; /* GitHub dark theme */
+    background-color: white !important; /* GitHub dark theme */
     font-family: "Source Code Pro", monospace;
     color: #ffffff; /* Make sure all text is white */
     padding: 10px;
