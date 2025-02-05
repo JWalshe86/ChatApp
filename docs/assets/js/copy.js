@@ -1,15 +1,7 @@
-document.querySelectorAll('.expand-button').forEach(button => {
-    button.addEventListener('click', () => {
-        let codeBlock = button.closest('.code-block');
-        let codeElement = codeBlock.querySelector('code');
+document.querySelector(".expand-button").addEventListener("click", function () {
+    let originalLines = document.querySelectorAll(".original-code");
+    originalLines.forEach(line => line.classList.toggle("hidden"));
 
-        codeBlock.classList.toggle('expanded');
-
-        if (codeBlock.classList.contains('expanded')) {
-            if (!codeElement.dataset.highlighted) { // Ensure it runs only once
-                hljs.highlightElement(codeElement);
-                codeElement.dataset.highlighted = "true";
-            }
-        }
-    });
+    // Toggle button text
+    this.textContent = this.textContent === "Expand all" ? "Collapse" : "Expand all";
 });
