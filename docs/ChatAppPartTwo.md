@@ -9,16 +9,15 @@ title: ChatApp Part Two
 ![ChatApp](images/ChatApp.png)
 
 ---
-
 <div class="code-block">
     <div class="code-header">
         <span class="code-filename">ChatHub.cs</span>
-        <button class="expand-button" onclick="toggleExpand(this)">Expand all</button>
+        <button class="expand-button">Expand all</button>
         <button class="copy-button">Copy</button>
     </div>
 
     <div class="code-container">
-        <pre class="updated-code language-csharp data-no-highlight"><code>
+        <pre class="updated-code language-csharp"><code>
 <span class="added-line">+ using ChatApp.Models;</span>
 
 <span class="original-code hidden">using Microsoft.AspNetCore.SignalR;</span>
