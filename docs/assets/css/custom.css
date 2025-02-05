@@ -81,7 +81,7 @@ body {
 
 /* Match GitHub's Dark Mode for Code */
 pre code {
-    background-color: #24292e !important;
+    background-color: white !important;
     font-family: "Source Code Pro", monospace;
     color: white;
 }
