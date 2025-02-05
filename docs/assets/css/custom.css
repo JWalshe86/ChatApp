@@ -1,20 +1,21 @@
-/* Base Styles */
+/* 🌟 Base Styles */
 body {
     font-family: "Source Code Pro", monospace;
-    background-color: #f6f8fa;
+    background-color: #ffffff; /* Light theme background */
     padding: 20px;
+    color: #24292e; /* GitHub text color */
 }
 
-/* Code Block Container */
+/* 📜 Code Block Container */
 .code-block {
-    border: 1px solid #ddd;
+    border: 1px solid #d1d5da; /* Lighter border for GitHub light theme */
     border-radius: 5px;
     overflow: hidden;
     font-family: "Source Code Pro", monospace;
-    background: #ffffff;
+    background: #f6f8fa; /* GitHub light gray */
 }
 
-/* Header Styling */
+/* 🏷️ Header Styling */
 .code-header {
     background: #eaecef;
     padding: 8px;
@@ -24,7 +25,7 @@ body {
     align-items: center;
 }
 
-/* Expand & Copy Buttons */
+/* 🔘 Expand & Copy Buttons */
 .expand-button,
 .copy-button {
     background: none;
@@ -34,32 +35,32 @@ body {
     color: #0366d6;
 }
 
-/* Code Container */
+/* 📦 Code Container */
 .code-container {
     padding: 8px;
 }
 
-/* Updated Code Block */
+/* 🆕 Updated Code Block */
 .updated-code {
-    background: #ffffff;
+    background: #ffffff; /* White background */
     padding: 8px;
     border-radius: 5px;
     overflow-x: auto;
 }
 
-/* Added Lines */
+/* ✅ Added Lines - Light Theme */
 .added-line {
-    background: var(--color-diff-blob-addition-bg, #e6ffed); /* Uses GitHub color */
+    background: var(--color-diff-blob-addition-bg, #e6ffed); /* Uses GitHub's light mode color */
     border-left: 3px solid #28a745;
     display: block;
     padding: 2px 8px;
-    color: #59636e;
+    color: #24292e; /* Dark text for readability */
     width: 100%;
-    line-height: 1.3; /* Matches GitHub */
+    line-height: 1.3;
     white-space: pre-wrap;
 }
 
-/* Add "+" Symbol Before Added Lines */
+/* ➕ "+" Symbol Before Added Lines */
 .added-line::before {
     content: "+";
     color: #28a745;
@@ -69,19 +70,37 @@ body {
     width: 20px;
 }
 
-/* Ensure Original Code Is White */
+/* 🔳 Original Code - Light Mode */
 .original-code {
-    color: #ffffff !important; /* Ensures it stands out on dark mode */
+    color: #24292e !important; /* Dark text to match GitHub light mode */
 }
 
-/* Hide Original Code by Default */
+/* 🚫 Hide Original Code by Default */
 .original-code.hidden {
     display: none;
 }
 
-/* Match GitHub's Dark Mode for Code */
+/* 🎨 Match GitHub’s Light Theme Syntax */
 pre code {
-    background-color: white !important;
+    background-color: #f6f8fa !important; /* GitHub's light gray */
     font-family: "Source Code Pro", monospace;
-    color: white;
+    color: #24292e; /* Dark text */
+    border-radius: 6px;
+}
+
+/* 🎨 Syntax Highlighting */
+.hljs-keyword {
+    color: #d73a49 !important; /* Red for keywords */
+}
+
+.hljs-title {
+    color: #6f42c1 !important; /* Purple for class names */
+}
+
+.hljs-string {
+    color: #032f62 !important; /* Dark blue for strings */
+}
+
+.hljs-comment {
+    color: #6a737d !important; /* Gray for comments */
 }
