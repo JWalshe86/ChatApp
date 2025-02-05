@@ -1,11 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("JS is running"); 
+    console.log("JS is running");
 
+    // Preserve entire original lines before Highlight.js modifies them
     document.querySelectorAll("pre code").forEach((block) => {
-        block.innerHTML = block.innerHTML.replace(
-            /(using|namespace|public|private|await|var|class|function)/g,
-            (match) => `<span class="original-code">${match}</span>`
-        );
+        block.innerHTML = block.innerHTML
+            .split("\n")
+            .map((line) =>
+                line.includes("+")
+                    ? `<span class="added-line">${line}</span>` // Preserve added lines
+                    : `<span class="original-code hidden">${line}</span>` // Preserve original lines
+            )
+            .join("\n");
     });
 
     console.log("Injected .original-code into pre code blocks.");
