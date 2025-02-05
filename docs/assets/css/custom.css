@@ -4,6 +4,7 @@ body {
     padding: 20px;
 }
 
+/* 🔹 Code Block Styling */
 .code-block {
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -12,6 +13,7 @@ body {
     background: #ffffff;
 }
 
+/* 🔹 Code Header (Filename + Buttons) */
 .code-header {
     background: #eaecef;
     padding: 8px;
@@ -30,10 +32,12 @@ body {
     color: #0366d6;
 }
 
+/* 🔹 Code Container */
 .code-container {
     padding: 8px;
 }
 
+/* 🔹 Updated Code (Code that is always visible) */
 .updated-code {
     background: #ffffff;
     padding: 8px;
@@ -41,6 +45,7 @@ body {
     overflow-x: auto;
 }
 
+/* ✅ Ensure added lines follow GitHub's diff style */
 .added-line {
     background: #e6ffed; /* Light green for added lines */
     display: block; /* Ensures full-width background */
@@ -50,6 +55,7 @@ body {
     white-space: pre-wrap; /* Keeps formatting and line wrapping */
 }
 
+/* 🔹 Add "+" sign before added lines */
 .added-line::before {
     content: "+";
     color: #28a745;
@@ -59,14 +65,22 @@ body {
     width: 20px; /* Adds spacing so the code aligns well */
 }
 
+/* ✅ Original Code (Hidden by default, shown when expanded) */
 .original-code {
-    background: #fff; /* Default white for hidden original code */
+    color: white !important; /* Make original code white */
     display: block;
-    padding: 2px 8px;
-    border-left: 3px solid #ddd;
-    line-height: 1.4; /* Reduce line height */
 }
 
-.hidden {
-    display: none; /* Initially hidden */
+/* 🔹 Ensure original lines are hidden by default */
+.original-code.hidden {
+    display: none;
+}
+
+/* ✅ Ensure Highlight.js Syntax Colors Work Properly */
+pre code {
+    background-color: #24292e !important; /* GitHub dark theme */
+    font-family: "Source Code Pro", monospace;
+    color: #ffffff; /* Make sure all text is white */
+    padding: 10px;
+    border-radius: 5px;
 }
