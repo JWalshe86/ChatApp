@@ -47,19 +47,19 @@ body {
     overflow-x: auto;
 }
 
-/* ✅ Added Lines - Light Theme */
+/* Ensure Added Lines Follow GitHub’s Diff Style */
 .added-line {
-    background: var(--color-diff-blob-addition-bg, #e6ffed); /* Uses GitHub's light mode color */
+    background: var(--color-diff-blob-addition-bg, #e6ffed);
     border-left: 3px solid #28a745;
     display: block;
     padding: 2px 8px;
-    color: #24292e; /* Dark text for readability */
+    color: #59636e;
     width: 100%;
     line-height: 1.3;
     white-space: pre-wrap;
 }
 
-/* ➕ "+" Symbol Before Added Lines */
+/* ✅ Only show `+` visually */
 .added-line::before {
     content: "+";
     color: #28a745;
@@ -68,6 +68,7 @@ body {
     display: inline-block;
     width: 20px;
 }
+
 
 /* 🔳 Original Code - Light Mode */
 .original-code {
