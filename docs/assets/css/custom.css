@@ -38,3 +38,58 @@
         .unchanged {
             background: #f6f8fa;
         }
+.code-block {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    font-family: monospace;
+    background: #f8f9fa;
+}
+
+.code-header {
+    background: #eaecef;
+    padding: 8px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expand-button,
+.copy-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #0366d6;
+}
+
+.code-container {
+    padding: 8px;
+}
+
+.updated-code {
+    background: #ffffff;
+    padding: 8px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.added-line {
+    background: #e6ffed; /* Light green for added lines */
+    display: block;
+    padding: 2px 8px;
+    border-left: 3px solid #28a745;
+}
+
+.original-code {
+    background: #fff; /* Default white for hidden original code */
+    display: block;
+    padding: 2px 8px;
+    border-left: 3px solid #ddd;
+}
+
+.hidden {
+    display: none; /* Initially hidden */
+}
+
