@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
-    // ✨ Apply Highlight.js FIRST
+    // ✨ Apply Highlight.js 1st
     document.querySelectorAll("pre code").forEach((block) => {
         hljs.highlightElement(block);
     });
