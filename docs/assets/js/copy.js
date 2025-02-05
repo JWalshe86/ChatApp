@@ -1,4 +1,3 @@
-<script>
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("pre code").forEach((block) => {
         hljs.highlightElement(block);
@@ -14,4 +13,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }, 500); // Give time for Highlight.js to modify DOM
 });
-</script>
