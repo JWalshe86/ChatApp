@@ -18,7 +18,7 @@ title: ChatApp Part Two
     </div>
 
     <div class="code-container">
-        <pre class="updated-code language-csharp"><code>
+        <pre class="updated-code language-csharp data-no-highlight"><code>
 <span class="added-line">+ using ChatApp.Models;</span>
 
 <span class="original-code hidden">using Microsoft.AspNetCore.SignalR;</span>
