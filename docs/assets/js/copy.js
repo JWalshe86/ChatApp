@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
-    // Preserve entire original lines before Highlight.js modifies them
+    // 🛠 Preserve entire lines before Highlight.js modifies them
     document.querySelectorAll("pre code").forEach((block) => {
         block.innerHTML = block.innerHTML
             .split("\n")
             .map((line) =>
-                line.includes("+")
+                line.trim().startsWith("+") // If line is an addition
                     ? `<span class="added-line">${line}</span>` // Preserve added lines
                     : `<span class="original-code hidden">${line}</span>` // Preserve original lines
             )
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Injected .original-code into pre code blocks.");
 
-    // Apply Highlight.js AFTER ensuring original-code is present
+    // ✨ Apply Highlight.js AFTER ensuring original-code is present
     document.querySelectorAll("pre code").forEach((block) => {
         hljs.highlightElement(block);
     });
@@ -30,6 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let originalCode = codeBlock.querySelectorAll(".original-code");
 
             console.log("Original code found:", originalCode);
+
+            if (originalCode.length === 0) {
+                console.warn("⚠ No original code elements found. Check HTML.");
+                return;
+            }
 
             originalCode.forEach((line) => {
                 line.classList.toggle("hidden");
