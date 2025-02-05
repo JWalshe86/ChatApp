@@ -1,10 +1,17 @@
-function toggleExpand(button) {
-    let codeBlock = button.closest(".code-block");
-    let originalCode = codeBlock.querySelectorAll(".original-code");
+document.addEventListener("DOMContentLoaded", function () {
+    // Ensure syntax highlighting doesn't interfere with expand functionality
+    setTimeout(() => {
+        document.querySelectorAll(".expand-button").forEach(button => {
+            button.addEventListener("click", function () {
+                let codeBlock = this.closest(".code-block");
+                let originalCode = codeBlock.querySelectorAll(".original-code");
 
-    originalCode.forEach(line => {
-        line.classList.toggle("hidden");
-    });
+                originalCode.forEach(line => {
+                    line.classList.toggle("hidden");
+                });
 
-    button.textContent = button.textContent === "Expand all" ? "Collapse" : "Expand all";
-}
+                this.textContent = this.textContent === "Expand all" ? "Collapse" : "Expand all";
+            });
+        });
+    }, 500); // Give syntax highlighting some time to process
+});
