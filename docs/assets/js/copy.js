@@ -1,7 +1,16 @@
-document.querySelector(".expand-button").addEventListener("click", function () {
-    let originalLines = document.querySelectorAll(".original-code");
-    originalLines.forEach(line => line.classList.toggle("hidden"));
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".expand-button").forEach(button => {
+        button.addEventListener("click", () => {
+            const codeBlock = button.closest(".code-block");
+            const originalCode = codeBlock.querySelectorAll(".original-code");
+            const addedCode = codeBlock.querySelectorAll(".added-line");
 
-    // Toggle button text
-    this.textContent = this.textContent === "Expand all" ? "Collapse" : "Expand all";
+            originalCode.forEach(line => {
+                line.classList.toggle("hidden");
+            });
+
+            // Change button text
+            button.textContent = button.textContent === "Expand all" ? "Collapse" : "Expand all";
+        });
+    });
 });
