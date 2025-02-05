@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
-    // ✨ Apply Highlight.js 1st
+    // ✨ Apply Highlight.js first
     document.querySelectorAll("pre code").forEach((block) => {
         hljs.highlightElement(block);
     });
@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
         block.innerHTML = lines
             .map((line) =>
                 line.trim().startsWith("+") // If line is an addition
-                    ? `<span class="added-line">${line}</span>` // Preserve added lines
-                    : `<span class="original-code hidden">${line}</span>` // Preserve original lines
+                    ? `<span class="added-line">${line.substring(1).trim()}</span>` // ✅ Remove `+` from code, but keep styling
+                    : `<span class="original-code hidden">${line}</span>`
             )
             .join("\n");
     });
@@ -56,15 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // ✅ Fix Copy Button (if it doesn't work)
-document.querySelectorAll(".copy-button").forEach((button) => {
-    button.addEventListener("click", function () {
-        let codeBlock = this.closest(".code-block");
-        let codeText = codeBlock.querySelector("code").innerText.trim();
+    // ✅ Fix Copy Button (so it doesn't copy the `+` signs)
+    document.querySelectorAll(".copy-button").forEach((button) => {
+        button.addEventListener("click", function () {
+            let codeBlock = this.closest(".code-block");
+            let codeText = [...codeBlock.querySelectorAll("code .added-line, code .original-code")]
+                .map(span => span.textContent.replace(/^\+\s*/, "")) // ✅ Remove the `+` when copying
+                .join("\n");
 
-        navigator.clipboard.writeText(codeText).then(() => {
-            console.log("✅ Code copied!");
-        }).catch(err => console.error("❌ Copy failed", err));
+            navigator.clipboard.writeText(codeText).then(() => {
+                console.log("✅ Code copied!");
+            }).catch(err => console.error("❌ Copy failed", err));
+        });
     });
 });
-}); // ✅ Closing bracket was missing here!
