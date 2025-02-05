@@ -43,11 +43,12 @@ body {
 
 .added-line {
     background: #e6ffed; /* Light green for added lines */
-    display: block; /* Ensures full-width background */
+    display: inline-block; /* Removes the gap while keeping full-width background */
+    width: 100%; /* Ensures full row coloring */
     padding: 2px 8px;
     border-left: 3px solid #28a745;
     line-height: 1.4; /* Adjusts spacing to match GitHub */
-    white-space: pre-wrap; /* Keeps formatting and line wrapping */
+    white-space: pre-wrap; /* Keeps formatting and wrapping */
 }
 
 .added-line::before {
