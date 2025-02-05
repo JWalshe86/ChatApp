@@ -35,6 +35,7 @@
 <!-- ✅ Load Custom JS -->
 <script src="{{ '/assets/js/copy.js' | relative_url }}"></script>
 <script>
+<script>
 function toggleExpand(button) {
     let codeBlock = button.closest(".code-block");
     let originalCode = codeBlock.querySelectorAll(".original-code");
@@ -46,6 +47,7 @@ function toggleExpand(button) {
     button.textContent = button.textContent === "Expand all" ? "Collapse" : "Expand all";
 }
 </script>
+
 
 </body>
 </html>
