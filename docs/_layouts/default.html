@@ -22,18 +22,33 @@
         {{ content }}
     </div>
 
-    <!-- ✅ Load Bootstrap JavaScript -->
+   <!-- ✅ Load Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- ✅ Load Highlight.js -->
-<!-- Highlight.js for Syntax Highlighting -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+        });
 
-    
-<!-- ✅ Load Custom JS -->
+        // ✅ Reapply added-line styles after Highlight.js finishes
+        setTimeout(() => {
+            document.querySelectorAll(".added-line").forEach((line) => {
+                line.style.backgroundColor = "#e6ffed"; // Light green background
+                line.style.borderLeft = "3px solid #28a745"; // Green left border
+                line.style.display = "inline-block"; // Ensures full row highlighting
+                line.style.width = "100%";
+            });
+        }, 500); // Wait 500ms for Highlight.js to modify the DOM
+    });
+</script>
+
+<!-- ✅ Load Custom Copy-to-Clipboard JS -->
 <script src="{{ '/assets/js/copy.js' | relative_url }}"></script>
+
+<!-- ✅ Expand Button JavaScript -->
 <script>
 function toggleExpand(button) {
     let codeBlock = button.closest(".code-block");
