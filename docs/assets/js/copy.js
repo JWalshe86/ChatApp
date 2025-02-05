@@ -56,4 +56,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // ✅ Fix Copy Button (if it doesn't work)
+document.querySelectorAll(".copy-button").forEach((button) => {
+    button.addEventListener("click", function () {
+        let codeBlock = this.closest(".code-block");
+        let codeText = codeBlock.querySelector("code").innerText.trim();
+
+        navigator.clipboard.writeText(codeText).then(() => {
+            console.log("✅ Code copied!");
+        }).catch(err => console.error("❌ Copy failed", err));
+    });
+});
 }); // ✅ Closing bracket was missing here!
