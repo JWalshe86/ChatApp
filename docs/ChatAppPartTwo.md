@@ -4,7 +4,7 @@ title: ChatApp Part Two
 ---
 
 # **ChatApp Part 2**  
-## **Real-Time Messaging with SignalR**
+## **Real-Time Messaging using SignalR**
 
 ![ChatApp](images/ChatApp.png)
 
