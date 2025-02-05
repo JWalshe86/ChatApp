@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         hljs.highlightElement(block);
     });
 
-    // 🔄 Restore our classes after Highlight.js modifies the DOM
+    // 🔄 Restore classes after Highlight.js modifies the DOM
     document.querySelectorAll("pre code span[data-custom-class]").forEach((span) => {
         span.classList.add(span.getAttribute("data-custom-class"));
         span.removeAttribute("data-custom-class"); // Cleanup
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 line.classList.toggle("hidden");
             });
 
-            // Ensure syntax highlighting doesn't remove our classes
+            // Ensure Highlight.js doesn't strip our classes
             applyHighlightingFix(codeBlock);
 
             this.textContent = this.textContent === "Expand all" ? "Collapse" : "Expand all";
