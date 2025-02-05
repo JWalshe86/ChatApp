@@ -29,7 +29,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 line.classList.toggle("hidden");
             });
 
+            // Ensure syntax highlighting doesn't remove our classes
+            applyHighlightingFix(codeBlock);
+
             this.textContent = this.textContent === "Expand all" ? "Collapse" : "Expand all";
         });
     });
+
+    // 🚀 Function to reapply classes after Highlight.js modifies the DOM
+    function applyHighlightingFix(container) {
+        container.querySelectorAll(".hljs-keyword, .hljs-title, .hljs-string").forEach(span => {
+            let parent = span.closest("span");
+
+            if (parent) {
+                if (parent.classList.contains("added-line")) {
+                    span.classList.add("added-line");
+                }
+                if (parent.classList.contains("original-code")) {
+                    span.classList.add("original-code");
+                }
+            }
+        });
+    }
+
+    // 🔄 Reapply Highlight Fix on Page Load
+    document.querySelectorAll(".code-block").forEach(block => applyHighlightingFix(block));
 });
