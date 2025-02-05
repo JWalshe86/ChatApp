@@ -58,8 +58,28 @@ function toggleExpand(button) {
         line.classList.toggle("hidden");
     });
 
+    // Ensure syntax highlighting preserves styles
+    applyHighlightingFix(codeBlock);
+
     button.textContent = button.textContent === "Expand all" ? "Collapse" : "Expand all";
 }
+
+// Reapply added-line and original-code after hljs modifies DOM
+function applyHighlightingFix(container) {
+    container.querySelectorAll(".hljs-keyword, .hljs-title, .hljs-string").forEach(span => {
+        let parent = span.closest("span");
+
+        if (parent) {
+            if (parent.classList.contains("added-line")) {
+                span.classList.add("added-line");
+            }
+            if (parent.classList.contains("original-code")) {
+                span.classList.add("original-code");
+            }
+        }
+    });
+}
+
 </script>
 
 
