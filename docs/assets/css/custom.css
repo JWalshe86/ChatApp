@@ -7,9 +7,9 @@ body {
 .code-block {
     border: 1px solid #ddd;
     border-radius: 5px;
-    overflow: hidden;
     font-family: monospace;
-    background: #ffffff;
+    background: #f8f9fa;
+    position: relative;
 }
 
 .code-header {
@@ -21,8 +21,7 @@ body {
     align-items: center;
 }
 
-.expand-button,
-.copy-button {
+.expand-button, .copy-button {
     background: none;
     border: none;
     cursor: pointer;
@@ -34,40 +33,29 @@ body {
     padding: 8px;
 }
 
-.updated-code {
-    background: #ffffff;
-    padding: 8px;
+pre {
+    background: white;
+    padding: 10px;
     border-radius: 5px;
     overflow-x: auto;
+    white-space: pre-wrap;
 }
 
+/* Highlighting */
 .added-line {
-    background: #e6ffed; /* Light green for added lines */
-    display: inline-block; /* Removes the gap while keeping full-width background */
-    width: 100%; /* Ensures full row coloring */
+    background: #e6ffed;
+    color: #22863a;
+    display: block;
     padding: 2px 8px;
     border-left: 3px solid #28a745;
-    line-height: 1.4; /* Adjusts spacing to match GitHub */
-    white-space: pre-wrap; /* Keeps formatting and wrapping */
-}
-
-.added-line::before {
-    content: "+";
-    color: #28a745;
-    margin-right: 8px;
-    font-weight: bold;
-    display: inline-block; /* Keeps the + symbol aligned properly */
-    width: 20px; /* Adds spacing so the code aligns well */
 }
 
 .original-code {
-    background: #fff; /* Default white for hidden original code */
     display: block;
     padding: 2px 8px;
     border-left: 3px solid #ddd;
-    line-height: 1.4; /* Reduce line height */
 }
 
 .hidden {
-    display: none; /* Initially hidden */
+    display: none;
 }
