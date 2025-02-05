@@ -1,10 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
-    // 🛠 Preserve entire lines before Highlight.js modifies them
+    // ✨ Apply Highlight.js FIRST
     document.querySelectorAll("pre code").forEach((block) => {
-        block.innerHTML = block.innerHTML
-            .split("\n")
+        hljs.highlightElement(block);
+    });
+
+    console.log("Highlight.js applied");
+
+    // 🛠 AFTER Highlight.js runs, inject .original-code for full lines
+    document.querySelectorAll("pre code").forEach((block) => {
+        const lines = block.innerHTML.split("\n");
+
+        block.innerHTML = lines
             .map((line) =>
                 line.trim().startsWith("+") // If line is an addition
                     ? `<span class="added-line">${line}</span>` // Preserve added lines
@@ -13,14 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .join("\n");
     });
 
-    console.log("Injected .original-code into pre code blocks.");
-
-    // ✨ Apply Highlight.js AFTER ensuring original-code is present
-    document.querySelectorAll("pre code").forEach((block) => {
-        hljs.highlightElement(block);
-    });
-
-    console.log("Highlight.js applied");
+    console.log("Injected .original-code after Highlight.js applied.");
 
     // ✅ Fix Expand Button
     document.querySelectorAll(".expand-button").forEach((button) => {
