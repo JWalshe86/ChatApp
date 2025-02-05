@@ -1,45 +1,26 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("✅ DOM fully loaded! JavaScript is running.");
+document.querySelectorAll(".expand-button").forEach(button => {
+    button.addEventListener("click", () => {
+        console.log("🔥 Expand button clicked!");
 
-    // Select all expand buttons
-    let expandButtons = document.querySelectorAll(".expand-button");
-    console.log(`🔍 Found ${expandButtons.length} expand buttons.`);
+        let codeBlock = button.closest(".code-block");
+        console.log("🔍 Closest code block:", codeBlock);
 
-    if (expandButtons.length === 0) {
-        console.warn("⚠️ No expand buttons found! Check your HTML structure.");
-    }
+        let wasExpanded = codeBlock.classList.contains("expanded");
+        codeBlock.classList.toggle("expanded");
+        console.log("🔄 Toggled 'expanded' class. Now expanded:", !wasExpanded);
 
-    expandButtons.forEach(button => {
-        console.log("🛠️ Adding event listener to:", button);
-
-        button.addEventListener("click", function () {
-            console.log("🔥 Expand button clicked!");
-
-            // Find the nearest code block
-            let codeBlock = button.closest(".code-block");
-            console.log("🔍 Closest code block:", codeBlock);
-
-            if (!codeBlock) {
-                console.error("❌ No .code-block found! Check the HTML structure.");
-                return;
-            }
-
-            // Toggle the expanded class
-            codeBlock.classList.toggle("expanded");
-            let isExpanded = codeBlock.classList.contains("expanded");
-            console.log(`🔄 Toggled 'expanded' class. Now expanded: ${isExpanded}`);
-
-            // Reapply syntax highlighting if expanded
-            if (isExpanded) {
-                console.log("🎨 Applying syntax highlighting...");
-                document.querySelectorAll("pre code").forEach(el => {
-                    console.log("🔦 Highlighting element:", el);
-                    hljs.highlightElement(el);
-                });
-            } else {
-                console.log("⬅️ Removing expanded styles (if necessary).");
-                // If you need to reset styles, you can add a function here
-            }
-        });
+        if (!wasExpanded) {
+            console.log("🎨 Applying syntax highlighting...");
+            codeBlock.querySelectorAll("pre code").forEach(el => {
+                hljs.highlightElement(el);
+                console.log("🔦 Highlighting element:", el);
+            });
+        } else {
+            console.log("⬅️ Removing expanded styles (if necessary).");
+            codeBlock.querySelectorAll("pre code").forEach(el => {
+                el.classList.remove("hljs");  // Remove Highlight.js styles
+                console.log("🚫 Removed syntax highlighting from:", el);
+            });
+        }
     });
 });
