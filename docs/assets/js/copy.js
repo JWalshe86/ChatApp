@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Injected .original-code after Highlight.js applied.");
 
- // ✅ Fix Expand Button for SVG-based UI
 document.querySelectorAll(".expand-button").forEach((button) => {
     button.addEventListener("click", function () {
         console.log("Toggle clicked!");
@@ -41,27 +40,25 @@ document.querySelectorAll(".expand-button").forEach((button) => {
             line.classList.toggle("hidden");
         });
 
-        // ✅ Instead of changing text, toggle an "expanded" class
+        // ✅ Toggle "expanded" class
         this.classList.toggle("expanded");
 
-        // ✅ Fix SVG Icon Change (Use Two Separate Paths)
-        let icon = this.querySelector("svg path");
-        if (icon) {
-            console.log("SVG Path Before:", icon.getAttribute("d"));
+        // ✅ Fix SVG Icon Change
+        let icon = this.querySelector("svg");
+        let path = icon.querySelector("path");
 
-            // 🔹 Correct Expand/Collapse Icons
-            if (this.classList.contains("expanded")) {
-                // Set Collapse Icon (Arrow Up)
-                icon.setAttribute("d", "M4 9l4-4 4 4"); 
-            } else {
-                // Set Expand Icon (Arrow Down)
-                icon.setAttribute("d", "M4 6l4 4 4-4");
-            }
-
-            console.log("SVG Path After:", icon.getAttribute("d"));
+        if (this.classList.contains("expanded")) {
+            // Switch to "fold" (collapse) icon
+            icon.classList.replace("octicon-unfold", "octicon-fold");
+            path.setAttribute("d", "M10.896 2H8.75V.75a.75.75 0 0 0-1.5 0V2H5.104a.25.25 0 0 0-.177.427l2.896 2.896a.25.25 0 0 0 .354 0l2.896-2.896A.25.25 0 0 0 10.896 2Z");
+        } else {
+            // Switch to "unfold" (expand) icon
+            icon.classList.replace("octicon-fold", "octicon-unfold");
+            path.setAttribute("d", "m8.177.677 2.896 2.896a.25.25 0 0 1-.177.427H8.75v1.25a.75.75 0 0 1-1.5 0V4H5.104a.25.25 0 0 1-.177-.427L7.823.677a.25.25 0 0 1 .354 0Z");
         }
     });
 });
+
 
 
     // ✅ Fix Copy Button (so it doesn't copy the `+` signs)
