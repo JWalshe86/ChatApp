@@ -46,15 +46,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Optional: Change the SVG icon based on the state
             let icon = this.querySelector("svg path");
-            if (icon) {
-                if (this.classList.contains("expanded")) {
-                    icon.setAttribute("d", "M2 6h12M2 10h12"); // Example collapse icon
-                } else {
-                    icon.setAttribute("d", "M2 6h12M2 10h12M2 14h12"); // Example expand icon
-                }
-            }
-        });
-    });
+if (icon) {
+    console.log("SVG Path Before:", icon.getAttribute("d")); // ✅ Log before changing
+    if (this.classList.contains("expanded")) {
+        icon.setAttribute("d", "M2 6h12M2 10h12"); // Example collapse icon
+    } else {
+        icon.setAttribute("d", "M2 6h12M2 10h12M2 14h12"); // Example expand icon
+    }
+    console.log("SVG Path After:", icon.getAttribute("d")); // ✅ Log after changing
+}
+
 
     // ✅ Fix Copy Button (so it doesn't copy the `+` signs)
     document.querySelectorAll(".copy-button").forEach((button) => {
