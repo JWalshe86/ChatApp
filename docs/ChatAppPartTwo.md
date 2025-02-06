@@ -1,14 +1,3 @@
----
-layout: default
-title: ChatApp Part Two
----
-
-# **ChatApp Part 2**  
-## **Real-Time Messaging using SignalR**
-
-![ChatApp](images/ChatApp.png)
-
----
 <div class="code-block">
     <div class="code-header">
         <span class="code-filename">ChatHub.cs</span>
@@ -26,9 +15,8 @@ title: ChatApp Part Two
             </svg>
         </button>
     </div>
-</div>
 
-
+    <!-- ✅ Wraps the code inside code-container (inside .code-block) -->
     <div class="code-container">
         <pre class="updated-code language-csharp"><code>
 <span class="added-line">+ using ChatApp.Models;</span>
@@ -62,5 +50,5 @@ title: ChatApp Part Two
 <span class="original-code hidden">}</span>
 <span class="original-code hidden">}</span>
 </code></pre>
-    </div> <!-- ✅ Moved closing </div> to wrap everything inside .code-block -->
-</div> <!-- ✅ Closing .code-block div -->
+    </div>
+</div> <!-- ✅ Properly closed .code-block -->
