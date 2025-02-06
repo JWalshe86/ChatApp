@@ -23,10 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Injected .original-code after Highlight.js applied.");
 
-
-   document.addEventListener("DOMContentLoaded", function () {
-    console.log("JS is running");
-
+    // ✅ Fix Expand Button
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
             console.log("Toggle clicked!");
@@ -48,15 +45,22 @@ document.addEventListener("DOMContentLoaded", function () {
             let unfoldIcon = this.querySelector(".unfold-icon");
             let foldIcon = this.querySelector(".fold-icon");
 
+            console.log("Before Toggle:", {
+                unfold: unfoldIcon.classList.contains("hidden"),
+                fold: foldIcon.classList.contains("hidden"),
+            });
+
             unfoldIcon.classList.toggle("hidden");
             foldIcon.classList.toggle("hidden");
+
+            console.log("After Toggle:", {
+                unfold: unfoldIcon.classList.contains("hidden"),
+                fold: foldIcon.classList.contains("hidden"),
+            });
 
             this.classList.toggle("expanded");
         });
     });
-});
-
-
 
     // ✅ Fix Copy Button (so it doesn't copy the `+` signs)
     document.querySelectorAll(".copy-button").forEach((button) => {
@@ -72,4 +76,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-}); // ✅ Closing `DOMContentLoaded` event listener
+}); // ✅ Closing `DOMContentLoaded`
