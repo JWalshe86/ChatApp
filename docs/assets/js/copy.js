@@ -23,40 +23,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Injected .original-code after Highlight.js applied.");
 
-    // ✅ Fix Expand Button for SVG-based UI
-    document.querySelectorAll(".expand-button").forEach((button) => {
-        button.addEventListener("click", function () {
-            console.log("Toggle clicked!");
-            let codeBlock = this.closest(".code-block");
-            let originalCode = codeBlock.querySelectorAll(".original-code");
+ // ✅ Fix Expand Button for SVG-based UI
+document.querySelectorAll(".expand-button").forEach((button) => {
+    button.addEventListener("click", function () {
+        console.log("Toggle clicked!");
+        let codeBlock = this.closest(".code-block");
+        let originalCode = codeBlock.querySelectorAll(".original-code");
 
-            console.log("Original code found:", originalCode);
+        console.log("Original code found:", originalCode);
 
-            if (originalCode.length === 0) {
-                console.warn("⚠ No original code elements found. Check HTML.");
-                return;
+        if (originalCode.length === 0) {
+            console.warn("⚠ No original code elements found. Check HTML.");
+            return;
+        }
+
+        originalCode.forEach((line) => {
+            line.classList.toggle("hidden");
+        });
+
+        // ✅ Instead of changing text, toggle an "expanded" class
+        this.classList.toggle("expanded");
+
+        // ✅ Fix SVG Icon Change (Use Two Separate Paths)
+        let icon = this.querySelector("svg path");
+        if (icon) {
+            console.log("SVG Path Before:", icon.getAttribute("d"));
+
+            // 🔹 Correct Expand/Collapse Icons
+            if (this.classList.contains("expanded")) {
+                // Set Collapse Icon (Arrow Up)
+                icon.setAttribute("d", "M4 9l4-4 4 4"); 
+            } else {
+                // Set Expand Icon (Arrow Down)
+                icon.setAttribute("d", "M4 6l4 4 4-4");
             }
 
-            originalCode.forEach((line) => {
-                line.classList.toggle("hidden");
-            });
-
-            // ✅ Instead of changing text, toggle an "expanded" class
-            this.classList.toggle("expanded");
-
-            // ✅ Fix SVG Icon Change
-            let icon = this.querySelector("svg path");
-            if (icon) {
-                console.log("SVG Path Before:", icon.getAttribute("d")); // ✅ Log before changing
-                if (this.classList.contains("expanded")) {
-                    icon.setAttribute("d", "M2 6h12M2 10h12"); // Example collapse icon
-                } else {
-                    icon.setAttribute("d", "M2 6h12M2 10h12M2 14h12"); // Example expand icon
-                }
-                console.log("SVG Path After:", icon.getAttribute("d")); // ✅ Log after changing
-            }
-        }); // ✅ **Missing bracket was here!**
+            console.log("SVG Path After:", icon.getAttribute("d"));
+        }
     });
+});
+
 
     // ✅ Fix Copy Button (so it doesn't copy the `+` signs)
     document.querySelectorAll(".copy-button").forEach((button) => {
