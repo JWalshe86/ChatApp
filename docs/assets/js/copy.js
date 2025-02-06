@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Injected .original-code after Highlight.js applied.");
 
 
-    document.addEventListener("DOMContentLoaded", function () {
+   document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
     document.querySelectorAll(".expand-button").forEach((button) => {
@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
 
 
 
