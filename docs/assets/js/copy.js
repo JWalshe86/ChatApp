@@ -24,9 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Injected .original-code after Highlight.js applied.");
 
 
+    document.addEventListener("DOMContentLoaded", function () {
+    console.log("JS is running");
+
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
             console.log("Toggle clicked!");
+
             let codeBlock = this.closest(".code-block");
             let originalCode = codeBlock.querySelectorAll(".original-code");
 
@@ -40,21 +44,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 line.classList.toggle("hidden");
             });
 
-            this.classList.toggle("expanded");
-
-            // ✅ Toggle Icons
+            // ✅ Toggle Icons Correctly
             let unfoldIcon = this.querySelector(".unfold-icon");
             let foldIcon = this.querySelector(".fold-icon");
 
-            if (this.classList.contains("expanded")) {
-                unfoldIcon.classList.add("hidden");  // Hide unfold icon
-                foldIcon.classList.remove("hidden"); // Show fold icon
-            } else {
-                unfoldIcon.classList.remove("hidden"); // Show unfold icon
-                foldIcon.classList.add("hidden");  // Hide fold icon
-            }
+            unfoldIcon.classList.toggle("hidden");
+            foldIcon.classList.toggle("hidden");
+
+            this.classList.toggle("expanded");
         });
     });
+});
 
 
 
