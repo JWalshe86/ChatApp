@@ -23,41 +23,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Injected .original-code after Highlight.js applied.");
 
-document.querySelectorAll(".expand-button").forEach((button) => {
-    button.addEventListener("click", function () {
-        console.log("Toggle clicked!");
-        let codeBlock = this.closest(".code-block");
-        let originalCode = codeBlock.querySelectorAll(".original-code");
 
-        console.log("Original code found:", originalCode);
+    document.querySelectorAll(".expand-button").forEach((button) => {
+        button.addEventListener("click", function () {
+            console.log("Toggle clicked!");
+            let codeBlock = this.closest(".code-block");
+            let originalCode = codeBlock.querySelectorAll(".original-code");
 
-        if (originalCode.length === 0) {
-            console.warn("⚠ No original code elements found. Check HTML.");
-            return;
-        }
+            if (originalCode.length === 0) {
+                console.warn("⚠ No original code elements found. Check HTML.");
+                return;
+            }
 
-        originalCode.forEach((line) => {
-            line.classList.toggle("hidden");
+            // ✅ Toggle the visibility of original code
+            originalCode.forEach((line) => {
+                line.classList.toggle("hidden");
+            });
+
+            this.classList.toggle("expanded");
+
+            // ✅ Toggle Icons
+            let unfoldIcon = this.querySelector(".unfold-icon");
+            let foldIcon = this.querySelector(".fold-icon");
+
+            if (this.classList.contains("expanded")) {
+                unfoldIcon.classList.add("hidden");  // Hide unfold icon
+                foldIcon.classList.remove("hidden"); // Show fold icon
+            } else {
+                unfoldIcon.classList.remove("hidden"); // Show unfold icon
+                foldIcon.classList.add("hidden");  // Hide fold icon
+            }
         });
-
-        // ✅ Toggle "expanded" class
-        this.classList.toggle("expanded");
-
-        // ✅ Fix SVG Icon Change
-        let icon = this.querySelector("svg");
-        let path = icon.querySelector("path");
-
-        if (this.classList.contains("expanded")) {
-            // Switch to "fold" (collapse) icon
-            icon.classList.replace("octicon-unfold", "octicon-fold");
-            path.setAttribute("d", "M10.896 2H8.75V.75a.75.75 0 0 0-1.5 0V2H5.104a.25.25 0 0 0-.177.427l2.896 2.896a.25.25 0 0 0 .354 0l2.896-2.896A.25.25 0 0 0 10.896 2Z");
-        } else {
-            // Switch to "unfold" (expand) icon
-            icon.classList.replace("octicon-fold", "octicon-unfold");
-            path.setAttribute("d", "m8.177.677 2.896 2.896a.25.25 0 0 1-.177.427H8.75v1.25a.75.75 0 0 1-1.5 0V4H5.104a.25.25 0 0 1-.177-.427L7.823.677a.25.25 0 0 1 .354 0Z");
-        }
     });
-});
 
 
 
