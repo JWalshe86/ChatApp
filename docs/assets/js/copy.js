@@ -1,72 +1,49 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("JS is running");
-
-    // Apply Highlight.js
-    document.querySelectorAll("pre code").forEach((block) => {
-        hljs.highlightElement(block);
-    });
-
-    console.log("Highlight.js applied");
-
-    // Inject .original-code for full lines
-    document.querySelectorAll("pre code").forEach((block) => {
-        const lines = block.innerHTML.split("\n");
-
-        block.innerHTML = lines
-            .map((line) =>
-                line.trim().startsWith("+")
-                    ? `<span class="added-line">${line.substring(1).trim()}</span>` // Remove `+` but keep styling
-                    : `<span class="original-code hidden">${line}</span>`
-            )
-            .join("\n");
-    });
-
-    console.log("Injected .original-code after Highlight.js applied.");
-
-    // ✅ Fix Expand Button Functionality
-    document.querySelectorAll(".expand-button").forEach((button) => {
-        button.addEventListener("click", function () {
-            console.log("Toggle clicked!");
-
-            let codeBlock = this.closest(".code-block");
-            let originalCode = codeBlock.querySelectorAll(".original-code");
-
-            if (originalCode.length === 0) {
-                console.warn("⚠ No original code elements found. Check HTML.");
-                return;
-            }
-
-            // ✅ Toggle the visibility of original code
-            originalCode.forEach((line) => {
-                line.classList.toggle("hidden");
-            });
-
-            // ✅ Fix Icon Toggle
-            let unfoldIcon = this.querySelector(".unfold-icon");
-            let foldIcon = this.querySelector(".fold-icon");
-
-            if (unfoldIcon && foldIcon) {
-                unfoldIcon.classList.toggle("hidden");
-                foldIcon.classList.toggle("hidden");
-            } else {
-                console.warn("⚠ Icons not found in button!");
-            }
+    // Handle "Show Original Code" toggle
+    document.querySelectorAll("details").forEach(detail => {
+        const summary = detail.querySelector("summary");
+        summary.addEventListener("click", function () {
+            setTimeout(() => {
+                summary.innerHTML = detail.open ? "🔼 Original Code..." : "🔽 Show Original Code...";
+            }, 100);
         });
     });
 
-    // ✅ Fix Copy Button (so it doesn't copy the `+` signs)
-    document.querySelectorAll(".copy-button").forEach((button) => {
+    // Handle GitHub-Style Copy Button Clicks
+    document.querySelectorAll(".copy-button").forEach(button => {
         button.addEventListener("click", function () {
-            let codeBlock = this.closest(".code-block");
-            let codeText = [...codeBlock.querySelectorAll("code .added-line, code .original-code")]
-                .map(span => span.textContent.replace(/^\+\s*/, "")) // ✅ Remove the `+` when copying
-                .join("\n");
+            let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("code");
+            let codeText = codeBlock.innerText.trim();
 
             navigator.clipboard.writeText(codeText).then(() => {
-                console.log("✅ Code copied!");
-            }).catch(err => console.error("❌ Copy failed", err));
+                let originalIcon = button.innerHTML;
+                button.innerHTML = `
+                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
+                        <path fill-rule="evenodd"
+                            d="M13 3H7c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7 4h6c.6 0 1 .4 1 1v7c0 .6-.4 1-1-1V5c0-.6.4-1 1-1z"></path>
+                    </svg> Copied!`;
+
+                setTimeout(() => {
+                    button.innerHTML = originalIcon;
+                }, 1500);
+            }).catch(err => console.error("Failed to copy:", err));
         });
     });
 
-    console.log("✅ JavaScript fully loaded!");
+    // Smooth Expand/Collapse
+    document.querySelectorAll(".expand-button").forEach(button => {
+        button.addEventListener("click", function () {
+            let codeContainer = button.closest(".code-block").querySelector(".code-content");
+
+            if (codeContainer.style.maxHeight) {
+                // Collapse
+                codeContainer.style.maxHeight = null;
+                button.innerHTML = "🔽 Show Original Code...";
+            } else {
+                // Expand
+                codeContainer.style.maxHeight = codeContainer.scrollHeight + "px";
+                button.innerHTML = "🔼 Hide Original Code...";
+            }
+        });
+    });
 });
