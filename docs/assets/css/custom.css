@@ -1,22 +1,23 @@
+/* 🌟 Base Styles */
 body {
-    font-family: monospace;
-    background-color: #f6f8fa;
+    font-family: "Source Code Pro", monospace;
+    background-color: #ffffff; /* Light theme background */
     padding: 20px;
+    color: #24292e; /* GitHub text color */
 }
 
-/* 🔹 Code Block Styling */
+/* 📜 Code Block Container */
 .code-block {
-    border: 1px solid #ddd;
+    border: 1px solid #d1d5da; /* Lighter border for GitHub light theme */
     border-radius: 5px;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out; /* Expand smoothly */
-    font-family: monospace;
-    background: #ffffff !important; /* Force background */
+    font-family: "Source Code Pro", monospace;
+    background: #f6f8fa; /* GitHub light gray */
 }
 
-/* 🔹 Code Header (Filename + Buttons) */
+/* 🏷️ Header Styling */
 .code-header {
-    background: #eaecef !important;
+    background: #eaecef;
     padding: 8px;
     font-weight: bold;
     display: flex;
@@ -24,60 +25,85 @@ body {
     align-items: center;
 }
 
+/* 🔘 Expand & Copy Buttons */
 .expand-button,
 .copy-button {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 14px;
-    color: #0366d6 !important;
 }
 
-/* 🔹 Code Container */
+/* 📦 Code Container */
 .code-container {
     padding: 8px;
-    transition: max-height 0.3s ease-in-out;
-    overflow: hidden;
-    max-height: 500px; /* Ensures content is visible initially */
 }
 
-/* 🔹 Updated Code (Code that is always visible) */
+/* 🆕 Updated Code Block */
 .updated-code {
-    background: #ffffff !important;
+    background: #ffffff; /* White background */
     padding: 8px;
     border-radius: 5px;
     overflow-x: auto;
 }
 
-/* ✅ Added Lines */
+/* Ensure Added Lines Follow GitHub’s Diff Style */
 .added-line {
-    background: #e6ffed !important;
+    background: var(--color-diff-blob-addition-bg, #e6ffed);
+    border-left: 3px solid #28a745;
     display: block;
     padding: 2px 8px;
-    border-left: 3px solid #28a745;
-    line-height: 1.4;
+    color: #59636e;
+    width: 100%;
+    line-height: 1.3;
     white-space: pre-wrap;
 }
 
-/* 🔹 Original Code - Hidden Initially */
+/* ✅ Only show `+` visually */
+.added-line::before {
+    content: "+";
+    color: #28a745;
+    margin-right: 8px;
+    font-weight: bold;
+    display: inline-block;
+    width: 20px;
+}
+
+
+/* 🔳 Original Code - Light Mode */
 .original-code {
-    display: none; /* Ensure it starts hidden */
+    color: #24292e !important; /* Dark text to match GitHub light mode */
 }
 
-/* 🔹 Show Original Code When Expanded */
-.expanded .original-code {
-    display: block !important;
+/* 🚫 Hide Original Code by Default */
+.original-code.hidden {
+    display: none;
 }
 
-/* 🔹 Code Expansion Effect */
-.expanded .code-container {
-    max-height: 1000px !important;
-}
-
-/* ✅ Ensure Highlight.js Syntax Colors Work Properly */
+/* 🎨 Match GitHub’s Light Theme Syntax */
 pre code {
-    background-color: white !important;
+    background-color: #f6f8fa !important; /* GitHub's light gray */
     font-family: "Source Code Pro", monospace;
-    padding: 10px;
-    border-radius: 5px;
+    color: #24292e; /* Dark text */
+    border-radius: 6px;
+}
+
+/* 🎨 Syntax Highlighting */
+.hljs-keyword {
+    color: #d73a49 !important; /* Red for keywords */
+}
+
+.hljs-title {
+    color: #6f42c1 !important; /* Purple for class names */
+}
+
+.hljs-string {
+    color: #032f62 !important; /* Dark blue for strings */
+}
+
+.hljs-comment {
+    color: #6a737d !important; /* Gray for comments */
+}
+.hidden {
+    display: none;
 }
