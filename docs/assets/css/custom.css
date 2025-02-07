@@ -105,5 +105,5 @@ pre code {
     color: #6a737d !important; /* Gray for comments */
 }
 .hidden {
-    display: none;
+    display: none !important;
 }
