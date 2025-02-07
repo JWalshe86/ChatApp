@@ -9,6 +9,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     overflow: hidden;
+    transition: max-height 0.3s ease-in-out; /* Expand smoothly */
     font-family: monospace;
     background: #ffffff !important; /* Force background */
 }
