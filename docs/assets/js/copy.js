@@ -23,12 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Injected .original-code after Highlight.js applied.");
 
-    // ✅ Fix Expand Button Functionality
+    // ✅ Fix Expand Button Functionality with Smooth Expansion
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
-            console.log("Toggle clicked!");
+            console.log("Expand button clicked!");
 
             let codeBlock = this.closest(".code-block");
+            let codeContainer = codeBlock.querySelector(".code-container");
             let originalCode = codeBlock.querySelectorAll(".original-code");
 
             if (originalCode.length === 0) {
@@ -36,35 +37,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // ✅ Toggle the visibility of original code
-            originalCode.forEach((line) => {
-                line.classList.toggle("hidden");
-            });
+            let isExpanded = codeBlock.classList.toggle("expanded");
 
-            // ✅ Fix Icon Toggle
+            if (isExpanded) {
+                console.log("📂 Expanding...");
+                codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Smooth expansion
+
+                setTimeout(() => {
+                    originalCode.forEach(line => line.classList.remove("hidden")); // Show original code
+                }, 300); // Delay showing original code for smooth animation
+            } else {
+                console.log("📂 Collapsing...");
+                originalCode.forEach(line => line.classList.add("hidden")); // Hide original code first
+
+                setTimeout(() => {
+                    codeContainer.style.maxHeight = "0px"; // Collapse container
+                }, 300);
+            }
+
+            // Toggle icons
             let unfoldIcon = this.querySelector(".unfold-icon");
             let foldIcon = this.querySelector(".fold-icon");
 
             if (unfoldIcon && foldIcon) {
                 unfoldIcon.classList.toggle("hidden");
                 foldIcon.classList.toggle("hidden");
-            } else {
-                console.warn("⚠ Icons not found in button!");
             }
-        });
-    });
-
-    // ✅ Fix Copy Button (so it doesn't copy the `+` signs)
-    document.querySelectorAll(".copy-button").forEach((button) => {
-        button.addEventListener("click", function () {
-            let codeBlock = this.closest(".code-block");
-            let codeText = [...codeBlock.querySelectorAll("code .added-line, code .original-code")]
-                .map(span => span.textContent.replace(/^\+\s*/, "")) // ✅ Remove the `+` when copying
-                .join("\n");
-
-            navigator.clipboard.writeText(codeText).then(() => {
-                console.log("✅ Code copied!");
-            }).catch(err => console.error("❌ Copy failed", err));
         });
     });
 
