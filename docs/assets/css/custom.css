@@ -37,7 +37,7 @@ body {
 /* 📦 Code Container */
 .code-container {
     overflow: hidden;
-    max-height: 0;
+    max-height: none;
     padding: 8px;
     transition: max-height 0.3s ease-in-out;
 }
@@ -76,14 +76,22 @@ body {
 
 /* 🔳 Original Code - Light Mode */
 .original-code {
-    color: #24292e !important; /* Dark text to match GitHub light mode */
+    display: none;
 }
+
+
 
 /* 🚫 Hide Original Code by Default */
 .original-code.hidden {
     display: none;
 }
+expanded .original-code {
+    display: block; /* Show original code when expanded */
+}
 
+.expanded .code-container {
+    max-height: 1000px; /* Expand smoothly */
+}
 /* 🎨 Match GitHub’s Light Theme Syntax */
 pre code {
     background-color: #f6f8fa !important; /* GitHub's light gray */
