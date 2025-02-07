@@ -10,6 +10,7 @@ body {
     border-radius: 5px;
     overflow: hidden;
     font-family: monospace;
+    transition: max-height 0.3s ease-in-out; /* Expand smoothly */
     background: #ffffff !important; /* Force background */
 }
 
