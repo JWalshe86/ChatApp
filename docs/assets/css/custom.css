@@ -10,12 +10,12 @@ body {
     border-radius: 5px;
     overflow: hidden;
     font-family: monospace;
-    background: #ffffff;
+    background: #ffffff !important; /* Force background */
 }
 
 /* 🔹 Code Header (Filename + Buttons) */
 .code-header {
-    background: #eaecef;
+    background: #eaecef !important;
     padding: 8px;
     font-weight: bold;
     display: flex;
@@ -29,63 +29,54 @@ body {
     border: none;
     cursor: pointer;
     font-size: 14px;
-    color: #0366d6;
+    color: #0366d6 !important;
 }
 
 /* 🔹 Code Container */
 .code-container {
     padding: 8px;
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+    max-height: 500px; /* Ensures content is visible initially */
 }
 
 /* 🔹 Updated Code (Code that is always visible) */
 .updated-code {
-    background: #ffffff;
+    background: #ffffff !important;
     padding: 8px;
     border-radius: 5px;
     overflow-x: auto;
 }
 
-/* ✅ Ensure added lines follow GitHub's diff style */
+/* ✅ Added Lines */
 .added-line {
-    background: #e6ffed; /* Light green for added lines */
-    display: block; /* Ensures full-width background */
+    background: #e6ffed !important;
+    display: block;
     padding: 2px 8px;
     border-left: 3px solid #28a745;
-    line-height: 1.4; /* Adjusts spacing to match GitHub */
-    white-space: pre-wrap; /* Keeps formatting and line wrapping */
+    line-height: 1.4;
+    white-space: pre-wrap;
 }
 
-/* 🔹 Add "+" sign before added lines */
-.added-line::before {
-    content: "+";
-    color: #28a745;
-    margin-right: 8px;
-    font-weight: bold;
-    display: inline-block; /* Keeps the + symbol aligned properly */
-    width: 20px; /* Adds spacing so the code aligns well */
-}
-
-/* ✅ Original Code (Hidden by default, shown when expanded) */
+/* 🔹 Original Code - Hidden Initially */
 .original-code {
-    color: white !important; /* Make original code white */
-    display: block;
+    display: none; /* Ensure it starts hidden */
 }
 
-/* 🔹 Ensure original lines are hidden by default */
-.original-code.hidden {
-    display: none;
+/* 🔹 Show Original Code When Expanded */
+.expanded .original-code {
+    display: block !important;
+}
+
+/* 🔹 Code Expansion Effect */
+.expanded .code-container {
+    max-height: 1000px !important;
 }
 
 /* ✅ Ensure Highlight.js Syntax Colors Work Properly */
 pre code {
-    background-color: white !important; /* GitHub dark theme */
+    background-color: white !important;
     font-family: "Source Code Pro", monospace;
-    color: #ffffff; /* Make sure all text is white */
     padding: 10px;
     border-radius: 5px;
-}
-.code-content {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease-in-out;
 }
