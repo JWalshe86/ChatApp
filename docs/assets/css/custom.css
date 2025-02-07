@@ -107,4 +107,9 @@ pre code {
 .hidden {
     display: none;
 }
+.code-content {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+}
 
