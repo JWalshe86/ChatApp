@@ -14,7 +14,10 @@ body {
     font-family: "Source Code Pro", monospace;
     background: #f6f8fa; /* GitHub light gray */
 }
-
+/* Expand state */
+.expanded .code-container {
+    max-height: 1000px; /* Large enough to fit content */
+}
 /* 🏷️ Header Styling */
 .code-header {
     background: #eaecef;
@@ -37,6 +40,10 @@ body {
 /* 📦 Code Container */
 .code-container {
     padding: 8px;
+    overflow: hidden;
+    max-height: 0;  /* Initially collapsed */
+    transition: max-height 0.3s ease-in-out; /* Smooth expand */
+    contain: layout; /* Optimize rendering */
 }
 
 /* 🆕 Updated Code Block */
