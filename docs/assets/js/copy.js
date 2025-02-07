@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Smooth Expand/Collapse for Original Code
     document.querySelectorAll(".expand-button").forEach(button => {
         button.addEventListener("click", function () {
             let codeBlock = button.closest(".code-block");
@@ -10,16 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            if (codeContainer.style.maxHeight) {
-                // Collapse
-                codeContainer.style.maxHeight = null;
-                button.querySelector(".unfold-icon").classList.remove("hidden");
-                button.querySelector(".fold-icon").classList.add("hidden");
-            } else {
+            let isExpanded = codeBlock.classList.toggle("expanded"); // Toggle class
+
+            if (isExpanded) {
                 // Expand
                 codeContainer.style.maxHeight = codeContainer.scrollHeight + "px";
                 button.querySelector(".unfold-icon").classList.add("hidden");
                 button.querySelector(".fold-icon").classList.remove("hidden");
+            } else {
+                // Collapse
+                codeContainer.style.maxHeight = null;
+                button.querySelector(".unfold-icon").classList.remove("hidden");
+                button.querySelector(".fold-icon").classList.add("hidden");
             }
         });
     });
