@@ -36,8 +36,12 @@ body {
 
 /* 📦 Code Container */
 .code-container {
+    overflow: hidden;
+    max-height: 0;
     padding: 8px;
+    transition: max-height 0.3s ease-in-out;
 }
+
 
 /* 🆕 Updated Code Block */
 .updated-code {
@@ -107,9 +111,3 @@ pre code {
 .hidden {
     display: none;
 }
-.code-content {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease-in-out;
-}
-
