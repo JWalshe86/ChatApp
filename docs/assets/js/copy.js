@@ -16,25 +16,34 @@ document.addEventListener("DOMContentLoaded", function () {
             let codeText = codeBlock.innerText.trim();
 
             navigator.clipboard.writeText(codeText).then(() => {
-                // ✅ Change SVG icon directly instead of replacing button content
-                let originalIcon = button.innerHTML; // Store original HTML
+                let originalIcon = button.innerHTML;
                 button.innerHTML = `
                     <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
                         <path fill-rule="evenodd"
-                            d="M13 3H7c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7 4h6c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V5c0-.6.4-1 1-1z"></path>
-                    </svg> Copied!`; // Change icon + message
+                            d="M13 3H7c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7 4h6c.6 0 1 .4 1 1v7c0 .6-.4 1-1-1V5c0-.6.4-1 1-1z"></path>
+                    </svg> Copied!`;
 
                 setTimeout(() => {
-                    button.innerHTML = originalIcon; // Restore original icon
+                    button.innerHTML = originalIcon;
                 }, 1500);
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
-});
 
-document.querySelectorAll(".expand-button").forEach(button => {
-    button.addEventListener("click", function () {
-        let codeContainer = button.closest(".code-block");
-        codeContainer.classList.toggle("expanded");
+    // Smooth Expand/Collapse
+    document.querySelectorAll(".expand-button").forEach(button => {
+        button.addEventListener("click", function () {
+            let codeContainer = button.closest(".code-block").querySelector(".code-content");
+
+            if (codeContainer.style.maxHeight) {
+                // Collapse
+                codeContainer.style.maxHeight = null;
+                button.innerHTML = "🔽 Show Original Code...";
+            } else {
+                // Expand
+                codeContainer.style.maxHeight = codeContainer.scrollHeight + "px";
+                button.innerHTML = "🔼 Hide Original Code...";
+            }
+        });
     });
 });
