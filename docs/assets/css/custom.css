@@ -1,3 +1,20 @@
- .hidden { display: none !important; }
-    .code-container { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-    .expanded .code-container { max-height: 500px; } /* Arbitrary large value */
+ .hidden 
+{ 
+ display: none !important; 
+}
+
+.code-container 
+{ 
+ max-height: 0; 
+ overflow: hidden; 
+ transition: max-height 0.3s ease-out;
+}
+
+.expanded .code-container
+{ 
+ max-height: 500px;
+} /* Arbitrary large value */
+
+.original-code {
+    display: none;
+}
