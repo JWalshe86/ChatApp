@@ -134,18 +134,21 @@ body {
     position: absolute;
     z-index: 10;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
+    white-space: nowrap; /* Prevents text wrapping */
 }
 
 .tooltip-trigger {
     position: relative;
+    display: inline-block; /* Ensure it's properly positioned */
     cursor: pointer;
 }
 
 .tooltip-trigger:hover .tooltip {
     visibility: visible;
     opacity: 1;
-    top: -30px; /* Position tooltip above */
+    top: -30px; /* Adjust based on positioning */
     left: 50%;
     transform: translateX(-50%);
 }
+
