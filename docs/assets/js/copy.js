@@ -15,14 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
                 }
 
-                // 🚀 Fix: Ensure explanation stays with updated code
-                if (line.includes("_context = context;")) {
+                // 🚀 Ensure explanation stays inside the updated code block, NOT in original code
+                if (trimmed === "_context = context;") {
                     return `<div class="added-line tooltip-container">
-                                <span class="tooltip-trigger">${line}</span>
+                                <span class="tooltip-trigger">${trimmed}</span>
                                 <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
                             </div>`;
                 }
 
+                // ✅ Only wrap non-modified lines in `original-code`, preventing extra lines from appearing
                 return `<div class="original-code hidden">${line}</div>`;
             })
             .join("\n");
@@ -32,10 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
             let codeBlock = this.closest(".code-block");
-            let originalCode = codeBlock.querySelectorAll(".original-code:not(.tooltip-container)");
+            let originalCode = codeBlock.querySelectorAll(".original-code");
 
             originalCode.forEach((line) => {
-                line.classList.toggle("hidden");
+                if (!line.classList.contains("tooltip-container")) {
+                    line.classList.toggle("hidden");
+                }
             });
 
             this.querySelector(".unfold-icon").classList.toggle("hidden");
