@@ -1,14 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
-    // ✅ Ensure original code is hidden on page load
-    document.querySelectorAll(".original-code").forEach((line) => {
-        line.classList.add("hidden");
+    // ✨ Apply Highlight.js first
+    document.querySelectorAll("pre code").forEach((block) => {
+        hljs.highlightElement(block);
     });
 
-    console.log("✅ Original code hidden on page load");
+    console.log("Highlight.js applied");
 
-    // ✅ Expand Button Click Event
+    // 🛠 AFTER Highlight.js runs, inject `.original-code` where needed
+    document.querySelectorAll("pre code").forEach((block) => {
+        const lines = block.innerHTML.split("\n");
+
+        block.innerHTML = lines
+            .map((line) =>
+                line.trim().startsWith("+") // If line starts with `+`, it's an addition
+                    ? `<span class="added-line">${line.substring(1).trim()}</span>` // ✅ Keep new code
+                    : `<span class="original-code hidden">${line}</span>` // ❌ Hide original code initially
+            )
+            .join("\n");
+    });
+
+    console.log("Injected .original-code after Highlight.js applied.");
+
+    // ✅ Expand Button Click Event - Toggle original code visibility
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
             console.log("Expand button clicked");
