@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // 🖌️ Apply Syntax Highlighting & Track Diff Changes BEFORE Highlight.js runs
     document.querySelectorAll("pre code").forEach((block) => {
         let lines = block.innerHTML.split("\n");
-
-        // 🚀 Apply line modifications first
         let modifiedHTML = lines
             .map((line) => {
                 let trimmed = line.trim();
@@ -16,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
                 }
 
-                // ✅ Ensure tooltip stays inside added-line, NOT original-code
+                // ✅ Ensure tooltip stays inside the added-line
                 if (trimmed.includes("_context = context;")) {
                     return `<div class="added-line tooltip-container">
                                 <span class="tooltip-trigger">${trimmed}
@@ -29,18 +27,23 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .join("\n");
 
-        // ✅ Replace block content BEFORE Highlight.js runs
         block.innerHTML = modifiedHTML;
     });
 
-    // ✅ Only run Highlight.js if it's loaded
-    if (typeof hljs !== "undefined" && hljs.highlightElement) {
+    console.log("✅ Code transformations applied.");
+
+    // ✅ Safe Highlight.js Execution (Prevents Crash)
+    if (typeof hljs !== "undefined" && typeof hljs.highlightElement === "function") {
         console.log("Applying Highlight.js...");
         document.querySelectorAll("pre code").forEach((block) => {
-            hljs.highlightElement(block);
+            try {
+                hljs.highlightElement(block);
+            } catch (error) {
+                console.error("⚠️ Highlight.js Error:", error);
+            }
         });
     } else {
-        console.warn("⚠️ Highlight.js is not loaded!");
+        console.warn("⚠️ Highlight.js not found. Skipping syntax highlighting.");
     }
 
     // 🔄 Expand button functionality
@@ -49,23 +52,22 @@ document.addEventListener("DOMContentLoaded", function () {
             let codeBlock = this.closest(".code-block");
             let originalCodeLines = codeBlock.querySelectorAll(".original-code");
 
-            // Toggle visibility of original code
             originalCodeLines.forEach((line) => {
                 line.classList.toggle("hidden");
             });
 
-            // Toggle expand/collapse icons
             this.querySelector(".unfold-icon").classList.toggle("hidden");
             this.querySelector(".fold-icon").classList.toggle("hidden");
         });
     });
+
+    console.log("✅ Expand button functionality added.");
 
     // 📝 Copy Button Functionality
     document.querySelectorAll(".copy-button").forEach(button => {
         button.addEventListener("click", function () {
             let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("code");
 
-            // Collect all visible lines (both original and updated)
             let visibleLines = [...codeBlock.querySelectorAll(".added-line, .original-code:not(.hidden)")];
             let codeText = visibleLines.map(line => line.textContent.replace(/^[+-]\s*/, "")).join("\n").trim();
 
@@ -76,6 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
+
+    console.log("✅ Copy button functionality added.");
 
     // ℹ️ Tooltip Hover Effect
     document.querySelectorAll(".tooltip-trigger").forEach(trigger => {
@@ -91,4 +95,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    console.log("✅ Tooltip functionality added.");
 });
