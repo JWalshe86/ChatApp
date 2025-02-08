@@ -6,8 +6,14 @@
 }
 
 /* Hide original code by default */
+/* Ensure original code is fully hidden */
 .original-code {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Allow the code container to be visible but collapsed */
