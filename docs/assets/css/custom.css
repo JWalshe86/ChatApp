@@ -124,8 +124,10 @@ body {
     transition: max-height 0.3s ease-in-out; /* Expand smoothly */
     background: #ffffff !important; /* Force background */
 }
+
+
 .tooltip-container {
-    display: inline; /* ✅ Keep everything on the same line */
+    display: inline-block; /* ✅ Keeps tooltip explanation in one line */
     position: relative;
 }
 
@@ -143,10 +145,14 @@ body {
     top: -30px; /* ✅ Position above */
     left: 50%;
     transform: translateX(-50%);
-    white-space: nowrap; /* ✅ Prevents it from expanding to a new line */
+    white-space: nowrap; /* ✅ Prevents expansion */
 }
 
 .tooltip-trigger:hover .tooltip {
     visibility: visible;
     opacity: 1;
+}
+
+.original-code.tooltip-container {
+    display: inline-block !important; /* 🚀 Prevents it from being treated as original */
 }
