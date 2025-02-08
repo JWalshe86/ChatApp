@@ -16,14 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 // 🚀 Ensure explanation stays inside the updated code block, NOT in original code
-               if (trimmed.includes("_context = context;")) {
-    return `<div class="added-line">
+              if (trimmed.includes("_context = context;")) {
+    return `<div class="added-line tooltip-container">
                 <span class="tooltip-trigger">${trimmed}
                     <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
                 </span>
             </div>`;
 }
-
 
                 // ✅ Only wrap non-modified lines in `original-code`, preventing extra lines from appearing
                 return `<div class="original-code hidden">${line}</div>`;
@@ -31,6 +30,13 @@ document.addEventListener("DOMContentLoaded", function () {
             .join("\n");
     });
 
+// ✅ Prevent Highlight.js from affecting explanations
+document.querySelectorAll("pre code").forEach((block) => {
+    block.innerHTML = block.innerHTML.replace(/(<span class="tooltip">.*?<\/span>)/g, "<!--hljs-ignore-->$1");
+    hljs.highlightElement(block);
+});
+
+    
     // 🔄 Expand button functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
