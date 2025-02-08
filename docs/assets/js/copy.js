@@ -16,12 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 // 🚀 Ensure explanation stays inside the updated code block, NOT in original code
-                if (trimmed === "_context = context;") {
-                    return `<div class="added-line tooltip-container">
-                                <span class="tooltip-trigger">${trimmed}</span>
-                                <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
-                            </div>`;
-                }
+               if (trimmed.includes("_context = context;")) {
+    return `<div class="added-line">
+                <span class="tooltip-trigger">${trimmed}
+                    <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
+                </span>
+            </div>`;
+}
+
 
                 // ✅ Only wrap non-modified lines in `original-code`, preventing extra lines from appearing
                 return `<div class="original-code hidden">${line}</div>`;
