@@ -1,25 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
-    // ✨ Apply Highlight.js first
-    document.querySelectorAll("pre code").forEach((block) => {
-        hljs.highlightElement(block);
+    // ✅ Expand Button Click Event
+    document.querySelectorAll(".expand-button").forEach((button) => {
+        button.addEventListener("click", function () {
+            console.log("Expand button clicked");
+
+            let codeBlock = this.closest(".code-block");
+            let originalCode = codeBlock.querySelectorAll(".original-code");
+
+            if (originalCode.length === 0) {
+                console.warn("⚠ No original code elements found. Check HTML.");
+                return;
+            }
+
+            // ✅ Toggle the visibility of original code
+            originalCode.forEach((line) => {
+                line.classList.toggle("hidden");
+            });
+
+            // ✅ Toggle Expand/Collapse Text
+            if (this.textContent.trim() === "Expand") {
+                this.textContent = "Collapse";
+            } else {
+                this.textContent = "Expand";
+            }
+
+            console.log("Original code visibility toggled");
+        });
     });
-
-    console.log("Highlight.js applied");
-
-    // 🛠 AFTER Highlight.js runs, inject `.original-code` where needed
-    document.querySelectorAll("pre code").forEach((block) => {
-        const lines = block.innerHTML.split("\n");
-
-        block.innerHTML = lines
-            .map((line) =>
-                line.trim().startsWith("+") // If line starts with `+`, it's an addition
-                    ? `<span class="added-line">${line.substring(1).trim()}</span>` // ✅ Keep new code
-                    : `<span class="original-code hidden">${line}</span>` // ❌ Hide original code
-            )
-            .join("\n");
-    });
-
-    console.log("Injected .original-code after Highlight.js applied.");
 });
