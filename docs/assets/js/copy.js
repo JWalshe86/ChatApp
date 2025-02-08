@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
                 }
 
-                // ✅ Ensure `_context = context;` stays as updated code with tooltip
+                // 🚀 Ensure explanation stays inside the updated code block, NOT in original code
                 if (trimmed.includes("_context = context;")) {
                     return `<div class="added-line tooltip-container">
                                 <span class="tooltip-trigger">${trimmed}
@@ -24,8 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             </div>`;
                 }
 
-                // ✅ Only wrap non-modified lines in `original-code`
-                return `<div class="original-code hidden">${line}</div>`;
+                return `<div class="original-code hidden">${trimmed}</div>`;
             })
             .join("\n");
     });
@@ -33,10 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Prevent Highlight.js from affecting explanations
     document.querySelectorAll("pre code").forEach((block) => {
         block.innerHTML = block.innerHTML.replace(/(<span class="tooltip">.*?<\/span>)/g, "<!--hljs-ignore-->$1");
-    });
-
-    // ✅ Apply Highlight.js after modifications
-    document.querySelectorAll("pre code").forEach((block) => {
         hljs.highlightElement(block);
     });
 
@@ -47,10 +42,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let originalCode = codeBlock.querySelectorAll(".original-code");
 
             originalCode.forEach((line) => {
-                line.classList.toggle("hidden");
+                if (!line.closest(".tooltip-container")) {
+                    line.classList.toggle("hidden");
+                }
             });
 
-            // ✅ Toggle Expand/Collapse Icons
             this.querySelector(".unfold-icon").classList.toggle("hidden");
             this.querySelector(".fold-icon").classList.toggle("hidden");
         });
@@ -61,8 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("code");
 
-            // ✅ Collect all visible lines (both original and updated)
-            let lines = [...codeBlock.querySelectorAll(".added-line, .original-code:not(.hidden)")];
+            // Collect all visible lines (both original and updated)
+            let lines = [...codeBlock.querySelectorAll(".added-line, .original-code")];
             let codeText = lines.map(line => line.textContent.replace(/^[+-]\s*/, "")).join("\n").trim();
 
             navigator.clipboard.writeText(codeText).then(() => {
