@@ -15,16 +15,18 @@ title: ChatApp Part Two
         <button class="expand-button">Expand</button>
     </div>
 
-    <div class="code-container" style="max-height: auto; overflow: hidden; transition: max-height 0.3s ease-out;">
-        <pre class="updated-code">
+    <div class="code-container">
+        <pre class="updated-code language-csharp">
             <code>
                 <span class="added-line">+ using System;</span>
-                <span class="original-code hidden">using System.Text;</span>
+                using System.Text;
                 <span class="added-line">+ public class Test {</span>
-                <span class="original-code hidden">{</span>
+                {
                 <span class="added-line">+ public void Run() { Console.WriteLine("Hello"); }</span>
-                <span class="original-code hidden">}</span>
+                }
             </code>
         </pre>
+        <!-- Placeholder for original code (will be inserted dynamically) -->
+        <pre class="original-code-placeholder"></pre>
     </div>
 </div>
