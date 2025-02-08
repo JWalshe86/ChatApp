@@ -6,7 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
         line.classList.add("hidden");
     });
 
-    console.log("✅ Original code hidden on page load");
+    // Ensure updated code is always visible
+    document.querySelectorAll(".updated-code").forEach(codeBlock => {
+        codeBlock.classList.remove("hidden"); // Make sure updated code is shown
+    });
+
+    console.log("✅ Original code hidden, Updated code visible on page load");
 
     // Expand button functionality
     document.querySelector(".expand-button").addEventListener("click", function () {
@@ -18,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (isExpanded) {
             console.log("📂 Expanding...");
-            codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Smooth expansion
+            codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Expand smoothly
             setTimeout(() => {
                 originalCode.forEach(line => line.classList.remove("hidden")); // Show original code
             }, 300);
