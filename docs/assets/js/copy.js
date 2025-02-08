@@ -3,39 +3,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 🖌️ Apply Syntax Highlighting & Track Diff Changes
   document.querySelectorAll("pre code").forEach((block) => {
-    const lines = block.innerHTML.split("\n");
+    document.querySelectorAll("pre code").forEach((block) => {
+        const lines = block.innerHTML.split("\n");
 
-    block.innerHTML = lines
-        .map((line) => {
-            let trimmed = line.trim();
+        block.innerHTML = lines
+            .map((line) => {
+                let trimmed = line.trim();
 
-            if (trimmed.startsWith("+")) {
-                return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
-            } else if (trimmed.startsWith("-")) {
-                return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
-            }
+                if (trimmed.startsWith("+")) {
+                    return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
+                } else if (trimmed.startsWith("-")) {
+                    return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
+                }
 
-            // ✅ Keep tooltips inside the added-line
-            if (line.includes("_context = context;")) {
-                return `<div class="added-line tooltip-container">
-                            <span class="tooltip-trigger">_context = context;
+                // 🚀 Fix: Ensure explanation stays with updated code
+                if (line.includes("_context = context;")) {
+                    return `<div class="added-line tooltip-container">
+                                <span class="tooltip-trigger">${line}</span>
                                 <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
-                            </span>
-                        </div>`;
-            }
+                            </div>`;
+                }
 
-            return `<div class="original-code hidden">${line}</div>`;
-        })
-        .join("\n");
-});
+                return `<div class="original-code hidden">${line}</div>`;
+            })
+            .join("\n");
+    });
 
-
-
-    // 🖱️ Expand/Collapse Button
+    // 🔄 Expand button functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
             let codeBlock = this.closest(".code-block");
-            let originalCode = codeBlock.querySelectorAll(".original-code");
+            let originalCode = codeBlock.querySelectorAll(".original-code:not(.tooltip-container)");
 
             originalCode.forEach((line) => {
                 line.classList.toggle("hidden");
@@ -45,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
             this.querySelector(".fold-icon").classList.toggle("hidden");
         });
     });
-
+      
     // 📝 Copy Button
     document.querySelectorAll(".copy-button").forEach(button => {
         button.addEventListener("click", function () {
