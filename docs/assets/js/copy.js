@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Highlight.js applied");
 
-    // Inject .original-code for full lines & avoid extra gaps
+    // Inject .original-code for full lines & ensure no gaps
     document.querySelectorAll("pre code").forEach((block) => {
         const lines = block.innerHTML.split("\n");
 
@@ -17,16 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (line.trim().startsWith("+")) {
                     return `<span class="added-line">${line.substring(1).trim()}</span>`; // Remove `+`
                 } else if (line.trim() !== "") {
-                    return `<span class="original-code hidden">${line}</span>`; // Hide original code
+                    return `<span class="original-code hidden">${line}</span>`; // Hide properly
                 }
-                return ""; // Avoid inserting empty lines
+                return ""; // Prevent empty lines
             })
             .join("\n");
     });
 
     console.log("Injected .original-code after Highlight.js applied.");
 
-    // ✅ Expand Button with Smooth Expansion & No Gaps
+    // ✅ Expand Button Fix with No Gaps
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
             console.log("Expand button clicked!");
@@ -44,15 +44,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (isExpanded) {
                 console.log("📂 Expanding...");
-                originalCode.forEach(line => line.classList.remove("hidden")); // Show original code
+                originalCode.forEach(line => {
+                    line.style.display = "inline"; // Show in-line to avoid gaps
+                    line.style.height = "auto"; // Allow expansion naturally
+                    line.classList.remove("hidden");
+                });
                 codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Smooth expand
             } else {
                 console.log("📂 Collapsing...");
                 codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Preserve height
                 setTimeout(() => {
-                    originalCode.forEach(line => line.classList.add("hidden")); // Hide original code
+                    originalCode.forEach(line => {
+                        line.style.display = "none"; // Hide fully with no gaps
+                        line.style.height = "0"; 
+                        line.classList.add("hidden");
+                    });
                     codeContainer.style.maxHeight = "0px"; // Collapse smoothly
-                }, 200); // Delay hiding for a smoother effect
+                }, 200);
             }
 
             // Toggle icons
