@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded ✅");
 
-    // 🖌️ Apply Syntax Highlighting & Track Diff Changes
+    // 🖌️ Apply Syntax Highlighting & Track Diff Changes Before Highlight.js Runs
     document.querySelectorAll("pre code").forEach((block) => {
-        const lines = block.innerHTML.split("\n");
+        let lines = block.innerHTML.split("\n");
 
         block.innerHTML = lines
             .map((line) => {
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
                 }
 
-                // ✅ Keep tooltips inside the added-line
+                // ✅ Ensure tooltip stays inside added-line, NOT original-code
                 if (trimmed.includes("_context = context;")) {
                     return `<div class="added-line tooltip-container">
                                 <span class="tooltip-trigger">${trimmed}
@@ -24,9 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
                             </div>`;
                 }
 
-                return `<div class="original-code hidden">${trimmed}</div>`;
+                return `<div class="original-code hidden hljs-ignore">${trimmed}</div>`;
             })
             .join("\n");
+    });
+
+    // ✅ Ensure Highlight.js Does Not Modify Tooltips
+    document.querySelectorAll("pre code").forEach((block) => {
+        block.innerHTML = block.innerHTML.replace(/(<span class="tooltip">.*?<\/span>)/g, "<!--hljs-ignore-->$1");
+        hljs.highlightElement(block);
     });
 
     // 🔄 Expand button functionality
