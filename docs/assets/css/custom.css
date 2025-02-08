@@ -125,7 +125,7 @@ body {
     background: #ffffff !important; /* Force background */
 }
 .tooltip-container {
-    display: inline-block; /* ✅ Prevent breaking into a new line */
+    display: inline; /* ✅ Keep everything on the same line */
     position: relative;
 }
 
@@ -143,7 +143,7 @@ body {
     top: -30px; /* ✅ Position above */
     left: 50%;
     transform: translateX(-50%);
-    white-space: nowrap; /* ✅ Prevent text from wrapping */
+    white-space: nowrap; /* ✅ Prevents it from expanding to a new line */
 }
 
 .tooltip-trigger:hover .tooltip {
