@@ -48,7 +48,12 @@ title: ChatApp Part Two
 
             <span class="added-line">+ public ChatHub(AppDbContext context)</span>
             <span class="added-line">+ {</span>
-            <span class="added-line tooltip" data-tooltip="Assigns the injected database context to the private field for use in this class.">_context = context; Test</span>
+            <span class="added-line">
+            <span class="tooltip-trigger">_context = context;
+            <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
+            </span>
+            </span>
+
             <span class="added-line">+ }</span>
 
             <span class="original-code hidden">public async Task SendMessage(string user, string message)</span>
