@@ -1,40 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("JS is running");
-
-    // Ensure all original code is hidden at the start
-    document.querySelectorAll(".original-code").forEach(line => {
-        line.classList.add("hidden");
-    });
-
-    // Ensure updated code is always visible
-    document.querySelectorAll(".updated-code").forEach(codeBlock => {
-        codeBlock.classList.remove("hidden"); // Make sure updated code is shown
-    });
-
-    console.log("✅ Original code hidden, Updated code visible on page load");
-
-    // Expand button functionality
-    document.querySelector(".expand-button").addEventListener("click", function () {
-        let codeBlock = this.closest(".code-block");
-        let originalCode = codeBlock.querySelectorAll(".original-code");
-        let codeContainer = codeBlock.querySelector(".code-container");
-
-        let isExpanded = codeBlock.classList.toggle("expanded");
-
-        if (isExpanded) {
-            console.log("📂 Expanding...");
-            codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Expand smoothly
-            setTimeout(() => {
-                originalCode.forEach(line => line.classList.remove("hidden")); // Show original code
-            }, 300);
-        } else {
-            console.log("📂 Collapsing...");
-            originalCode.forEach(line => line.classList.add("hidden")); // Hide original code first
-            setTimeout(() => {
-                codeContainer.style.maxHeight = "0px"; // Collapse smoothly
-            }, 300);
-        }
-    });
-
-    console.log("✅ JavaScript fully loaded!");
+document.querySelectorAll(".updated-code").forEach(codeBlock => {
+    codeBlock.classList.remove("hidden"); // Ensure updated code is always visible
+    codeBlock.style.display = "block"; // Override any hidden styles
+    console.log("✅ Ensured updated code is visible:", codeBlock);
 });
