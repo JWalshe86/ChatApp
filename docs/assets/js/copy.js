@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             </div>`;
                 }
 
-                return `<div class="original-code hidden hljs-ignore">${trimmed}</div>`;
+                return `<div class="original-code hidden">${trimmed}</div>`;
             })
             .join("\n");
 
@@ -33,7 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
         block.innerHTML = modifiedHTML;
     });
 
-    
+    // ✅ Only run Highlight.js if it's loaded
+    if (typeof hljs !== "undefined" && hljs.highlightElement) {
+        console.log("Applying Highlight.js...");
+        document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    } else {
+        console.warn("⚠️ Highlight.js is not loaded!");
+    }
+
     // 🔄 Expand button functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
