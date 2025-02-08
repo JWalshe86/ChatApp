@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
     // Apply Highlight.js
-  document.querySelectorAll("pre code").forEach((block) => {
+document.querySelectorAll("pre code").forEach((block) => {
     const lines = block.innerHTML.split("\n");
 
     block.innerHTML = lines
@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .join("\n");
 });
+
 
 // Handle GitHub-Style Copy Button Clicks
 document.querySelectorAll(".copy-button").forEach(button => {
