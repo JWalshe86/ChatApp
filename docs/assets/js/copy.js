@@ -1,6 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
+    // ✅ Ensure original code is hidden on page load
+    document.querySelectorAll(".original-code").forEach((line) => {
+        line.classList.add("hidden");
+    });
+
+    console.log("✅ Original code hidden on page load");
+
     // ✅ Expand Button Click Event
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
@@ -14,19 +21,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // ✅ Toggle the visibility of original code
+            // ✅ Toggle visibility of original code
+            let isExpanded = [...originalCode].some(line => line.classList.contains("hidden"));
+
             originalCode.forEach((line) => {
-                line.classList.toggle("hidden");
+                line.classList.toggle("hidden", !isExpanded);
             });
 
             // ✅ Toggle Expand/Collapse Text
-            if (this.textContent.trim() === "Expand") {
-                this.textContent = "Collapse";
-            } else {
-                this.textContent = "Expand";
-            }
+            this.textContent = isExpanded ? "Collapse" : "Expand";
 
-            console.log("Original code visibility toggled");
+            console.log(`🔄 Toggled original code, isExpanded: ${isExpanded}`);
         });
     });
 });
