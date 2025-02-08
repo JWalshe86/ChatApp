@@ -33,11 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         block.innerHTML = modifiedHTML;
     });
 
-    // ✅ Prevent Highlight.js from wrapping tooltips in extra spans
-    document.querySelectorAll("pre code").forEach((block) => {
-        hljs.highlightElement(block);
-    });
-
+    
     // 🔄 Expand button functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
