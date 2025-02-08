@@ -125,30 +125,28 @@ body {
     background: #ffffff !important; /* Force background */
 }
 .tooltip {
+    position: absolute; /* Keep it floating, not affecting the layout */
     visibility: hidden;
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 5px 10px;
     border-radius: 5px;
-    position: absolute;
     z-index: 10;
     opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-    white-space: nowrap; /* Prevents text wrapping */
+    transition: opacity 0.3s ease-in-out;
+    white-space: nowrap; /* Prevent wrapping */
+    transform: translateX(-50%); /* Center align */
+    top: -30px; /* Adjust positioning */
+    left: 50%;
 }
 
 .tooltip-trigger {
     position: relative;
-    display: inline-block; /* Ensure it's properly positioned */
     cursor: pointer;
 }
 
 .tooltip-trigger:hover .tooltip {
     visibility: visible;
     opacity: 1;
-    top: -30px; /* Adjust based on positioning */
-    left: 50%;
-    transform: translateX(-50%);
 }
-
