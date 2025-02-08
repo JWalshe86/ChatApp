@@ -42,12 +42,6 @@ document.querySelectorAll("pre code").forEach((block) => {
             let codeBlock = this.closest(".code-block");
             let originalCode = codeBlock.querySelectorAll(".original-code");
 
-            originalCode.forEach((line) => {
-                if (!line.closest(".tooltip-container")) {
-                    line.classList.toggle("hidden");
-                }
-            });
-
             this.querySelector(".unfold-icon").classList.toggle("hidden");
             this.querySelector(".fold-icon").classList.toggle("hidden");
         });
