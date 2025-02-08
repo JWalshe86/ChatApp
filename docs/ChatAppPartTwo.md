@@ -43,14 +43,12 @@ title: ChatApp Part Two
 
             <span class="added-line">+ namespace ChatApp.Hubs</span>
             <span class="added-line">+ {</span>
-            <span class="added-line tooltip-trigger">
-               private readonly <span class="tooltip">This means the `_context` variable is assigned only once in the constructor and cannot be modified.</span> 
-               AppDbContext _context;
-            </span>
+            <span class="added-line">
+               private readonly AppDbContext _context;</span>
 
             <span class="added-line">+ public ChatHub(AppDbContext context)</span>
             <span class="added-line">+ {</span>
-            <span class="added-line">+ _context = context;</span>
+            <span class="added-line tooltip" data-tooltip="Assigns the injected database context to the private field for use in this class.">_context = context;</span>
             <span class="added-line">+ }</span>
 
             <span class="original-code hidden">public async Task SendMessage(string user, string message)</span>
