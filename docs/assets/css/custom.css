@@ -10,7 +10,7 @@
 
 /* Ensure original code is visible when `.hidden` is removed */
 .original-code:not(.hidden) {
-    display: inline !important;
+    display: inline-block !important;
     visibility: visible !important;
     opacity: 1 !important;
     height: auto !important;
@@ -85,7 +85,7 @@ code.hljs {
 
 /* Hide original code by default */
 .original-code {
-    display: block !important;
+    display: inline-block !important;
     visibility: hidden !important;
     opacity: 0 !important;
     height: 0 !important;
@@ -125,7 +125,7 @@ body {
     background: #ffffff !important; /* Force background */
 }
 
-
+/* 🔹 Tooltip Styles */
 .tooltip-container {
     display: inline-block; /* ✅ Keeps tooltip explanation in one line */
     position: relative;
@@ -153,11 +153,13 @@ body {
 .tooltip-trigger:hover .tooltip {
     visibility: visible;
     opacity: 1;
-    top: -30px;
+    bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
+    margin-bottom: 5px; /* Space between element and tooltip */
 }
 
-.original-code.tooltip-container {
-    display: inline-block !important; /* 🚀 Prevents it from being treated as original */
+/* ✅ Ensure explanation stays inside updated code, NOT original */
+.added-line.tooltip-container {
+    display: inline-block !important;
 }
