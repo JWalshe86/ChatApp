@@ -6,7 +6,6 @@
 }
 
 /* Hide original code by default */
-/* Ensure original code is fully hidden */
 .original-code {
     display: none !important;
     visibility: hidden !important;
@@ -16,7 +15,17 @@
     padding: 0 !important;
 }
 
-/* Allow the code container to be visible but collapsed */
+/* Ensure original code is visible when `.hidden` is removed */
+.original-code:not(.hidden) {
+    display: inline !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    margin: initial !important;
+    padding: initial !important;
+}
+
+/* Ensure code container is visible but collapsed */
 .code-container { 
     max-height: 500px; /* Adjust as needed */
     overflow: hidden;
@@ -26,4 +35,11 @@
 /* When expanded, it smoothly opens */
 .expanded .code-container { 
     max-height: 1000px; /* Ensure enough space for expanded code */
+}
+
+/* Ensure hidden class properly hides elements */
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
