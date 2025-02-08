@@ -8,22 +8,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Highlight.js applied");
 
-    // Inject .original-code for full lines
+    // Inject .original-code for full lines & avoid extra gaps
     document.querySelectorAll("pre code").forEach((block) => {
         const lines = block.innerHTML.split("\n");
 
         block.innerHTML = lines
-            .map((line) =>
-                line.trim().startsWith("+")
-                    ? `<span class="added-line">${line.substring(1).trim()}</span>` // Remove `+` but keep styling
-                    : `<span class="original-code hidden">${line}</span>`
-            )
+            .map((line) => {
+                if (line.trim().startsWith("+")) {
+                    return `<span class="added-line">${line.substring(1).trim()}</span>`; // Remove `+`
+                } else if (line.trim() !== "") {
+                    return `<span class="original-code hidden">${line}</span>`; // Hide original code
+                }
+                return ""; // Avoid inserting empty lines
+            })
             .join("\n");
     });
 
     console.log("Injected .original-code after Highlight.js applied.");
 
-    // ✅ Fix Expand Button Functionality with Smooth Expansion
+    // ✅ Expand Button with Smooth Expansion & No Gaps
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
             console.log("Expand button clicked!");
@@ -41,18 +44,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (isExpanded) {
                 console.log("📂 Expanding...");
-                codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Smooth expansion
-
-                setTimeout(() => {
-                    originalCode.forEach(line => line.classList.remove("hidden")); // Show original code
-                }, 300); // Delay showing original code for smooth animation
+                originalCode.forEach(line => line.classList.remove("hidden")); // Show original code
+                codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Smooth expand
             } else {
                 console.log("📂 Collapsing...");
-                originalCode.forEach(line => line.classList.add("hidden")); // Hide original code first
-
+                codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Preserve height
                 setTimeout(() => {
-                    codeContainer.style.maxHeight = "0px"; // Collapse container
-                }, 300);
+                    originalCode.forEach(line => line.classList.add("hidden")); // Hide original code
+                    codeContainer.style.maxHeight = "0px"; // Collapse smoothly
+                }, 200); // Delay hiding for a smoother effect
             }
 
             // Toggle icons
