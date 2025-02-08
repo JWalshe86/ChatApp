@@ -15,7 +15,7 @@ title: ChatApp Part Two
         <button class="expand-button">Expand</button>
     </div>
 
-    <div class="code-container" style="max-height: 0px; overflow: hidden; transition: max-height 0.3s ease-out;">
+    <div class="code-container" style="max-height: auto; overflow: hidden; transition: max-height 0.3s ease-out;">
         <pre class="updated-code">
             <code>
                 <span class="added-line">+ using System;</span>
@@ -28,4 +28,3 @@ title: ChatApp Part Two
         </pre>
     </div>
 </div>
-
