@@ -1,39 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS is running");
 
-    // Ensure all original code is hidden at the start
-    document.querySelectorAll(".original-code").forEach(line => {
-        line.classList.add("hidden");
-    });
+    document.querySelectorAll(".expand-button").forEach((button) => {
+        button.addEventListener("click", function () {
+            let codeBlock = this.closest(".code-block");
+            let placeholder = codeBlock.querySelector(".original-code-placeholder");
 
-    // Ensure updated code is always visible
-    document.querySelectorAll(".updated-code").forEach(codeBlock => {
-        codeBlock.classList.remove("hidden"); // Make sure updated code is shown
-    });
+            if (placeholder.innerHTML.trim() === "") {
+                // Insert original code dynamically
+                placeholder.innerHTML = `
+                    <code class="original-code">
+                        using System.Text;
+                        public class Test {
+                        public void Run() { Console.WriteLine("Hello"); }
+                        }
+                    </code>
+                `;
+                console.log("✅ Original code inserted.");
+            } else {
+                // Remove original code when collapsing
+                placeholder.innerHTML = "";
+                console.log("❌ Original code removed.");
+            }
 
-    console.log("✅ Original code hidden, Updated code visible on page load");
-
-    // Expand button functionality
-    document.querySelector(".expand-button").addEventListener("click", function () {
-        let codeBlock = this.closest(".code-block");
-        let originalCode = codeBlock.querySelectorAll(".original-code");
-        let codeContainer = codeBlock.querySelector(".code-container");
-
-        let isExpanded = codeBlock.classList.toggle("expanded");
-
-        if (isExpanded) {
-            console.log("📂 Expanding...");
-            codeContainer.style.maxHeight = codeContainer.scrollHeight + "px"; // Expand smoothly
-            setTimeout(() => {
-                originalCode.forEach(line => line.classList.remove("hidden")); // Show original code
-            }, 300);
-        } else {
-            console.log("📂 Collapsing...");
-            originalCode.forEach(line => line.classList.add("hidden")); // Hide original code first
-            setTimeout(() => {
-                codeContainer.style.maxHeight = "0px"; // Collapse smoothly
-            }, 300);
-        }
+            this.textContent = this.textContent === "Expand" ? "Collapse" : "Expand";
+        });
     });
 
     console.log("✅ JavaScript fully loaded!");
