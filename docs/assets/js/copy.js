@@ -3,27 +3,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 🖌️ Apply Syntax Highlighting & Track Diff Changes
     document.querySelectorAll("pre code").forEach((block) => {
-        const lines = block.innerHTML.split("\n");
-        
-        block.innerHTML = lines
-            .map((line) => {
-                let trimmed = line.trim();
+    const lines = block.innerHTML.split("\n");
 
-                if (trimmed.startsWith("+")) {
-                    return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
-                } else if (trimmed.startsWith("-")) {
-                    return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
-                }
+    block.innerHTML = lines
+        .map((line) => {
+            let trimmed = line.trim();
 
-                // Add tooltip to _context = context;
+            if (trimmed.startsWith("+")) {
                 if (line.includes("_context = context;")) {
-                    return `<div class="added-line tooltip-trigger">_context = context;<span class="tooltip">Assigns the injected database context to the private field for use in this class.</span></div>`;
+                    return `<div class="added-line">
+                                <span class="tooltip-trigger">_context = context;
+                                    <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
+                                </span>
+                            </div>`;
                 }
+                return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
+            }
 
-                return `<div class="original-code hidden">${line}</div>`;
-            })
-            .join("\n");
-    });
+            return `<div class="original-code hidden">${line}</div>`;
+        })
+        .join("\n");
+});
+
 
     // 🖱️ Expand/Collapse Button
     document.querySelectorAll(".expand-button").forEach((button) => {
