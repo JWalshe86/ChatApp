@@ -15,28 +15,31 @@ document.addEventListener("DOMContentLoaded", function () {
                     return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
                 }
 
-                // 🚀 Ensure explanation stays inside the updated code block, NOT in original code
-              if (trimmed.includes("_context = context;")) {
-    return `<div class="added-line tooltip-container">
-                <span class="tooltip-trigger">${trimmed}
-                    <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
-                </span>
-            </div>`;
-}
+                // ✅ Ensure `_context = context;` stays as updated code with tooltip
+                if (trimmed.includes("_context = context;")) {
+                    return `<div class="added-line tooltip-container">
+                                <span class="tooltip-trigger">${trimmed}
+                                    <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
+                                </span>
+                            </div>`;
+                }
 
-                // ✅ Only wrap non-modified lines in `original-code`, preventing extra lines from appearing
+                // ✅ Only wrap non-modified lines in `original-code`
                 return `<div class="original-code hidden">${line}</div>`;
             })
             .join("\n");
     });
 
-// ✅ Prevent Highlight.js from affecting explanations
-document.querySelectorAll("pre code").forEach((block) => {
-    block.innerHTML = block.innerHTML.replace(/(<span class="tooltip">.*?<\/span>)/g, "<!--hljs-ignore-->$1");
-    hljs.highlightElement(block);
-});
+    // ✅ Prevent Highlight.js from affecting explanations
+    document.querySelectorAll("pre code").forEach((block) => {
+        block.innerHTML = block.innerHTML.replace(/(<span class="tooltip">.*?<\/span>)/g, "<!--hljs-ignore-->$1");
+    });
 
-    
+    // ✅ Apply Highlight.js after modifications
+    document.querySelectorAll("pre code").forEach((block) => {
+        hljs.highlightElement(block);
+    });
+
     // 🔄 Expand button functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
@@ -44,11 +47,10 @@ document.querySelectorAll("pre code").forEach((block) => {
             let originalCode = codeBlock.querySelectorAll(".original-code");
 
             originalCode.forEach((line) => {
-                if (!line.classList.contains("tooltip-container")) {
-                    line.classList.toggle("hidden");
-                }
+                line.classList.toggle("hidden");
             });
 
+            // ✅ Toggle Expand/Collapse Icons
             this.querySelector(".unfold-icon").classList.toggle("hidden");
             this.querySelector(".fold-icon").classList.toggle("hidden");
         });
@@ -59,8 +61,8 @@ document.querySelectorAll("pre code").forEach((block) => {
         button.addEventListener("click", function () {
             let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("code");
 
-            // Collect all visible lines (both original and updated)
-            let lines = [...codeBlock.querySelectorAll(".added-line, .original-code")];
+            // ✅ Collect all visible lines (both original and updated)
+            let lines = [...codeBlock.querySelectorAll(".added-line, .original-code:not(.hidden)")];
             let codeText = lines.map(line => line.textContent.replace(/^[+-]\s*/, "")).join("\n").trim();
 
             navigator.clipboard.writeText(codeText).then(() => {
