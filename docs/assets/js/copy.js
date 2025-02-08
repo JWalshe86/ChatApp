@@ -2,32 +2,33 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded ✅");
 
     // 🖌️ Apply Syntax Highlighting & Track Diff Changes
-    document.querySelectorAll("pre code").forEach((block) => {
-        const lines = block.innerHTML.split("\n");
+document.querySelectorAll("pre code").forEach((block) => {
+    const lines = block.innerHTML.split("\n");
 
-        block.innerHTML = lines
-            .map((line) => {
-                let trimmed = line.trim();
+    block.innerHTML = lines
+        .map((line) => {
+            let trimmed = line.trim();
 
-                if (trimmed.startsWith("+")) {
-                    return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
-                } else if (trimmed.startsWith("-")) {
-                    return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
-                }
+            if (trimmed.startsWith("+")) {
+                return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
+            } else if (trimmed.startsWith("-")) {
+                return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
+            }
 
-                // 🚀 Ensure explanation stays inside the updated code block, NOT in original code
-                if (trimmed.includes("_context = context;")) {
-                    return `<div class="added-line tooltip-container">
-                                <span class="tooltip-trigger">${trimmed}
-                                    <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
-                                </span>
-                            </div>`;
-                }
+            // ✅ Keep tooltips inside the added-line
+            if (line.includes("_context = context;")) {
+                return `<div class="added-line tooltip-container">
+                            <span class="tooltip-trigger">_context = context;
+                                <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
+                            </span>
+                        </div>`;
+            }
 
-                return `<div class="original-code hidden">${trimmed}</div>`;
-            })
-            .join("\n");
-    });
+            return `<div class="original-code hidden">${line}</div>`;
+        })
+        .join("\n");
+});
+
 
     // ✅ Prevent Highlight.js from affecting explanations
     document.querySelectorAll("pre code").forEach((block) => {
