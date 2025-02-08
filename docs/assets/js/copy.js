@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded ✅");
 
-    // 🖌️ Apply Syntax Highlighting & Track Diff Changes Before Highlight.js Runs
+    // 🖌️ Apply Syntax Highlighting & Track Diff Changes BEFORE Highlight.js runs
     document.querySelectorAll("pre code").forEach((block) => {
         let lines = block.innerHTML.split("\n");
 
-        block.innerHTML = lines
+        // 🚀 Apply line modifications first
+        let modifiedHTML = lines
             .map((line) => {
                 let trimmed = line.trim();
 
@@ -27,11 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 return `<div class="original-code hidden hljs-ignore">${trimmed}</div>`;
             })
             .join("\n");
+
+        // ✅ Replace block content BEFORE Highlight.js runs
+        block.innerHTML = modifiedHTML;
     });
 
-    // ✅ Ensure Highlight.js Does Not Modify Tooltips
+    // ✅ Prevent Highlight.js from wrapping tooltips in extra spans
     document.querySelectorAll("pre code").forEach((block) => {
-        block.innerHTML = block.innerHTML.replace(/(<span class="tooltip">.*?<\/span>)/g, "<!--hljs-ignore-->$1");
         hljs.highlightElement(block);
     });
 
