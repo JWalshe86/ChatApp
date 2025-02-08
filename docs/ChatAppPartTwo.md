@@ -3,7 +3,7 @@ layout: default
 title: ChatApp Part Two
 ---
 
-# **ChatApp Part 2 Ui Expand collapsed**  
+# **ChatApp Part 2 Ui Expand collapsed test**  
 ## **Real-Time Messaging using SignalR**
 
 ![ChatApp](images/ChatApp.png)
