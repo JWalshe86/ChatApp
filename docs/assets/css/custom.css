@@ -124,26 +124,26 @@ body {
     transition: max-height 0.3s ease-in-out; /* Expand smoothly */
     background: #ffffff !important; /* Force background */
 }
+.tooltip-container {
+    display: inline-block; /* ✅ Prevent breaking into a new line */
+    position: relative;
+}
+
 .tooltip {
-    position: absolute; /* Keep it floating, not affecting the layout */
     visibility: hidden;
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 5px 10px;
     border-radius: 5px;
+    position: absolute;
     z-index: 10;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    white-space: nowrap; /* Prevent wrapping */
-    transform: translateX(-50%); /* Center align */
-    top: -30px; /* Adjust positioning */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    top: -30px; /* ✅ Position above */
     left: 50%;
-}
-
-.tooltip-trigger {
-    position: relative;
-    cursor: pointer;
+    transform: translateX(-50%);
+    white-space: nowrap; /* ✅ Prevent text from wrapping */
 }
 
 .tooltip-trigger:hover .tooltip {
