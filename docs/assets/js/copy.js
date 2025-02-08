@@ -15,10 +15,16 @@ document.querySelectorAll("pre code").forEach((block) => {
                 return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
             }
 
+            // 🚀 Fix: Keep the "added-line" class if already present!
+            if (line.includes("_context = context;")) {
+                return `<div class="added-line tooltip" data-tooltip="Assigns the injected database context to the private field for use in this class.">${line}</div>`;
+            }
+
             return `<div class="original-code hidden">${line}</div>`;
         })
         .join("\n");
 });
+
 
 
 // Handle GitHub-Style Copy Button Clicks
