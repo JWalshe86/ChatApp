@@ -1,20 +1,23 @@
- .hidden 
-{ 
- display: none !important; 
+/* Ensure updated code is visible */
+.updated-code {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-.code-container 
-{ 
- max-height: 0; 
- overflow: hidden; 
- transition: max-height 0.3s ease-out;
-}
-
-.expanded .code-container
-{ 
- max-height: 500px;
-} /* Arbitrary large value */
-
+/* Hide original code by default */
 .original-code {
-    display: none;
+    display: none !important;
+}
+
+/* Allow the code container to be visible but collapsed */
+.code-container { 
+    max-height: 500px; /* Adjust as needed */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+/* When expanded, it smoothly opens */
+.expanded .code-container { 
+    max-height: 1000px; /* Ensure enough space for expanded code */
 }
