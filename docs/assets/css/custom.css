@@ -43,3 +43,8 @@
     visibility: hidden !important;
     opacity: 0 !important;
 }
+
+pre code.hljs 
+{
+    display: grid !important;
+}
