@@ -30,12 +30,7 @@ document.querySelectorAll("pre code").forEach((block) => {
 });
 
 
-    // ✅ Prevent Highlight.js from affecting explanations
-    document.querySelectorAll("pre code").forEach((block) => {
-        block.innerHTML = block.innerHTML.replace(/(<span class="tooltip">.*?<\/span>)/g, "<!--hljs-ignore-->$1");
-        hljs.highlightElement(block);
-    });
-
+   
     // 🔄 Expand button functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
