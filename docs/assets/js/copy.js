@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded ✅");
 
     // 🖌️ Apply Syntax Highlighting & Track Diff Changes
-  document.querySelectorAll("pre code").forEach((block) => {
     document.querySelectorAll("pre code").forEach((block) => {
         const lines = block.innerHTML.split("\n");
 
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             this.querySelector(".fold-icon").classList.toggle("hidden");
         });
     });
-      
+
     // 📝 Copy Button
     document.querySelectorAll(".copy-button").forEach(button => {
         button.addEventListener("click", function () {
