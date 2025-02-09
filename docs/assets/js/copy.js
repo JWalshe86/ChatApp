@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded ✅");
 
-    // 🖌️ Process code transformations before applying syntax highlighting
+    // 🖌️ Apply Syntax Highlighting & Track Diff Changes
     document.querySelectorAll("pre code").forEach((block) => {
         const lines = block.innerHTML.split("\n");
 
@@ -24,19 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
                             </div>`;
                 }
 
-                return `<div class="original-code hidden">${line}</div>`;
+                return `<div class="original-code hidden">${trimmed}</div>`;
             })
             .join("\n");
     });
-
-    console.log("Code transformations applied.");
-
-    // ✅ Apply Highlight.js after modifications
-    document.querySelectorAll("pre code").forEach((block) => {
-        hljs.highlightElement(block);
-    });
-
-    console.log("Applying Highlight.js...");
 
     // 🔄 Expand button functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
@@ -44,24 +35,25 @@ document.addEventListener("DOMContentLoaded", function () {
             let codeBlock = this.closest(".code-block");
             let originalCodeLines = codeBlock.querySelectorAll(".original-code");
 
+            // Toggle visibility of original code
             originalCodeLines.forEach((line) => {
                 line.classList.toggle("hidden");
             });
 
+            // Toggle expand/collapse icons
             this.querySelector(".unfold-icon").classList.toggle("hidden");
             this.querySelector(".fold-icon").classList.toggle("hidden");
         });
     });
 
-    console.log("Expand button functionality added.");
-
-    // 📝 Copy Button
+    // 📝 Copy Button Functionality
     document.querySelectorAll(".copy-button").forEach(button => {
         button.addEventListener("click", function () {
             let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("code");
 
-            let lines = [...codeBlock.querySelectorAll(".added-line, .original-code")];
-            let codeText = lines.map(line => line.textContent.replace(/^[+-]\s*/, "")).join("\n").trim();
+            // Collect all visible lines (both original and updated)
+            let visibleLines = [...codeBlock.querySelectorAll(".added-line, .original-code:not(.hidden)")];
+            let codeText = visibleLines.map(line => line.textContent.replace(/^[+-]\s*/, "")).join("\n").trim();
 
             navigator.clipboard.writeText(codeText).then(() => {
                 let originalIcon = button.innerHTML;
@@ -70,8 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
-
-    console.log("Copy button functionality added.");
 
     // ℹ️ Tooltip Hover Effect
     document.querySelectorAll(".tooltip-trigger").forEach(trigger => {
@@ -87,5 +77,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    console.log("Tooltip functionality added.");
 });
