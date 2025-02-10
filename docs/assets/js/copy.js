@@ -1,7 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded ✅");
 
-    // 🖌️ Apply Syntax Highlighting & Track Diff Changes
+    // 🖌️ Apply Syntax Highlighting (only for elements without 'nohighlight')
+    document.querySelectorAll("pre code:not(.nohighlight)").forEach((block) => {
+        hljs.highlightElement(block);
+    });
+
+    // ✅ Reapply added-line styles after Highlight.js modifies the DOM
+    setTimeout(() => {
+        document.querySelectorAll(".added-line").forEach((line) => {
+            line.style.backgroundColor = "#e6ffed"; // Light green background
+            line.style.borderLeft = "3px solid #28a745"; // Green left border
+            line.style.display = "inline-block"; // Ensures full row highlighting
+            line.style.width = "100%";
+        });
+    }, 500);
+
+    // 🖌️ Track Diff Changes & Keep Tooltips
     document.querySelectorAll("pre code").forEach((block) => {
         const lines = block.innerHTML.split("\n");
 
@@ -29,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .join("\n");
     });
 
-    // 🔄 Expand button functionality
+    // 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
             let codeBlock = this.closest(".code-block");
@@ -62,4 +77,20 @@ document.addEventListener("DOMContentLoaded", function () {
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
+
+    // ✅ Ensure Highlight.js modifications don't override custom styles
+    function applyHighlightingFix(container) {
+        container.querySelectorAll(".hljs-keyword, .hljs-title, .hljs-string").forEach(span => {
+            let parent = span.closest("span");
+
+            if (parent) {
+                if (parent.classList.contains("added-line")) {
+                    span.classList.add("added-line");
+                }
+                if (parent.classList.contains("original-code")) {
+                    span.classList.add("original-code");
+                }
+            }
+        });
+    }
 });
