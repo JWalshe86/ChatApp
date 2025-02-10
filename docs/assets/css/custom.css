@@ -42,9 +42,6 @@
 /* Grid display for consistent line alignment */
 pre code.hljs {
     display: grid !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow-x: auto !important; /* Keep horizontal scrolling */
 }
 /* Remove padding from general code styling */
 code.hljs {
