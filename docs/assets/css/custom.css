@@ -20,7 +20,6 @@
 
 /* Ensure code container is visible but collapsed */
 .code-container { 
-    max-height: 500px; /* Adjust as needed */
     overflow: hidden;
     transition: max-height 0.3s ease-out;
     padding: 0 !important;
