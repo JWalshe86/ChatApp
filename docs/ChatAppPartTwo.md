@@ -48,10 +48,7 @@ title: ChatApp Part Two
 
             <span class="added-line">+ public ChatHub(AppDbContext context)</span>
             <span class="added-line">+ {</span>
-            <span class="added-line tooltip-container">
-            <span class="tooltip-trigger">_context = context;</span>
-            <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
-            </span>
+            <span class="added-line">_context = context;</span>
 
 
             <span class="added-line">+ }</span>
