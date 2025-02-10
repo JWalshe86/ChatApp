@@ -62,19 +62,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }).catch(err => console.error("Failed to copy:", err));
         });
     });
-
-    // ℹ️ Tooltip Hover Effect
-    document.querySelectorAll(".tooltip-trigger").forEach(trigger => {
-        trigger.addEventListener("mouseover", function () {
-            let tooltip = this.querySelector(".tooltip");
-            tooltip.style.visibility = "visible";
-            tooltip.style.opacity = "1";
-        });
-        trigger.addEventListener("mouseout", function () {
-            let tooltip = this.querySelector(".tooltip");
-            tooltip.style.visibility = "hidden";
-            tooltip.style.opacity = "0";
-        });
-    });
-
 });
