@@ -28,61 +28,9 @@
 <!-- ✅ Load Highlight.js -->
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll("pre code").forEach((block) => {
-            hljs.highlightElement(block);
-        });
-
-        // ✅ Reapply added-line styles after Highlight.js finishes
-        setTimeout(() => {
-            document.querySelectorAll(".added-line").forEach((line) => {
-                line.style.backgroundColor = "#e6ffed"; // Light green background
-                line.style.borderLeft = "3px solid #28a745"; // Green left border
-                line.style.display = "inline-block"; // Ensures full row highlighting
-                line.style.width = "100%";
-            });
-        }, 500); // Wait 500ms for Highlight.js to modify the DOM
-    });
-</script>
 
 <!-- ✅ Load Custom Copy-to-Clipboard JS -->
 <script src="{{ '/assets/js/copy.js' | relative_url }}"></script>
-
-<!-- ✅ Expand Button JavaScript -->
-<script>
-function toggleExpand(button) {
-    let codeBlock = button.closest(".code-block");
-    let originalCode = codeBlock.querySelectorAll(".original-code");
-
-    originalCode.forEach(line => {
-        line.classList.toggle("hidden");
-    });
-
-    // Ensure syntax highlighting preserves styles
-    applyHighlightingFix(codeBlock);
-
-    button.textContent = button.textContent === "Expand all" ? "Collapse" : "Expand all";
-}
-
-// Reapply added-line and original-code after hljs modifies DOM
-function applyHighlightingFix(container) {
-    container.querySelectorAll(".hljs-keyword, .hljs-title, .hljs-string").forEach(span => {
-        let parent = span.closest("span");
-
-        if (parent) {
-            if (parent.classList.contains("added-line")) {
-                span.classList.add("added-line");
-            }
-            if (parent.classList.contains("original-code")) {
-                span.classList.add("original-code");
-            }
-        }
-    });
-}
-
-</script>
-
 
 </body>
 </html>
