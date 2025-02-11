@@ -6,30 +6,32 @@ document.addEventListener("DOMContentLoaded", function () {
         "using Microsoft.AspNetCore.SignalR;": "Imports SignalR for real-time communication.",
     };
 
-    document.querySelectorAll("pre code").forEach((block) => {
-        const lines = block.innerHTML.split("\n").map(line => line.trim()).filter(line => line !== "");
+   document.querySelectorAll("pre code").forEach((block) => {
+    const lines = block.innerHTML.split("\n").map(line => line.trim()).filter(line => line !== "");
 
-        block.innerHTML = lines.map((line) => {
-            let lineWithoutDiffSymbol = line.replace(/^[+-]\s*/, "").trim();
-            let tooltipText = tooltipMessages[lineWithoutDiffSymbol] || "No additional information.";
+    block.innerHTML = lines.map((line) => {
+        let lineWithoutDiffSymbol = line.replace(/^[+-]\s*/, "").trim();
+        let tooltipText = tooltipMessages[lineWithoutDiffSymbol] || "No additional information.";
 
-            if (line.startsWith("+")) {
-                return `<div class="added-line tooltip-container">
-                            <span class="tooltip-trigger"><span class="diff-symbol">+</span> ${lineWithoutDiffSymbol}
-                                <span class="tooltip">${tooltipText}</span>
-                            </span>
-                        </div>`;
-            } else if (line.startsWith("-")) {
-                return `<div class="removed-line tooltip-container">
-                            <span class="tooltip-trigger"><span class="diff-symbol">-</span> ${lineWithoutDiffSymbol}
-                                <span class="tooltip">Removed: ${tooltipText}</span>
-                            </span>
-                        </div>`;
-            } else {
-                return `<div class="original-code hidden">${line}</div>`;
-            }
-        }).join("\n");
-    });
+        if (line.startsWith("+")) {
+            return `<div class="added-line tooltip-container">
+                        <span class="tooltip-trigger"><span class="diff-symbol">+</span> ${lineWithoutDiffSymbol}
+                            <span class="tooltip">${tooltipText}</span>
+                        </span>
+                    </div>`;
+        } else if (line.startsWith("-")) {
+            return `<div class="removed-line tooltip-container">
+                        <span class="tooltip-trigger"><span class="diff-symbol">-</span> ${lineWithoutDiffSymbol}
+                            <span class="tooltip">Removed: ${tooltipText}</span>
+                        </span>
+                    </div>`;
+        } else if (!line.startsWith("+") && !line.startsWith("-")) { // ✅ Only unchanged lines should be marked as original-code
+            return `<div class="original-code hidden">${line}</div>`;
+        }
+
+        return line; // Ensure nothing else is unintentionally converted
+    }).join("\n");
+});
 
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
