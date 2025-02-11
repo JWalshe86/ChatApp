@@ -132,3 +132,25 @@ pre code {
     display: block !important;
     overflow-x: auto !important;
 }
+/* Tooltip Styling */
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+}
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+.tooltip-trigger:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
