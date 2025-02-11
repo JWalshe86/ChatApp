@@ -33,33 +33,34 @@ title: ChatApp Part Two
         </button>
     </div>
 
-    <div class="code-container">
+<div class="code-container">
         <pre class="updated-code language-csharp"><code>
-            <span class="added-line">+ using ChatApp.Models;</span>
-            <span class="original-code hidden">using Microsoft.AspNetCore.SignalR;</span>
-            <span class="original-code hidden">public class ChatHub : Hub</span>
+            <span class="added-line">+ <span class="hljs-keyword">using</span> ChatApp.Models;</span>
+            <span class="original-code hidden"><span class="hljs-keyword">using</span> Microsoft.AspNetCore.SignalR;</span>
+            <span class="original-code hidden"><span class="hljs-keyword">public</span> <span class="hljs-class-name">class ChatHub</span> : <span class="hljs-class-name">Hub</span></span>
             <span class="original-code hidden">{</span>
-            <span class="added-line">+ namespace ChatApp.Hubs</span>
+            <span class="added-line">+ <span class="hljs-keyword">namespace</span> ChatApp.Hubs</span>
             <span class="added-line">+ {</span>
             <span class="added-line">
-               private readonly AppDbContext _context;</span>
-            <span class="added-line">+ public ChatHub(AppDbContext context)</span>
+               <span class="hljs-keyword">private readonly</span> <span class="hljs-class-name">AppDbContext</span> _context;</span>
+            <span class="added-line">+ <span class="hljs-keyword">public</span> <span class="hljs-class-name">ChatHub</span>(<span class="hljs-class-name">AppDbContext</span> context)</span>
             <span class="added-line">+ {</span>
             <span class="added-line">_context = context;</span>
             <span class="added-line">+ }</span>
-            <span class="original-code hidden">public async Task SendMessage(string user, string message)</span>
+            <span class="original-code hidden"><span class="hljs-keyword">public async</span> <span class="hljs-class-name">Task</span> <span class="hljs-function">SendMessage</span>(<span class="hljs-keyword">string</span> user, <span class="hljs-keyword">string</span> message)</span>
             <span class="original-code hidden">{</span>
-            <span class="added-line">+ var newMessage = new Message</span>
+            <span class="added-line">+ <span class="hljs-keyword">var</span> newMessage = <span class="hljs-keyword">new</span> <span class="hljs-class-name">Message</span></span>
             <span class="added-line">+ {</span>
-            <span class="added-line">+     User = user,</span>
-            <span class="added-line">+     Content = message,</span>
-            <span class="added-line">+     Timestamp = DateTime.UtcNow</span>
+            <span class="added-line">+     <span class="hljs-keyword">User</span> = user,</span>
+            <span class="added-line">+     <span class="hljs-keyword">Content</span> = message,</span>
+            <span class="added-line">+     <span class="hljs-keyword">Timestamp</span> = DateTime.UtcNow</span>
             <span class="added-line">+ };</span>
             <span class="added-line">+ _context.Messages.Add(newMessage);</span>
-            <span class="added-line">+ await _context.SaveChangesAsync();</span>
-            <span class="original-code hidden">await Clients.All.SendAsync("ReceiveMessage", user, message);</span>
+            <span class="added-line">+ <span class="hljs-keyword">await</span> _context.SaveChangesAsync();</span>
+            <span class="original-code hidden"><span class="hljs-keyword">await</span> Clients.All.SendAsync(<span class="hljs-string">"ReceiveMessage"</span>, user, message);</span>
             <span class="original-code hidden">}</span>
             <span class="original-code hidden">}</span>
         </code></pre>
     </div>
 </div>
+
