@@ -11,44 +11,33 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".added-line").forEach((line) => {
             line.style.backgroundColor = "#e6ffed"; // Light green background
             line.style.borderLeft = "3px solid #28a745"; // Green left border
-            line.style.display = "inline-block"; // Ensures full row highlighting
+            line.style.display = "block"; // ✅ Prevent inline spacing issues
             line.style.width = "100%";
         });
     }, 500);
 
     // 🖌️ Track Diff Changes & Keep Tooltips
     document.querySelectorAll("pre code").forEach((block) => {
-        const lines = block.innerHTML.split("\n");
+        const lines = block.innerHTML.split("\n").map(line => line.trim()).filter(line => line !== ""); // ✅ Trim & remove blank lines
 
         block.innerHTML = lines
             .map((line) => {
-                let trimmed = line.trim();
-
-                // ✅ Skip completely empty lines (ensures no empty spans/divs)
-                if (!trimmed) return null;
-
-                if (trimmed.startsWith("+")) {
-                    return trimmed.length > 1 
-                        ? `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`
-                        : null; // Prevents empty spans
-                } else if (trimmed.startsWith("-")) {
-                    return trimmed.length > 1 
-                        ? `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`
-                        : null;
+                if (line.startsWith("+")) {
+                    return `<div class="added-line"><span class="diff-symbol">+</span> ${line.substring(1).trim()}</div>`;
+                } else if (line.startsWith("-")) {
+                    return `<div class="removed-line"><span class="diff-symbol">-</span> ${line.substring(1).trim()}</div>`;
                 }
 
-                // ✅ Keep tooltips inside the added-line
-                if (trimmed.includes("_context = context;")) {
+                if (line.includes("_context = context;")) {
                     return `<div class="added-line tooltip-container">
-                                <span class="tooltip-trigger">${trimmed}
+                                <span class="tooltip-trigger">${line}
                                     <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
                                 </span>
                             </div>`;
                 }
 
-                return `<div class="original-code hidden">${trimmed}</div>`;
+                return `<div class="original-code hidden">${line}</div>`;
             })
-            .filter(line => line !== null) // ✅ Ensures no empty elements are added
             .join("\n");
 
         console.log("✅ Updated script applied, empty lines removed!");
