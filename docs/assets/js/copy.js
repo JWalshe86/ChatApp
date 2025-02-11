@@ -23,33 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
 }, 500);
 
 
-    // 🖌️ Track Diff Changes & Keep Tooltips
-    document.querySelectorAll("pre code").forEach((block) => {
-        const lines = block.innerHTML.split("\n").map(line => line.trim()).filter(line => line !== ""); // ✅ Trim & remove blank lines
-
-        block.innerHTML = lines
-            .map((line) => {
-                if (line.startsWith("+")) {
-                    return `<div class="added-line"><span class="diff-symbol">+</span> ${line.substring(1).trim()}</div>`;
-                } else if (line.startsWith("-")) {
-                    return `<div class="removed-line"><span class="diff-symbol">-</span> ${line.substring(1).trim()}</div>`;
-                }
-
-                if (line.includes("_context = context;")) {
-                    return `<div class="added-line tooltip-container">
-                                <span class="tooltip-trigger">${line}
-                                    <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
-                                </span>
-                            </div>`;
-                }
-
-                return `<div class="original-code hidden">${line}</div>`;
-            })
-            .join("\n");
-
-        console.log("✅ Updated script applied, empty lines removed!");
-    });
-
     // ✅ Extra Cleanup: Remove any remaining empty `.original-code.hidden` or `.added-line` elements
     document.querySelectorAll(".original-code.hidden, .added-line").forEach(el => {
         if (!el.textContent.trim()) {
