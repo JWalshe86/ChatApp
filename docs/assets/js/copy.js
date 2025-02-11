@@ -92,19 +92,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // ✅ Ensure Highlight.js modifications don't override custom styles
-    function applyHighlightingFix(container) {
-        container.querySelectorAll(".hljs-keyword, .hljs-title, .hljs-string").forEach(span => {
-            let parent = span.closest("span");
-
-            if (parent) {
-                if (parent.classList.contains("added-line")) {
-                    span.classList.add("added-line");
-                }
-                if (parent.classList.contains("original-code")) {
-                    span.classList.add("original-code");
-                }
-            }
-        });
-    }
-});
+  
