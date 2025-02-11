@@ -43,7 +43,11 @@ title: ChatApp Part Two
             <span class="added-line">+ {</span>
             <span class="added-line">
                private readonly AppDbContext _context;</span>
-            <span class="added-line">+ public ChatHub(AppDbContext context)</span>
+            <span class="added-line tooltip-container">
+            <span class="tooltip-trigger">public ChatHub(AppDbContext context)
+            <span class="tooltip">Constructor that initializes the ChatHub with a database context.</span>
+            </span>
+            </span>
             <span class="added-line">+ {</span>
             <span class="added-line">_context = context;</span>
             <span class="added-line">+ }</span>
