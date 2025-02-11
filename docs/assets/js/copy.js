@@ -16,37 +16,51 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }, 500);
 
-// 🖌️ Track Diff Changes & Keep Tooltips
-document.querySelectorAll("pre code").forEach((block) => {
-    const lines = block.innerHTML.split("\n");
+    // 🖌️ Track Diff Changes & Keep Tooltips
+    document.querySelectorAll("pre code").forEach((block) => {
+        const lines = block.innerHTML.split("\n");
 
-    block.innerHTML = lines
-        .map((line) => {
-            let trimmed = line.trim();
+        block.innerHTML = lines
+            .map((line) => {
+                let trimmed = line.trim();
 
-            if (!trimmed) return ""; // ✅ Skip empty lines (Prevents empty <div>)
+                // ✅ Skip completely empty lines (ensures no empty spans/divs)
+                if (!trimmed) return null;
 
-            if (trimmed.startsWith("+")) {
-                return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
-            } else if (trimmed.startsWith("-")) {
-                return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
-            }
+                if (trimmed.startsWith("+")) {
+                    return trimmed.length > 1 
+                        ? `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`
+                        : null; // Prevents empty spans
+                } else if (trimmed.startsWith("-")) {
+                    return trimmed.length > 1 
+                        ? `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`
+                        : null;
+                }
 
-            // ✅ Keep tooltips inside the added-line
-            if (trimmed.includes("_context = context;")) {
-                return `<div class="added-line tooltip-container">
-                            <span class="tooltip-trigger">${trimmed}
-                                <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
-                            </span>
-                        </div>`;
-            }
+                // ✅ Keep tooltips inside the added-line
+                if (trimmed.includes("_context = context;")) {
+                    return `<div class="added-line tooltip-container">
+                                <span class="tooltip-trigger">${trimmed}
+                                    <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
+                                </span>
+                            </div>`;
+                }
 
-            return `<div class="original-code hidden">${trimmed}</div>`;
-        })
-        .filter(line => line !== "") // ✅ Removes empty strings from the final output
-        .join("\n");
-});
+                return `<div class="original-code hidden">${trimmed}</div>`;
+            })
+            .filter(line => line !== null) // ✅ Ensures no empty elements are added
+            .join("\n");
 
+        console.log("✅ Updated script applied, empty lines removed!");
+    });
+
+    // ✅ Extra Cleanup: Remove any remaining empty `.original-code.hidden` or `.added-line` elements
+    document.querySelectorAll(".original-code.hidden, .added-line").forEach(el => {
+        if (!el.textContent.trim()) {
+            el.remove();
+            console.log("❌ Removed empty element:", el);
+        }
+    });
 
     // 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
