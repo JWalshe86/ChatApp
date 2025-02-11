@@ -1,11 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const tooltipMessages = {
-        "public ChatHub(AppDbContext context)": "Constructor initializing ChatHub with a database context.",
-        "await _context.SaveChangesAsync();": "Saves the message to the database asynchronously.",
-        "await Clients.All.SendAsync(\"ReceiveMessage\", user, message);": "Broadcasts the message to all connected clients.",
-        "using Microsoft.AspNetCore.SignalR;": "Imports SignalR for real-time communication.",
-    };
-
     document.querySelectorAll("pre code").forEach((block) => {
         const lines = block.innerHTML.split("\n").map(line => line.trim()).filter(line => line !== "");
 
@@ -13,22 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
             let isAdded = line.startsWith("+");
             let isRemoved = line.startsWith("-");
             let lineWithoutDiffSymbol = line.replace(/^[+-]\s*/, "").trim();
-            let tooltipText = tooltipMessages[lineWithoutDiffSymbol] || "No additional information.";
 
             if (isAdded) {
-                return `<span class="added-line tooltip-container">
-                            <span class="tooltip-trigger">${line}
-                                <span class="tooltip">${tooltipText}</span>
-                            </span>
-                        </span>`;
+                return `<span class="added-line">${lineWithoutDiffSymbol}</span>`;
             } else if (isRemoved) {
-                return `<span class="removed-line tooltip-container">
-                            <span class="tooltip-trigger">${line}
-                                <span class="tooltip">Removed: ${tooltipText}</span>
-                            </span>
-                        </span>`;
+                return `<span class="removed-line">${lineWithoutDiffSymbol}</span>`;
             } else {
-                return `<span class="original-code hidden">${line}</span>`;
+                return `<span class="original-code hidden">${lineWithoutDiffSymbol}</span>`;
             }
         }).join("\n");
     });
