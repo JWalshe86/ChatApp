@@ -1,35 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded ✅");
 
-    // 🖌️ Apply Syntax Highlighting (only for elements without 'nohighlight')
-    document.querySelectorAll("pre code:not(.nohighlight)").forEach((block) => {
-        hljs.highlightElement(block);
-
-        // ✅ Ensure Highlight.js does NOT strip tooltips inside added-line
-        block.querySelectorAll(".tooltip-container").forEach((tooltip) => {
-            tooltip.classList.add("nohighlight");
-        });
-    });
-
-    setTimeout(() => {
-    document.querySelectorAll(".added-line").forEach((line) => {
-        let content = line.innerHTML;
-
-        // Ensure tooltips are restored inside added-line
-        if (content.includes("tooltip-trigger")) {
-            line.innerHTML = `<span class="tooltip-container">${content}</span>`;
-        }
-    });
-}, 500);
-
-
-    // ✅ Extra Cleanup: Remove any remaining empty `.original-code.hidden` or `.added-line` elements
-    document.querySelectorAll(".original-code.hidden, .added-line").forEach(el => {
-        if (!el.textContent.trim()) {
-            el.remove();
-            console.log("❌ Removed empty element:", el);
-        }
-    });
+    // // ✅ Extra Cleanup: Remove any remaining empty `.original-code.hidden` or `.added-line` elements
+    // document.querySelectorAll(".original-code.hidden, .added-line").forEach(el => {
+    //     if (!el.textContent.trim()) {
+    //         el.remove();
+    //         console.log("❌ Removed empty element:", el);
+    //     }
+    // });
 
     // 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
