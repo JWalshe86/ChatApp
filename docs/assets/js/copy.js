@@ -16,33 +16,37 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }, 500);
 
-    // 🖌️ Track Diff Changes & Keep Tooltips
-    document.querySelectorAll("pre code").forEach((block) => {
-        const lines = block.innerHTML.split("\n");
+// 🖌️ Track Diff Changes & Keep Tooltips
+document.querySelectorAll("pre code").forEach((block) => {
+    const lines = block.innerHTML.split("\n");
 
-        block.innerHTML = lines
-            .map((line) => {
-                let trimmed = line.trim();
+    block.innerHTML = lines
+        .map((line) => {
+            let trimmed = line.trim();
 
-                if (trimmed.startsWith("+")) {
-                    return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
-                } else if (trimmed.startsWith("-")) {
-                    return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
-                }
+            if (!trimmed) return ""; // ✅ Skip empty lines (Prevents empty <div>)
 
-                // ✅ Keep tooltips inside the added-line
-                if (trimmed.includes("_context = context;")) {
-                    return `<div class="added-line tooltip-container">
-                                <span class="tooltip-trigger">${trimmed}
-                                    <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
-                                </span>
-                            </div>`;
-                }
+            if (trimmed.startsWith("+")) {
+                return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
+            } else if (trimmed.startsWith("-")) {
+                return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
+            }
 
-                return `<div class="original-code hidden">${trimmed}</div>`;
-            })
-            .join("\n");
-    });
+            // ✅ Keep tooltips inside the added-line
+            if (trimmed.includes("_context = context;")) {
+                return `<div class="added-line tooltip-container">
+                            <span class="tooltip-trigger">${trimmed}
+                                <span class="tooltip">Assigns the injected database context to the private field for use in this class.</span>
+                            </span>
+                        </div>`;
+            }
+
+            return `<div class="original-code hidden">${trimmed}</div>`;
+        })
+        .filter(line => line !== "") // ✅ Removes empty strings from the final output
+        .join("\n");
+});
+
 
     // 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
