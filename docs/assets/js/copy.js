@@ -1,13 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("JS Loaded ✅");
-
-    // // ✅ Extra Cleanup: Remove any remaining empty `.original-code.hidden` or `.added-line` elements
-    // document.querySelectorAll(".original-code.hidden, .added-line").forEach(el => {
-    //     if (!el.textContent.trim()) {
-    //         el.remove();
-    //         console.log("❌ Removed empty element:", el);
-    //     }
-    // });
 
     // 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
@@ -43,4 +34,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-  
