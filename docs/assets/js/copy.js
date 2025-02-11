@@ -10,25 +10,25 @@ document.addEventListener("DOMContentLoaded", function () {
         const lines = block.innerHTML.split("\n").map(line => line.trim()).filter(line => line !== "");
 
         block.innerHTML = lines.map((line) => {
-            let isAdded = line.includes("class=\"added-line\"");
-            let isRemoved = line.includes("class=\"removed-line\"");
+            let isAdded = line.startsWith("+");
+            let isRemoved = line.startsWith("-");
             let lineWithoutDiffSymbol = line.replace(/^[+-]\s*/, "").trim();
             let tooltipText = tooltipMessages[lineWithoutDiffSymbol] || "No additional information.";
 
             if (isAdded) {
-                return `<div class="added-line tooltip-container">
-                            <span class="tooltip-trigger">${lineWithoutDiffSymbol}
+                return `<span class="added-line tooltip-container">
+                            <span class="tooltip-trigger">${line}
                                 <span class="tooltip">${tooltipText}</span>
                             </span>
-                        </div>`;
+                        </span>`;
             } else if (isRemoved) {
-                return `<div class="removed-line tooltip-container">
-                            <span class="tooltip-trigger">${lineWithoutDiffSymbol}
+                return `<span class="removed-line tooltip-container">
+                            <span class="tooltip-trigger">${line}
                                 <span class="tooltip">Removed: ${tooltipText}</span>
                             </span>
-                        </div>`;
+                        </span>`;
             } else {
-                return `<div class="original-code hidden">${lineWithoutDiffSymbol}</div>`;
+                return `<span class="original-code hidden">${line}</span>`;
             }
         }).join("\n");
     });
