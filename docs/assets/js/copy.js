@@ -6,14 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const lines = block.innerHTML.split("\n");
 
     block.innerHTML = lines
-        .map((line, index) => {
+        .map((line) => {
             let trimmed = line.trim();
-            console.log(`Processing line ${index}:`, trimmed); // ✅ Debug log
-
-            if (trimmed.length === 0) {
-                console.log(`Skipping empty line at index ${index}`);
-                return ""; // Skip only truly empty lines
-            }
+            
+            // ✅ Skip completely empty lines (ensures no empty spans/divs)
+            if (trimmed === "") return null;
 
             if (trimmed.startsWith("+")) {
                 return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
@@ -31,9 +28,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
             return `<div class="original-code hidden">${trimmed}</div>`;
         })
+        .filter(line => line !== null && line.trim() !== "") // ✅ Double check no empty lines are added
         .join("\n");
 
-    console.log("Updated script applied without deleting valid lines!");
+    console.log("✅ Updated script applied, empty lines removed!");
+});
+
+// ✅ Extra Cleanup: Remove any empty `.original-code.hidden` elements left in the DOM
+document.querySelectorAll(".original-code.hidden").forEach(el => {
+    if (!el.textContent.trim()) {
+        el.remove();
+        console.log("❌ Removed empty .original-code.hidden:", el);
+    }
 });
 
 
