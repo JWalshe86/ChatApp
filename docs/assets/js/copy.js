@@ -4,17 +4,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // 🖌️ Apply Syntax Highlighting (only for elements without 'nohighlight')
     document.querySelectorAll("pre code:not(.nohighlight)").forEach((block) => {
         hljs.highlightElement(block);
+
+        // ✅ Ensure Highlight.js does NOT strip tooltips inside added-line
+        block.querySelectorAll(".tooltip-container").forEach((tooltip) => {
+            tooltip.classList.add("nohighlight");
+        });
     });
 
-    // ✅ Reapply added-line styles after Highlight.js modifies the DOM
     setTimeout(() => {
-        document.querySelectorAll(".added-line").forEach((line) => {
-            line.style.backgroundColor = "#e6ffed"; // Light green background
-            line.style.borderLeft = "3px solid #28a745"; // Green left border
-            line.style.display = "block"; // ✅ Prevent inline spacing issues
-            line.style.width = "100%";
-        });
-    }, 500);
+    document.querySelectorAll(".added-line").forEach((line) => {
+        let content = line.innerHTML;
+
+        // Ensure tooltips are restored inside added-line
+        if (content.includes("tooltip-trigger")) {
+            line.innerHTML = `<span class="tooltip-container">${content}</span>`;
+        }
+    });
+}, 500);
+
 
     // 🖌️ Track Diff Changes & Keep Tooltips
     document.querySelectorAll("pre code").forEach((block) => {
