@@ -154,3 +154,92 @@ pre code {
     opacity: 1;
     visibility: visible;
 }
+/* Base styles */
+.hljs {
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 14px;
+    background: #f6f8fa;
+    color: #24292e;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+/* Keywords (e.g., public, class, return) */
+.hljs-keyword {
+    color: #d73a49; /* Red */
+    font-weight: bold;
+}
+
+/* Data types, Classes, and Method names */
+.hljs-title {
+    color: #6f42c1; /* Purple */
+}
+
+/* String literals */
+.hljs-string {
+    color: #032f62; /* Blue */
+}
+
+/* Function parameters */
+.hljs-params {
+    color: #005cc5; /* Lighter Blue */
+}
+
+/* Numbers and constants */
+.hljs-number {
+    color: #005cc5;
+}
+
+/* Comments */
+.hljs-comment {
+    color: #6a737d; /* Gray */
+    font-style: italic;
+}
+
+/* Operators (=, +, -) */
+.hljs-operator {
+    color: #d73a49;
+}
+
+/* Parentheses, brackets */
+.hljs-punctuation {
+    color: #24292e; /* Dark Gray */
+}
+
+/* Imports (e.g., using ChatApp.Models) */
+.hljs-namespace {
+    color: #22863a; /* Green */
+}
+
+/* Class Names */
+.hljs-class-name {
+    color: #6f42c1; /* Purple */
+}
+
+/* Method Names */
+.hljs-function {
+    color: #005cc5; /* Lighter Blue */
+}
+
+/* Boolean values (true, false) */
+.hljs-literal {
+    color: #d73a49; /* Red */
+}
+
+/* Added line (diff) */
+.added-line {
+    background-color: #e6ffed; /* Light green */
+    border-left: 3px solid #28a745; /* Green border */
+    display: block;
+    padding: 0.2em 0.5em;
+    margin: 0;
+}
+
+/* Removed line (diff) */
+.removed-line {
+    background-color: #ffebe9; /* Light red */
+    border-left: 3px solid #d73a49; /* Red border */
+    display: block;
+    padding: 0.2em 0.5em;
+    margin: 0;
+}
