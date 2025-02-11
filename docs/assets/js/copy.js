@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded ✅");
 
     const tooltipMessages = {
-    "public ChatHub(AppDbContext context)": "Constructor initializing ChatHub with a database context.",
-    "await _context.SaveChangesAsync();": "Saves the message to the database asynchronously.",
-    "await Clients.All.SendAsync(\"ReceiveMessage\", user, message);": "Broadcasts the message to all connected clients.",
-    "using Microsoft.AspNetCore.SignalR;": "Imports SignalR for real-time communication.",
-};
+        "public ChatHub(AppDbContext context)": "Constructor initializing ChatHub with a database context.",
+        "await _context.SaveChangesAsync();": "Saves the message to the database asynchronously.",
+        "await Clients.All.SendAsync(\"ReceiveMessage\", user, message);": "Broadcasts the message to all connected clients.",
+        "using Microsoft.AspNetCore.SignalR;": "Imports SignalR for real-time communication.",
+    };
 
     // 🖌️ Apply Syntax Highlighting (only for elements without 'nohighlight')
     document.querySelectorAll("pre code:not(.nohighlight)").forEach((block) => {
@@ -24,31 +24,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 500);
 
     // 🖌️ Track Diff Changes & Keep Tooltips Based on added-line or original-code
-   document.querySelectorAll("pre code").forEach((block) => {
-    const lines = block.innerHTML.split("\n").map(line => line.trim()).filter(line => line !== "");
+    document.querySelectorAll("pre code").forEach((block) => {
+        const lines = block.innerHTML.split("\n").map(line => line.trim()).filter(line => line !== "");
 
-    block.innerHTML = lines.map((line) => {
-        let lineWithoutDiffSymbol = line.replace(/^[+-]\s*/, "").trim(); // Remove leading "+" or "-"
-        let tooltipText = tooltipMessages[lineWithoutDiffSymbol] || "No additional information.";
+        block.innerHTML = lines.map((line) => {
+            let lineWithoutDiffSymbol = line.replace(/^[+-]\s*/, "").trim(); // Remove leading "+" or "-"
+            let tooltipText = tooltipMessages[lineWithoutDiffSymbol] || "No additional information.";
 
-        if (line.startsWith("+")) {
-            return `<div class="added-line tooltip-container">
-                        <span class="tooltip-trigger"><span class="diff-symbol">+</span> ${lineWithoutDiffSymbol}
-                            <span class="tooltip">${tooltipText}</span>
-                        </span>
-                    </div>`;
-        } else if (line.startsWith("-")) {
-            return `<div class="removed-line tooltip-container">
-                        <span class="tooltip-trigger"><span class="diff-symbol">-</span> ${lineWithoutDiffSymbol}
-                            <span class="tooltip">Removed: ${tooltipText}</span>
-                        </span>
-                    </div>`;
-        } else {
-            return `<div class="original-code hidden">${line}</div>`;
-        }
-    }).join("\n");
-});
-
+            if (line.startsWith("+")) {
+                return `<div class="added-line tooltip-container">
+                            <span class="tooltip-trigger"><span class="diff-symbol">+</span> ${lineWithoutDiffSymbol}
+                                <span class="tooltip">${tooltipText}</span>
+                            </span>
+                        </div>`;
+            } else if (line.startsWith("-")) {
+                return `<div class="removed-line tooltip-container">
+                            <span class="tooltip-trigger"><span class="diff-symbol">-</span> ${lineWithoutDiffSymbol}
+                                <span class="tooltip">Removed: ${tooltipText}</span>
+                            </span>
+                        </div>`;
+            } else {
+                return `<div class="original-code hidden">${line}</div>`;
+            }
+        }).join("\n");
+    });
 
     console.log("✅ Updated script applied, empty lines removed!");
 
