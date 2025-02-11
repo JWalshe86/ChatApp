@@ -2,29 +2,18 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded ✅");
 
     // 🖌️ Apply Syntax Highlighting (only for elements without 'nohighlight')
-    document.querySelectorAll("pre code:not(.nohighlight)").forEach((block) => {
-        hljs.highlightElement(block);
-    });
-
-    // ✅ Reapply added-line styles after Highlight.js modifies the DOM
-    setTimeout(() => {
-        document.querySelectorAll(".added-line").forEach((line) => {
-            line.style.backgroundColor = "#e6ffed"; // Light green background
-            line.style.borderLeft = "3px solid #28a745"; // Green left border
-            line.style.display = "inline-block"; // Ensures full row highlighting
-            line.style.width = "100%";
-        });
-    }, 500);
-
-// 🖌️ Track Diff Changes & Keep Tooltips
-document.querySelectorAll("pre code").forEach((block) => {
+    document.querySelectorAll("pre code").forEach((block) => {
     const lines = block.innerHTML.split("\n");
 
     block.innerHTML = lines
-        .map((line) => {
+        .map((line, index) => {
             let trimmed = line.trim();
+            console.log(`Processing line ${index}:`, trimmed); // ✅ Debug log
 
-            if (!trimmed) return ""; // ✅ Skip empty lines (Prevents empty <div>)
+            if (trimmed.length === 0) {
+                console.log(`Skipping empty line at index ${index}`);
+                return ""; // Skip only truly empty lines
+            }
 
             if (trimmed.startsWith("+")) {
                 return `<div class="added-line"><span class="diff-symbol">+</span> ${trimmed.substring(1).trim()}</div>`;
@@ -32,7 +21,6 @@ document.querySelectorAll("pre code").forEach((block) => {
                 return `<div class="removed-line"><span class="diff-symbol">-</span> ${trimmed.substring(1).trim()}</div>`;
             }
 
-            // ✅ Keep tooltips inside the added-line
             if (trimmed.includes("_context = context;")) {
                 return `<div class="added-line tooltip-container">
                             <span class="tooltip-trigger">${trimmed}
@@ -43,9 +31,11 @@ document.querySelectorAll("pre code").forEach((block) => {
 
             return `<div class="original-code hidden">${trimmed}</div>`;
         })
-        .filter(line => line !== "") // ✅ Removes empty strings from the final output
         .join("\n");
+
+    console.log("Updated script applied without deleting valid lines!");
 });
+
 
 
     // 🔄 Expand Button Functionality
