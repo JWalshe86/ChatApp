@@ -58,10 +58,12 @@ code.hljs {
     line-height: 0.5;
     white-space: pre-wrap;
     position: relative; /* Keeps `+` positioned properly */
-    padding: 0 !important;
     margin: 0 !important;
     border-left-width: 2px !important; /* Adjust border thickness */
+    padding: 0.2em 0.5em;
 }
+
+   
 
 /* ✅ Ensure `+` symbol is properly aligned */
 .diff-symbol {
@@ -223,15 +225,6 @@ pre code {
 /* Boolean values (true, false) */
 .hljs-literal {
     color: #d73a49; /* Red */
-}
-
-/* Added line (diff) */
-.added-line {
-    background-color: #e6ffed; /* Light green */
-    border-left: 3px solid #28a745; /* Green border */
-    display: block;
-    padding: 0.2em 0.5em;
-    margin: 0;
 }
 
 /* Removed line (diff) */
