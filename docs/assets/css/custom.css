@@ -88,6 +88,7 @@ code.hljs {
     margin: 0 !important;
     padding: 0 !important;
     white-space: pre-wrap;
+    border-left: 6vw solid #28a745 !important;
 }
 .expand-button,
 .copy-button {
