@@ -1,13 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-   document.addEventListener("DOMContentLoaded", function () {
-    // ✅ Remove empty `.original-code.hidden` elements to prevent gaps
-    document.querySelectorAll(".original-code.hidden").forEach(el => {
-        if (!el.textContent.trim()) {
-            el.remove(); // Remove empty elements causing gaps
-        }
-    });
-
     // 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
