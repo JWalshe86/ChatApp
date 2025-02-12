@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ✅ Hide original code on load and remove empty elements
+   document.addEventListener("DOMContentLoaded", function () {
+    // ✅ Remove empty `.original-code.hidden` elements to prevent gaps
     document.querySelectorAll(".original-code.hidden").forEach(el => {
         if (!el.textContent.trim()) {
-            el.remove(); // Remove empty lines to prevent gaps
+            el.remove(); // Remove empty elements causing gaps
         }
     });
 
