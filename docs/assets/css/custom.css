@@ -3,7 +3,6 @@
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    padding: 0 !important;
     margin: 0 !important;
     background: none !important; /* Ensure it blends seamlessly */
 }
