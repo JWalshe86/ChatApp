@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Tab switching logic
-    document.querySelectorAll(".tab").forEach(tab => {
-        tab.addEventListener("click", function () {
-            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-            document.querySelectorAll(".content").forEach(c => c.classList.remove("active"));
+    // // Tab switching logic
+    // document.querySelectorAll(".tab").forEach(tab => {
+    //     tab.addEventListener("click", function () {
+    //         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    //         document.querySelectorAll(".content").forEach(c => c.classList.remove("active"));
 
-            this.classList.add("active");
-            document.getElementById(this.getAttribute("data-target")).classList.add("active");
-        });
-    });
+    //         this.classList.add("active");
+    //         document.getElementById(this.getAttribute("data-target")).classList.add("active");
+    //     });
+    // });
 
     // 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
