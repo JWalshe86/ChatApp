@@ -51,7 +51,7 @@ code.hljs {
 /* Ensure added-line spans do not wrap across multiple lines */
 .added-line {
     background: var(--color-diff-blob-addition-bg, #e6ffed);
-    border-left: 3px solid #28a745;
+    border-left: 6vw solid #28a745 !important;
     display: block !important; /* Ensures each line is its own block */
     color: #59636e;
     width: 100%;
