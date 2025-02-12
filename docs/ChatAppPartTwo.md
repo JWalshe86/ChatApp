@@ -34,7 +34,7 @@ title: ChatApp Part Two
     </div>
 
 <!-- Tabs Section - START -->
-<!-- 
+
     <div class="tabs">
         <div class="tab active" data-target="code-tab">💻 Code</div>
         <div class="tab" data-target="explanation-tab">📜 Explanation</div>
@@ -42,7 +42,7 @@ title: ChatApp Part Two
 
     <!-- Code Content -->
     <div id="code-tab" class="content active">
--->
+
 
 
 
