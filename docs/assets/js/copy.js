@@ -17,14 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 📝 Copy Button Functionality
+   // 📝 Copy Button Functionality
     document.querySelectorAll(".copy-button").forEach(button => {
         button.addEventListener("click", function () {
-            let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("code");
+            let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("pre code");
 
             // Collect all visible lines (both original and updated)
             let visibleLines = [...codeBlock.querySelectorAll(".added-line, .original-code:not(.hidden)")];
-            let codeText = visibleLines.map(line => line.textContent.replace(/^[+-]\s*/, "")).join("\n").trim();
+
+            // Clean up text to remove leading `+` or `-`
+            let codeText = visibleLines.map(line => line.textContent.replace(/^\s*[+-]\s*/, "").trim()).join("\n");
 
             navigator.clipboard.writeText(codeText).then(() => {
                 let originalIcon = button.innerHTML;
