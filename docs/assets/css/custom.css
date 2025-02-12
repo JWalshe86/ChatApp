@@ -14,8 +14,7 @@
     opacity: 1 !important;
     height: auto !important;
     margin: initial !important;
-    padding: initial !important;
-}
+    }
 
 /* Ensure code container is visible but collapsed */
 .code-container { 
