@@ -129,7 +129,7 @@ body {
 
 /* Ensure code doesn't break layout */
 pre code {
-    display: block !important;
+    display: grid !important;
     overflow-x: auto !important;
 }
 /* Tooltip Styling */
