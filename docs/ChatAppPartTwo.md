@@ -33,14 +33,19 @@ title: ChatApp Part Two
         </button>
     </div>
 
-<!-- Tabs -->
+<!-- Tabs Section - START -->
+<!-- 
     <div class="tabs">
         <div class="tab active" data-target="code-tab">💻 Code</div>
         <div class="tab" data-target="explanation-tab">📜 Explanation</div>
     </div>
 
-<!-- Code Content -->
-<div id="code-tab" class="content active">
+    <!-- Code Content -->
+    <div id="code-tab" class="content active">
+-->
+
+
+
 <div class="code-container">
 
     <pre class="updated-code language-csharp"><code>
