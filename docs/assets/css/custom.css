@@ -59,7 +59,6 @@ code.hljs {
     white-space: pre-wrap;
     position: relative; /* Keeps `+` positioned properly */
     margin: 0 !important;
-    border-left-width: 2px !important; /* Adjust border thickness */
     padding: 0.2em 0.5em;
 }
 
