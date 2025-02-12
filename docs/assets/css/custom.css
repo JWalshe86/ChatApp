@@ -86,7 +86,7 @@ code.hljs {
     opacity: 0 !important;
     height: 0 !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding-left: 2vw !important;
     white-space: pre-wrap;
     border-left: 6vw solid #28a745 !important;
 }
