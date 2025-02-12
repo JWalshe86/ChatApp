@@ -1,5 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    // ✅ Hide original code on load and remove empty elements
+    document.querySelectorAll(".original-code.hidden").forEach(el => {
+        if (!el.textContent.trim()) {
+            el.remove(); // Remove empty lines to prevent gaps
+        }
+    });
+
     // 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
