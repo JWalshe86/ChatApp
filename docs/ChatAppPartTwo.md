@@ -33,96 +33,65 @@ title: ChatApp Part Two
         </button>
     </div>
 
+<!-- Tabs -->
+    <div class="tabs">
+        <div class="tab active" data-target="code-tab">💻 Code</div>
+        <div class="tab" data-target="explanation-tab">📜 Explanation</div>
+    </div>
+
+<!-- Code Content -->
+<div id="code-tab" class="content active">
 <div class="code-container">
-        <pre class="updated-code language-csharp"><code>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">using</span> ChatApp.Models;
-                    <span class="tooltip">Imports the ChatApp models for use in this file.</span>
-                </span>
-            </span>
-            <span class="original-code hidden"><span class="hljs-keyword">using</span> Microsoft.AspNetCore.SignalR;</span>
-            <span class="original-code hidden"><span class="hljs-keyword">public</span> <span class="hljs-class-name">class ChatHub</span> : <span class="hljs-class-name">Hub</span></span>
-            <span class="original-code hidden">{</span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">namespace</span> ChatApp.Hubs
-                    <span class="tooltip">Defines the namespace for the ChatHub class.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ {
-                    <span class="tooltip">Opens the namespace block.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger"><span class="hljs-keyword">private readonly</span> <span class="hljs-class-name">AppDbContext</span> _context;
-                    <span class="tooltip">Declares a private field for the database context.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> <span class="hljs-class-name">ChatHub</span>(<span class="hljs-class-name">AppDbContext</span> context)
-                    <span class="tooltip">Constructor that initializes the ChatHub with a database context.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ {
-                    <span class="tooltip">Opens the constructor block.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">_context = context;
-                    <span class="tooltip">Assigns the injected database context to the private field.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ }
-                    <span class="tooltip">Closes the constructor block.</span>
-                </span>
-            </span>
-            <span class="original-code hidden"><span class="hljs-keyword">public async</span> <span class="hljs-class-name">Task</span> <span class="hljs-function">SendMessage</span>(<span class="hljs-keyword">string</span> user, <span class="hljs-keyword">string</span> message)</span>
-            <span class="original-code hidden">{</span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">var</span> newMessage = <span class="hljs-keyword">new</span> <span class="hljs-class-name">Message</span>
-                    <span class="tooltip">Creates a new Message object.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ {
-                    <span class="tooltip">Opens the Message object initialization block.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+     <span class="hljs-keyword">User</span> = user,
-                    <span class="tooltip">Assigns the user to the Message object.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+     <span class="hljs-keyword">Content</span> = message,
-                    <span class="tooltip">Assigns the message content to the Message object.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+     <span class="hljs-keyword">Timestamp</span> = DateTime.UtcNow
-                    <span class="tooltip">Sets the timestamp of the message to the current UTC time.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ };
-                    <span class="tooltip">Closes the Message object initialization block.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ _context.Messages.Add(newMessage);
-                    <span class="tooltip">Adds the new message to the database context.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">await</span> _context.SaveChangesAsync();
-                    <span class="tooltip">Saves the message asynchronously to the database.</span>
-                </span>
-            </span>
-            <span class="original-code hidden"><span class="hljs-keyword">await</span> Clients.All.SendAsync(<span class="hljs-string">"ReceiveMessage"</span>, user, message);</span>
-            <span class="original-code hidden">}</span>
-            <span class="original-code hidden">}</span>
-        </code></pre>
+
+    <pre class="updated-code language-csharp"><code>
+<span class="tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">using</span> ChatApp.Models;</span>
+    <span class="tooltip">Imports ChatApp models.</span>
+</span>
+
+<span class="tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">namespace</span> ChatApp.Hubs</span>
+    <span class="tooltip">Defines the namespace.</span>
+</span>
+
+<span class="tooltip-container">
+    <span class="tooltip-trigger">+ {</span>
+    <span class="tooltip">Opens namespace.</span>
+</span>
+
+<span class="tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">private readonly</span> AppDbContext _context;</span>
+    <span class="tooltip">Database context field.</span>
+</span>
+
+<span class="tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> ChatHub(AppDbContext context)</span>
+    <span class="tooltip">Constructor with dependency injection.</span>
+</span>
+
+<span class="tooltip-container">
+    <span class="tooltip-trigger">+ {</span>
+    <span class="tooltip">Opens constructor.</span>
+</span>
+
+<span class="tooltip-container">
+    <span class="tooltip-trigger">_context = context;</span>
+    <span class="tooltip">Assigns database context.</span>
+</span>
+
+<span class="tooltip-container">
+    <span class="tooltip-trigger">+ }</span>
+    <span class="tooltip">Closes constructor.</span>
+</span>
+            </code></pre>
     </div>
 </div>
+<!-- Explanation Content -->
+    <div id="explanation-tab" class="content">
+        <p><strong>📌 `using ChatApp.Models;`</strong> - Imports the necessary models for database operations.</p>
+        <p><strong>📌 `namespace ChatApp.Hubs`</strong> - Groups related classes together under a namespace.</p>
+        <p><strong>📌 `private readonly AppDbContext _context;`</strong> - Stores the database context for interacting with the database.</p>
+        <p><strong>📌 `public ChatHub(AppDbContext context)`</strong> - Constructor that injects the database context.</p>
+        <p><strong>📌 `_context = context;`</strong> - Assigns the injected database context to a private variable for use.</p>
+    </div>
+    </div>
