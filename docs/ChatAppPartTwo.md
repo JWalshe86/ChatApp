@@ -14,9 +14,8 @@ title: ChatApp Part Two
     <div class="code-header">
         <span class="code-filename">ChatHub.cs</span>
 
-<!-- Tab Switch Buttons -->
-        <button class="tab-button active" data-target="code-tab">💻 Code</button>
-        <button class="tab-button" data-target="explanation-tab">📜 Explanation</button>
+<!-- Toggle Button -->
+        <button class="toggle-button" id="toggleButton">💬 Show Code</button>
         
         <button class="expand-button" aria-label="Expand all lines: ChatHub.cs">
             <!-- Expand (Unfold) Icon - Initially Visible -->
@@ -38,8 +37,17 @@ title: ChatApp Part Two
         </button>
     </div>
 
-<!-- Code Tab Content -->
-<div id="code-tab" class="tab-content active">
+    <!-- Explanation View (Default) -->
+    <div id="explanation-tab" class="tab-content active">
+        <p><strong>📌 `using ChatApp.Models;`</strong> - Imports the necessary models for database operations.</p>
+        <p><strong>📌 `namespace ChatApp.Hubs`</strong> - Groups related classes together under a namespace.</p>
+        <p><strong>📌 `private readonly AppDbContext _context;`</strong> - Stores the database context for interacting with the database.</p>
+        <p><strong>📌 `public ChatHub(AppDbContext context)`</strong> - Constructor that injects the database context.</p>
+        <p><strong>📌 `_context = context;`</strong> - Assigns the injected database context to a private variable for use.</p>
+    </div>
+
+<!-- Code View (Initially Hidden) -->
+    <div id="code-tab" class="tab-content" style="display:none;">
 <div class="code-container">
         <pre class="updated-code language-csharp"><code>
             <span class="added-line tooltip-container">
@@ -131,16 +139,6 @@ title: ChatApp Part Two
             <span class="original-code hidden">}</span>
             <span class="original-code hidden">}</span>
         </code></pre>
+            </div>
+        </div>
     </div>
-</div>
-
-<!-- Explanation Tab Content -->
-    <div id="explanation-tab" class="tab-content">
-        <p><strong>📌 `using ChatApp.Models;`</strong> - Imports the necessary models for database operations.</p>
-        <p><strong>📌 `namespace ChatApp.Hubs`</strong> - Groups related classes together under a namespace.</p>
-        <p><strong>📌 `private readonly AppDbContext _context;`</strong> - Stores the database context for interacting with the database.</p>
-        <p><strong>📌 `public ChatHub(AppDbContext context)`</strong> - Constructor that injects the database context.</p>
-        <p><strong>📌 `_context = context;`</strong> - Assigns the injected database context to a private variable for use.</p>
-    </div>
-    
-</div>
