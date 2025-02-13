@@ -38,6 +38,8 @@ title: ChatApp Part Two
         </button>
     </div>
 
+<!-- Code Tab Content -->
+<div id="code-tab" class="tab-content active">
 <div class="code-container">
         <pre class="updated-code language-csharp"><code>
             <span class="added-line tooltip-container">
@@ -130,4 +132,15 @@ title: ChatApp Part Two
             <span class="original-code hidden">}</span>
         </code></pre>
     </div>
+</div>
+
+<!-- Explanation Tab Content -->
+    <div id="explanation-tab" class="tab-content">
+        <p><strong>📌 `using ChatApp.Models;`</strong> - Imports the necessary models for database operations.</p>
+        <p><strong>📌 `namespace ChatApp.Hubs`</strong> - Groups related classes together under a namespace.</p>
+        <p><strong>📌 `private readonly AppDbContext _context;`</strong> - Stores the database context for interacting with the database.</p>
+        <p><strong>📌 `public ChatHub(AppDbContext context)`</strong> - Constructor that injects the database context.</p>
+        <p><strong>📌 `_context = context;`</strong> - Assigns the injected database context to a private variable for use.</p>
+    </div>
+    
 </div>
