@@ -1,5 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    // Toggle between Code & Explanation tabs
+    document.querySelectorAll(".tab-button").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".tab-button").forEach(t => t.classList.remove("active"));
+            document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+
+            this.classList.add("active");
+            document.getElementById(this.getAttribute("data-target")).classList.add("active");
+        });
+    });
+
     // 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
