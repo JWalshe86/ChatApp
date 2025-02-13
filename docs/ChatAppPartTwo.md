@@ -13,6 +13,11 @@ title: ChatApp Part Two
 <div class="code-block">
     <div class="code-header">
         <span class="code-filename">ChatHub.cs</span>
+
+<!-- Tab Switch Buttons -->
+        <button class="tab-button active" data-target="code-tab">💻 Code</button>
+        <button class="tab-button" data-target="explanation-tab">📜 Explanation</button>
+        
         <button class="expand-button" aria-label="Expand all lines: ChatHub.cs">
             <!-- Expand (Unfold) Icon - Initially Visible -->
             <svg aria-hidden="true" class="octicon unfold-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
