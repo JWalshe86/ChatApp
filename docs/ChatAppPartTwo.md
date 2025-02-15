@@ -25,7 +25,7 @@ title: ChatApp Part Two
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        This is a Bootstrap modal inside a Markdown-linked HTML file!
+                        I'm using an abstract class.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
