@@ -21,11 +21,11 @@ title: ChatApp Part Two
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Bootstrap Modal in Markdown</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">I'm using an abstract class</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        I'm using an abstract class.
+                        What an abstract class does.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
