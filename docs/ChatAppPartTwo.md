@@ -29,6 +29,12 @@ title: ChatApp Part Two
     <div id="code-tab" class="tab-content active" style="display:block;">
 <div class="code-container">
         <pre class="updated-code language-csharp"><code>
+
+             <span class="added-line tooltip-container">
+                <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> abstract class MessageBase
+                    <span class="tooltip">Something about message base</span>
+                </span>
+            </span>
             <span class="added-line tooltip-container">
                 + { 
             </span>
