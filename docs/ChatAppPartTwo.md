@@ -10,30 +10,54 @@ title: ChatApp Part Two
 
 ---
 <div class="container mt-5">
-        <p>I'm using an abstract class</p>
-        <!-- Button to trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Open Modal
-        </button>
-        <!-- Bootstrap Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">I'm using an abstract class</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        What an abstract class does.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
+    <p>
+        I'm using an <span class="text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            abstract
+        </span> class.
+    </p>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Understanding Abstract Classes in C#</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    An <b>abstract class</b> in C# is a class that cannot be instantiated directly. 
+                    It serves as a base class for other classes and can contain both abstract methods 
+                    (without implementation) and concrete methods (with implementation).
+
+                    <pre><code class="language-csharp">
+// Abstract class example
+public abstract class Animal
+{
+    public string Name { get; set; }
+    public abstract void MakeSound();
+}
+
+// Concrete class implementing the abstract method
+public class Dog : Animal
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Woof! Woof!");
+    }
+}
+                    </code></pre>
+
+                    Abstract classes allow for shared behavior while enforcing a contract for derived classes.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
+----
 <div class="code-block">
     <div class="code-header">
         <span class="code-filename">MessageBase.cs</span>
