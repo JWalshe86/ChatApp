@@ -74,45 +74,41 @@ public class Dog : Animal
     </div>
 
     <!-- Code View (Default) -->
-    <div id="code-tab" class="tab-content active" style="display:block;">
-<div class="code-container">
+<!-- Code View (Default) -->
+<div id="code-tab" class="tab-content active" style="display:block;">
+    <div class="code-container">
         <pre class="updated-code language-csharp"><code>
-
-             <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> abstract class MessageBase
-                    <span class="tooltip">Something about message base</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                + { 
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> int ID { get; set; }
-                    <span class="tooltip">Defines the namespace for the ChatHub class.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> string Sender { get; set; }
-                    <span class="tooltip">Defines the namespace for the ChatHub class.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> DateTime TimeStamp { get; set; }
-                    <span class="tooltip">Defines the namespace for the ChatHub class.</span>
-                </span>
-            </span>
-            <span class="added-line tooltip-container">
-                <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> abstract string DisplayContent();
-                    <span class="tooltip">Defines the namespace for the ChatHub class.</span>
-                </span>
-            </span>
-             <span class="added-line tooltip-container">
-                + }
-            </span>            
-           
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> abstract class MessageBase
+        <span class="tooltip">Defines a base class for different types of messages.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ {</span>
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> int Id { get; set; }
+        <span class="tooltip">Unique identifier for each message.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> string Sender { get; set; }
+        <span class="tooltip">Stores the sender's name.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> DateTime Timestamp { get; set; }
+        <span class="tooltip">Records when the message was sent.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> abstract string DisplayContent();
+        <span class="tooltip">Forces child classes to define how content is displayed.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ }</span>          
         </code></pre>
-            </div>
     </div>
+</div>
+
         
         <!-- Explanation View (Initially Hidden) -->
     <div id="explanation-tab" class="tab-content" style="display:none;">
