@@ -10,8 +10,7 @@ title: ChatApp Part Two
 
 ---
 <div class="container mt-5">
-        <h2>ChatApp: Bootstrap Modal Demo</h2>
-        <p>Here's a Bootstrap modal working inside GitHub Pages.</p>
+        <p>I'm using an abstract class</p>
         <!-- Button to trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Open Modal
