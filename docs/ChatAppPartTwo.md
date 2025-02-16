@@ -356,8 +356,17 @@ namespace ChatApp.Models
 
     <!-- Explanation View (Initially Hidden) -->
     <div id="explanation-tab-imagemessage" class="tab-content" style="display:none;">
-        <p><strong>📌 `public class ImageMessage : MessageBase`</strong> - This class inherits from `MessageBase`, making it a **derived class**. It specializes in handling **image-based messages** while maintaining the shared properties of all messages. It includes a unique property, <strong>`ImageUrl`</strong>, which holds the **URL of the image** being sent. Additionally, it **overrides the abstract method** <strong>`DisplayContent()`</strong>, providing a custom format for displaying image messages in the chat application. This ensures each message type can define its own structure while still adhering to a common contract.</p>
-    </div>
+    <p>
+        <strong>📌 <code>public class ImageMessage : MessageBase</code></strong> - 
+        This class inherits from <code>MessageBase</code>, making it a <strong>derived class</strong>. 
+        It specializes in handling <strong>image-based messages</strong> while maintaining the shared properties of all messages.
+        It includes a unique property, <code>ImageUrl</code>, which holds the <strong>URL of the image</strong> being sent. 
+        Additionally, it <strong>overrides the abstract method</strong> <code>DisplayContent()</code>, 
+        providing a custom format for displaying image messages in the chat application. 
+        This ensures each message type can define its own structure while still adhering to a common contract.
+    </p>
+</div>
+
 
 </div> <!-- Closing .code-block -->
 
