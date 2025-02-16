@@ -121,17 +121,17 @@ public class Dog : Animal
 
 <div class="container mt-5">
     <p>
-        This <span class="text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        This <span class="text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#derivedClassModal">
             derived class
         </span> extends `MessageBase` and implements its abstract method, defining how a text message should be displayed in the chat app.
     </p>
 
     <!-- Bootstrap Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="derivedClassModal" tabindex="-1" aria-labelledby="derivedClassModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Understanding Derived Classes in C#</h5>
+                    <h5 class="modal-title" id="derivedClassModalLabel">Understanding Derived Classes in C#</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
