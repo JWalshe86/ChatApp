@@ -117,22 +117,9 @@ public class Dog : Animal
     </div>
 
 ---
-
----
-layout: default
-title: ChatApp Part Two
----
-
-# **ChatApp Part 2 Abstract Classes**  
-## **Real-Time Messaging using SignalR**
-
-![ChatApp](images/ChatApp.png)
-
----
-
 <div class="container mt-5">
     <p>
-        This <span class="text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    This <span class="text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
             abstract class
         </span> serves as a blueprint for different message types in the chat app, ensuring they share common properties and behaviors.
     </p>
@@ -178,8 +165,6 @@ public class Dog : Animal
     </div>
 </div>
 
----
-
 <!-- MessageBase Code Block -->
 <div class="code-block">
     <div class="code-header">
@@ -196,6 +181,8 @@ public class Dog : Animal
         </button>
     </div>
 
+<!-- Code View (Default) -->
+<div id="code-tab" class="tab-content active" style="display:block;">
     <div class="code-container">
         <pre class="updated-code language-csharp"><code>
 <span class="added-line tooltip-container">
