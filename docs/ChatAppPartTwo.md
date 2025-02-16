@@ -457,8 +457,8 @@ public class ChatHub : Hub
         <span class="code-filename">ChatHub.cs</span>
 
         <!-- Toggle Button -->
-<button class="toggle-button" id="toggleButton" data-bs-target="#explanation-tab" data-toggle="tab">
-    💬 Show Explanation
+<button class="toggle-button" data-target="chathub">
+    📜 Show Explanation
 </button>
 
         <button class="expand-button" aria-label="Expand all lines: ChatHub.cs">
