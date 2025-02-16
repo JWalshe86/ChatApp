@@ -111,11 +111,9 @@ public class Dog : Animal
 
         
         <!-- Explanation View (Initially Hidden) -->
-    <div id="explanation-tab" class="tab-content" style="display:none;">
-        <p><strong>📌 `using ChatApp.Models;`</strong> - Imports the necessary models for database operations.</p>
-        <p><strong>📌 `namespace ChatApp.Hubs`</strong> - Groups related classes together under a namespace.</p>
-        <p><strong>📌 `private readonly AppDbContext _context;`</strong> - Stores the database context for interacting with the database.</p>
-        <p><strong>📌 `public ChatHub(AppDbContext context)`</strong> - Constructor that injects the database context.</p>
-        <p><strong>📌 `_context = context;`</strong> - Assigns the injected database context to a private variable for use.</p>
-    </div>
+   <!-- Explanation View (Initially Hidden) -->
+<div id="explanation-tab" class="tab-content" style="display:none;">
+    <p><strong>📌 `public abstract class MessageBase`</strong> - This abstract class serves as a blueprint for different message types in the chat app, ensuring they share common properties and behaviors. It includes <strong>`Id`</strong>, which uniquely identifies each message for tracking or database storage, <strong>`Sender`</strong>, which holds the sender's name or identifier, and <strong>`Timestamp`</strong>, which records when the message was sent. Additionally, the class defines an abstract method <strong>`DisplayContent()`</strong>, which forces all derived classes (such as `TextMessage` or `ImageMessage`) to implement their own way of displaying message content. This approach enforces consistency across all message types while allowing flexibility in how messages are presented.</p>
+</div>
+
     </div>
