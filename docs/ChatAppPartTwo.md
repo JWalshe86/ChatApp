@@ -482,7 +482,7 @@ public class ChatHub : Hub
     </div>
 
   <!-- Code View (Default) -->
-    <div id="code-tab" class="tab-content active" style="display:block;">
+   <div id="code-tab-chathub" class="tab-content active" style="display:block;">
         <div class="code-container">
             <pre class="updated-code language-csharp"><code>
 <span class="added-line tooltip-container">
@@ -549,7 +549,7 @@ public class ChatHub : Hub
 </div>
 
 <!-- Explanation View (Initially Hidden) -->
-<div id="explanation-tab" class="tab-content" style="display:none;">
+<div id="explanation-tab-chathub" class="tab-content" style="display:none;">
     <p>
         <strong>📌 `ChatHub`</strong> - The `ChatHub` class acts as the **real-time communication hub** for the chat application, enabling users to send and receive messages instantly. It leverages **SignalR** to manage connections and broadcast messages to all connected clients.
     </p>
