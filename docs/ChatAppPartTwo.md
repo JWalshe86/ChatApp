@@ -481,20 +481,37 @@ public class ChatHub : Hub
         </button>
     </div>
 
-  <!-- Code View (Default) -->
-   <div id="code-tab-chathub" class="tab-content active" style="display:block;">
-        <div class="code-container">
-            <pre class="updated-code language-csharp"><code>
+<!-- Code View (Default) -->
+<div id="code-tab-chathub" class="tab-content active" style="display:block;">
+    <div class="code-container">
+        <pre class="updated-code language-csharp"><code>
 <span class="added-line tooltip-container">
     <span class="tooltip-trigger">+ <span class="hljs-keyword">using</span> ChatApp.Models;
         <span class="tooltip">Imports the ChatApp models for use in this file.</span>
     </span>
 </span>
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">using</span> Microsoft.EntityFrameworkCore;
+        <span class="tooltip">Imports Entity Framework Core for database interactions.</span>
+    </span>
+</span>
 <span class="original-code hidden"><span class="hljs-keyword">using</span> Microsoft.AspNetCore.SignalR;</span>
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">using</span> System.Threading.Tasks;
+        <span class="tooltip">Includes support for async operations.</span>
+    </span>
+</span>
 
 <span class="added-line tooltip-container">
     <span class="tooltip-trigger">+ <span class="hljs-keyword">namespace</span> ChatApp.Hubs
         <span class="tooltip">Defines the namespace for the ChatHub class.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ {</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public class</span> ChatHub : Hub
+        <span class="tooltip">Defines the ChatHub class that extends SignalR's `Hub` class.</span>
     </span>
 </span>
 <span class="added-line tooltip-container">+ {</span>
@@ -514,6 +531,13 @@ public class ChatHub : Hub
 
 <span class="original-code hidden"><span class="hljs-keyword">public async</span> <span class="hljs-class-name">Task</span> <span class="hljs-function">SendMessage</span>(<span class="hljs-keyword">string</span> user, <span class="hljs-keyword">string</span> message)</span>
 <span class="original-code hidden">{</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public async</span> Task SendMessage(<span class="hljs-keyword">string</span> user, <span class="hljs-keyword">string</span> content, <span class="hljs-keyword">string</span> messageType)
+        <span class="tooltip">Handles sending different types of messages (text, image).</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ {</span>
 
 <span class="added-line tooltip-container">
     <span class="tooltip-trigger">+ <span class="hljs-keyword">MessageBase</span> newMessage;
@@ -543,9 +567,14 @@ public class ChatHub : Hub
 <span class="added-line tooltip-container">+ await _context.SaveChangesAsync();</span>
 <span class="added-line tooltip-container">+ await Clients.All.SendAsync("ReceiveMessage", newMessage);</span>
 
+<span class="added-line tooltip-container">+ }</span> <!-- Closing SendMessage -->
+<span class="added-line tooltip-container">+ }</span> <!-- Closing ChatHub -->
+<span class="added-line tooltip-container">+ }</span> <!-- Closing Namespace -->
+
 </code></pre>
-        </div>
     </div>
+</div>
+
 </div>
 
 <!-- Explanation View (Initially Hidden) -->
