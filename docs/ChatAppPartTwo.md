@@ -62,7 +62,7 @@ public class Dog : Animal
         <span class="code-filename">MessageBase.cs</span>
 
 <!-- Toggle Button -->
-        <button class="toggle-button" id="toggleButton">💬 Show Explanation</button>
+        <button class="toggle-button" id="toggleButton" data-target="messagebase">💬 Show Explanation</button>
         
         <button class="copy-button" aria-label="Copy code">
             <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
@@ -74,7 +74,7 @@ public class Dog : Animal
 
     <!-- Code View (Default) -->
 <!-- Code View (Default) -->
-<div id="code-tab" class="tab-content active" style="display:block;">
+<div id="code-tab-messagebase"  class="tab-content active" style="display:block;">
     <div class="code-container">
         <pre class="updated-code language-csharp"><code>
 <span class="added-line tooltip-container">
@@ -109,7 +109,7 @@ public class Dog : Animal
 </div>
 
 <!-- Explanation View (Initially Hidden) -->
-<div id="explanation-tab" class="tab-content" style="display:none;">
+<div id="explanation-tab-messagebase" class="tab-content" style="display:none;">
     <p><strong>📌 `public abstract class MessageBase`</strong> - This abstract class serves as a blueprint for different message types in the chat app, ensuring they share common properties and behaviors. It includes <strong>`Id`</strong>, which uniquely identifies each message for tracking or database storage, <strong>`Sender`</strong>, which holds the sender's name or identifier, and <strong>`Timestamp`</strong>, which records when the message was sent. Additionally, the class defines an abstract method <strong>`DisplayContent()`</strong>, which forces all derived classes (such as `TextMessage` or `ImageMessage`) to implement their own way of displaying message content. This approach enforces consistency across all message types while allowing flexibility in how messages are presented.</p>
 </div>
 
@@ -171,7 +171,7 @@ namespace ChatApp.Models
         <span class="code-filename">TextMessage.cs</span>
 
         <!-- Toggle Button -->
-        <button class="toggle-button" id="toggleButtonTextMessage">💬 Show Explanation</button>
+        <button class="toggle-button" id="toggleButtonTextMessage" data-target="textmessage">💬 Show Explanation</button>
         
         <button class="copy-button" aria-label="Copy code">
             <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
@@ -182,7 +182,7 @@ namespace ChatApp.Models
     </div>
 
     <!-- Code View (Default) -->
-    <div id="code-tab-text" class="tab-content active" style="display:block;">
+    <div id="code-tab-textmessage" class="tab-content active" style="display:block;">
         <div class="code-container">
             <pre class="updated-code language-csharp"><code>
 <span class="added-line tooltip-container">
@@ -232,7 +232,7 @@ namespace ChatApp.Models
     </div>
 
     <!-- Explanation View (Initially Hidden) -->
-    <div id="explanation-tab-text" class="tab-content" style="display:none;">
+    <div id="explanation-tab-textmessage"  class="tab-content" style="display:none;">
         <p><strong>📌 `public class TextMessage : MessageBase`</strong> - This class inherits from `MessageBase`, making it a **derived class**. It specializes in handling **text-based messages** while maintaining the shared properties of all messages. It includes a unique property, <strong>`Text`</strong>, which holds the actual message content. Additionally, it **overrides the abstract method** <strong>`DisplayContent()`</strong>, providing a custom format for displaying text messages in the chat application. This ensures each message type can define its own structure while still adhering to a common contract.</p>
     </div>
 
@@ -294,7 +294,7 @@ namespace ChatApp.Models
         <span class="code-filename">ImageMessage.cs</span>
 
         <!-- Toggle Button -->
-        <button class="toggle-button" id="toggleButtonImageMessage">💬 Show Explanation</button>
+        <button class="toggle-button" id="toggleButtonImageMessage" data-target="imagemessage">💬 Show Explanation</button>
         
         <button class="copy-button" aria-label="Copy code">
             <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
@@ -305,7 +305,7 @@ namespace ChatApp.Models
     </div>
 
     <!-- Code View (Default) -->
-    <div id="code-tab-image" class="tab-content active" style="display:block;">
+    <div id="code-tab-imagemessage" class="tab-content active" style="display:block;">
         <div class="code-container">
             <pre class="updated-code language-csharp"><code>
 <span class="added-line tooltip-container">
@@ -355,7 +355,7 @@ namespace ChatApp.Models
     </div>
 
     <!-- Explanation View (Initially Hidden) -->
-    <div id="explanation-tab-image" class="tab-content" style="display:none;">
+    <div id="explanation-tab-imagemessage" class="tab-content" style="display:none;">
         <p><strong>📌 `public class ImageMessage : MessageBase`</strong> - This class inherits from `MessageBase`, making it a **derived class**. It specializes in handling **image-based messages** while maintaining the shared properties of all messages. It includes a unique property, <strong>`ImageUrl`</strong>, which holds the **URL of the image** being sent. Additionally, it **overrides the abstract method** <strong>`DisplayContent()`</strong>, providing a custom format for displaying image messages in the chat application. This ensures each message type can define its own structure while still adhering to a common contract.</p>
     </div>
 
