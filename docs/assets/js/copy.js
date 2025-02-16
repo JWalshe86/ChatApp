@@ -1,23 +1,28 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // Generic function to toggle between Code & Explanation tabs
+// Generic function to toggle between Code & Explanation tabs
 document.querySelectorAll('.toggle-button').forEach(button => {
     button.addEventListener('click', function () {
         const targetId = this.getAttribute('data-target');
         const codeTab = document.getElementById(`code-tab-${targetId}`);
         const explanationTab = document.getElementById(`explanation-tab-${targetId}`);
 
-        if (codeTab.style.display === 'none') {
-            codeTab.style.display = 'block';
-            explanationTab.style.display = 'none';
-            this.textContent = '📜 Show Explanation';
+        if (codeTab && explanationTab) {
+            if (codeTab.style.display === 'none') {
+                codeTab.style.display = 'block';
+                explanationTab.style.display = 'none';
+                this.textContent = '📜 Show Explanation';
+            } else {
+                codeTab.style.display = 'none';
+                explanationTab.style.display = 'block';
+                this.textContent = '💻 Show Code';
+            }
         } else {
-            codeTab.style.display = 'none';
-            explanationTab.style.display = 'block';
-            this.textContent = '💻 Show Code';
+            console.error(`Could not find elements with IDs code-tab-${targetId} or explanation-tab-${targetId}`);
         }
     });
 });
+
 
 
     // 🔄 Expand Button Functionality
