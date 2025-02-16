@@ -551,19 +551,19 @@ public class ChatHub : Hub
 <!-- Explanation View (Initially Hidden) -->
 <div id="explanation-tab-chathub" class="tab-content" style="display:none;">
     <p>
-        <strong>📌 `ChatHub`</strong> - The `ChatHub` class acts as the **real-time communication hub** for the chat application, enabling users to send and receive messages instantly. It leverages **SignalR** to manage connections and broadcast messages to all connected clients.
+        <strong>📌 <code>ChatHub</code></strong> - The <code>ChatHub</code> class acts as the <strong>real-time communication hub</strong> for the chat application, enabling users to send and receive messages instantly. It leverages <strong>SignalR</strong> to manage connections and broadcast messages to all connected clients.
     </p>
     <p>
-        This hub is integrated with **Entity Framework** to store messages persistently in a database. The **database context (`AppDbContext`)** is injected into the `ChatHub` constructor to allow seamless interaction with the database.
+        This hub is integrated with <strong>Entity Framework</strong> to store messages persistently in a database. The <strong>database context (<code>AppDbContext</code>)</strong> is injected into the <code>ChatHub</code> constructor to allow seamless interaction with the database.
     </p>
     <p>
-        The `SendMessage` method is responsible for processing incoming messages. Based on the **message type (`text` or `image`)**, it dynamically creates a `TextMessage` or `ImageMessage` object, ensuring that different types of messages are properly handled.
+        The <code>SendMessage</code> method is responsible for processing incoming messages. Based on the <strong>message type (<code>text</code> or <code>image</code>)</strong>, it dynamically creates a <code>TextMessage</code> or <code>ImageMessage</code> object, ensuring that different types of messages are properly handled.
     </p>
     <p>
-        Once the message is created, it is **saved to the database** and then **broadcasted** to all connected clients using SignalR’s `Clients.All.SendAsync` method. This ensures that every user in the chat receives messages in real-time, even if they were sent from another client.
+        Once the message is created, it is <strong>saved to the database</strong> and then <strong>broadcasted</strong> to all connected clients using SignalR’s <code>Clients.All.SendAsync</code> method. This ensures that every user in the chat receives messages in real-time, even if they were sent from another client.
     </p>
     <p>
-        This approach keeps the **chat system scalable**, allowing for future expansion with new message types while ensuring consistency in data storage and real-time delivery.
+        This approach keeps the <strong>chat system scalable</strong>, allowing for future expansion with new message types while ensuring consistency in data storage and real-time delivery.
     </p>
 </div>
 
