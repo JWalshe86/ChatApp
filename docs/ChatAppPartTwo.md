@@ -110,9 +110,23 @@ public class Dog : Animal
 
 <!-- Explanation View (Initially Hidden) -->
 <div id="explanation-tab-messagebase" class="tab-content" style="display:none;">
-    <p><strong>📌 `public abstract class MessageBase`</strong> - This abstract class serves as a blueprint for different message types in the chat app, ensuring they share common properties and behaviors. It includes <strong>`Id`</strong>, which uniquely identifies each message for tracking or database storage, <strong>`Sender`</strong>, which holds the sender's name or identifier, and <strong>`Timestamp`</strong>, which records when the message was sent. Additionally, the class defines an abstract method <strong>`DisplayContent()`</strong>, which forces all derived classes (such as `TextMessage` or `ImageMessage`) to implement their own way of displaying message content. This approach enforces consistency across all message types while allowing flexibility in how messages are presented.</p>
+    <p>
+        <strong>📌 <code>public abstract class MessageBase</code></strong> - 
+        This abstract class serves as a **blueprint** for different message types in the chat app, 
+        ensuring they share **common properties** and behaviors.
+        It includes:
+    </p>
+    <ul>
+        <li><strong><code>Id</code></strong> - Uniquely identifies each message for **tracking or database storage**.</li>
+        <li><strong><code>Sender</code></strong> - Holds the **sender's name or identifier**.</li>
+        <li><strong><code>Timestamp</code></strong> - Records **when the message was sent**.</li>
+    </ul>
+    <p>
+        Additionally, the class defines an **abstract method** <code>DisplayContent()</code>, which forces all derived classes 
+        (such as <code>TextMessage</code> or <code>ImageMessage</code>) to **implement their own way** of displaying message content.
+        This **enforces consistency** across all message types while allowing **flexibility** in how messages are presented.
+    </p>
 </div>
-
     </div>
 
 ---
@@ -232,9 +246,21 @@ namespace ChatApp.Models
     </div>
 
     <!-- Explanation View (Initially Hidden) -->
-    <div id="explanation-tab-textmessage"  class="tab-content" style="display:none;">
-        <p><strong>📌 `public class TextMessage : MessageBase`</strong> - This class inherits from `MessageBase`, making it a **derived class**. It specializes in handling **text-based messages** while maintaining the shared properties of all messages. It includes a unique property, <strong>`Text`</strong>, which holds the actual message content. Additionally, it **overrides the abstract method** <strong>`DisplayContent()`</strong>, providing a custom format for displaying text messages in the chat application. This ensures each message type can define its own structure while still adhering to a common contract.</p>
-    </div>
+    <div id="explanation-tab-textmessage" class="tab-content" style="display:none;">
+    <p>
+        <strong>📌 <code>public class TextMessage : MessageBase</code></strong> - 
+        This class **inherits** from <code>MessageBase</code>, making it a <strong>derived class</strong>. 
+        It specializes in handling <strong>text-based messages</strong> while maintaining the **shared properties** of all messages.
+    </p>
+    <ul>
+        <li><strong><code>Text</code></strong> - Holds the **actual message content**.</li>
+    </ul>
+    <p>
+        Additionally, it **overrides** the **abstract method** <code>DisplayContent()</code>, 
+        providing a **custom format** for displaying text messages in the chat application. 
+        This ensures that each message type can **define its own structure** while still adhering to a **common contract**.
+    </p>
+</div>
 
 </div> <!-- Closing .code-block -->
 
