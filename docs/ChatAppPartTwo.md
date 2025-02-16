@@ -11,9 +11,9 @@ title: ChatApp Part Two
 ---
 <div class="container mt-5">
     <p>
-        I'm using an <span class="text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            abstract
-        </span> class.
+    This <span class="text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            abstract class
+        </span> serves as a blueprint for different message types in the chat app, ensuring they share common properties and behaviors.
     </p>
 
     <!-- Bootstrap Modal -->
