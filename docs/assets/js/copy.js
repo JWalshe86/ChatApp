@@ -1,35 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-   // Toggle between Code & Explanation tabs for MessageBase
-document.getElementById('toggleButton').addEventListener('click', function () {
-    const explanationTab = document.getElementById('explanation-tab');
-    const codeTab = document.getElementById('code-tab');
+  // Generic function to toggle between Code & Explanation tabs
+document.querySelectorAll('.toggle-button').forEach(button => {
+    button.addEventListener('click', function () {
+        const targetId = this.getAttribute('data-target');
+        const codeTab = document.getElementById(`code-tab-${targetId}`);
+        const explanationTab = document.getElementById(`explanation-tab-${targetId}`);
 
-    if (codeTab.style.display === 'none') {
-        codeTab.style.display = 'block';
-        explanationTab.style.display = 'none';
-        this.textContent = '📜 Show Explanation';
-    } else {
-        codeTab.style.display = 'none';
-        explanationTab.style.display = 'block';
-        this.textContent = '💻 Show Code';
-    }
-});
-
-// Toggle between Code & Explanation tabs for TextMessage
-document.getElementById('toggleButtonTextMessage').addEventListener('click', function () {
-    const explanationTabText = document.getElementById('explanation-tab-text');
-    const codeTabText = document.getElementById('code-tab-text');
-
-    if (codeTabText.style.display === 'none') {
-        codeTabText.style.display = 'block';
-        explanationTabText.style.display = 'none';
-        this.textContent = '📜 Show Explanation';
-    } else {
-        codeTabText.style.display = 'none';
-        explanationTabText.style.display = 'block';
-        this.textContent = '💻 Show Code';
-    }
+        if (codeTab.style.display === 'none') {
+            codeTab.style.display = 'block';
+            explanationTab.style.display = 'none';
+            this.textContent = '📜 Show Explanation';
+        } else {
+            codeTab.style.display = 'none';
+            explanationTab.style.display = 'block';
+            this.textContent = '💻 Show Code';
+        }
+    });
 });
 
 
