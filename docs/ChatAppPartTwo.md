@@ -117,3 +117,57 @@ public class Dog : Animal
 </div>
 
     </div>
+
+---
+<div class="container mt-5">
+    <p>
+        This <span class="text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            derived class
+        </span> extends `MessageBase` and implements its abstract method, defining how a text message should be displayed in the chat app.
+    </p>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Understanding Derived Classes in C#</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    A <b>derived class</b> in C# is a class that **inherits from a base class**, meaning it gains all the properties and methods of the base class but can also provide its own unique functionality. In this chat application, `TextMessage` is a derived class of `MessageBase`, meaning it follows the structure defined in `MessageBase` but also provides a custom implementation for `DisplayContent()`.
+
+                    <pre><code class="language-csharp">
+using System;
+
+namespace ChatApp.Models
+{
+    // Derived class for text messages
+    public class TextMessage : MessageBase
+    {
+        public string Text { get; set; }
+
+        // Implementing abstract method
+        public override string DisplayContent()
+        {
+            return $"{Sender}: {Text} (Sent at {Timestamp})";
+        }
+    }
+}
+                    </code></pre>
+
+                    The `TextMessage` class **inherits** all the properties from `MessageBase`, including `Id`, `Sender`, and `Timestamp`, ensuring all message types share these attributes. However, since `MessageBase` is an **abstract class**, `TextMessage` must implement the `DisplayContent()` method, which defines how text messages are formatted when displayed.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+---
+
+
+
+
