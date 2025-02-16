@@ -34,21 +34,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
    // 📝 Copy Button Functionality
-    document.querySelectorAll(".copy-button").forEach(button => {
-        button.addEventListener("click", function () {
-            let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("pre code");
+document.querySelectorAll(".copy-button").forEach(button => {
+    button.addEventListener("click", function () {
+        let codeBlock = button.closest(".code-header").nextElementSibling.querySelector("pre code");
 
-            // Collect all visible lines (both original and updated)
-            let visibleLines = [...codeBlock.querySelectorAll(".added-line, .original-code:not(.hidden)")];
+        // Collect all visible lines (both original and updated)
+        let visibleLines = [...codeBlock.querySelectorAll(".added-line, .original-code:not(.hidden)")];
 
-            // Clean up text to remove leading `+` or `-`
-            let codeText = visibleLines.map(line => line.textContent.replace(/^\s*[+-]\s*/, "").trim()).join("\n");
+        // Extract only the text content of the main code, ignoring tooltips
+        let codeText = visibleLines.map(line => {
+            let clonedLine = line.cloneNode(true); // Clone the node to modify it without affecting UI
+            clonedLine.querySelectorAll(".tooltip").forEach(tooltip => tooltip.remove()); // Remove tooltips
+            return clonedLine.textContent.replace(/^\s*[+-]\s*/, "").trim(); // Clean up leading +/-
+        }).join("\n");
 
-            navigator.clipboard.writeText(codeText).then(() => {
-                let originalIcon = button.innerHTML;
-                button.innerHTML = `✅ Copied!`;
-                setTimeout(() => { button.innerHTML = originalIcon; }, 1500);
-            }).catch(err => console.error("Failed to copy:", err));
-        });
+        navigator.clipboard.writeText(codeText).then(() => {
+            let originalIcon = button.innerHTML;
+            button.innerHTML = `✅ Copied!`;
+            setTimeout(() => { button.innerHTML = originalIcon; }, 1500);
+        }).catch(err => console.error("Failed to copy:", err));
     });
+});
+
 });
