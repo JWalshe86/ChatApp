@@ -534,6 +534,112 @@ namespace ChatApp.Models
     </div>
 </div>
 
+-----
+## **Updating ChatHub.cs**
+
+<div class="container mt-5">
+    <p>
+        I had to update the 
+        <span class="text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#hubExplanationModal">
+            Hub
+        </span> 
+        to support multiple message types and database integration.
+    </p>
+
+    <!-- Bootstrap Modal for Hub Explanation -->
+    <div class="modal fade" id="hubExplanationModal" tabindex="-1" aria-labelledby="hubExplanationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hubExplanationModalLabel">Understanding SignalR Hubs</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    A <b>Hub</b> in SignalR is a **central communication point** that allows clients and the server to interact in real-time. 
+                    It acts as a **WebSocket-based hub**, managing connections, broadcasting messages, and handling events.
+
+                    <ul>
+                        <li><strong>Handles Client-Server Communication</strong> - Allows real-time messaging between users.</li>
+                        <li><strong>Manages Connections</strong> - Tracks online users and disconnects.</li>
+                        <li><strong>Supports Multiple Message Types</strong> - Like text and image messages.</li>
+                    </ul>
+
+                    **Example Hub Code:**
+                    <pre><code class="language-csharp">
+using Microsoft.AspNetCore.SignalR;
+public class ChatHub : Hub
+{
+    public async Task SendMessage(string user, string message)
+    {
+        await Clients.All.SendAsync("ReceiveMessage", user, message);
+    }
+}
+                    </code></pre>
+
+                    In the updated `ChatHub.cs`, we extended this by allowing **different message types**, integrating a **database context**, 
+                    and ensuring messages persist.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="code-block">
+    <div class="code-header">
+        <span class="code-filename">ChatHub.cs</span>
+
+        <!-- Toggle Button -->
+        <button class="toggle-button" id="toggleButton">💬 Show Code</button>
+
+        <button class="expand-button" aria-label="Expand all lines: ChatHub.cs">
+            <svg aria-hidden="true" class="octicon unfold-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="m8.177.677 2.896 2.896a.25.25 0 0 1-.177.427H8.75v1.25a.75.75 0 0 1-1.5 0V4H5.104a.25.25 0 0 1-.177-.427L7.823.677a.25.25 0 0 1 .354 0ZM7.25 10.75a.75.75 0 0 1 1.5 0V12h2.146a.25.25 0 0 1 .177.427l-2.896 2.896a.25.25 0 0 1-.354 0l-2.896-2.896A.25.25 0 0 1 5.104 12H7.25v-1.25Zm-5-2a.75.75 0 0 0 0-1.5h-.5a.75.75 0 0 0 0 1.5h.5ZM6 8a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1 0-1.5h.5A.75.75 0 0 1 6 8Zm2.25.75a.75.75 0 0 0 0-1.5h-.5a.75.75 0 0 0 0 1.5h.5ZM12 8a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1 0-1.5h.5A.75.75 0 0 1 12 8Zm2.25.75a.75.75 0 0 0 0-1.5h-.5a.75.75 0 0 0 0 1.5h.5Z"></path>
+            </svg>
+        </button>
+
+        <button class="copy-button" aria-label="Copy code">
+            <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
+                <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Code View (Default) -->
+    <div id="code-tab" class="tab-content active" style="display:block;">
+        <div class="code-container">
+            <pre class="updated-code language-csharp"><code>
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">using</span> Microsoft.AspNetCore.SignalR;
+        <span class="tooltip">Imports SignalR for real-time communication.</span>
+    </span>
+</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public class</span> ChatHub : Hub
+        <span class="tooltip">Defines the ChatHub class, which extends SignalR Hub for real-time messaging.</span>
+    </span>
+</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public async Task</span> SendMessage(<span class="hljs-keyword">string</span> user, <span class="hljs-keyword">string</span> message)
+        <span class="tooltip">Handles sending messages between clients.</span>
+    </span>
+</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ await Clients.All.SendAsync("ReceiveMessage", user, message);
+        <span class="tooltip">Broadcasts the message to all connected clients.</span>
+    </span>
+</span>
+
+</code></pre>
+        </div>
+    </div>
+</div>
 
 
 
