@@ -598,6 +598,12 @@ public class ChatHub : Hub
             <svg aria-hidden="true" class="octicon unfold-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
                 <path d="m8.177.677 2.896 2.896a.25.25 0 0 1-.177.427H8.75v1.25a.75.75 0 0 1-1.5 0V4H5.104a.25.25 0 0 1-.177-.427L7.823.677a.25.25 0 0 1 .354 0ZM7.25 10.75a.75.75 0 0 1 1.5 0V12h2.146a.25.25 0 0 1 .177.427l-2.896 2.896a.25.25 0 0 1-.354 0l-2.896-2.896A.25.25 0 0 1 5.104 12H7.25v-1.25Zm-5-2a.75.75 0 0 0 0-1.5h-.5a.75.75 0 0 0 0 1.5h.5ZM6 8a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1 0-1.5h.5A.75.75 0 0 1 6 8Zm2.25.75a.75.75 0 0 0 0-1.5h-.5a.75.75 0 0 0 0 1.5h.5ZM12 8a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1 0-1.5h.5A.75.75 0 0 1 12 8Zm2.25.75a.75.75 0 0 0 0-1.5h-.5a.75.75 0 0 0 0 1.5h.5Z"></path>
             </svg>
+
+            <!-- Collapse (Fold) Icon - Initially Hidden -->
+            <svg aria-hidden="true" class="octicon fold-icon hidden" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M10.896 2H8.75V.75a.75.75 0 0 0-1.5 0V2H5.104a.25.25 0 0 0-.177.427l2.896 2.896a.25.25 0 0 0 .354 0l2.896-2.896A.25.25 0 0 0 10.896 2ZM8.75 15.25a.75.75 0 0 1-1.5 0V14H5.104a.25.25 0 0 1-.177-.427l2.896-2.896a.25.25 0 0 1 .354 0l2.896 2.896a.25.25 0 0 1-.177.427H8.75v1.25Zm-6.5-6.5a.75.75 0 0 0 0-1.5h-.5a.75.75 0 0 0 0 1.5h.5ZM6 8a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1 0-1.5h.5A.75.75 0 0 1 6 8Zm2.25.75a.75.75 0 0 0 0-1.5h-.5a.75.75 0 0 0 0 1.5h.5ZM12 8a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1 0-1.5h.5A.75.75 0 0 1 12 8Zm2.25.75a.75.75 0 0 0 0-1.5h-.5a.75.75 0 0 0 0 1.5h.5Z"></path>
+            </svg>
+            
         </button>
 
         <button class="copy-button" aria-label="Copy code">
@@ -608,39 +614,90 @@ public class ChatHub : Hub
         </button>
     </div>
 
-    <!-- Code View (Default) -->
+  <!-- Code View (Default) -->
     <div id="code-tab" class="tab-content active" style="display:block;">
         <div class="code-container">
             <pre class="updated-code language-csharp"><code>
 <span class="added-line tooltip-container">
-    <span class="tooltip-trigger">+ <span class="hljs-keyword">using</span> Microsoft.AspNetCore.SignalR;
-        <span class="tooltip">Imports SignalR for real-time communication.</span>
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">using</span> ChatApp.Models;
+        <span class="tooltip">Imports the ChatApp models for use in this file.</span>
+    </span>
+</span>
+<span class="original-code hidden"><span class="hljs-keyword">using</span> Microsoft.AspNetCore.SignalR;</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">namespace</span> ChatApp.Hubs
+        <span class="tooltip">Defines the namespace for the ChatHub class.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ {</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">private readonly</span> <span class="hljs-class-name">AppDbContext</span> _context;
+        <span class="tooltip">Declares a private field for the database context.</span>
     </span>
 </span>
 
 <span class="added-line tooltip-container">
-    <span class="tooltip-trigger">+ <span class="hljs-keyword">public class</span> ChatHub : Hub
-        <span class="tooltip">Defines the ChatHub class, which extends SignalR Hub for real-time messaging.</span>
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> <span class="hljs-class-name">ChatHub</span>(<span class="hljs-class-name">AppDbContext</span> context)
+        <span class="tooltip">Constructor that initializes the ChatHub with a database context.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ { _context = context; }</span>
+
+<span class="original-code hidden"><span class="hljs-keyword">public async</span> <span class="hljs-class-name">Task</span> <span class="hljs-function">SendMessage</span>(<span class="hljs-keyword">string</span> user, <span class="hljs-keyword">string</span> message)</span>
+<span class="original-code hidden">{</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">MessageBase</span> newMessage;
+        <span class="tooltip">Declares a variable to hold the appropriate message type.</span>
     </span>
 </span>
 
 <span class="added-line tooltip-container">
-    <span class="tooltip-trigger">+ <span class="hljs-keyword">public async Task</span> SendMessage(<span class="hljs-keyword">string</span> user, <span class="hljs-keyword">string</span> message)
-        <span class="tooltip">Handles sending messages between clients.</span>
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">if</span> (messageType == "text")
+        <span class="tooltip">Checks if the message is a text message.</span>
     </span>
 </span>
+<span class="added-line tooltip-container">+ { newMessage = <span class="hljs-keyword">new</span> <span class="hljs-class-name">TextMessage</span> { Sender = user, Text = content, Timestamp = DateTime.UtcNow }; }</span>
 
 <span class="added-line tooltip-container">
-    <span class="tooltip-trigger">+ await Clients.All.SendAsync("ReceiveMessage", user, message);
-        <span class="tooltip">Broadcasts the message to all connected clients.</span>
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">else if</span> (messageType == "image")
+        <span class="tooltip">Checks if the message is an image message.</span>
     </span>
 </span>
+<span class="added-line tooltip-container">+ { newMessage = <span class="hljs-keyword">new</span> <span class="hljs-class-name">ImageMessage</span> { Sender = user, ImageUrl = content, Timestamp = DateTime.UtcNow }; }</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ _context.Messages.Add(newMessage);
+        <span class="tooltip">Saves the message to the database.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ await _context.SaveChangesAsync();</span>
+<span class="added-line tooltip-container">+ await Clients.All.SendAsync("ReceiveMessage", newMessage);</span>
 
 </code></pre>
         </div>
     </div>
 </div>
 
-
+<!-- Explanation View (Initially Hidden) -->
+<div id="explanation-tab" class="tab-content" style="display:none;">
+    <p>
+        <strong>📌 `ChatHub`</strong> - The `ChatHub` class acts as the **real-time communication hub** for the chat application, enabling users to send and receive messages instantly. It leverages **SignalR** to manage connections and broadcast messages to all connected clients.
+    </p>
+    <p>
+        This hub is integrated with **Entity Framework** to store messages persistently in a database. The **database context (`AppDbContext`)** is injected into the `ChatHub` constructor to allow seamless interaction with the database.
+    </p>
+    <p>
+        The `SendMessage` method is responsible for processing incoming messages. Based on the **message type (`text` or `image`)**, it dynamically creates a `TextMessage` or `ImageMessage` object, ensuring that different types of messages are properly handled.
+    </p>
+    <p>
+        Once the message is created, it is **saved to the database** and then **broadcasted** to all connected clients using SignalR’s `Clients.All.SendAsync` method. This ensures that every user in the chat receives messages in real-time, even if they were sent from another client.
+    </p>
+    <p>
+        This approach keeps the **chat system scalable**, allowing for future expansion with new message types while ensuring consistency in data storage and real-time delivery.
+    </p>
+</div>
 
 
