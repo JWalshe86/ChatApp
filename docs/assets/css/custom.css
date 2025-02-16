@@ -148,7 +148,7 @@ pre code {
 }
 .tooltip-container {
     position: relative;
-    display: inline-block;
+    display: inline-block !important;
 }
 .tooltip-trigger:hover .tooltip {
     opacity: 1;
