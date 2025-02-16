@@ -117,7 +117,7 @@ public class Dog : Animal
 
 ---
 
-*** Derived Text Message Class ***
+## **Derived Text Message Class**
 
 <div class="container mt-5">
     <p>
@@ -165,3 +165,75 @@ namespace ChatApp.Models
         </div>
     </div>
 </div>
+---
+<div class="code-block">
+    <div class="code-header">
+        <span class="code-filename">TextMessage.cs</span>
+
+        <!-- Toggle Button -->
+        <button class="toggle-button" id="toggleButtonTextMessage">💬 Show Explanation</button>
+        
+        <button class="copy-button" aria-label="Copy code">
+            <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
+                <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Code View (Default) -->
+    <div id="code-tab-text" class="tab-content active" style="display:block;">
+        <div class="code-container">
+            <pre class="updated-code language-csharp"><code>
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">using</span> System;
+        <span class="tooltip">Includes system functionalities such as DateTime.</span>
+    </span>
+</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">namespace</span> ChatApp.Models
+        <span class="tooltip">Defines the namespace for organizing related classes.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ {</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> class TextMessage : MessageBase
+        <span class="tooltip">This class extends `MessageBase` to handle text messages.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ {</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> string Text { get; set; }
+        <span class="tooltip">Holds the actual text content of the message.</span>
+    </span>
+</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">public</span> override string DisplayContent()
+        <span class="tooltip">Overrides `DisplayContent()` to define how text messages are displayed.</span>
+    </span>
+</span>
+<span class="added-line tooltip-container">+ {</span>
+
+<span class="added-line tooltip-container">
+    <span class="tooltip-trigger">+ <span class="hljs-keyword">return</span> $"{Sender}: {Text} (Sent at {Timestamp})";
+        <span class="tooltip">Formats the message display string with sender, text, and timestamp.</span>
+    </span>
+</span>
+
+<span class="added-line tooltip-container">+ }</span> <!-- Closing DisplayContent Method -->
+<span class="added-line tooltip-container">+ }</span> <!-- Closing TextMessage Class -->
+<span class="added-line tooltip-container">+ }</span> <!-- Closing Namespace -->
+            </code></pre>
+        </div>
+    </div>
+
+    <!-- Explanation View (Initially Hidden) -->
+    <div id="explanation-tab-text" class="tab-content" style="display:none;">
+        <p><strong>📌 `public class TextMessage : MessageBase`</strong> - This class inherits from `MessageBase`, making it a **derived class**. It specializes in handling **text-based messages** while maintaining the shared properties of all messages. It includes a unique property, <strong>`Text`</strong>, which holds the actual message content. Additionally, it **overrides the abstract method** <strong>`DisplayContent()`</strong>, providing a custom format for displaying text messages in the chat application. This ensures each message type can define its own structure while still adhering to a common contract.</p>
+    </div>
+
+</div> <!-- Closing .code-block -->
