@@ -187,7 +187,8 @@ namespace ChatApp.Models
 
         <!-- Toggle Button -->
         <button class="toggle-button" id="toggleButtonTextMessage" data-target="textmessage">💬 Show Explanation</button>
-        
+        <button class="toggle-button" data-target="test-textmessage">🧪 Show Tests</button>
+
         <button class="copy-button" aria-label="Copy code">
             <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
                 <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
@@ -264,6 +265,52 @@ namespace ChatApp.Models
         adhering to a <strong>common contract</strong>.
     </p>
 </div>
+
+<!-- Tests View (Initially Hidden) -->
+    <div id="test-textmessage" class="tab-content" style="display:none;">
+        <h4>🧪 Unit Tests for <code>TextMessage</code></h4>
+        <pre class="language-csharp"><code>
+using Xunit;
+using ChatApp.Models;
+using System;
+
+public class TestMessage
+{
+    [Fact]
+    public void TextMessage_DisplayContent_ReturnsExpectedFormat()
+    {
+        var textMessage = new TextMessage 
+        { 
+            Sender = "Alice", 
+            Text = "Hello World!", 
+            Timestamp = new DateTime(2025, 2, 16, 12, 0, 0) 
+        };
+
+        var result = textMessage.DisplayContent();
+
+        Assert.Equal("Alice: Hello World! (Sent at 16/02/2025 12:00:00)", result);
+    }
+}
+        </code></pre>
+
+        <h4>✅ Test Results</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Test</th>
+                    <th>Status</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>TextMessage_DisplayContent_ReturnsExpectedFormat</code></td>
+                    <td style="color: green;">✔ Passed</td>
+                    <td>24 ms</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div> <!-- Closing .code-block -->
 
