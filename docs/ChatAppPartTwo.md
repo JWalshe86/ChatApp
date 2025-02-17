@@ -61,18 +61,8 @@ public class Dog : Animal
     <div class="code-header">
         <span class="code-filename">MessageBase.cs</span>
 
-<!-- Button Group (Always Visible) -->
-        <div class="toggle-button-group">
-            <button class="toggle-button code-btn" data-target="textmessage" aria-label="Show Code">
-                💻
-            </button>
-            <button class="toggle-button doc-btn" data-target="textmessage" aria-label="Show Explanation">
-                📜
-            </button>
-            <button class="toggle-button test-btn" data-target="textmessage" aria-label="Show Tests">
-                🧪
-            </button>
-        </div>
+<!-- Toggle Button -->
+        <button class="toggle-button" id="toggleButton" data-target="messagebase">💬 Show Explanation</button>
         
         <button class="copy-button" aria-label="Copy code">
             <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
@@ -195,8 +185,18 @@ namespace ChatApp.Models
     <div class="code-header">
         <span class="code-filename">TextMessage.cs</span>
 
-        <!-- Toggle Button -->
-        <button class="toggle-button" id="toggleButtonTextMessage" data-target="textmessage">💬 Show Explanation</button>
+       <!-- Button Group (Always Visible) -->
+        <div class="toggle-button-group">
+            <button class="toggle-button code-btn" data-target="textmessage" aria-label="Show Code">
+                💻
+            </button>
+            <button class="toggle-button doc-btn" data-target="textmessage" aria-label="Show Explanation">
+                📜
+            </button>
+            <button class="toggle-button test-btn" data-target="textmessage" aria-label="Show Tests">
+                🧪
+            </button>
+        </div>
 
         <button class="copy-button" aria-label="Copy code">
             <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
@@ -651,5 +651,4 @@ public class ChatHub : Hub
         This approach keeps the <strong>chat system scalable</strong>, allowing for future expansion with new message types while ensuring consistency in data storage and real-time delivery.
     </p>
 </div>
-
 
