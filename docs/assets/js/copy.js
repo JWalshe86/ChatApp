@@ -1,32 +1,28 @@
 document.addEventListener("DOMContentLoaded", function () {
 
 // Function to toggle between Code, Explanation, and Tests tabs
-document.querySelectorAll('.toggle-button').forEach(button => {
+document.querySelectorAll('.toggle-button-group button').forEach(button => {
     button.addEventListener('click', function () {
-        const targetId = this.getAttribute('data-target'); // Get target ID (textmessage, test-textmessage, etc.)
-        
-        // Find related tabs
+        const targetId = this.getAttribute('data-target');
+
+        // Find related sections
         const codeTab = document.getElementById(`code-tab-${targetId}`);
         const explanationTab = document.getElementById(`explanation-tab-${targetId}`);
         const testTab = document.getElementById(`test-${targetId}`);
 
-        // Toggle visibility
         if (codeTab && explanationTab && testTab) {
-            // Hide all tabs first
+            // Hide all sections
             codeTab.style.display = "none";
             explanationTab.style.display = "none";
             testTab.style.display = "none";
 
-            // Show the selected one
-            if (this.textContent.includes("💬")) {
+            // Show the selected section
+            if (this.classList.contains('code-btn')) {
                 codeTab.style.display = "block";
-                this.textContent = "📜 Show Explanation";
-            } else if (this.textContent.includes("📜")) {
+            } else if (this.classList.contains('doc-btn')) {
                 explanationTab.style.display = "block";
-                this.textContent = "🧪 Show Tests";
-            } else {
+            } else if (this.classList.contains('test-btn')) {
                 testTab.style.display = "block";
-                this.textContent = "💬 Show Code";
             }
         }
     });
