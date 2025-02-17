@@ -1,31 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-// Generic function to toggle between Code & Explanation tabs
+// Function to toggle between Code, Explanation, and Tests tabs
 document.querySelectorAll('.toggle-button').forEach(button => {
     button.addEventListener('click', function () {
-        const targetId = this.getAttribute('data-target');
+        const targetId = this.getAttribute('data-target'); // Get target ID (textmessage, test-textmessage, etc.)
+        
+        // Find related tabs
         const codeTab = document.getElementById(`code-tab-${targetId}`);
         const explanationTab = document.getElementById(`explanation-tab-${targetId}`);
+        const testTab = document.getElementById(`test-${targetId}`);
 
-        if (codeTab && explanationTab) {
-            if (codeTab.style.display === 'none') {
-                codeTab.style.display = 'block';
-                explanationTab.style.display = 'none';
-                this.textContent = '📜 Show Explanation';
+        // Toggle visibility
+        if (codeTab && explanationTab && testTab) {
+            // Hide all tabs first
+            codeTab.style.display = "none";
+            explanationTab.style.display = "none";
+            testTab.style.display = "none";
+
+            // Show the selected one
+            if (this.textContent.includes("💬")) {
+                codeTab.style.display = "block";
+                this.textContent = "📜 Show Explanation";
+            } else if (this.textContent.includes("📜")) {
+                explanationTab.style.display = "block";
+                this.textContent = "🧪 Show Tests";
             } else {
-                codeTab.style.display = 'none';
-                explanationTab.style.display = 'block';
-                this.textContent = '💻 Show Code';
+                testTab.style.display = "block";
+                this.textContent = "💬 Show Code";
             }
-        } else {
-            console.error(`Could not find elements with IDs code-tab-${targetId} or explanation-tab-${targetId}`);
         }
     });
 });
 
 
-
-    // 🔄 Expand Button Functionality
+// 🔄 Expand Button Functionality
     document.querySelectorAll(".expand-button").forEach((button) => {
         button.addEventListener("click", function () {
             let codeBlock = this.closest(".code-block");
