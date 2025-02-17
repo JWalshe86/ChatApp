@@ -61,8 +61,15 @@ public class Dog : Animal
     <div class="code-header">
         <span class="code-filename">MessageBase.cs</span>
 
-<!-- Toggle Button -->
-        <button class="toggle-button" id="toggleButton" data-target="messagebase">💬 Show Explanation</button>
+<!-- Button Group (Always Visible) -->
+        <div class="toggle-button-group">
+            <button class="toggle-button code-btn" data-target="textmessage" aria-label="Show Code">
+                💻
+            </button>
+            <button class="toggle-button doc-btn" data-target="textmessage" aria-label="Show Explanation">
+                📜
+            </button>
+        </div>
         
         <button class="copy-button" aria-label="Copy code">
             <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
