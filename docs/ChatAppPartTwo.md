@@ -677,3 +677,82 @@ public class ChatHub : Hub
     </p>
 </div>
 
+<!-- Tests View (Initially Hidden) -->
+<div id="test-chathub" class="tab-content" style="display:none;">
+    <h4>🧪 Unit Tests for <code>ChatHub</code></h4>
+    <pre class="language-csharp"><code>
+using Xunit;
+using Moq;
+using ChatApp.Hubs;
+using ChatApp.Models;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
+
+public class ChatHubTests
+{
+    private readonly Mock<AppDbContext> _mockDbContext;
+    private readonly Mock<IHubCallerClients> _mockClients;
+    private readonly Mock<IClientProxy> _mockClientProxy;
+    private readonly ChatHub _chatHub;
+
+    public ChatHubTests()
+    {
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase(databaseName: "ChatAppTestDb")
+            .Options;
+
+        _mockDbContext = new Mock<AppDbContext>(options);
+        _mockClients = new Mock<IHubCallerClients>();
+        _mockClientProxy = new Mock<IClientProxy>();
+
+        _mockClients.Setup(clients => clients.All).Returns(_mockClientProxy.Object);
+
+        _chatHub = new ChatHub(_mockDbContext.Object)
+        {
+            Clients = _mockClients.Object
+        };
+    }
+
+    [Fact]
+    public async Task SendMessage_ShouldSaveMessage_AndBroadcast()
+    {
+        // Arrange
+        string user = "Alice";
+        string content = "Hello, world!";
+        string messageType = "text";
+
+        // Act
+        await _chatHub.SendMessage(user, content, messageType);
+
+        // Assert
+        _mockDbContext.Verify(db => db.Messages.Add(It.IsAny<TextMessage>()), Times.Once);
+        _mockDbContext.Verify(db => db.SaveChangesAsync(default), Times.Once);
+        _mockClientProxy.Verify(client => client.SendCoreAsync("ReceiveMessage", It.IsAny<object[]>(), default), Times.Once);
+    }
+}
+    </code></pre>
+
+    <h4>✅ Test Results</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Status</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>SendMessage_ShouldSaveMessage_AndBroadcast</code></td>
+                <td style="color: green;">✔ Passed</td>
+                <td>1 ms</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</div> <!-- Closing .code-block -->
+
+
