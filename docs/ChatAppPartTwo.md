@@ -682,27 +682,37 @@ using ChatApp.Models;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 public class ChatHubTests
 {
     private readonly Mock<AppDbContext> _mockDbContext;
+    private readonly Mock<DbSet<MessageBase>> _mockMessageSet;
     private readonly Mock<IHubCallerClients> _mockClients;
     private readonly Mock<IClientProxy> _mockClientProxy;
     private readonly ChatHub _chatHub;
 
     public ChatHubTests()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase(databaseName: "ChatAppTestDb")
-            .Options;
+        // ✅ Provide options to avoid parameterless constructor error
+        var options = new DbContextOptionsBuilder<AppDbContext>().Options;
 
+        // ✅ Mock DbSet<MessageBase>
+        _mockMessageSet = new Mock<DbSet<MessageBase>>();
+
+        // ✅ Mock AppDbContext with options
         _mockDbContext = new Mock<AppDbContext>(options);
+        _mockDbContext.Setup(db => db.Messages).Returns(_mockMessageSet.Object);
+
+        // ✅ Mock SignalR Clients
         _mockClients = new Mock<IHubCallerClients>();
         _mockClientProxy = new Mock<IClientProxy>();
-
         _mockClients.Setup(clients => clients.All).Returns(_mockClientProxy.Object);
 
+        // ✅ Initialize ChatHub with the mocked dependencies
         _chatHub = new ChatHub(_mockDbContext.Object)
         {
             Clients = _mockClients.Object
@@ -717,15 +727,26 @@ public class ChatHubTests
         string content = "Hello, world!";
         string messageType = "text";
 
+        // ✅ Simulate Add() method for DbSet
+        _mockMessageSet.Setup(m => m.Add(It.IsAny<MessageBase>())).Verifiable();
+        
+        // ✅ Simulate SaveChangesAsync() method
+        _mockDbContext.Setup(db => db.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
+
         // Act
         await _chatHub.SendMessage(user, content, messageType);
 
-        // Assert
-        _mockDbContext.Verify(db => db.Messages.Add(It.IsAny<TextMessage>()), Times.Once);
-        _mockDbContext.Verify(db => db.SaveChangesAsync(default), Times.Once);
+        // ✅ Verify message was added to DbSet
+        _mockMessageSet.Verify(m => m.Add(It.IsAny<MessageBase>()), Times.Once);
+
+        // ✅ Verify SaveChangesAsync() was called
+        _mockDbContext.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+
+        // ✅ Verify the message was broadcasted to all clients
         _mockClientProxy.Verify(client => client.SendCoreAsync("ReceiveMessage", It.IsAny<object[]>(), default), Times.Once);
     }
 }
+
     </code></pre>
 
     <h4>✅ Test Results</h4>
