@@ -63,10 +63,10 @@ public class Dog : Animal
 
 <!-- Button Group (Always Visible) -->
         <div class="toggle-button-group">
-            <button class="toggle-button code-btn" data-target="textmessage" aria-label="Show Code">
+            <button class="toggle-button code-btn" data-target="messagebase" aria-label="Show Code">
                 💻
             </button>
-            <button class="toggle-button doc-btn" data-target="textmessage" aria-label="Show Explanation">
+            <button class="toggle-button doc-btn" data-target="messagebase" aria-label="Show Explanation">
                 📜
             </button>
         </div>
@@ -385,8 +385,18 @@ namespace ChatApp.Models
     <div class="code-header">
         <span class="code-filename">ImageMessage.cs</span>
 
-        <!-- Toggle Button -->
-        <button class="toggle-button" id="toggleButtonImageMessage" data-target="imagemessage">💬 Show Explanation</button>
+       <!-- Button Group (Always Visible) -->
+        <div class="toggle-button-group">
+            <button class="toggle-button code-btn" data-target="imagemessage" aria-label="Show Code">
+                💻
+            </button>
+            <button class="toggle-button doc-btn" data-target="imagemessage" aria-label="Show Explanation">
+                📜
+            </button>
+            <button class="toggle-button test-btn" data-target="imagemessage" aria-label="Show Tests">
+                🧪
+            </button>
+        </div>
         
         <button class="copy-button" aria-label="Copy code">
             <svg aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
@@ -519,10 +529,18 @@ public class ChatHub : Hub
     <div class="code-header">
         <span class="code-filename">ChatHub.cs</span>
 
-        <!-- Toggle Button -->
-<button class="toggle-button" data-target="chathub">
-    📜 Show Explanation
-</button>
+       <!-- Button Group (Always Visible) -->
+        <div class="toggle-button-group">
+            <button class="toggle-button code-btn" data-target="chathub" aria-label="Show Code">
+                💻
+            </button>
+            <button class="toggle-button doc-btn" data-target="chathub" aria-label="Show Explanation">
+                📜
+            </button>
+            <button class="toggle-button test-btn" data-target="chathub" aria-label="Show Tests">
+                🧪
+            </button>
+        </div>
 
         <button class="expand-button" aria-label="Expand all lines: ChatHub.cs">
             <svg aria-hidden="true" class="octicon unfold-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
