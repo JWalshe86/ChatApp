@@ -9,14 +9,17 @@ document.querySelectorAll('.toggle-button').forEach(button => {
         // Find related sections
         const codeTab = document.getElementById(`code-tab-${targetId}`);
         const explanationTab = document.getElementById(`explanation-tab-${targetId}`);
+        const testTab = document.getElementById(`test-${targetId}`);
 
         console.log(`Code Tab Found:`, codeTab);
         console.log(`Explanation Tab Found:`, explanationTab);
+        console.log(`Test Tab Found:`, testTab);
 
-        if (codeTab && explanationTab) {
+        if (codeTab && explanationTab && testTab) {
             // Hide all related sections
             codeTab.style.display = "none";
             explanationTab.style.display = "none";
+            testTab.style.display = "none";
 
             // Show the selected section
             if (this.classList.contains('code-btn')) {
@@ -25,13 +28,15 @@ document.querySelectorAll('.toggle-button').forEach(button => {
             } else if (this.classList.contains('doc-btn')) {
                 console.log(`Showing explanation for ${targetId}`);
                 explanationTab.style.display = "block";
+            } else if (this.classList.contains('test-btn')) {
+                console.log(`Showing tests for ${targetId}`);
+                testTab.style.display = "block";
             }
         } else {
             console.error(`Missing elements for ${targetId}`);
         }
     });
 });
-
 
 
 // 🔄 Expand Button Functionality
