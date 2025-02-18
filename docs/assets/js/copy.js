@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
 // Function to toggle between Code, Explanation, and Tests tabs
-document.querySelectorAll('.toggle-button-group button').forEach(button => {
+document.querySelectorAll('.toggle-button').forEach(button => {
     button.addEventListener('click', function () {
         const targetId = this.getAttribute('data-target');
 
@@ -11,7 +11,7 @@ document.querySelectorAll('.toggle-button-group button').forEach(button => {
         const testTab = document.getElementById(`test-${targetId}`);
 
         if (codeTab && explanationTab && testTab) {
-            // Hide all sections
+            // Hide all related sections
             codeTab.style.display = "none";
             explanationTab.style.display = "none";
             testTab.style.display = "none";
