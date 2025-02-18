@@ -529,17 +529,11 @@ public class ChatHub : Hub
     <div class="code-header">
         <span class="code-filename">ChatHub.cs</span>
 
-       <!-- Button Group (Always Visible) -->
+       <!-- Toggle Buttons -->
         <div class="toggle-button-group">
-            <button class="toggle-button code-btn" data-target="chathub" aria-label="Show Code">
-                💻
-            </button>
-            <button class="toggle-button doc-btn" data-target="chathub" aria-label="Show Explanation">
-                📜
-            </button>
-            <button class="toggle-button test-btn" data-target="chathub" aria-label="Show Tests">
-                🧪
-            </button>
+            <button class="toggle-button code-btn" data-target="chathub" aria-label="Show Code">💻</button>
+            <button class="toggle-button doc-btn" data-target="chathub" aria-label="Show Explanation">📜</button>
+            <button class="toggle-button test-btn" data-target="chathub" aria-label="Show Tests">🧪</button>
         </div>
 
         <button class="expand-button" aria-label="Expand all lines: ChatHub.cs">
